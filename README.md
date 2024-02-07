@@ -230,7 +230,7 @@ AMD FM2平台：
 ![laptop-1th-Sonoma](images/laptop-1th-Sonoma.png)
 
 3代平台【华硕笔记本】
-
+来自粉丝【瞌睡真的多】
 ![laptop-3th](images/laptop-3th.png)
 
 4代平台【联想X240】
