@@ -3,6 +3,7 @@
 
 
 
+
 ## RapidEFI软件预览
 
 ![intel](images/intel-desktop.png)
@@ -16,6 +17,12 @@
 
 
 ![alcid](images/alcid.png)
+
+## 带一个主题
+
+![theme](images/theme.png)
+
+
 
 
 
@@ -96,6 +103,16 @@ RapidEFI适合有点黑果基础的人群，至少你要懂得：
 
 #### 3）.如果你确认使用该工具配置EFI，请始终保持【初步精简，后期完善】原则，可以减少问题！
 尤其笔记本，别看见是笔记本可能适用，就添加（随便举个例子，例如:电池读数，自动亮度补丁，亮度快捷键，这些随便一个都有可能卡代码）.如果使用工具生成的EFI出现无法引导，自己按照OC指南可以引导，那可能是工具读取的静态配置文件个别填写错误，对，你没看错，大部分都是提前准备好的静态数据，所以存在手写填错的情况！建议贴平台配置，提issue(报告问题)！当然成功也可以进行反馈！
+
+以下是部分粉丝自行折腾记录(挺佩服的)
+
+![fans-1](images/fans-1.png)
+
+
+
+![fans-2](images/fans-2.png)
+
+
 
   
 
@@ -212,9 +229,13 @@ AMD FM2平台：
 
 ![laptop-1th-Sonoma](images/laptop-1th-Sonoma.png)
 
+3代平台【华硕笔记本】
 
+![laptop-3th](images/laptop-3th.png)
 
 4代平台【联想X240】
+
+来自粉丝 【howl】
 
 ![laptop-4th](images/laptop-4th.png)
 
