@@ -1,27 +1,28 @@
 ## 目录
 
-- [1.RapidEFI是什么?](#1.RapidEFI是什么？)
+- [1.RapidEFI是什么?](#1rapidefi是什么)
 
-- [2.RapidEFI软件预览](#2.RapidEFI软件预览)
+- [2.RapidEFI软件预览](#2rapidefi软件预览)
 
-- [3.RapidEFI有啥优势或特点?](#3.RapidEFI有啥优势或特点？)
+- [3.RapidEFI有啥优势或特点?](#3rapidefi有啥优势或特点)
 
-- [4.RapidEFI适合人群](#4.RapidEFI适合人群？)
+- [4.RapidEFI适合人群](#4rapidefi适合人群)
 
-- [5.RapidEFI软件兼容性?](#5.rapidefi-软件兼容性?)
+- [5.RapidEFI软件兼容性?](#5rapidefi-软件兼容性)
 
-- [6.RapidEFI制作的EFI支持哪些macOS版本？](#6.RapidEFI制作的EFI支持哪些macOS版本？)
+- [6.RapidEFI制作的EFI支持哪些macOS版本？](#6rapidefi制作的efi支持哪些macos版本)
 
-- [7.RapidEFI具体支持哪些电脑配置?](#7.RapidEFI具体支持哪些电脑配置?)
-- [8.我的电脑是3代以下如何配置?](#8.我的电脑是3代以下如何配置?)
+- [7.RapidEFI具体支持哪些电脑配置?](#7rapidefi具体支持哪些电脑配置)
 
-- [9.RapidEFI配置的EFI是否完美？](#9.RapidEFI配置的EFI是否完美？)
+- [8.我的电脑是3代以下如何配置?](#8我的电脑是3代以下如何配置)
 
-- [10.请开发者喝杯奶茶](#10.请开发者喝杯奶茶)
+- [9.RapidEFI配置的EFI是否完美？](#9rapidefi配置的efi是否完美)
 
-- [11.打赏列表(目前仅展示部分，不定期更新)](#11.打赏列表(目前仅展示部分，不定期更新))
+- [10.请开发者喝杯奶茶](#10请开发者喝杯奶茶)
 
-- [12.致谢](#12.致谢)
+- [11.打赏列表(目前仅展示部分，不定期更新)](#11打赏列表目前仅展示部分不定期更新)
+
+- [12.致谢](#12致谢)
 
 ## 1.RapidEFI是什么？
 
@@ -92,7 +93,7 @@ RapidEFI适合有点黑果基础的人群，至少你要懂得：
 
 ## 8.我的电脑是3代以下如何配置?
 
-具体可以参考[关于Pro]栏目
+具体可以参考[关于Pro](https://github.com/JeoJay127/RapidEFI-Tool/blob/main/关于Pro.md)栏目
 
 
 ## 9.RapidEFI配置的EFI是否完美？

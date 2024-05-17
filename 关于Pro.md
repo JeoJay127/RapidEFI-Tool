@@ -1,6 +1,6 @@
 ## 目录
 
-- [1.关于RapidEFI-Pro版本](#1.关于RapidEFI-Pro版本)
+- [1.关于RapidEFI-Pro版本](#1关于rapidefi-pro版本)
 
 - [2.请开发者喝杯奶茶](#2请开发者喝杯奶茶)
 
