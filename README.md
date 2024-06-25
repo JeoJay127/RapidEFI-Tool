@@ -1,5 +1,5 @@
 
-## 重要说明:由于版权原因,目前已删除NootedRed.kext,NootRX.kext驱动，与之相关的功能全部删除,自行添加!!!
+## 重要说明:由于版权原因,目前已删除NootedRed.kext,NootRX.kext驱动，与之相关的功能全部删除!!!
 
 
 ## 目录
