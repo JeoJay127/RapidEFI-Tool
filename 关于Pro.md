@@ -11,7 +11,7 @@
 |       | 台式机(Desktop)                     |       笔记本(Laptop)        |        迷你(Nuc)主机        |        高端服务器(HEDT)        |
 | :---: | ----------------------------------- | :-------------------------: | :-------------------------: | :----------------------------: |
 | Intel | 4 ~ 14代                            | 4 ~ 10代 (11代以上核显无解) | 4 ~ 10代 (11代以上核显无解) |    4~10代（X99,X299,X599）     |
-|  AMD  | Ryzen and Threadripper(17h and 19h) |  Ryzen系列(2000~5000核显)   |  Ryzen系列(2000~5000核显)   | Ryzen Threadripper(线程撕裂者) |
+|  AMD  | Ryzen and Threadripper(17h and 19h) |  Ryzen系列   |  Ryzen系列   | Ryzen Threadripper(线程撕裂者) |
 
 
 
@@ -20,7 +20,7 @@
 |       | 台式机(Desktop)                                              |       笔记本(Laptop)        |       迷你(Nuc)主机        |        高端服务器(HEDT)         |
 | :---: | ------------------------------------------------------------ | :-------------------------: | :------------------------: | :-----------------------------: |
 | Intel | 0 ~ 14代                                                     | 0 ~ 10代 (11代以上核显无解) | 0~ 10代 (11代以上核显无解) | 1~10代（X58,X79,X99,X299,X599） |
-|  AMD  | Bulldozer(15h) and Jaguar(16h) && Ryzen and Threadripper(17h and 19h) |  Ryzen系列(2000~5000核显)   |  Ryzen系列(2000~5000核显)  | Ryzen Threadripper(线程撕裂者)  |
+|  AMD  | Bulldozer(15h) and Jaguar(16h) && Ryzen and Threadripper(17h and 19h) |  Ryzen系列  |  Ryzen系列  | Ryzen Threadripper(线程撕裂者)  |
 
 备注： 
 

@@ -1,3 +1,7 @@
+
+## 重要说明:由于版权原因,目前已删除NootedRed.kext,NootRX.kext驱动，与之相关的功能全部删除,自行添加!!!
+
+
 ## 目录
 
 - [1.RapidEFI是什么?](#1rapidefi是什么)
@@ -23,6 +27,7 @@
 - [11.打赏列表(目前仅展示部分，不定期更新)](#11打赏列表目前仅展示部分不定期更新)
 
 - [12.致谢](#12致谢)
+
 
 ## 1.RapidEFI是什么？
 
@@ -89,7 +94,7 @@ RapidEFI适合有点黑果基础的人群，至少你要懂得：
 |       | 台式机(Desktop)                     |       笔记本(Laptop)        |        迷你(Nuc)主机        |        高端服务器(HEDT)        |
 | :---: | ----------------------------------- | :-------------------------: | :-------------------------: | :----------------------------: |
 | Intel | 4 ~ 14代                            | 4 ~ 10代 (11代以上核显无解) | 4 ~ 10代 (11代以上核显无解) |    4~10代（X99,X299,X599）     |
-|  AMD  | Ryzen and Threadripper(17h and 19h) |  Ryzen系列(2000~5000核显)   |  Ryzen系列(2000~5000核显)   | Ryzen Threadripper(线程撕裂者) |
+|  AMD  | Ryzen and Threadripper(17h and 19h) |  Ryzen系列  |  Ryzen系列  | Ryzen Threadripper(线程撕裂者) |
 
 ## 8.我的电脑是3代以下如何配置?
 
@@ -101,9 +106,7 @@ RapidEFI适合有点黑果基础的人群，至少你要懂得：
 RapidEFI主要是根据官方OC指南制作的一款代替手动配置的工具而已，它很优秀，但它不是神！可以说没有人一开始就配置EFI就完美的，都是一步步完善的。如果你说有，我也不反驳，你自己多体会，多用用黑果吧。此外，黑苹果没有完美一说，它终究是黑果，只有接近完美之说！如果你坚持追求完美，那么请直接上白果！
 
 
-
 ## 10.请开发者喝杯奶茶
-
 
 如果有幸帮到了你，可以随意对开发者打赏！感谢支持！！！
 
@@ -146,19 +149,21 @@ RapidEFI主要是根据官方OC指南制作的一款代替手动配置的工具�
 ## 12.致谢
 
 - [Acidanthera](https://github.com/Acidanthera)
+
   - OpenCorePkg, as well as many of the core kexts and tools
 
-- [ChefKissInc](https://github.com/ChefKissInc)
-  - [NootedRed](https://github.com/ChefKissInc/NootedRed) for Ryzen 2000 ~ 5000 iGPUs
-  - [NootRX](https://github.com/ChefKissInc/NootRX) for RX6700,RX6750XT and so on
 - [AMD-OSX](https://github.com/AMD-OSX/AMD_Vanilla)
+
   - Patches across 15h, 16h, 17h, and 19h
+
 - [zxystd](https://github.com/zxystd)
+
   - Intel Wi-Fi Adapter Kernel Extension for macOS
 
 - RapidEFI QQ群 -白给大师老18
 
   - 提供的12代及以上平台MacPro7,1机型睿频驱动
+
   - RapidEFI建议及Bug反馈
 
   
