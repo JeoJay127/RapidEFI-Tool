@@ -32,7 +32,7 @@
 
 ## 1.RapidEFI是什么？
 
-RapidEFI是一款黑苹果OpenCore一键配置工具,3秒即可制作基于OpenCore最新版本的黑苹果EFI，由作者本人(JeoJay,B站同名)业余时间开发。RapidEFI用爱发电,完全免费,永久免费！！！有兴趣的可以[观看B站视频](https:/www.bilibili.com/video/BV1DK411t7nB/?spm_id_from=333.337.search-card.all.click)
+RapidEFI是一款黑苹果OpenCore一键配置工具,3秒即可制作基于OpenCore最新版本的黑苹果EFI，由作者本人(JeoJay,B站同名)业余时间开发。RapidEFI用爱发电,完全免费,永久免费！！！有兴趣的可以[观看B站视频](https://www.bilibili.com/video/BV1Li421h7FZ)
 
 
 ## 2.RapidEFI软件预览
