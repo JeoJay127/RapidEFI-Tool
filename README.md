@@ -1,6 +1,7 @@
 
-## 重要说明:由于版权原因,目前已删除NootedRed.kext,NootRX.kext驱动，与之相关的功能全部删除!!!
+## 重要说明:由于版权原因,目前已删除NootedRed.kext,NootRX.kext驱动!!!
 
+如果需要相关帮助,具体可以参考[帮助说明](https://github.com/JeoJay127/RapidEFI-Tool/blob/main/帮助说明.md)
 
 ## 目录
 
@@ -45,6 +46,14 @@ RapidEFI是一款黑苹果OpenCore一键配置工具,3秒即可制作基于OpenC
 ![amd](images/amd.png)
 
 ![alcid](images/alcid.png)
+
+历史记录
+
+![history](images/history.png)
+
+偏好设置
+
+![settings](images/settings.png)
 
 带一个主题
 
@@ -113,7 +122,6 @@ RapidEFI主要是根据官方OC指南制作的一款代替手动配置的工具�
 ![donate_alipay](images/donate_alipay.png) ![donate_wechat](images/donate_wechat.png)
 
 
-
 ## 11.打赏列表(目前仅展示部分，不定期更新)
 
 
@@ -138,7 +146,7 @@ RapidEFI主要是根据官方OC指南制作的一款代替手动配置的工具�
 |   DG幸福数码(QQ:30xxxxx35)    |        |  20  |      |
 |    汉武雄风(QQ:23xxxxx92)     |        |  15  |      |
 |    Mr_Prince(QQ:71xxxxx92)    |        |  50  |      |
-|    艺声之灵(QQ:29xxxxxx34)    |        |  50  |      |
+|    艺声之灵(QQ:29xxxxxx34)    |        | 150  |      |
 |   很久很久前(QQ:11xxxxxx83)   |        |  30  |      |
 |    麦兜兜（QQ:31xxxxx74）     |        |  15  |      |
 |    方波不方(QQ:27xxxxx96)     |        |  15  |      |
