@@ -36,7 +36,8 @@
 
 ## 2.请开发者喝杯奶茶
 
-如果有幸帮到了你，可以对开发者随意打赏！感谢支持！！！
+如果有幸帮到了你，可以随意对开发者打赏！感谢支持！！！
+
 ![donate_alipay](images/donate_alipay.png) ![donate_wechat](images/donate_wechat.png)
 
 
