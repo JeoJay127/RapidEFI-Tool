@@ -131,7 +131,7 @@ RapidEFI适合有点黑果基础的人群，至少你要懂得：
 
 ## 6.RapidEFI制作的EFI支持哪些macOS版本？
 
-通常支持macOS 10.11.x ~ macOS Sonoma 14.x,制作的EFI是向下兼容的 ,可以自行折腾
+通常支持macOS 10.11.x ~ macOS Tahoe 26.x (注意保持软件最新版本),制作的EFI是向下兼容的 ,可以自行折腾
 
 ## 7.RapidEFI具体支持哪些电脑配置?
 
