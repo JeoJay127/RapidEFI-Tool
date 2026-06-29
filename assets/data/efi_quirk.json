@@ -1,0 +1,8 @@
+[
+    {
+        "id": "ReleaseUsbOwnership",
+        "title": "ReleaseUsbOwnership",
+        "description": "从固件驱动程序中释放USB控制器的所有权,虽然大部分的主板都有自动释放USB所有权的功能(可以在主板BIOS设置中将XHCI EHCI hand-off开启即可),但是有些固件做不到(比如某些H110,B150,B250,联想Q270等OEM主板)。具体表现是,可能在启动mac系统时因USB问题卡住,无法进入系统,或者开机USB键盘鼠标无法正常使用。此怪癖,除非必要，否则不建议使用",
+        "tip": "OEM主板建议开启"
+    }
+]

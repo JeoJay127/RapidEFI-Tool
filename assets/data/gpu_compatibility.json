@@ -1,0 +1,4831 @@
+{
+  "vendors": {
+    "1002": {
+      "groups": {
+        "gcn_7000": {
+          "codename": "GCN 1",
+          "devices": {
+            "1002-6780": {
+              "name": "AMD Radeon W9000"
+            },
+            "1002-6790": {
+              "name": ""
+            },
+            "1002-6798": {
+              "name": "AMD Radeon HD 7970/8970 OEM / R9 280X / D700"
+            },
+            "1002-679A": {
+              "name": "AMD Radeon HD 7950/8950 OEM / R9 280",
+              "codename": "Tahiti PRO",
+              "spoofId": "1002-6798"
+            },
+            "1002-679E": {
+              "name": "AMD Radeon HD 7870 XT"
+            },
+            "1002-6800": {
+              "name": "AMD Radeon HD 7970M"
+            },
+            "1002-6801": {
+              "name": "AMD Radeon HD 8970M"
+            },
+            "1002-6806": {
+              "name": ""
+            },
+            "1002-6808": {
+              "name": "AMD Radeon W7000"
+            },
+            "1002-6810": {
+              "name": "AMD Radeon R7 370 / R9 270X/370X"
+            },
+            "1002-6818": {
+              "name": "AMD Radeon HD 7870"
+            },
+            "1002-6819": {
+              "name": "AMD Radeon HD 7850 / R7 265 / R9 270 1024SP",
+              "codename": "Pitcairn PRO",
+              "spoofId": "1002-6818"
+            },
+            "1002-6820": {
+              "name": "AMD Radeon HD 8890M / R9 M275X/M375X / M5100"
+            },
+            "1002-6821": {
+              "name": "AMD Radeon HD 8870M / R9 M270X/M370X"
+            },
+            "1002-6823": {
+              "name": "AMD Radeon HD 8850M / R9 M265X"
+            },
+            "1002-6825": {
+              "name": "AMD Radeon HD 7870M"
+            },
+            "1002-6827": {
+              "name": "AMD Radeon HD 7850M/8850M"
+            },
+            "1002-682B": {
+              "name": "AMD Radeon HD 8830M / R7 250 / R7 M465X",
+              "codename": "Cape Verde PRO / Venus LE / Tropo PRO-L",
+              "spoofId": "1002-683D"
+            },
+            "1002-682D": {
+              "name": "AMD Radeon M4000"
+            },
+            "1002-682F": {
+              "name": "AMD Radeon HD 7730M"
+            },
+            "1002-6835": {
+              "name": "AMD Radeon R9 255"
+            },
+            "1002-6839": {
+              "name": ""
+            },
+            "1002-683B": {
+              "name": ""
+            },
+            "1002-683D": {
+              "name": "AMD Radeon HD 7770/8760 / R7 250X"
+            },
+            "1002-683F": {
+              "name": "AMD Radeon HD 7750/8740 / R7 250E"
+            }
+          },
+          "maxDarwin": "21.99.99",
+          "maxOclp": "24.99.99",
+          "minDarwin": "12.0.0",
+          "minOclp": "22.0.0",
+          "vendor": "AMD",
+          "vendorId": "1002"
+        },
+        "gcn_7000_identity_override": {
+          "codename": "GCN 1",
+          "devices": {
+            "1002-6607": {
+              "codename": "Mars LE",
+              "name": "AMD Radeon HD 8530M / R5 M240",
+              "spoofId": "1002-6798"
+            },
+            "1002-6611": {
+              "codename": "Oland",
+              "name": "AMD Radeon HD 8570",
+              "spoofId": "1002-6798"
+            },
+            "1002-6613": {
+              "codename": "Oland PRO",
+              "name": "AMD Radeon R7 240",
+              "spoofId": "1002-6798"
+            },
+            "1002-6617": {
+              "codename": "Oland LE",
+              "name": "AMD Radeon R7 240",
+              "spoofId": "1002-6798"
+            },
+            "1002-682C": {
+              "codename": "Cape Verde GL",
+              "name": "AMD FirePro W4100",
+              "spoofId": "1002-683F"
+            },
+            "1002-6809": {
+              "codename": "Pitcairn LE GL",
+              "name": "AMD FirePro W5000",
+              "spoofId": "1002-6808"
+            },
+            "1002-6811": {
+              "codename": "Curacao PRO",
+              "name": "AMD Radeon R7 370",
+              "spoofId": "1002-6810"
+            },
+            "1002-6837": {
+              "codename": "Cape Verde LE",
+              "name": "AMD Radeon HD 7730",
+              "spoofId": "1002-683F"
+            }
+          },
+          "maxDarwin": "21.99.99",
+          "maxOclp": "24.99.99",
+          "minDarwin": "12.0.0",
+          "minOclp": "22.0.0",
+          "vendor": "AMD",
+          "vendorId": "1002"
+        },
+        "gcn_8000": {
+          "codename": "GCN 2",
+          "devices": {
+            "1002-6640": {
+              "name": "AMD Radeon M6100"
+            },
+            "1002-6641": {
+              "name": "AMD Radeon HD 8930M"
+            },
+            "1002-6646": {
+              "name": "AMD Radeon R9 M280X / W6170M"
+            },
+            "1002-6647": {
+              "name": "AMD Radeon R9 M270X/M280X"
+            },
+            "1002-6650": {
+              "name": ""
+            },
+            "1002-6651": {
+              "name": ""
+            },
+            "1002-665C": {
+              "name": "AMD Radeon HD 7790/8770 / R7 360 / R9 260/360"
+            },
+            "1002-665D": {
+              "name": "AMD Radeon R7 200"
+            },
+            "1002-67B0": {
+              "name": "AMD Radeon R9 290X/390X"
+            }
+          },
+          "maxDarwin": "21.99.99",
+          "maxOclp": "24.99.99",
+          "minDarwin": "12.0.0",
+          "minOclp": "22.0.0",
+          "vendor": "AMD",
+          "vendorId": "1002"
+        },
+        "gcn_8000_identity_override": {
+          "codename": "GCN 2",
+          "devices": {
+            "1002-6649": {
+              "codename": "Bonaire",
+              "name": "AMD FirePro W5100",
+              "spoofId": "1002-665C"
+            },
+            "1002-67A1": {
+              "codename": "Hawaii PRO GL",
+              "name": "AMD FirePro W8100",
+              "spoofId": "1002-67B0"
+            },
+            "1002-6658": {
+              "codename": "Bonaire XTX",
+              "name": "AMD Radeon R7 260X",
+              "spoofId": "1002-665C"
+            },
+            "1002-67B1": {
+              "codename": "Hawaii PRO",
+              "name": "AMD Radeon R9 290/390",
+              "spoofId": "1002-67B0"
+            },
+            "1002-665F": {
+              "codename": "Tobago PRO",
+              "name": "AMD Radeon HD R9 360",
+              "spoofId": "1002-665C"
+            }
+          },
+          "maxDarwin": "21.99.99",
+          "maxOclp": "24.99.99",
+          "minDarwin": "12.0.0",
+          "minOclp": "22.0.0",
+          "vendor": "AMD",
+          "vendorId": "1002"
+        },
+        "gcn_9000": {
+          "codename": "GCN 3",
+          "devices": {
+            "1002-6920": {
+              "name": "AMD Radeon R9 M395/ M395X"
+            },
+            "1002-6921": {
+              "name": "AMD Radeon R9 M295X / M390X"
+            },
+            "1002-6930": {
+              "name": "AMD Radeon R9 380",
+              "codename": "Tonga PRO",
+              "spoofId": "1002-6938"
+            },
+            "1002-6938": {
+              "name": "AMD Radeon R9 380X / R9 M295X"
+            },
+            "1002-6939": {
+              "name": "AMD Radeon R9 285/380",
+              "codename": "Tonga PRO",
+              "spoofId": "1002-6938"
+            },
+            "1002-7300": {
+              "name": "AMD Radeon R9 FURY / NANO"
+            },
+            "1002-730F": {
+              "name": ""
+            }
+          },
+          "maxDarwin": "21.99.99",
+          "maxOclp": "24.99.99",
+          "minDarwin": "12.0.0",
+          "minOclp": "22.0.0",
+          "vendor": "AMD",
+          "vendorId": "1002"
+        },
+        "navi": {
+          "avx2Limited": true,
+          "codename": "Navi",
+          "devices": {
+            "1002-7310": {
+              "name": "AMD Radeon Pro W5700X"
+            },
+            "1002-7312": {
+              "name": "AMD Radeon Pro W5700"
+            },
+            "1002-7318": {
+              "name": ""
+            },
+            "1002-7319": {
+              "name": ""
+            },
+            "1002-731A": {
+              "name": ""
+            },
+            "1002-731B": {
+              "name": ""
+            },
+            "1002-731F": {
+              "name": "AMD Radeon RX 5600/5600 XT / 5700/5700 XT"
+            },
+            "1002-7340": {
+              "name": "AMD Radeon 5500/5500M / Pro 5500M"
+            },
+            "1002-7341": {
+              "name": "AMD Radeon Pro W5500"
+            },
+            "1002-7343": {
+              "name": ""
+            },
+            "1002-7347": {
+              "name": "AMD Radeon Pro W5500M"
+            },
+            "1002-734F": {
+              "name": "AMD Radeon Pro W5300M"
+            },
+            "1002-7360": {
+              "name": "AMD Radeon 5600M"
+            },
+            "1002-73A2": {
+              "name": "AMD Radeon Pro W6900X"
+            },
+            "1002-73A3": {
+              "name": "AMD Radeon Pro W6800"
+            },
+            "1002-73AB": {
+              "name": "AMD Radeon Pro W6800X/Pro W6800X Duo"
+            },
+            "1002-73BF": {
+              "name": "AMD Radeon 6800/6800 XT / 6900 XT"
+            },
+            "1002-73E0": {
+              "name": ""
+            },
+            "1002-73E3": {
+              "name": "AMD Radeon Pro W6600"
+            },
+            "1002-73FF": {
+              "name": "AMD Radeon 6600/6600 XT/6600M"
+            }
+          },
+          "maxDarwin": "25.99.99",
+          "maxOclp": null,
+          "minDarwin": "19.0.0",
+          "minOclp": null,
+          "vendor": "AMD",
+          "vendorId": "1002"
+        },
+        "navi_identity_override": {
+          "avx2Limited": true,
+          "codename": "Navi Identity Override",
+          "devices": {
+            "1002-73EF": {
+              "codename": "Navi 23",
+              "name": "AMD Radeon RX 6650 XT",
+              "spoofId": "1002-73FF"
+            },
+            "1002-73E1": {
+              "codename": "Navi 23 WKS-XM",
+              "name": "AMD Radeon Pro W6600M",
+              "spoofId": "1002-73E3"
+            },
+            "1002-73AF": {
+              "codename": "Navi 21",
+              "name": "AMD Radeon RX 6900 XT",
+              "spoofId": "1002-73BF"
+            },
+            "1002-73A5": {
+              "codename": "Navi 21",
+              "name": "AMD Radeon RX 6950 XT",
+              "spoofId": "1002-73BF"
+            }
+          },
+          "maxDarwin": "25.99.99",
+          "maxOclp": null,
+          "minDarwin": "19.0.0",
+          "minOclp": null,
+          "vendor": "AMD",
+          "vendorId": "1002"
+        },
+        "polaris": {
+          "avx2Limited": true,
+          "codename": "Polaris",
+          "devices": {
+            "1002-67C0": {
+              "codename": "Ellesmere",
+              "name": "AMD Radeon Pro WX 7100 Mobile"
+            },
+            "1002-67C1": {
+              "codename": "Ellesmere",
+              "name": ""
+            },
+            "1002-67C2": {
+              "codename": "Ellesmere",
+              "name": "AMD Radeon Pro V7300X / V7350x2"
+            },
+            "1002-67C4": {
+              "codename": "Ellesmere",
+              "name": "AMD Radeon Pro WX 7100"
+            },
+            "1002-67C7": {
+              "codename": "Ellesmere",
+              "name": "AMD Radeon Pro WX 5100"
+            },
+            "1002-67C8": {
+              "codename": "Ellesmere",
+              "name": ""
+            },
+            "1002-67C9": {
+              "codename": "Ellesmere",
+              "name": ""
+            },
+            "1002-67CA": {
+              "codename": "Ellesmere",
+              "name": ""
+            },
+            "1002-67CC": {
+              "codename": "Ellesmere",
+              "name": ""
+            },
+            "1002-67CF": {
+              "codename": "Ellesmere",
+              "name": ""
+            },
+            "1002-67D0": {
+              "codename": "Ellesmere",
+              "name": "AMD Radeon Pro V7300X / V7350x2"
+            },
+            "1002-67DF": {
+              "codename": "Ellesmere",
+              "name": "AMD Radeon 470/480/570/570X/580/580X/590"
+            },
+            "1002-67E0": {
+              "codename": "Baffin",
+              "name": "AMD Radeon Pro WX 4170"
+            },
+            "1002-67E1": {
+              "codename": "Baffin",
+              "name": ""
+            },
+            "1002-67E3": {
+              "codename": "Baffin",
+              "name": "AMD Radeon Pro WX 4100"
+            },
+            "1002-67E7": {
+              "codename": "Baffin",
+              "name": ""
+            },
+            "1002-67E8": {
+              "codename": "Baffin",
+              "name": "AMD Radeon Pro WX 4130 / WX 4150"
+            },
+            "1002-67E9": {
+              "codename": "Baffin",
+              "name": ""
+            },
+            "1002-67EB": {
+              "codename": "Baffin",
+              "name": "AMD Radeon Pro V5300X"
+            },
+            "1002-67EF": {
+              "codename": "Baffin",
+              "name": "AMD Radeon 460/560D / Pro 450/455/460/555/555X/560/560X"
+            },
+            "1002-67FF": {
+              "codename": "Baffin",
+              "name": "AMD Radeon 550 640SP / RX 560/560X"
+            }
+          },
+          "maxDarwin": "25.99.99",
+          "maxOclp": null,
+          "minDarwin": "17.0.0",
+          "minOclp": null,
+          "vendor": "AMD",
+          "vendorId": "1002"
+        },
+        "polaris_identity_override": {
+          "avx2Limited": true,
+          "codename": "Polaris",
+          "devices": {
+            "1002-6981": {
+              "codename": "Lexa",
+              "name": "AMD Radeon PRO WX 3200",
+              "spoofId": "1002-67FF"
+            },
+            "1002-6987": {
+              "codename": "Lexa",
+              "name": "AMD Radeon RX 640",
+              "spoofId": "1002-67FF"
+            },
+            "1002-699F": {
+              "codename": "Lexa",
+              "name": "AMD Radeon RX 550",
+              "spoofId": "1002-67FF"
+            },
+            "1002-6995": {
+              "codename": "Lexa",
+              "name": "AMD Radeon PRO WX 2100",
+              "spoofId": "1002-67FF"
+            },
+            "1002-6985": {
+              "codename": "Lexa",
+              "name": "AMD Radeon PRO WX 3100",
+              "spoofId": "1002-67E3"
+            }
+          },
+          "maxDarwin": "25.99.99",
+          "maxOclp": null,
+          "minDarwin": "17.0.0",
+          "minOclp": null,
+          "vendor": "AMD",
+          "vendorId": "1002"
+        },
+        "r500": {
+          "codename": "R500",
+          "devices": {
+            "1002-7146": {
+              "name": "AMD Radeon X1300/X1550"
+            },
+            "1002-7187": {
+              "name": "AMD Radeon X1300/X1550"
+            },
+            "1002-71C5": {
+              "name": "AMD Radeon Mobile X1600"
+            },
+            "1002-7249": {
+              "name": "AMD Radeon X1900 XT"
+            }
+          },
+          "maxDarwin": "11.99.99",
+          "maxOclp": "24.99.99",
+          "minDarwin": "8.0.0",
+          "minOclp": "18.0.0",
+          "vendor": "AMD",
+          "vendorId": "1002"
+        },
+        "terascale_1": {
+          "codename": "TeraScale 1",
+          "devices": {
+            "1002-9400": {
+              "name": "AMD Radeon HD 2900 PRO/XT"
+            },
+            "1002-9401": {
+              "name": "AMD Radeon HD 2900 XT"
+            },
+            "1002-9402": {
+              "name": ""
+            },
+            "1002-9403": {
+              "name": "AMD Radeon HD 2900 PRO"
+            },
+            "1002-9440": {
+              "name": "AMD Radeon HD 4870"
+            },
+            "1002-9442": {
+              "name": "AMD Radeon HD 4850"
+            },
+            "1002-944A": {
+              "name": "AMD Radeon HD 4850 (mobile)"
+            },
+            "1002-945A": {
+              "name": "AMD Radeon HD 4870 (mobile)"
+            },
+            "1002-9480": {
+              "name": "AMD Radeon HD 4650/5165 (mobile)"
+            },
+            "1002-9488": {
+              "name": "AMD Radeon HD 4670 (mobile)"
+            },
+            "1002-9490": {
+              "name": "AMD Radeon HD 4670"
+            },
+            "1002-949E": {
+              "name": "AMD Radeon FirePro V5700"
+            },
+            "1002-94A0": {
+              "name": "AMD Radeon HD 4830"
+            },
+            "1002-94C8": {
+              "name": "AMD Radeon HD 2400 XT (mobile)"
+            },
+            "1002-94C9": {
+              "name": "AMD Radeon HD 2400 (mobile)"
+            },
+            "1002-9500": {
+              "name": "AMD Radeon HD 3850 X2"
+            },
+            "1002-9501": {
+              "name": "AMD Radeon HD 3870"
+            },
+            "1002-9504": {
+              "name": "AMD Radeon HD 3850 (mobile)"
+            },
+            "1002-9505": {
+              "name": "AMD Radeon HD 3690/3850"
+            },
+            "1002-9506": {
+              "name": "AMD Radeon HD 3850 X2 (mobile)"
+            },
+            "1002-9507": {
+              "name": "AMD Radeon HD 3830"
+            },
+            "1002-9540": {
+              "name": "AMD Radeon HD 4550"
+            },
+            "1002-9541": {
+              "name": ""
+            },
+            "1002-954E": {
+              "name": ""
+            },
+            "1002-954F": {
+              "name": "AMD Radeon HD 4350/4550"
+            },
+            "1002-9552": {
+              "name": "AMD Radeon HD 4330/4350/4550 (mobile)"
+            },
+            "1002-9553": {
+              "name": "AMD Radeon HD 4530/4570/545v (mobile)"
+            },
+            "1002-9581": {
+              "name": "AMD Radeon HD 2600 (mobile)"
+            },
+            "1002-9583": {
+              "name": "AMD Radeon HD 2600 XT/2700 (mobile)"
+            },
+            "1002-9588": {
+              "name": "AMD Radeon HD 2600 XT"
+            },
+            "1002-9591": {
+              "name": "AMD Radeon HD 3650 (mobile)"
+            },
+            "1002-9593": {
+              "name": "AMD Radeon HD 3670 (mobile)"
+            },
+            "1002-9598": {
+              "name": "AMD Radeon HD 3650/3750/4570/4580"
+            },
+            "1002-9599": {
+              "name": "AMD Radeon HD 3650 AGP"
+            }
+          },
+          "maxDarwin": "17.99.99",
+          "maxOclp": "24.99.99",
+          "minDarwin": "10.0.0",
+          "minOclp": "18.0.0",
+          "vendor": "AMD",
+          "vendorId": "1002"
+        },
+        "terascale_1_identity_override": {
+          "codename": "TeraScale 1 Identity Override",
+          "devices": {
+            "1002-950F": {
+              "codename": "R680",
+              "name": "AMD Radeon HD 3870 X2",
+              "spoofId": "1002-9505"
+            },
+            "1002-944C": {
+              "codename": "RV770 LE",
+              "name": "AMD Radeon HD 4830",
+              "spoofId": "1002-9442"
+            },
+            "1002-9498": {
+              "codename": "RV730 PRO",
+              "name": "AMD Radeon HD 4650",
+              "spoofId": "1002-9553"
+            }
+          },
+          "maxDarwin": "17.99.99",
+          "maxOclp": "24.99.99",
+          "minDarwin": "10.0.0",
+          "minOclp": "18.0.0",
+          "vendor": "AMD",
+          "vendorId": "1002"
+        },
+        "terascale_2": {
+          "codename": "TeraScale 2",
+          "devices": {
+            "1002-6720": {
+              "name": "AMD Radeon HD 6970M/6990M"
+            },
+            "1002-6722": {
+              "name": ""
+            },
+            "1002-6738": {
+              "name": "AMD Radeon HD 6870"
+            },
+            "1002-6739": {
+              "name": "AMD Radeon HD 6850"
+            },
+            "1002-6740": {
+              "name": "AMD Radeon HD 6730M/6770M/7690M XT"
+            },
+            "1002-6741": {
+              "name": "AMD Radeon HD 6630M/6650M/6750M/7670M/7690M"
+            },
+            "1002-6745": {
+              "name": ""
+            },
+            "1002-6750": {
+              "name": "AMD Radeon HD 6650A/7650A"
+            },
+            "1002-6758": {
+              "name": "AMD Radeon HD 6670/7670"
+            },
+            "1002-6759": {
+              "name": "AMD Radeon HD 6570/7570/8550"
+            },
+            "1002-6760": {
+              "name": "AMD Radeon HD 6400M/7400M"
+            },
+            "1002-6761": {
+              "name": "AMD Radeon HD 6430M"
+            },
+            "1002-6768": {
+              "name": ""
+            },
+            "1002-6770": {
+              "name": "AMD Radeon HD 6450A/7450A"
+            },
+            "1002-6779": {
+              "name": "AMD Radeon HD 6450/7450/8450 / R5 230 OEM"
+            },
+            "1002-6840": {
+              "name": "AMD Radeon HD 7500M/7600M"
+            },
+            "1002-6841": {
+              "name": "AMD Radeon HD 7550M/7570M/7650M"
+            },
+            "1002-6898": {
+              "name": "AMD Radeon HD 5870"
+            },
+            "1002-6899": {
+              "name": "AMD Radeon HD 5850"
+            },
+            "1002-68A0": {
+              "name": "AMD Radeon HD 5870 (mobile)"
+            },
+            "1002-68A1": {
+              "name": "AMD Radeon HD 5850 (mobile)"
+            },
+            "1002-68B0": {
+              "name": ""
+            },
+            "1002-68B1": {
+              "name": ""
+            },
+            "1002-68B8": {
+              "name": "AMD Radeon HD 5770"
+            },
+            "1002-68C0": {
+              "name": "AMD Radeon HD 5730 / 6570M"
+            },
+            "1002-68C1": {
+              "name": "AMD Radeon HD 5650/5750 / 6530M/6550M"
+            },
+            "1002-68D8": {
+              "name": "AMD Radeon HD 5670/5690/5730"
+            },
+            "1002-68D9": {
+              "name": "AMD Radeon HD 5550/5570/5630/6510/6610/7570"
+            },
+            "1002-68E0": {
+              "name": "AMD Radeon HD 5430/5450/547"
+            },
+            "1002-6704": {
+              "codename": "Cayman PRO GL",
+              "name": "AMD Radeon FirePro V7900"
+            }
+          },
+          "maxDarwin": "17.99.99",
+          "maxOclp": "24.99.99",
+          "minDarwin": "10.0.0",
+          "minOclp": "18.0.0",
+          "vendor": "AMD",
+          "vendorId": "1002"
+        },
+        "terascale_2_identity_override": {
+          "codename": "TeraScale 2 Identity Override",
+          "devices": {
+            "1002-675B": {
+              "codename": "Turks",
+              "name": "AMD Radeon HD 7670",
+              "spoofId": "1002-6758"
+            },
+            "1002-68BE": {
+              "codename": "Juniper PRO",
+              "name": "AMD Radeon HD 5750",
+              "spoofId": "1002-68B8"
+            },
+            "1002-68BF": {
+              "codename": "Juniper PRO",
+              "name": "AMD Radeon HD 6750",
+              "spoofId": "1002-68B8"
+            },
+            "1002-68F9": {
+              "codename": "Cedar",
+              "name": "AMD Radeon HD 5450",
+              "spoofId": "1002-68E0"
+            },
+            "1002-68FA": {
+              "codename": "Cedar",
+              "name": "AMD Radeon HD 8350",
+              "spoofId": "1002-68E0"
+            },
+            "1002-6778": {
+              "codename": "Caicos XT",
+              "name": "AMD Radeon HD 8470",
+              "spoofId": "1002-6779"
+            },
+            "1002-6707": {
+              "codename": "Cayman LE GL",
+              "name": "AMD FirePro V5900",
+              "spoofId": "1002-6704"
+            }
+          },
+          "maxDarwin": "17.99.99",
+          "maxOclp": "24.99.99",
+          "minDarwin": "10.0.0",
+          "minOclp": "18.0.0",
+          "vendor": "AMD",
+          "vendorId": "1002"
+        },
+        "vega": {
+          "avx2Limited": true,
+          "codename": "Vega",
+          "devices": {
+            "1002-66A0": {
+              "name": "Instinct"
+            },
+            "1002-66A1": {
+              "name": "AMD Radeon Pro VII/Instinct MI50"
+            },
+            "1002-66A2": {
+              "name": ""
+            },
+            "1002-66A3": {
+              "name": "AMD Radeon Pro Vega II/ Pro Vega II Duo"
+            },
+            "1002-66A7": {
+              "name": ""
+            },
+            "1002-66AF": {
+              "name": "AMD Radeon VII"
+            },
+            "1002-6860": {
+              "name": "AMD Radeon Instinct MI25"
+            },
+            "1002-6861": {
+              "name": "AMD Radeon Pro WX 9100"
+            },
+            "1002-6862": {
+              "name": "AMD Radeon Pro SSG"
+            },
+            "1002-6863": {
+              "name": "AMD Radeon Vega Frontier"
+            },
+            "1002-6864": {
+              "name": "AMD Radeon Pro V340"
+            },
+            "1002-6867": {
+              "name": "AMD Radeon Pro Vega 56"
+            },
+            "1002-6868": {
+              "name": "AMD Radeon Pro WX 8100/8200"
+            },
+            "1002-6869": {
+              "name": "AMD Radeon Pro Vega 48"
+            },
+            "1002-686A": {
+              "name": ""
+            },
+            "1002-686B": {
+              "name": "AMD Radeon Pro Vega 64X"
+            },
+            "1002-686C": {
+              "name": "AMD Radeon Instinct MI25"
+            },
+            "1002-686D": {
+              "name": ""
+            },
+            "1002-686E": {
+              "name": ""
+            },
+            "1002-686F": {
+              "name": ""
+            },
+            "1002-687F": {
+              "name": "AMD Radeon RX Vega 56/64"
+            },
+            "1002-69A0": {
+              "name": ""
+            },
+            "1002-69A1": {
+              "name": ""
+            },
+            "1002-69A2": {
+              "name": ""
+            },
+            "1002-69A3": {
+              "name": ""
+            },
+            "1002-69AF": {
+              "name": ""
+            }
+          },
+          "maxDarwin": "25.99.99",
+          "maxOclp": null,
+          "minDarwin": "17.0.0",
+          "minOclp": null,
+          "vendor": "AMD",
+          "vendorId": "1002"
+        }
+      },
+      "vendor": "AMD",
+      "vendorId": "1002"
+    },
+    "10DE": {
+      "groups": {
+        "curie": {
+          "codename": "Curie",
+          "devices": {
+            "10DE-0040": {
+              "codename": "NV40",
+              "name": "GeForce 6800 Ultra"
+            },
+            "10DE-0090": {
+              "codename": "G70",
+              "name": "GeForce 7800 GTX"
+            },
+            "10DE-00F0": {
+              "codename": "BR02",
+              "name": "BR02"
+            },
+            "10DE-0140": {
+              "codename": "NV43",
+              "name": "GeForce 6600 GT"
+            },
+            "10DE-0160": {
+              "codename": "NV44",
+              "name": "GeForce 6500"
+            },
+            "10DE-01D0": {
+              "codename": "G72",
+              "name": "GeForce 7350 LE"
+            },
+            "10DE-0220": {
+              "codename": "NV44A",
+              "name": "NV44A"
+            },
+            "10DE-0290": {
+              "codename": "G71",
+              "name": "GeForce 7900 GTX"
+            },
+            "10DE-0390": {
+              "codename": "G73",
+              "name": "GeForce 7650 GS"
+            }
+          },
+          "maxDarwin": "17.99.99",
+          "maxOclp": "24.99.99",
+          "minDarwin": "10.0.0",
+          "minOclp": "18.0.0",
+          "vendor": "NVIDIA",
+          "vendorId": "10DE"
+        },
+        "fermi": {
+          "codename": "Fermi",
+          "devices": {
+            "10DE-06C0": {
+              "codename": "GF100",
+              "name": "GTX 480"
+            },
+            "10DE-06C4": {
+              "codename": "GF100",
+              "name": "GTX 465"
+            },
+            "10DE-06CA": {
+              "codename": "GF100",
+              "name": "GTX 480M"
+            },
+            "10DE-06CB": {
+              "codename": "GF100",
+              "name": "GTX 480"
+            },
+            "10DE-06CD": {
+              "codename": "GF100",
+              "name": "GTX 470"
+            },
+            "10DE-06D1": {
+              "codename": "GF100",
+              "name": "C2050 / C2070"
+            },
+            "10DE-06D2": {
+              "codename": "GF100",
+              "name": "M2070"
+            },
+            "10DE-06D8": {
+              "codename": "GF100",
+              "name": "6000"
+            },
+            "10DE-06D9": {
+              "codename": "GF100",
+              "name": "5000"
+            },
+            "10DE-06DA": {
+              "codename": "GF100",
+              "name": "5000M"
+            },
+            "10DE-06DC": {
+              "codename": "GF100",
+              "name": "6000"
+            },
+            "10DE-06DD": {
+              "codename": "GF100",
+              "name": "4000"
+            },
+            "10DE-06DE": {
+              "codename": "GF100",
+              "name": "T20"
+            },
+            "10DE-06DF": {
+              "codename": "GF100",
+              "name": "M2070-Q"
+            },
+            "10DE-0DC0": {
+              "codename": "GF106",
+              "name": "GT 440"
+            },
+            "10DE-0DC4": {
+              "codename": "GF106",
+              "name": "GTS 450"
+            },
+            "10DE-0DC5": {
+              "codename": "GF106",
+              "name": "GTS 450"
+            },
+            "10DE-0DC6": {
+              "codename": "GF106",
+              "name": "GTS 450"
+            },
+            "10DE-0DCD": {
+              "codename": "GF106",
+              "name": "GT 555M"
+            },
+            "10DE-0DCE": {
+              "codename": "GF106",
+              "name": "GT 555M"
+            },
+            "10DE-0DD1": {
+              "codename": "GF106",
+              "name": "GTX 460M"
+            },
+            "10DE-0DD2": {
+              "codename": "GF106",
+              "name": "GT 445M"
+            },
+            "10DE-0DD3": {
+              "codename": "GF106",
+              "name": "GT 435M"
+            },
+            "10DE-0DD6": {
+              "codename": "GF106",
+              "name": "GT 550M"
+            },
+            "10DE-0DD8": {
+              "codename": "GF106",
+              "name": "2000"
+            },
+            "10DE-0DDA": {
+              "codename": "GF106",
+              "name": "2000M"
+            },
+            "10DE-0DE0": {
+              "codename": "GF108",
+              "name": "GT 440"
+            },
+            "10DE-0DE1": {
+              "codename": "GF108",
+              "name": "GT 430"
+            },
+            "10DE-0DE2": {
+              "codename": "GF108",
+              "name": "GT 420"
+            },
+            "10DE-0DE3": {
+              "codename": "GF108",
+              "name": "GT 635M"
+            },
+            "10DE-0DE4": {
+              "codename": "GF108",
+              "name": "GT 520"
+            },
+            "10DE-0DE5": {
+              "codename": "GF108",
+              "name": "GT 530"
+            },
+            "10DE-0DE8": {
+              "codename": "GF108",
+              "name": "GT 620M"
+            },
+            "10DE-0DE9": {
+              "codename": "GF108",
+              "name": "GT 630M"
+            },
+            "10DE-0DEA": {
+              "codename": "GF108",
+              "name": "610M"
+            },
+            "10DE-0DEB": {
+              "codename": "GF108",
+              "name": "GT 555M"
+            },
+            "10DE-0DEC": {
+              "codename": "GF108",
+              "name": "GT 525M"
+            },
+            "10DE-0DED": {
+              "codename": "GF108",
+              "name": "GT 520M"
+            },
+            "10DE-0DEE": {
+              "codename": "GF108",
+              "name": "GT 415M"
+            },
+            "10DE-0DEF": {
+              "codename": "GF108",
+              "name": "NVS 5400M"
+            },
+            "10DE-0DF0": {
+              "codename": "GF108",
+              "name": "GT 425M"
+            },
+            "10DE-0DF1": {
+              "codename": "GF108",
+              "name": "GT 420M"
+            },
+            "10DE-0DF2": {
+              "codename": "GF108",
+              "name": "GT 435M"
+            },
+            "10DE-0DF3": {
+              "codename": "GF108",
+              "name": "GT 420M"
+            },
+            "10DE-0DF4": {
+              "codename": "GF108",
+              "name": "GT 540M"
+            },
+            "10DE-0DF5": {
+              "codename": "GF108",
+              "name": "GT 525M"
+            },
+            "10DE-0DF6": {
+              "codename": "GF108",
+              "name": "GT 550M"
+            },
+            "10DE-0DF7": {
+              "codename": "GF108",
+              "name": "GT 520M"
+            },
+            "10DE-0DF8": {
+              "codename": "GF108",
+              "name": "600"
+            },
+            "10DE-0DF9": {
+              "codename": "GF108",
+              "name": "500M"
+            },
+            "10DE-0DFA": {
+              "codename": "GF108",
+              "name": "1000M"
+            },
+            "10DE-0DFC": {
+              "codename": "GF108",
+              "name": "NVS 5200M"
+            },
+            "10DE-0E22": {
+              "codename": "GF104",
+              "name": "GTX 460"
+            },
+            "10DE-0E23": {
+              "codename": "GF104",
+              "name": "GTX 460 SE"
+            },
+            "10DE-0E24": {
+              "codename": "GF104",
+              "name": "GTX 460 OEM"
+            },
+            "10DE-0E30": {
+              "codename": "GF104",
+              "name": "GTX 470M"
+            },
+            "10DE-0E31": {
+              "codename": "GF104",
+              "name": "GTX 485M"
+            },
+            "10DE-0E3A": {
+              "codename": "GF104",
+              "name": "3000M"
+            },
+            "10DE-0E3B": {
+              "codename": "GF104",
+              "name": "4000M"
+            },
+            "10DE-0F00": {
+              "codename": "GF108",
+              "name": "GT 630"
+            },
+            "10DE-0F01": {
+              "codename": "GF108",
+              "name": "GT 620"
+            },
+            "10DE-0F02": {
+              "codename": "GF108",
+              "name": "GT 730"
+            },
+            "10DE-1040": {
+              "codename": "GF119",
+              "name": "GT 520"
+            },
+            "10DE-1042": {
+              "codename": "GF119",
+              "name": "510"
+            },
+            "10DE-1048": {
+              "codename": "GF119",
+              "name": "605"
+            },
+            "10DE-1049": {
+              "codename": "GF119",
+              "name": "GT 620"
+            },
+            "10DE-104A": {
+              "codename": "GF119",
+              "name": "GT 610"
+            },
+            "10DE-104B": {
+              "codename": "GF119",
+              "name": "GT 625 OEM"
+            },
+            "10DE-104C": {
+              "codename": "GF119",
+              "name": "GT 705"
+            },
+            "10DE-1050": {
+              "codename": "GF119",
+              "name": "GT 520M"
+            },
+            "10DE-1051": {
+              "codename": "GF119",
+              "name": "GT 520MX"
+            },
+            "10DE-1052": {
+              "codename": "GF119",
+              "name": "GT 520M"
+            },
+            "10DE-1054": {
+              "codename": "GF119",
+              "name": "410M"
+            },
+            "10DE-1055": {
+              "codename": "GF119",
+              "name": "410M"
+            },
+            "10DE-1056": {
+              "codename": "GF119",
+              "name": "NVS 4200M"
+            },
+            "10DE-1057": {
+              "codename": "GF119",
+              "name": "NVS 4200M"
+            },
+            "10DE-1058": {
+              "codename": "GF119",
+              "name": "610M"
+            },
+            "10DE-1059": {
+              "codename": "GF119",
+              "name": "610M"
+            },
+            "10DE-105A": {
+              "codename": "GF119",
+              "name": "610M"
+            },
+            "10DE-105B": {
+              "codename": "GF119M",
+              "name": "705M"
+            },
+            "10DE-107C": {
+              "codename": "GF119",
+              "name": "NVS 315"
+            },
+            "10DE-107D": {
+              "codename": "GF119",
+              "name": "NVS 310"
+            },
+            "10DE-1080": {
+              "codename": "GF110",
+              "name": "GTX 580"
+            },
+            "10DE-1081": {
+              "codename": "GF110",
+              "name": "GTX 570"
+            },
+            "10DE-1082": {
+              "codename": "GF110",
+              "name": "GTX 560 Ti"
+            },
+            "10DE-1084": {
+              "codename": "GF110",
+              "name": "GTX 560"
+            },
+            "10DE-1086": {
+              "codename": "GF110",
+              "name": "GTX 570"
+            },
+            "10DE-1087": {
+              "codename": "GF110",
+              "name": "GTX 560 Ti"
+            },
+            "10DE-1088": {
+              "codename": "GF110",
+              "name": "GTX 590"
+            },
+            "10DE-1089": {
+              "codename": "GF110",
+              "name": "GTX 580"
+            },
+            "10DE-108B": {
+              "codename": "GF110",
+              "name": "GTX 580"
+            },
+            "10DE-1091": {
+              "codename": "GF110",
+              "name": "M2090"
+            },
+            "10DE-1096": {
+              "codename": "GF110GL",
+              "name": "Tesla C2050 / C2075"
+            },
+            "10DE-109A": {
+              "codename": "GF110",
+              "name": "5010M"
+            },
+            "10DE-109B": {
+              "codename": "GF110",
+              "name": "7000"
+            },
+            "10DE-1140": {
+              "codename": "GF117",
+              "name": "GT 620M"
+            },
+            "10DE-1200": {
+              "codename": "GF114",
+              "name": "GTX 560 Ti"
+            },
+            "10DE-1201": {
+              "codename": "GF114",
+              "name": "GTX 560"
+            },
+            "10DE-1202": {
+              "codename": "GF114",
+              "name": "GTX 560 Ti OEM"
+            },
+            "10DE-1203": {
+              "codename": "GF114",
+              "name": "GTX 460 SE v2"
+            },
+            "10DE-1205": {
+              "codename": "GF114",
+              "name": "GTX 460 v2"
+            },
+            "10DE-1206": {
+              "codename": "GF114",
+              "name": "GTX 555"
+            },
+            "10DE-1207": {
+              "codename": "GF114",
+              "name": "GT 645 OEM"
+            },
+            "10DE-1208": {
+              "codename": "GF114",
+              "name": "GTX 560 SE"
+            },
+            "10DE-1210": {
+              "codename": "GF114",
+              "name": "GTX 570M"
+            },
+            "10DE-1211": {
+              "codename": "GF114",
+              "name": "GTX 580M"
+            },
+            "10DE-1212": {
+              "codename": "GF114",
+              "name": "GTX 675M"
+            },
+            "10DE-1213": {
+              "codename": "GF114",
+              "name": "GTX 670M"
+            },
+            "10DE-1241": {
+              "codename": "GF116",
+              "name": "GT 545 OEM"
+            },
+            "10DE-1243": {
+              "codename": "GF116",
+              "name": "GT 545"
+            },
+            "10DE-1244": {
+              "codename": "GF116",
+              "name": "GTX 550 Ti"
+            },
+            "10DE-1245": {
+              "codename": "GF116",
+              "name": "GTS 450 Rev. 2"
+            },
+            "10DE-1246": {
+              "codename": "GF116",
+              "name": "GT 550M"
+            },
+            "10DE-1247": {
+              "codename": "GF116",
+              "name": "GT 635M"
+            },
+            "10DE-1248": {
+              "codename": "GF116",
+              "name": "GT 555M"
+            },
+            "10DE-1249": {
+              "codename": "GF116",
+              "name": "GTS 450 Rev. 3"
+            },
+            "10DE-124B": {
+              "codename": "GF116",
+              "name": "GT 640 OEM"
+            },
+            "10DE-124D": {
+              "codename": "GF116",
+              "name": "GT 555M"
+            },
+            "10DE-1251": {
+              "codename": "GF116",
+              "name": "GTX 560M"
+            }
+          },
+          "maxDarwin": "17.99.99",
+          "maxOclp": "24.99.99",
+          "minDarwin": "10.0.0",
+          "minOclp": "20.0.0",
+          "vendor": "NVIDIA",
+          "vendorId": "10DE"
+        },
+        "kepler": {
+          "codename": "Kepler",
+          "devices": {
+            "10DE-0FC0": {
+              "codename": "GK107",
+              "name": "GT 640"
+            },
+            "10DE-0FC1": {
+              "codename": "GK107",
+              "name": "GT 640"
+            },
+            "10DE-0FC2": {
+              "codename": "GK107",
+              "name": "GT 630"
+            },
+            "10DE-0FC5": {
+              "codename": "GK107",
+              "name": "GT 1030"
+            },
+            "10DE-0FC6": {
+              "codename": "GK107",
+              "name": "GTX 650"
+            },
+            "10DE-0FC8": {
+              "codename": "GK107",
+              "name": "GT 740"
+            },
+            "10DE-0FC9": {
+              "codename": "GK107",
+              "name": "GT 730"
+            },
+            "10DE-0FCD": {
+              "codename": "GK107M",
+              "name": "GT 755M"
+            },
+            "10DE-0FCE": {
+              "codename": "GK107M",
+              "name": "GT 640M LE"
+            },
+            "10DE-0FD1": {
+              "codename": "GK107",
+              "name": "GT 650M"
+            },
+            "10DE-0FD2": {
+              "codename": "GK107",
+              "name": "GT 640M"
+            },
+            "10DE-0FD3": {
+              "codename": "GK107",
+              "name": "GT 640M LE"
+            },
+            "10DE-0FD4": {
+              "codename": "GK107",
+              "name": "GTX 660M"
+            },
+            "10DE-0FD5": {
+              "codename": "GK107",
+              "name": "GT 650M"
+            },
+            "10DE-0FD6": {
+              "codename": "GK107M",
+              "name": "GK107M"
+            },
+            "10DE-0FD8": {
+              "codename": "GK107",
+              "name": "GT 640M"
+            },
+            "10DE-0FD9": {
+              "codename": "GK107",
+              "name": "GT 645M"
+            },
+            "10DE-0FDB": {
+              "codename": "GK107M",
+              "name": "GK107M"
+            },
+            "10DE-0FDF": {
+              "codename": "GK107M",
+              "name": "GT 740M"
+            },
+            "10DE-0FE0": {
+              "codename": "GK107",
+              "name": "GTX 660M"
+            },
+            "10DE-0FE1": {
+              "codename": "GK107M",
+              "name": "GT 730M"
+            },
+            "10DE-0FE2": {
+              "codename": "GK107M",
+              "name": "GT 745M"
+            },
+            "10DE-0FE3": {
+              "codename": "GK107M",
+              "name": "GT 745M"
+            },
+            "10DE-0FE4": {
+              "codename": "GK107M",
+              "name": "GT 750M"
+            },
+            "10DE-0FE5": {
+              "codename": "GK107",
+              "name": "GeForce K340 USM"
+            },
+            "10DE-0FE6": {
+              "codename": "GK107",
+              "name": "GRID K1 NVS USM"
+            },
+            "10DE-0FE7": {
+              "codename": "GK107GL",
+              "name": "GRID K100 vGPU"
+            },
+            "10DE-0FE8": {
+              "codename": "GK107M",
+              "name": "N14P-GS"
+            },
+            "10DE-0FE9": {
+              "codename": "GK107",
+              "name": "GT 750M Mac Edition"
+            },
+            "10DE-0FEA": {
+              "codename": "GK107M",
+              "name": "GT 755M Mac Edition"
+            },
+            "10DE-0FEC": {
+              "codename": "GK107M",
+              "name": "710A"
+            },
+            "10DE-0FED": {
+              "codename": "GK107M",
+              "name": "820M"
+            },
+            "10DE-0FEE": {
+              "codename": "GK107M",
+              "name": "810M"
+            },
+            "10DE-0FEF": {
+              "codename": "GK107GL",
+              "name": "GRID K340"
+            },
+            "10DE-0FF1": {
+              "codename": "GK107",
+              "name": "NVS 1000"
+            },
+            "10DE-0FF2": {
+              "codename": "GK107GL",
+              "name": "GRID K1"
+            },
+            "10DE-0FF3": {
+              "codename": "GK107GL",
+              "name": "Quadro K420"
+            },
+            "10DE-0FF5": {
+              "codename": "GK107GL",
+              "name": "GRID K1 Tesla USM"
+            },
+            "10DE-0FF6": {
+              "codename": "GK107GLM",
+              "name": "Quadro K1100M"
+            },
+            "10DE-0FF7": {
+              "codename": "GK107GL",
+              "name": "GRID K140Q vGPU"
+            },
+            "10DE-0FF8": {
+              "codename": "GK107GLM",
+              "name": "Quadro K500M"
+            },
+            "10DE-0FF9": {
+              "codename": "GK107",
+              "name": "K2000D"
+            },
+            "10DE-0FFA": {
+              "codename": "GK107",
+              "name": "K600"
+            },
+            "10DE-0FFB": {
+              "codename": "GK107",
+              "name": "K2000M"
+            },
+            "10DE-0FFC": {
+              "codename": "GK107",
+              "name": "K1000M"
+            },
+            "10DE-0FFD": {
+              "codename": "GK107",
+              "name": "NVS 510"
+            },
+            "10DE-0FFE": {
+              "codename": "GK107",
+              "name": "Quadro K2000"
+            },
+            "10DE-0FFF": {
+              "codename": "GK107",
+              "name": "Quadro 410"
+            },
+            "10DE-1001": {
+              "codename": "GK110B",
+              "name": "GTX TITAN Z"
+            },
+            "10DE-1003": {
+              "codename": "GK110",
+              "name": "GTX Titan LE"
+            },
+            "10DE-1004": {
+              "codename": "GK110",
+              "name": "GTX 780"
+            },
+            "10DE-1005": {
+              "codename": "GK110",
+              "name": "GTX Titan"
+            },
+            "10DE-1007": {
+              "codename": "GK110",
+              "name": "GTX 780 Rev. 2"
+            },
+            "10DE-1008": {
+              "codename": "GK110",
+              "name": "GTX 780 Ti 6GB"
+            },
+            "10DE-100A": {
+              "codename": "GK110B",
+              "name": "GTX 780 Ti"
+            },
+            "10DE-100C": {
+              "codename": "GK110B",
+              "name": "GTX TITAN Black"
+            },
+            "10DE-101E": {
+              "codename": "GK110GL",
+              "name": "Tesla K20X"
+            },
+            "10DE-101F": {
+              "codename": "GK110GL",
+              "name": "Tesla K20"
+            },
+            "10DE-1020": {
+              "codename": "GK110GL",
+              "name": "Tesla K20X"
+            },
+            "10DE-1021": {
+              "codename": "GK110GL",
+              "name": "Tesla K20Xm"
+            },
+            "10DE-1022": {
+              "codename": "GK110GL",
+              "name": "Tesla K20C"
+            },
+            "10DE-1023": {
+              "codename": "GK110BGL",
+              "name": "Tesla K40m"
+            },
+            "10DE-1024": {
+              "codename": "GK180GL",
+              "name": "Tesla K40c"
+            },
+            "10DE-1026": {
+              "codename": "GK110GL",
+              "name": "Tesla K20s"
+            },
+            "10DE-1027": {
+              "codename": "GK110BGL",
+              "name": "Tesla K40st"
+            },
+            "10DE-1028": {
+              "codename": "GK110GL",
+              "name": "Tesla K20m"
+            },
+            "10DE-1029": {
+              "codename": "GK110BGL",
+              "name": "Tesla K40s"
+            },
+            "10DE-102A": {
+              "codename": "GK110BGL",
+              "name": "Tesla K40t"
+            },
+            "10DE-102D": {
+              "codename": "GK210GL",
+              "name": "Tesla K80"
+            },
+            "10DE-102E": {
+              "codename": "GK110BGL",
+              "name": "Tesla K40d"
+            },
+            "10DE-102F": {
+              "codename": "GK110BGL",
+              "name": "Tesla Stella Solo"
+            },
+            "10DE-103A": {
+              "codename": "GK110GL",
+              "name": "Quadro K6000"
+            },
+            "10DE-103C": {
+              "codename": "GK110GL",
+              "name": "Quadro K5200"
+            },
+            "10DE-103F": {
+              "codename": "GK110BGL",
+              "name": "Tesla Stella SXM"
+            },
+            "10DE-1180": {
+              "codename": "GK104",
+              "name": "GTX 680"
+            },
+            "10DE-1182": {
+              "codename": "GK104",
+              "name": "GTX 760 Ti"
+            },
+            "10DE-1183": {
+              "codename": "GK104",
+              "name": "GTX 660 Ti"
+            },
+            "10DE-1184": {
+              "codename": "GK104",
+              "name": "GTX 770"
+            },
+            "10DE-1185": {
+              "codename": "GK104",
+              "name": "GTX 660"
+            },
+            "10DE-1186": {
+              "codename": "GK104",
+              "name": "GTX 660 Ti"
+            },
+            "10DE-1187": {
+              "codename": "GK104",
+              "name": "GTX 760"
+            },
+            "10DE-1188": {
+              "codename": "GK104",
+              "name": "GTX 690"
+            },
+            "10DE-1189": {
+              "codename": "GK104",
+              "name": "GTX 670"
+            },
+            "10DE-118A": {
+              "codename": "GK104GL",
+              "name": "GRID K520"
+            },
+            "10DE-118B": {
+              "codename": "GK104GL",
+              "name": "GRID K2 GeForce USM"
+            },
+            "10DE-118C": {
+              "codename": "GK104",
+              "name": "GRID K2 NVS USM"
+            },
+            "10DE-118D": {
+              "codename": "GK104GL",
+              "name": "GRID K200 vGPU"
+            },
+            "10DE-118E": {
+              "codename": "GK104",
+              "name": "GTX 760 OEM"
+            },
+            "10DE-118F": {
+              "codename": "GK104GL",
+              "name": "Tesla K10"
+            },
+            "10DE-1191": {
+              "codename": "GK104",
+              "name": "GTX 760 Rev. 2"
+            },
+            "10DE-1193": {
+              "codename": "GK104",
+              "name": "GTX 760 Ti OEM"
+            },
+            "10DE-1194": {
+              "codename": "GK104GL",
+              "name": "Tesla K8"
+            },
+            "10DE-1195": {
+              "codename": "GK104",
+              "name": "GTX 660 Rev. 2"
+            },
+            "10DE-1198": {
+              "codename": "GK104M",
+              "name": "GTX 880M"
+            },
+            "10DE-1199": {
+              "codename": "GK104M",
+              "name": "GTX 870M"
+            },
+            "10DE-119A": {
+              "codename": "GK104M",
+              "name": "GTX 860M"
+            },
+            "10DE-119D": {
+              "codename": "GK104M",
+              "name": "GTX 775M Mac Edition"
+            },
+            "10DE-119E": {
+              "codename": "GK104M",
+              "name": "GTX 780M Mac Edition"
+            },
+            "10DE-119F": {
+              "codename": "GK104",
+              "name": "GTX 780M"
+            },
+            "10DE-11A0": {
+              "codename": "GK104",
+              "name": "GTX 680M"
+            },
+            "10DE-11A1": {
+              "codename": "GK104",
+              "name": "GTX 670MX"
+            },
+            "10DE-11A2": {
+              "codename": "GK104",
+              "name": "GTX 675MX Mac Edition"
+            },
+            "10DE-11A3": {
+              "codename": "GK104",
+              "name": "GTX 680MX"
+            },
+            "10DE-11A7": {
+              "codename": "GK104",
+              "name": "GTX 675MX"
+            },
+            "10DE-11A8": {
+              "codename": "GK104GLM",
+              "name": "Quadro K5100M"
+            },
+            "10DE-11A9": {
+              "codename": "GK104M",
+              "name": "GTX 870M"
+            },
+            "10DE-11AF": {
+              "codename": "GK104GLM",
+              "name": "GRID IceCube"
+            },
+            "10DE-11B0": {
+              "codename": "GK104GL",
+              "name": "GRID K240Q / K260Q vGPU"
+            },
+            "10DE-11B1": {
+              "codename": "GK104GL",
+              "name": "GRID K2 Tesla USM"
+            },
+            "10DE-11B4": {
+              "codename": "GK104GL",
+              "name": "Quadro K4200"
+            },
+            "10DE-11B6": {
+              "codename": "GK104GLM",
+              "name": "Quadro K3100M"
+            },
+            "10DE-11B7": {
+              "codename": "GK104GLM",
+              "name": "Quadro K4100M"
+            },
+            "10DE-11B8": {
+              "codename": "GK104GLM",
+              "name": "Quadro K5100M"
+            },
+            "10DE-11B9": {
+              "codename": "GK104GLM",
+              "name": "GK104GLM"
+            },
+            "10DE-11BA": {
+              "codename": "GK104GL",
+              "name": "Quadro K5000"
+            },
+            "10DE-11BC": {
+              "codename": "GK104GLM",
+              "name": "Quadro K5000M"
+            },
+            "10DE-11BD": {
+              "codename": "GK104GLM",
+              "name": "Quadro K4000M"
+            },
+            "10DE-11BE": {
+              "codename": "GK104GLM",
+              "name": "Quadro K3000M"
+            },
+            "10DE-11BF": {
+              "codename": "GK104",
+              "name": "GRID K2"
+            },
+            "10DE-11C0": {
+              "codename": "GK106",
+              "name": "GTX 660"
+            },
+            "10DE-11C2": {
+              "codename": "GK106",
+              "name": "GTX 650 Ti BOOST"
+            },
+            "10DE-11C3": {
+              "codename": "GK106",
+              "name": "GTX 650 Ti OEM"
+            },
+            "10DE-11C4": {
+              "codename": "GK106",
+              "name": "GTX 645 OEM"
+            },
+            "10DE-11C5": {
+              "codename": "GK106",
+              "name": "GT 740"
+            },
+            "10DE-11C6": {
+              "codename": "GK106",
+              "name": "GTX 650 Ti"
+            },
+            "10DE-11C7": {
+              "codename": "GK106",
+              "name": "GTX 750 Ti"
+            },
+            "10DE-11C8": {
+              "codename": "GK106",
+              "name": "GTX 650 OEM"
+            },
+            "10DE-11CB": {
+              "codename": "GK106",
+              "name": "GT 740"
+            },
+            "10DE-11E0": {
+              "codename": "GK106M",
+              "name": "GTX 770M"
+            },
+            "10DE-11E1": {
+              "codename": "GK106M",
+              "name": "GTX 765M"
+            },
+            "10DE-11E2": {
+              "codename": "GK106M",
+              "name": "GTX 765M"
+            },
+            "10DE-11E3": {
+              "codename": "GK106M",
+              "name": "GTX 760M"
+            },
+            "10DE-11E7": {
+              "codename": "GK106M",
+              "name": "GK106M"
+            },
+            "10DE-11FA": {
+              "codename": "GK106GL",
+              "name": "Quadro K4000"
+            },
+            "10DE-11FC": {
+              "codename": "GL106GLM",
+              "name": "Quadro K2100M"
+            },
+            "10DE-1280": {
+              "codename": "GK208",
+              "name": "GT 635"
+            },
+            "10DE-1281": {
+              "codename": "GK208",
+              "name": "GT 710"
+            },
+            "10DE-1282": {
+              "codename": "GK208",
+              "name": "GT 640 REv. 2"
+            },
+            "10DE-1284": {
+              "codename": "GK208",
+              "name": "GT 630 REv. 2"
+            },
+            "10DE-1286": {
+              "codename": "GK208",
+              "name": "GT 720"
+            },
+            "10DE-1287": {
+              "codename": "GK208B",
+              "name": "GT 730"
+            },
+            "10DE-1288": {
+              "codename": "GK208B",
+              "name": "GT 720"
+            },
+            "10DE-1289": {
+              "codename": "GK208",
+              "name": "GT 710"
+            },
+            "10DE-128A": {
+              "codename": "GK208B",
+              "name": "GK208B"
+            },
+            "10DE-128B": {
+              "codename": "GK208B",
+              "name": "GT 710"
+            },
+            "10DE-128C": {
+              "codename": "GK208B",
+              "name": "GK208B"
+            },
+            "10DE-1290": {
+              "codename": "GK208",
+              "name": "GT 730M"
+            },
+            "10DE-1291": {
+              "codename": "GK208",
+              "name": "GT 735M"
+            },
+            "10DE-1292": {
+              "codename": "GK208",
+              "name": "GT 740M"
+            },
+            "10DE-1293": {
+              "codename": "GK208",
+              "name": "GT 730M"
+            },
+            "10DE-1294": {
+              "codename": "GK208",
+              "name": "GT 740M"
+            },
+            "10DE-1295": {
+              "codename": "GK208",
+              "name": "710M"
+            },
+            "10DE-1296": {
+              "codename": "GK208M",
+              "name": "825M"
+            },
+            "10DE-1298": {
+              "codename": "GK208M",
+              "name": "GT 720M"
+            },
+            "10DE-1299": {
+              "codename": "GK208BM",
+              "name": "920M"
+            },
+            "10DE-129A": {
+              "codename": "GK208BM",
+              "name": "910M"
+            },
+            "10DE-12A0": {
+              "codename": "GK208",
+              "name": "GK208"
+            },
+            "10DE-12B9": {
+              "codename": "GK208",
+              "name": "K610M"
+            },
+            "10DE-12BA": {
+              "codename": "GK208",
+              "name": "K510M"
+            }
+          },
+          "maxDarwin": "20.99.99",
+          "maxOclp": "24.99.99",
+          "minDarwin": "12.0.0",
+          "minOclp": "21.0.0",
+          "vendor": "NVIDIA",
+          "vendorId": "10DE"
+        },
+        "maxwell": {
+          "codename": "Maxwell",
+          "devices": {
+            "10DE-1340": {
+              "codename": "GM108M",
+              "name": "GeForce 830M"
+            },
+            "10DE-1341": {
+              "codename": "GM108M",
+              "name": "GeForce 840M"
+            },
+            "10DE-1344": {
+              "codename": "GM108M",
+              "name": "GeForce 845M"
+            },
+            "10DE-1346": {
+              "codename": "GM108M",
+              "name": "GeForce 930M"
+            },
+            "10DE-1347": {
+              "codename": "GM108M",
+              "name": "GeForce 940M"
+            },
+            "10DE-1348": {
+              "codename": "GM108M",
+              "name": "GeForce 945M / 945A"
+            },
+            "10DE-1349": {
+              "codename": "GM108M",
+              "name": "GeForce 930M"
+            },
+            "10DE-134B": {
+              "codename": "GM108M",
+              "name": "GeForce 940MX"
+            },
+            "10DE-134D": {
+              "codename": "GM108M",
+              "name": "GeForce 940MX"
+            },
+            "10DE-134E": {
+              "codename": "GM108M",
+              "name": "GeForce 930MX"
+            },
+            "10DE-134F": {
+              "codename": "GM108M",
+              "name": "GeForce 920MX"
+            },
+            "10DE-137A": {
+              "codename": "GM108GLM",
+              "name": "Quadro K620M / Quadro M500M"
+            },
+            "10DE-137B": {
+              "codename": "GM108GLM",
+              "name": "Quadro M520 Mobile"
+            },
+            "10DE-137D": {
+              "codename": "GM108M",
+              "name": "GeForce 940A"
+            },
+            "10DE-1380": {
+              "codename": "GM107",
+              "name": "GTX 750 Ti"
+            },
+            "10DE-1381": {
+              "codename": "GM107",
+              "name": "GTX 750"
+            },
+            "10DE-1382": {
+              "codename": "GM107",
+              "name": "GTX 745"
+            },
+            "10DE-1389": {
+              "codename": "GM107GL",
+              "name": "GRID M30"
+            },
+            "10DE-1390": {
+              "codename": "GM107M",
+              "name": "GeForce 845M"
+            },
+            "10DE-1391": {
+              "codename": "GM107M",
+              "name": "GTX 850M"
+            },
+            "10DE-1392": {
+              "codename": "GM107M",
+              "name": "GTX 860M"
+            },
+            "10DE-1393": {
+              "codename": "GM107M",
+              "name": "GeForce 840M"
+            },
+            "10DE-1398": {
+              "codename": "GM107M",
+              "name": "GeForce 845M"
+            },
+            "10DE-1399": {
+              "codename": "GM107M",
+              "name": "GeForce 945M"
+            },
+            "10DE-139A": {
+              "codename": "GM107M",
+              "name": "GTX 950M"
+            },
+            "10DE-139B": {
+              "codename": "GM107M",
+              "name": "GTX 960M"
+            },
+            "10DE-139C": {
+              "codename": "GM107M",
+              "name": "GeForce 940M"
+            },
+            "10DE-139D": {
+              "codename": "GM107M",
+              "name": "GTX 750 Ti"
+            },
+            "10DE-13B0": {
+              "codename": "GM107GLM",
+              "name": "Quadro M2000M"
+            },
+            "10DE-13B1": {
+              "codename": "GM107GLM",
+              "name": "Quadro M1000M"
+            },
+            "10DE-13B2": {
+              "codename": "GM107GLM",
+              "name": "Quadro M600M"
+            },
+            "10DE-13B3": {
+              "codename": "GM107GLM",
+              "name": "Quadro K2200M"
+            },
+            "10DE-13B4": {
+              "codename": "GM107GLM",
+              "name": "Quadro M620 Mobile"
+            },
+            "10DE-13B6": {
+              "codename": "GM107GLM",
+              "name": "Quadro M1200 Mobile"
+            },
+            "10DE-13B9": {
+              "codename": "GM107GL",
+              "name": "NVS 810"
+            },
+            "10DE-13BA": {
+              "codename": "GM107GL",
+              "name": "Quadro K2200"
+            },
+            "10DE-13BB": {
+              "codename": "GM107GL",
+              "name": "Quadro K620"
+            },
+            "10DE-13BC": {
+              "codename": "GM107GL",
+              "name": "Quadro K1200"
+            },
+            "10DE-13BD": {
+              "codename": "GM107GL",
+              "name": "Tesla M10"
+            },
+            "10DE-13C0": {
+              "codename": "GM204",
+              "name": "GTX 980"
+            },
+            "10DE-13C1": {
+              "codename": "GM204",
+              "name": "GM204"
+            },
+            "10DE-13C2": {
+              "codename": "GM204",
+              "name": "GTX 970"
+            },
+            "10DE-13C3": {
+              "codename": "GM204",
+              "name": "GM204"
+            },
+            "10DE-13D7": {
+              "codename": "GM204M",
+              "name": "GTX 980M"
+            },
+            "10DE-13D8": {
+              "codename": "GM204M",
+              "name": "GTX 970M"
+            },
+            "10DE-13D9": {
+              "codename": "GM204M",
+              "name": "GTX 965M"
+            },
+            "10DE-13DA": {
+              "codename": "GM204M",
+              "name": "GTX 980 Mobile"
+            },
+            "10DE-13E7": {
+              "codename": "GM204GL",
+              "name": "GTX 980 Engineering Sample"
+            },
+            "10DE-13F0": {
+              "codename": "GM204GL",
+              "name": "Quadro M5000"
+            },
+            "10DE-13F1": {
+              "codename": "GM204GL",
+              "name": "Quadro M4000"
+            },
+            "10DE-13F2": {
+              "codename": "GM204GL",
+              "name": "Tesla M60"
+            },
+            "10DE-13F3": {
+              "codename": "GM204GL",
+              "name": "Tesla M6"
+            },
+            "10DE-13F8": {
+              "codename": "GM204GLM",
+              "name": "Quadro M5000M / M5000 SE"
+            },
+            "10DE-13F9": {
+              "codename": "GM204GLM",
+              "name": "Quadro M4000M"
+            },
+            "10DE-13FA": {
+              "codename": "GM204GLM",
+              "name": "Quadro M3000M"
+            },
+            "10DE-13FB": {
+              "codename": "GM204GLM",
+              "name": "Quadro M5500"
+            },
+            "10DE-1401": {
+              "codename": "GM206",
+              "name": "GTX 960"
+            },
+            "10DE-1402": {
+              "codename": "GM206",
+              "name": "GTX 950"
+            },
+            "10DE-1404": {
+              "codename": "GM206",
+              "name": "GTX 960 FAKE"
+            },
+            "10DE-1406": {
+              "codename": "GM206",
+              "name": "GTX 960 OEM"
+            },
+            "10DE-1407": {
+              "codename": "GM206",
+              "name": "GTX 750 v2"
+            },
+            "10DE-1427": {
+              "codename": "GM206M",
+              "name": "GTX 965M"
+            },
+            "10DE-1430": {
+              "codename": "GM206GL",
+              "name": "Quadro M2000"
+            },
+            "10DE-1431": {
+              "codename": "GM206GL",
+              "name": "Tesla M4"
+            },
+            "10DE-1436": {
+              "codename": "GM206GLM",
+              "name": "Quadro M2200 Mobile"
+            },
+            "10DE-174D": {
+              "codename": "GM108M",
+              "name": "GeForce MX130"
+            },
+            "10DE-174E": {
+              "codename": "GM108M",
+              "name": "GeForce MX110"
+            },
+            "10DE-1789": {
+              "codename": "GM107GL",
+              "name": "GRID M3-3020"
+            },
+            "10DE-179C": {
+              "codename": "GM107",
+              "name": "GeForce 940MX"
+            },
+            "10DE-17C2": {
+              "codename": "GM200",
+              "name": "GTX TITAN X"
+            },
+            "10DE-17C8": {
+              "codename": "GM200",
+              "name": "GTX 980 Ti"
+            },
+            "10DE-17F0": {
+              "codename": "GM200GL",
+              "name": "Quadro M6000"
+            },
+            "10DE-17F1": {
+              "codename": "GM200GL",
+              "name": "Quadro M6000 24GB"
+            },
+            "10DE-17FD": {
+              "codename": "GM200GL",
+              "name": "Tesla M40"
+            }
+          },
+          "maxDarwin": "17.99.99",
+          "maxOclp":  "24.99.99",
+          "minDarwin": "14.0.0",
+          "minOclp":  "20.0.0",
+          "vendor": "NVIDIA",
+          "vendorId": "10DE"
+        },
+        "pascal": {
+          "codename": "Pascal",
+          "devices": {
+            "10DE-15F0": {
+              "codename": "GP100GL",
+              "name": "Quadro GP100"
+            },
+            "10DE-15F1": {
+              "codename": "GP100GL",
+              "name": "GP100GL"
+            },
+            "10DE-15F7": {
+              "codename": "GP100GL",
+              "name": "Tesla P100 PCIe 12GB"
+            },
+            "10DE-15F8": {
+              "codename": "GP100GL",
+              "name": "Tesla P100 PCIe 16GB"
+            },
+            "10DE-15F9": {
+              "codename": "GP100GL",
+              "name": "Tesla P100 SXM2 16GB"
+            },
+            "10DE-1725": {
+              "name": "10DE-1725"
+            },
+            "10DE-172E": {
+              "name": "10DE-172E"
+            },
+            "10DE-172F": {
+              "name": "10DE-172F"
+            },
+            "10DE-1B00": {
+              "codename": "GP102",
+              "name": "TITAN X"
+            },
+            "10DE-1B01": {
+              "codename": "GP102",
+              "name": "GTX 1080 Ti 10GB"
+            },
+            "10DE-1B02": {
+              "codename": "GP102",
+              "name": "TITAN Xp"
+            },
+            "10DE-1B04": {
+              "codename": "GP102",
+              "name": "GP102"
+            },
+            "10DE-1B06": {
+              "codename": "GP102",
+              "name": "GTX 1080 Ti"
+            },
+            "10DE-1B07": {
+              "codename": "GP102",
+              "name": "P102-100"
+            },
+            "10DE-1B30": {
+              "codename": "GP102GL",
+              "name": "Quadro P6000"
+            },
+            "10DE-1B38": {
+              "codename": "GP102GL",
+              "name": "Tesla P40"
+            },
+            "10DE-1B39": {
+              "codename": "GP102GL",
+              "name": "Tesla P10"
+            },
+            "10DE-1B70": {
+              "codename": "GP102GL",
+              "name": "GP102GL"
+            },
+            "10DE-1B78": {
+              "codename": "GP102GL",
+              "name": "GP102GL"
+            },
+            "10DE-1B80": {
+              "codename": "GP104",
+              "name": "GTX 1080"
+            },
+            "10DE-1B81": {
+              "codename": "GP104",
+              "name": "GTX 1070"
+            },
+            "10DE-1B82": {
+              "codename": "GP104",
+              "name": "GTX 1070 Ti"
+            },
+            "10DE-1B83": {
+              "codename": "GP104",
+              "name": "GTX 1060 6GB"
+            },
+            "10DE-1B84": {
+              "codename": "GP104",
+              "name": "GTX 1060 3GB"
+            },
+            "10DE-1B87": {
+              "codename": "GP104",
+              "name": "P104-100"
+            },
+            "10DE-1BA0": {
+              "codename": "GP104M",
+              "name": "GTX 1080 Mobile"
+            },
+            "10DE-1BA1": {
+              "codename": "GP104M",
+              "name": "GTX 1070 Mobile"
+            },
+            "10DE-1BA2": {
+              "codename": "GP104M",
+              "name": "GTX 1070 Mobile"
+            },
+            "10DE-1BA9": {
+              "codename": "GP104M",
+              "name": "GP104M"
+            },
+            "10DE-1BAA": {
+              "codename": "GP104M",
+              "name": "GP104M"
+            },
+            "10DE-1BAD": {
+              "codename": "GP104",
+              "name": "GTX 1070 Engineering Sample"
+            },
+            "10DE-1BB0": {
+              "codename": "GP104GL",
+              "name": "Quadro P5000"
+            },
+            "10DE-1BB1": {
+              "codename": "GP104GL",
+              "name": "Quadro P4000"
+            },
+            "10DE-1BB3": {
+              "codename": "GP104GL",
+              "name": "Tesla P4"
+            },
+            "10DE-1BB4": {
+              "codename": "GP104GL",
+              "name": "Tesla P6"
+            },
+            "10DE-1BB5": {
+              "codename": "GP104GLM",
+              "name": "Quadro P5200 Mobile"
+            },
+            "10DE-1BB6": {
+              "codename": "GP104GLM",
+              "name": "Quadro P5000 Mobile"
+            },
+            "10DE-1BB7": {
+              "codename": "GP104GLM",
+              "name": "Quadro P4000 Mobile"
+            },
+            "10DE-1BB8": {
+              "codename": "GP104GLM",
+              "name": "Quadro P3000 Mobile"
+            },
+            "10DE-1BB9": {
+              "codename": "GP104GLM",
+              "name": "Quadro P4200 Mobile"
+            },
+            "10DE-1BBB": {
+              "codename": "GP104GLM",
+              "name": "Quadro P3200 Mobile"
+            },
+            "10DE-1BC7": {
+              "codename": "GP104",
+              "name": "P104-101"
+            },
+            "10DE-1BE0": {
+              "codename": "GP104BM",
+              "name": "GTX 1080 Mobile"
+            },
+            "10DE-1BE1": {
+              "codename": "GP104BM",
+              "name": "GTX 1070 Mobile"
+            },
+            "10DE-1C00": {
+              "codename": "GP106",
+              "name": "GP106"
+            },
+            "10DE-1C01": {
+              "codename": "GP106",
+              "name": "GP106"
+            },
+            "10DE-1C02": {
+              "codename": "GP106",
+              "name": "GTX 1060 3GB"
+            },
+            "10DE-1C03": {
+              "codename": "GP106",
+              "name": "GTX 1060 6GB"
+            },
+            "10DE-1C04": {
+              "codename": "GP106",
+              "name": "GTX 1060 5GB"
+            },
+            "10DE-1C06": {
+              "codename": "GP106",
+              "name": "GTX 1060 6GB Rev. 2"
+            },
+            "10DE-1C07": {
+              "codename": "GP106",
+              "name": "P106-100"
+            },
+            "10DE-1C09": {
+              "codename": "GP106",
+              "name": "P106-090"
+            },
+            "10DE-1C20": {
+              "codename": "GP106M",
+              "name": "GTX 1060 Mobile"
+            },
+            "10DE-1C21": {
+              "codename": "GP106M",
+              "name": "GTX 1050 Ti Mobile"
+            },
+            "10DE-1C22": {
+              "codename": "GP106M",
+              "name": "GTX 1050 Mobile"
+            },
+            "10DE-1C23": {
+              "codename": "GP106M",
+              "name": "GTX 1060 Mobile Rev. 2"
+            },
+            "10DE-1C2D": {
+              "codename": "GP106M",
+              "name": "GP106M"
+            },
+            "10DE-1C30": {
+              "codename": "GP106GL",
+              "name": "Quadro P2000"
+            },
+            "10DE-1C31": {
+              "codename": "GP106GL",
+              "name": "Quadro P2200"
+            },
+            "10DE-1C35": {
+              "codename": "GP106M",
+              "name": "Quadro P2000 Mobile"
+            },
+            "10DE-1C36": {
+              "codename": "GP106",
+              "name": "P106M"
+            },
+            "10DE-1C60": {
+              "codename": "GP106BM",
+              "name": "GTX 1060 Mobile 6GB"
+            },
+            "10DE-1C61": {
+              "codename": "GP106BM",
+              "name": "GTX 1050 Ti Mobile"
+            },
+            "10DE-1C62": {
+              "codename": "GP106BM",
+              "name": "GTX 1050 Mobile"
+            },
+            "10DE-1C70": {
+              "codename": "GP106GL",
+              "name": "GP106GL"
+            },
+            "10DE-1C80": {
+              "name": "10DE-1C80"
+            },
+            "10DE-1C81": {
+              "codename": "GP107",
+              "name": "GTX 1050"
+            },
+            "10DE-1C82": {
+              "codename": "GP107",
+              "name": "GTX 1050 Ti"
+            },
+            "10DE-1C83": {
+              "codename": "GP107",
+              "name": "GTX 1050 3GB"
+            },
+            "10DE-1C8C": {
+              "codename": "GP107M",
+              "name": "GTX 1050 Ti Mobile"
+            },
+            "10DE-1C8D": {
+              "codename": "GP107M",
+              "name": "GTX 1050 Mobile"
+            },
+            "10DE-1C8E": {
+              "codename": "GP107M",
+              "name": "GP107M"
+            },
+            "10DE-1C8F": {
+              "codename": "GP107M",
+              "name": "GTX 1050 Ti Max-Q"
+            },
+            "10DE-1C90": {
+              "codename": "GP107M",
+              "name": "GeForce MX150"
+            },
+            "10DE-1C91": {
+              "codename": "GP107M",
+              "name": "GTX 1050 3 GB Max-Q"
+            },
+            "10DE-1C92": {
+              "codename": "GP107M",
+              "name": "GTX 1050 Mobile"
+            },
+            "10DE-1C94": {
+              "codename": "GP107M",
+              "name": "GeForce MX350"
+            },
+            "10DE-1C96": {
+              "codename": "GP107M",
+              "name": "GeForce MX350"
+            },
+            "10DE-1CA7": {
+              "codename": "GP107GL",
+              "name": "GP107GL"
+            },
+            "10DE-1CA8": {
+              "codename": "GP107GL",
+              "name": "GP107GL"
+            },
+            "10DE-1CAA": {
+              "codename": "GP107GL",
+              "name": "GP107GL"
+            },
+            "10DE-1CB1": {
+              "codename": "GP107GL",
+              "name": "Quadro P1000"
+            },
+            "10DE-1CB2": {
+              "codename": "GP107GL",
+              "name": "Quadro P600"
+            },
+            "10DE-1CB3": {
+              "codename": "GP107GL",
+              "name": "Quadro P400"
+            },
+            "10DE-1CB6": {
+              "codename": "GP107GL",
+              "name": "Quadro P620"
+            },
+            "10DE-1CBA": {
+              "codename": "GP107GLM",
+              "name": "Quadro P2000 Mobile"
+            },
+            "10DE-1CBB": {
+              "codename": "GP107GLM",
+              "name": "Quadro P1000 Mobile"
+            },
+            "10DE-1CBC": {
+              "codename": "GP107GLM",
+              "name": "Quadro P600 Mobile"
+            },
+            "10DE-1CBD": {
+              "codename": "GP107GLM",
+              "name": "Quadro P620"
+            },
+            "10DE-1CCC": {
+              "codename": "GP107BM",
+              "name": "GTX 1050 Ti Mobile"
+            },
+            "10DE-1CCD": {
+              "codename": "GP107BM",
+              "name": "GTX 1050 Mobile"
+            },
+            "10DE-1CFA": {
+              "codename": "GP107GL",
+              "name": "Quadro P2000"
+            },
+            "10DE-1CFB": {
+              "codename": "GP107GL",
+              "name": "Quadro P1000"
+            },
+            "10DE-1D01": {
+              "codename": "GP108",
+              "name": "GeForce GT 1030"
+            },
+            "10DE-1D02": {
+              "codename": "GP108",
+              "name": "GeForce GT 1010"
+            },
+            "10DE-1D10": {
+              "codename": "GP108M",
+              "name": "GeForce MX150"
+            },
+            "10DE-1D11": {
+              "codename": "GP108M",
+              "name": "GeForce MX230"
+            },
+            "10DE-1D12": {
+              "codename": "GP108M",
+              "name": "GeForce MX150"
+            },
+            "10DE-1D13": {
+              "codename": "GP108M",
+              "name": "GeForce MX250"
+            },
+            "10DE-1D16": {
+              "codename": "GP108M",
+              "name": "GeForce MX330"
+            },
+            "10DE-1D33": {
+              "codename": "GP108GLM",
+              "name": "Quadro P500 Mobile"
+            },
+            "10DE-1D34": {
+              "codename": "GP108GLM",
+              "name": "Quadro P520"
+            },
+            "10DE-1D52": {
+              "codename": "GP108BM",
+              "name": "GeForce MX250"
+            },
+            "10DE-1D56": {
+              "codename": "GP108BM",
+              "name": "GeForce MX330"
+            }
+          },
+          "maxDarwin": "17.99.99",
+          "maxOclp":  "24.99.99",
+          "minDarwin": "14.0.0",
+          "minOclp":  "20.0.0",
+          "vendor": "NVIDIA",
+          "vendorId": "10DE"
+        },
+        "tesla": {
+          "codename": "Tesla",
+          "devices": {
+            "10DE-0190": {
+              "codename": "G80",
+              "name": "GeForce 8800 GTS / 8800 GTX"
+            },
+            "10DE-0191": {
+              "codename": "G80",
+              "name": "GeForce 8800 GTX"
+            },
+            "10DE-0193": {
+              "codename": "G80",
+              "name": "GeForce 8800 GTS"
+            },
+            "10DE-0194": {
+              "codename": "G80",
+              "name": "GeForce 8800 Ultra"
+            },
+            "10DE-019D": {
+              "codename": "G80GL",
+              "name": "Quadro FX 5600"
+            },
+            "10DE-019E": {
+              "codename": "G80GL",
+              "name": "Quadro FX 4600"
+            },
+            "10DE-0400": {
+              "codename": "G84",
+              "name": "8600 GTS"
+            },
+            "10DE-0401": {
+              "codename": "G84",
+              "name": "8600 GT"
+            },
+            "10DE-0402": {
+              "codename": "G84",
+              "name": "8600 GT"
+            },
+            "10DE-0403": {
+              "codename": "G84",
+              "name": "8600 GS"
+            },
+            "10DE-0404": {
+              "codename": "G84",
+              "name": "8400 GS"
+            },
+            "10DE-0405": {
+              "codename": "G84",
+              "name": "9500M GS"
+            },
+            "10DE-0406": {
+              "codename": "G84",
+              "name": "8300 GS"
+            },
+            "10DE-0407": {
+              "codename": "G84",
+              "name": "8600M GT"
+            },
+            "10DE-0408": {
+              "codename": "G84",
+              "name": "9650M GS"
+            },
+            "10DE-0409": {
+              "codename": "G84",
+              "name": "8700M GT"
+            },
+            "10DE-040A": {
+              "codename": "G84",
+              "name": "FX 370"
+            },
+            "10DE-040B": {
+              "codename": "G84",
+              "name": "NVS 320M"
+            },
+            "10DE-040C": {
+              "codename": "G84",
+              "name": "FX 570M"
+            },
+            "10DE-040D": {
+              "codename": "G84",
+              "name": "FX 1600M"
+            },
+            "10DE-040E": {
+              "codename": "G84",
+              "name": "FX 570"
+            },
+            "10DE-040F": {
+              "codename": "G84",
+              "name": "FX 1700"
+            },
+            "10DE-0410": {
+              "codename": "G92",
+              "name": "GT 330"
+            },
+            "10DE-0420": {
+              "codename": "G86",
+              "name": "8400 SE"
+            },
+            "10DE-0421": {
+              "codename": "G86",
+              "name": "8500 GT"
+            },
+            "10DE-0422": {
+              "codename": "G86",
+              "name": "8400 GS"
+            },
+            "10DE-0423": {
+              "codename": "G86",
+              "name": "8300 GS"
+            },
+            "10DE-0424": {
+              "codename": "G86",
+              "name": "8400 GS"
+            },
+            "10DE-0425": {
+              "codename": "G86",
+              "name": "8600M GS"
+            },
+            "10DE-0426": {
+              "codename": "G86",
+              "name": "8400M GT"
+            },
+            "10DE-0427": {
+              "codename": "G86",
+              "name": "8400M GS"
+            },
+            "10DE-0428": {
+              "codename": "G86",
+              "name": "8400M G"
+            },
+            "10DE-0429": {
+              "codename": "G86",
+              "name": "NVS 140M"
+            },
+            "10DE-042A": {
+              "codename": "G86",
+              "name": "NVS 130M"
+            },
+            "10DE-042B": {
+              "codename": "G86",
+              "name": "NVS 135M"
+            },
+            "10DE-042C": {
+              "codename": "G86",
+              "name": "9400 GT"
+            },
+            "10DE-042D": {
+              "codename": "G86",
+              "name": "FX 360M"
+            },
+            "10DE-042E": {
+              "codename": "G86",
+              "name": "9300M G"
+            },
+            "10DE-042F": {
+              "codename": "G86",
+              "name": "NVS 290"
+            },
+            "10DE-05E0": {
+              "codename": "GT200",
+              "name": "GTX 295"
+            },
+            "10DE-05E1": {
+              "codename": "GT200",
+              "name": "GTX 280"
+            },
+            "10DE-05E2": {
+              "codename": "GT200",
+              "name": "GTX 260"
+            },
+            "10DE-05E3": {
+              "codename": "GT200",
+              "name": "GTX 285"
+            },
+            "10DE-05E6": {
+              "codename": "GT200",
+              "name": "GTX 275"
+            },
+            "10DE-05E7": {
+              "codename": "GT200",
+              "name": "C1060"
+            },
+            "10DE-05E9": {
+              "codename": "GT200",
+              "name": "CX"
+            },
+            "10DE-05EA": {
+              "codename": "GT200",
+              "name": "GTX 260"
+            },
+            "10DE-05EB": {
+              "codename": "GT200",
+              "name": "GTX 295"
+            },
+            "10DE-05ED": {
+              "codename": "GT200",
+              "name": "FX 5800"
+            },
+            "10DE-05EE": {
+              "codename": "GT200",
+              "name": "FX 4800"
+            },
+            "10DE-05EF": {
+              "codename": "GT200",
+              "name": "FX 3800"
+            },
+            "10DE-05FD": {
+              "codename": "GT200GL",
+              "name": "Quadro FX 5800"
+            },
+            "10DE-05FE": {
+              "codename": "GT200GL",
+              "name": "Quadro FX 4800"
+            },
+            "10DE-05FF": {
+              "codename": "GT200GL",
+              "name": "Quadro FX 3800"
+            },
+            "10DE-0600": {
+              "codename": "G92",
+              "name": "8800 GTS 512"
+            },
+            "10DE-0601": {
+              "codename": "G92",
+              "name": "9800 GT"
+            },
+            "10DE-0602": {
+              "codename": "G92",
+              "name": "8800 GT"
+            },
+            "10DE-0603": {
+              "codename": "G92",
+              "name": "GT 230"
+            },
+            "10DE-0604": {
+              "codename": "G92",
+              "name": "9800 GX2"
+            },
+            "10DE-0605": {
+              "codename": "G92",
+              "name": "9800 GT"
+            },
+            "10DE-0606": {
+              "codename": "G92",
+              "name": "8800 GS"
+            },
+            "10DE-0607": {
+              "codename": "G92",
+              "name": "GTS 240"
+            },
+            "10DE-0608": {
+              "codename": "G92",
+              "name": "9800M GTX"
+            },
+            "10DE-0609": {
+              "codename": "G92",
+              "name": "8800M GTS"
+            },
+            "10DE-060A": {
+              "codename": "G92",
+              "name": "GTX 280M"
+            },
+            "10DE-060B": {
+              "codename": "G92",
+              "name": "9800M GT"
+            },
+            "10DE-060C": {
+              "codename": "G92",
+              "name": "8800M GTX"
+            },
+            "10DE-060F": {
+              "codename": "G92",
+              "name": "GTX 285M"
+            },
+            "10DE-0610": {
+              "codename": "G92",
+              "name": "9600 GSO"
+            },
+            "10DE-0611": {
+              "codename": "G92",
+              "name": "8800 GT"
+            },
+            "10DE-0612": {
+              "codename": "G92",
+              "name": "9800 GTX/9800 GTX+"
+            },
+            "10DE-0613": {
+              "codename": "G92",
+              "name": "9800 GTX+"
+            },
+            "10DE-0614": {
+              "codename": "G92",
+              "name": "9800 GT"
+            },
+            "10DE-0615": {
+              "codename": "G92",
+              "name": "GTS 250"
+            },
+            "10DE-0617": {
+              "codename": "G92",
+              "name": "9800M GTX"
+            },
+            "10DE-0618": {
+              "codename": "G92",
+              "name": "GTX 260M"
+            },
+            "10DE-0619": {
+              "codename": "G92",
+              "name": "FX 4700 X2"
+            },
+            "10DE-061A": {
+              "codename": "G92",
+              "name": "FX 3700"
+            },
+            "10DE-061B": {
+              "codename": "G92",
+              "name": "VX 200"
+            },
+            "10DE-061C": {
+              "codename": "G92",
+              "name": "FX 3600M"
+            },
+            "10DE-061D": {
+              "codename": "G92",
+              "name": "FX 2800M"
+            },
+            "10DE-061E": {
+              "codename": "G92",
+              "name": "FX 3700M"
+            },
+            "10DE-061F": {
+              "codename": "G92",
+              "name": "FX 3800M"
+            },
+            "10DE-0621": {
+              "codename": "G94",
+              "name": "GT 230"
+            },
+            "10DE-0622": {
+              "codename": "G94",
+              "name": "9600 GT"
+            },
+            "10DE-0623": {
+              "codename": "G94",
+              "name": "9600 GS"
+            },
+            "10DE-0624": {
+              "codename": "G94",
+              "name": "9600 GT Green Edition"
+            },
+            "10DE-0625": {
+              "codename": "G94",
+              "name": "9600 GSO 512"
+            },
+            "10DE-0626": {
+              "codename": "G94",
+              "name": "GT 130"
+            },
+            "10DE-0627": {
+              "codename": "G94",
+              "name": "GT 140"
+            },
+            "10DE-0628": {
+              "codename": "G94",
+              "name": "9800M GTS"
+            },
+            "10DE-062A": {
+              "codename": "G94",
+              "name": "9700M GTS"
+            },
+            "10DE-062B": {
+              "codename": "G94",
+              "name": "9800M GS"
+            },
+            "10DE-062C": {
+              "codename": "G94",
+              "name": "9800M GTS"
+            },
+            "10DE-062D": {
+              "codename": "G94",
+              "name": "9600 GT"
+            },
+            "10DE-062E": {
+              "codename": "G94",
+              "name": "9600 GT"
+            },
+            "10DE-062F": {
+              "codename": "G94",
+              "name": "9800 S"
+            },
+            "10DE-0631": {
+              "codename": "G94",
+              "name": "GTS 160M"
+            },
+            "10DE-0635": {
+              "codename": "G94",
+              "name": "9600 GSO"
+            },
+            "10DE-0637": {
+              "codename": "G94",
+              "name": "9600 GT"
+            },
+            "10DE-0638": {
+              "codename": "G94",
+              "name": "FX 1800"
+            },
+            "10DE-063A": {
+              "codename": "G94",
+              "name": "FX 2700M"
+            },
+            "10DE-0640": {
+              "codename": "G96",
+              "name": "9500 GT"
+            },
+            "10DE-0641": {
+              "codename": "G96",
+              "name": "9400 GT"
+            },
+            "10DE-0643": {
+              "codename": "G96",
+              "name": "9500 GT"
+            },
+            "10DE-0644": {
+              "codename": "G96",
+              "name": "9500 GS"
+            },
+            "10DE-0645": {
+              "codename": "G96",
+              "name": "9500 GS"
+            },
+            "10DE-0646": {
+              "codename": "G96",
+              "name": "GT 120"
+            },
+            "10DE-0647": {
+              "codename": "G96",
+              "name": "9600M GT"
+            },
+            "10DE-0648": {
+              "codename": "G96",
+              "name": "9600M GS"
+            },
+            "10DE-0649": {
+              "codename": "G96",
+              "name": "9600M GT"
+            },
+            "10DE-064A": {
+              "codename": "G96",
+              "name": "9700M GT"
+            },
+            "10DE-064B": {
+              "codename": "G96",
+              "name": "9500M G"
+            },
+            "10DE-064C": {
+              "codename": "G96",
+              "name": "9650M GT"
+            },
+            "10DE-0651": {
+              "codename": "G96",
+              "name": "G 110M"
+            },
+            "10DE-0652": {
+              "codename": "G96",
+              "name": "GT 130M"
+            },
+            "10DE-0653": {
+              "codename": "G96",
+              "name": "GT 120M"
+            },
+            "10DE-0654": {
+              "codename": "G96",
+              "name": "GT 220M"
+            },
+            "10DE-0655": {
+              "codename": "G96",
+              "name": "GT 120"
+            },
+            "10DE-0656": {
+              "codename": "G96",
+              "name": "GT 120"
+            },
+            "10DE-0658": {
+              "codename": "G96",
+              "name": "FX 380"
+            },
+            "10DE-0659": {
+              "codename": "G96",
+              "name": "FX 580"
+            },
+            "10DE-065A": {
+              "codename": "G96",
+              "name": "FX 1700M"
+            },
+            "10DE-065B": {
+              "codename": "G96",
+              "name": "9400 GT"
+            },
+            "10DE-065C": {
+              "codename": "G96",
+              "name": "FX 770M"
+            },
+            "10DE-065F": {
+              "codename": "G96",
+              "name": "G210"
+            },
+            "10DE-06E0": {
+              "codename": "G98",
+              "name": "9300 GE"
+            },
+            "10DE-06E1": {
+              "codename": "G98",
+              "name": "9300 GS"
+            },
+            "10DE-06E2": {
+              "codename": "G98",
+              "name": "8400"
+            },
+            "10DE-06E3": {
+              "codename": "G98",
+              "name": "8400 SE"
+            },
+            "10DE-06E4": {
+              "codename": "G98",
+              "name": "8400 GS"
+            },
+            "10DE-06E5": {
+              "codename": "G98M",
+              "name": "9300M GS"
+            },
+            "10DE-06E6": {
+              "codename": "G98",
+              "name": "G100"
+            },
+            "10DE-06E7": {
+              "codename": "G98",
+              "name": "9300 SE"
+            },
+            "10DE-06E8": {
+              "codename": "G98",
+              "name": "9200M GS"
+            },
+            "10DE-06E9": {
+              "codename": "G98",
+              "name": "9300M GS"
+            },
+            "10DE-06EA": {
+              "codename": "G98",
+              "name": "NVS 150M"
+            },
+            "10DE-06EB": {
+              "codename": "G98",
+              "name": "NVS 160M"
+            },
+            "10DE-06EC": {
+              "codename": "G98",
+              "name": "G 105M"
+            },
+            "10DE-06ED": {
+              "codename": "G98",
+              "name": "9600 GT / 9800 GT"
+            },
+            "10DE-06EF": {
+              "codename": "G98",
+              "name": "G 103M"
+            },
+            "10DE-06F1": {
+              "codename": "G98",
+              "name": "G105M"
+            },
+            "10DE-06F8": {
+              "codename": "G98",
+              "name": "NVS 420"
+            },
+            "10DE-06F9": {
+              "codename": "G98",
+              "name": "FX 370 LP"
+            },
+            "10DE-06FA": {
+              "codename": "G98",
+              "name": "NVS 450"
+            },
+            "10DE-06FB": {
+              "codename": "G98",
+              "name": "FX 370M"
+            },
+            "10DE-06FD": {
+              "codename": "G98",
+              "name": "NVS 295"
+            },
+            "10DE-06FF": {
+              "codename": "G98",
+              "name": "HICx16"
+            },
+            "10DE-0840": {
+              "codename": "MCP77 GPU",
+              "name": "8200M"
+            },
+            "10DE-0844": {
+              "codename": "MCP77 GPU",
+              "name": "9100M G"
+            },
+            "10DE-0845": {
+              "codename": "MCP77 GPU",
+              "name": "8200M G"
+            },
+            "10DE-0846": {
+              "codename": "MCP77 GPU",
+              "name": "9200"
+            },
+            "10DE-0847": {
+              "codename": "MCP77 GPU",
+              "name": "9100"
+            },
+            "10DE-0848": {
+              "codename": "MCP77 GPU",
+              "name": "8300"
+            },
+            "10DE-0849": {
+              "codename": "MCP77 GPU",
+              "name": "8200"
+            },
+            "10DE-084A": {
+              "codename": "MCP77 GPU",
+              "name": "730A"
+            },
+            "10DE-084B": {
+              "codename": "MCP77 GPU",
+              "name": "9200"
+            },
+            "10DE-084C": {
+              "codename": "MCP77 GPU",
+              "name": "980A/780A SLI"
+            },
+            "10DE-084D": {
+              "codename": "MCP77 GPU",
+              "name": "750A SLI"
+            },
+            "10DE-084F": {
+              "codename": "MCP77 GPU",
+              "name": "8100 / 720A"
+            },
+            "10DE-0860": {
+              "codename": "MCP79 GPU",
+              "name": "9400"
+            },
+            "10DE-0861": {
+              "codename": "MCP79 GPU",
+              "name": "9400"
+            },
+            "10DE-0862": {
+              "codename": "MCP79 GPU",
+              "name": "9400M G"
+            },
+            "10DE-0863": {
+              "codename": "MCP79 GPU",
+              "name": "9400M"
+            },
+            "10DE-0864": {
+              "codename": "MCP79 GPU",
+              "name": "9300"
+            },
+            "10DE-0865": {
+              "codename": "MCP79 GPU",
+              "name": "ION"
+            },
+            "10DE-0866": {
+              "codename": "MCP79 GPU",
+              "name": "9400M G"
+            },
+            "10DE-0867": {
+              "codename": "MCP79 GPU",
+              "name": "9400"
+            },
+            "10DE-0868": {
+              "codename": "MCP79 GPU",
+              "name": "760i SLI"
+            },
+            "10DE-0869": {
+              "codename": "MCP79 GPU",
+              "name": "9400"
+            },
+            "10DE-086A": {
+              "codename": "MCP79 GPU",
+              "name": "9400"
+            },
+            "10DE-086C": {
+              "codename": "MCP79 GPU",
+              "name": "9300 / 730i"
+            },
+            "10DE-086D": {
+              "codename": "MCP79 GPU",
+              "name": "9200"
+            },
+            "10DE-086E": {
+              "codename": "MCP79 GPU",
+              "name": "9100M G"
+            },
+            "10DE-086F": {
+              "codename": "MCP79 GPU",
+              "name": "8200M G"
+            },
+            "10DE-0870": {
+              "codename": "MCP79 GPU",
+              "name": "9400M"
+            },
+            "10DE-0871": {
+              "codename": "MCP79 GPU",
+              "name": "9200"
+            },
+            "10DE-0872": {
+              "codename": "MCP79 GPU",
+              "name": "G102M"
+            },
+            "10DE-0873": {
+              "codename": "MCP79 GPU",
+              "name": "G102M"
+            },
+            "10DE-0874": {
+              "codename": "MCP79 GPU",
+              "name": "ION"
+            },
+            "10DE-0876": {
+              "codename": "MCP79 GPU",
+              "name": "ION"
+            },
+            "10DE-087A": {
+              "codename": "MCP79 GPU",
+              "name": "9400"
+            },
+            "10DE-087D": {
+              "codename": "MCP79 GPU",
+              "name": "ION"
+            },
+            "10DE-087E": {
+              "codename": "MCP79 GPU",
+              "name": "ION LE"
+            },
+            "10DE-087F": {
+              "codename": "MCP79 GPU",
+              "name": "ION LE"
+            },
+            "10DE-08A0": {
+              "codename": "MCP89 GPU",
+              "name": "320M"
+            },
+            "10DE-08A2": {
+              "codename": "MCP89 GPU",
+              "name": "320M"
+            },
+            "10DE-08A3": {
+              "codename": "MCP89 GPU",
+              "name": "320M"
+            },
+            "10DE-08A4": {
+              "codename": "MCP89 GPU",
+              "name": "320M"
+            },
+            "10DE-0A20": {
+              "codename": "GT216",
+              "name": "GT 220"
+            },
+            "10DE-0A22": {
+              "codename": "GT216",
+              "name": "315"
+            },
+            "10DE-0A23": {
+              "codename": "GT216",
+              "name": "210"
+            },
+            "10DE-0A26": {
+              "codename": "GT216",
+              "name": "405"
+            },
+            "10DE-0A27": {
+              "codename": "GT216",
+              "name": "405"
+            },
+            "10DE-0A28": {
+              "codename": "GT216",
+              "name": "GT 230M"
+            },
+            "10DE-0A29": {
+              "codename": "GT216",
+              "name": "GT 330M"
+            },
+            "10DE-0A2A": {
+              "codename": "GT216",
+              "name": "GT 230M"
+            },
+            "10DE-0A2B": {
+              "codename": "GT216",
+              "name": "GT 330M"
+            },
+            "10DE-0A2C": {
+              "codename": "GT216",
+              "name": "NVS 5100M"
+            },
+            "10DE-0A2D": {
+              "codename": "GT216",
+              "name": "GT 320M"
+            },
+            "10DE-0A32": {
+              "codename": "GT216",
+              "name": "GT 415"
+            },
+            "10DE-0A34": {
+              "codename": "GT216",
+              "name": "GT 240M"
+            },
+            "10DE-0A35": {
+              "codename": "GT216",
+              "name": "GT 325M"
+            },
+            "10DE-0A38": {
+              "codename": "GT216",
+              "name": "400"
+            },
+            "10DE-0A3C": {
+              "codename": "GT216",
+              "name": "FX 880M"
+            },
+            "10DE-0A60": {
+              "codename": "GT218",
+              "name": "G210"
+            },
+            "10DE-0A62": {
+              "codename": "GT218",
+              "name": "205"
+            },
+            "10DE-0A63": {
+              "codename": "GT218",
+              "name": "310"
+            },
+            "10DE-0A64": {
+              "codename": "GT218",
+              "name": "ION"
+            },
+            "10DE-0A65": {
+              "codename": "GT218",
+              "name": "210"
+            },
+            "10DE-0A66": {
+              "codename": "GT218",
+              "name": "310"
+            },
+            "10DE-0A67": {
+              "codename": "GT218",
+              "name": "315"
+            },
+            "10DE-0A68": {
+              "codename": "GT218",
+              "name": "G105M"
+            },
+            "10DE-0A69": {
+              "codename": "GT218",
+              "name": "G105M"
+            },
+            "10DE-0A6A": {
+              "codename": "GT218",
+              "name": "NVS 2100M"
+            },
+            "10DE-0A6C": {
+              "codename": "GT218",
+              "name": "NVS 3100M"
+            },
+            "10DE-0A6E": {
+              "codename": "GT218",
+              "name": "305M"
+            },
+            "10DE-0A6F": {
+              "codename": "GT218",
+              "name": "ION"
+            },
+            "10DE-0A70": {
+              "codename": "GT218",
+              "name": "310M"
+            },
+            "10DE-0A71": {
+              "codename": "GT218",
+              "name": "305M"
+            },
+            "10DE-0A72": {
+              "codename": "GT218",
+              "name": "310M"
+            },
+            "10DE-0A73": {
+              "codename": "GT218",
+              "name": "305M"
+            },
+            "10DE-0A74": {
+              "codename": "GT218",
+              "name": "G210M"
+            },
+            "10DE-0A75": {
+              "codename": "GT218",
+              "name": "310M"
+            },
+            "10DE-0A76": {
+              "codename": "GT218",
+              "name": "ION"
+            },
+            "10DE-0A78": {
+              "codename": "GT218",
+              "name": "FX 380 LP"
+            },
+            "10DE-0A7A": {
+              "codename": "GT218",
+              "name": "315M"
+            },
+            "10DE-0A7C": {
+              "codename": "GT218",
+              "name": "FX 380M"
+            },
+            "10DE-0CA0": {
+              "codename": "GT215",
+              "name": "GT 330"
+            },
+            "10DE-0CA2": {
+              "codename": "GT215",
+              "name": "GT 320"
+            },
+            "10DE-0CA3": {
+              "codename": "GT215",
+              "name": "GT 240"
+            },
+            "10DE-0CA4": {
+              "codename": "GT215",
+              "name": "GT 340"
+            },
+            "10DE-0CA5": {
+              "codename": "GT215",
+              "name": "GT 220"
+            },
+            "10DE-0CA7": {
+              "codename": "GT215",
+              "name": "GT 330"
+            },
+            "10DE-0CA9": {
+              "codename": "GT215",
+              "name": "GTS 250M"
+            },
+            "10DE-0CAC": {
+              "codename": "GT215",
+              "name": "GT 220"
+            },
+            "10DE-0CAF": {
+              "codename": "GT215",
+              "name": "GT 335M"
+            },
+            "10DE-0CB0": {
+              "codename": "GT215",
+              "name": "GTS 350M"
+            },
+            "10DE-0CB1": {
+              "codename": "GT215",
+              "name": "GTS 360M"
+            },
+            "10DE-0CBC": {
+              "codename": "GT215",
+              "name": "FX 1800M"
+            },
+            "10DE-10C0": {
+              "codename": "GT218",
+              "name": "9300 GS"
+            },
+            "10DE-10C3": {
+              "codename": "GT218",
+              "name": "8400GS"
+            },
+            "10DE-10C5": {
+              "codename": "GT218",
+              "name": "405"
+            },
+            "10DE-10D8": {
+              "codename": "GT218",
+              "name": "NVS 300"
+            }
+          },
+          "maxDarwin": "17.99.99",
+          "maxOclp": "24.99.99",
+          "minDarwin": "10.0.0",
+          "minOclp": "18.0.0",
+          "vendor": "NVIDIA",
+          "vendorId": "10DE"
+        }
+      },
+      "vendor": "NVIDIA",
+      "vendorId": "10DE"
+    },
+    "8086": {
+      "groups": {
+        "gma_950": {
+          "codename": "GMA 950",
+          "devices": {
+            "8086-2582": {
+              "name": "915G"
+            },
+            "8086-2592": {
+              "name": "915GM"
+            },
+            "8086-2772": {
+              "name": "945G"
+            },
+            "8086-27A2": {
+              "name": "945GM"
+            }
+          },
+          "maxDarwin": "11.99.99",
+          "maxOclp": null,
+          "minDarwin": "8.0.0",
+          "minOclp": null,
+          "vendor": "Intel",
+          "vendorId": "8086",
+          "vgaLimited": true
+        },
+        "gma_x3100": {
+          "codename": "GMA X3100",
+          "devices": {
+            "8086-2A02": {
+              "name": "965GM"
+            }
+          },
+          "maxDarwin": "11.99.99",
+          "maxOclp": null,
+          "minDarwin": "9.0.0",
+          "minOclp": null,
+          "vendor": "Intel",
+          "vendorId": "8086",
+          "vgaLimited": true
+        },
+        "iron": {
+          "codename": "Iron Lake",
+          "devices": {
+            "8086-0046": {
+              "name": "HD Graphics",
+              "architecture": "Gen5"
+            }
+          },
+          "maxDarwin": "17.99.99",
+          "maxOclp": "24.99.99",
+          "minDarwin": "10.0.0",
+          "minOclp": "18.0.0",
+          "vendor": "Intel",
+          "vendorId": "8086",
+          "vgaLimited": true,
+          "architecture": "Gen5"
+        },
+        "sandy": {
+          "codename": "Sandy Bridge",
+          "devices": {
+            "8086-0112": {
+              "name": "HD Graphics 3000",
+              "architecture": "Gen6",
+              "spoofId": "8086-0126"
+            },
+            "8086-0116": {
+              "name": "HD Graphics 3000",
+              "architecture": "Gen6"
+            },
+            "8086-0122": {
+              "name": "HD Graphics 3000",
+              "architecture": "Gen6",
+              "spoofId": "8086-0126"
+            },
+            "8086-0126": {
+              "name": "HD Graphics 3000",
+              "architecture": "Gen6"
+            }
+          },
+          "maxDarwin": "17.99.99",
+          "maxOclp": "24.99.99",
+          "minDarwin": "11.0.0",
+          "minOclp": "18.0.0",
+          "vendor": "Intel",
+          "vendorId": "8086",
+          "vgaLimited": true,
+          "architecture": "Gen6"
+        },
+        "ivy": {
+          "codename": "Ivy Bridge",
+          "devices": {
+            "8086-0162": {
+              "name": "HD Graphics 4000",
+              "architecture": "Gen7"
+            },
+            "8086-0166": {
+              "name": "HD Graphics 4000",
+              "architecture": "Gen7"
+            },
+            "8086-016A": {
+              "name": "HD Graphics P4000",
+              "architecture": "Gen7",
+              "spoofId": "8086-0166"
+            }
+          },
+          "maxDarwin": "20.99.99",
+          "maxOclp": "24.99.99",
+          "minDarwin": "12.0.0",
+          "minOclp": "21.0.0",
+          "vendor": "Intel",
+          "vendorId": "8086",
+          "vgaLimited": true,
+          "architecture": "Gen7"
+        },
+        "haswell": {
+          "codename": "Haswell",
+          "devices": {
+            "8086-0402": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0406": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-040A": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-040B": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-040E": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0412": {
+              "name": "HD Graphics 4600",
+              "officialName": "HD Graphics 4600",
+              "architecture": "Gen7",
+              "officialCodename": "Haswell"
+            },
+            "8086-0416": {
+              "name": "HD Graphics 4600",
+              "officialName": "HD Graphics 4600",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-041A": {
+              "name": "HD Graphics P4600/P4700",
+              "officialName": "HD Graphics P4600/P4700",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-041B": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-041E": {
+              "name": "HD Graphics 4400",
+              "officialName": "HD Graphics 4400",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0422": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0426": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-042A": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-042B": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-042E": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0A02": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0A06": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0A0A": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0A0B": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0A0E": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0A12": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0A16": {
+              "name": "HD Graphics 4400",
+              "officialName": "HD Graphics 4400",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0A1A": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0A1B": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0A1E": {
+              "name": "HD Graphics 4200",
+              "officialName": "HD Graphics 4200",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0A22": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0A26": {
+              "name": "HD Graphics 5000",
+              "officialName": "HD Graphics 5000",
+              "architecture": "Gen7",
+              "officialCodename": "Haswell"
+            },
+            "8086-0A2A": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0A2B": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0A2E": {
+              "name": "Iris Graphics 5100",
+              "officialName": "Iris Graphics 5100",
+              "architecture": "Gen7",
+              "officialCodename": "Haswell"
+            },
+            "8086-0C02": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0C06": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0C0A": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0C0B": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0C0E": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0C12": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0C16": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0C1A": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0C1B": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0C1E": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0C22": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0C26": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0C2A": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0C2B": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0C2E": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0D02": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0D06": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0D0A": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0D0B": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0D0E": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0D12": {
+              "name": "HD Graphics 4600",
+              "officialName": "HD Graphics 4600",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0D16": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0D1A": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0D1B": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0D1E": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0D22": {
+              "name": "Iris Pro Graphics 5200",
+              "officialName": "Iris Pro Graphics 5200",
+              "architecture": "Gen7",
+              "officialCodename": "Haswell"
+            },
+            "8086-0D26": {
+              "name": "Iris Pro Graphics P5200",
+              "officialName": "Iris Pro Graphics P5200",
+              "architecture": "Gen7",
+              "officialCodename": "Haswell"
+            },
+            "8086-0D2A": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0D2B": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            },
+            "8086-0D2E": {
+              "name": "HD Graphics",
+              "architecture": "Gen7",
+              "spoofId": "8086-0412"
+            }
+          },
+          "maxDarwin": "21.99.99",
+          "maxOclp": "24.99.99",
+          "minDarwin": "13.0.0",
+          "minOclp": "22.0.0",
+          "vendor": "Intel",
+          "vendorId": "8086",
+          "vgaLimited": true,
+          "architecture": "Gen7"
+        },
+        "broadwell": {
+          "codename": "Broadwell",
+          "devices": {
+            "8086-0BD1": {
+              "name": ""
+            },
+            "8086-0BD2": {
+              "name": ""
+            },
+            "8086-0BD3": {
+              "name": ""
+            },
+            "8086-1602": {
+              "name": "HD Graphics",
+              "architecture": "Gen8",
+              "spoofId": "8086-1616"
+            },
+            "8086-1606": {
+              "name": "HD Graphics",
+              "architecture": "Gen8"
+            },
+            "8086-160A": {
+              "name": "HD Graphics",
+              "architecture": "Gen8",
+              "spoofId": "8086-1616"
+            },
+            "8086-160B": {
+              "name": "HD Graphics",
+              "architecture": "Gen8",
+              "spoofId": "8086-1616"
+            },
+            "8086-160D": {
+              "name": "HD Graphics",
+              "architecture": "Gen8",
+              "spoofId": "8086-1616"
+            },
+            "8086-160E": {
+              "name": "HD Graphics",
+              "architecture": "Gen8"
+            },
+            "8086-1612": {
+              "name": "HD Graphics 5600",
+              "architecture": "Gen8"
+            },
+            "8086-1616": {
+              "name": "HD Graphics 5500",
+              "architecture": "Gen8"
+            },
+            "8086-161A": {
+              "name": "HD Graphics P5700",
+              "architecture": "Gen8",
+              "spoofId": "8086-1612"
+            },
+            "8086-161B": {
+              "name": "HD Graphics",
+              "architecture": "Gen8",
+              "spoofId": "8086-1616"
+            },
+            "8086-161D": {
+              "name": "HD Graphics",
+              "architecture": "Gen8",
+              "spoofId": "8086-1616"
+            },
+            "8086-161E": {
+              "name": "HD Graphics 5300",
+              "architecture": "Gen8"
+            },
+            "8086-1622": {
+              "name": "Iris Pro Graphics 6200",
+              "architecture": "Gen8"
+            },
+            "8086-1626": {
+              "name": "HD Graphics 6000",
+              "architecture": "Gen8"
+            },
+            "8086-162A": {
+              "name": "Iris Pro Graphics P6300",
+              "architecture": "Gen8",
+              "spoofId": "8086-1622"
+            },
+            "8086-162B": {
+              "name": "Iris Graphics 6100",
+              "architecture": "Gen8"
+            },
+            "8086-162D": {
+              "name": "HD Graphics",
+              "architecture": "Gen8",
+              "spoofId": "8086-1616"
+            },
+            "8086-162E": {
+              "name": "HD Graphics",
+              "architecture": "Gen8",
+              "spoofId": "8086-1616"
+            },
+            "8086-1632": {
+              "name": "HD Graphics",
+              "architecture": "Gen8",
+              "spoofId": "8086-1616"
+            },
+            "8086-1636": {
+              "name": "HD Graphics",
+              "architecture": "Gen8",
+              "spoofId": "8086-1616"
+            },
+            "8086-163A": {
+              "name": "HD Graphics",
+              "architecture": "Gen8",
+              "spoofId": "8086-1616"
+            },
+            "8086-163B": {
+              "name": "HD Graphics",
+              "architecture": "Gen8",
+              "spoofId": "8086-1616"
+            },
+            "8086-163D": {
+              "name": "HD Graphics",
+              "architecture": "Gen8",
+              "spoofId": "8086-1616"
+            },
+            "8086-163E": {
+              "name": "HD Graphics",
+              "architecture": "Gen8",
+              "spoofId": "8086-1616"
+            }
+          },
+          "maxDarwin": "21.99.99",
+          "maxOclp": "24.99.99",
+          "minDarwin": "14.0.0",
+          "minOclp": "22.0.0",
+          "vendor": "Intel",
+          "vendorId": "8086",
+          "architecture": "Gen8"
+        },
+        "skylake": {
+          "codename": "Skylake",
+          "devices": {
+            "8086-1912": {
+              "name": "HD Graphics 530",
+              "architecture": "Gen9",
+              "officialCodename": "Skylake"
+            },
+            "8086-1913": {
+              "name": "HD Graphics",
+              "architecture": "Gen9",
+              "spoofId": "8086-5912"
+            },
+            "8086-1915": {
+              "name": "HD Graphics",
+              "architecture": "Gen9",
+              "spoofId": "8086-5912"
+            },
+            "8086-1916": {
+              "name": "HD Graphics 520",
+              "architecture": "Gen9",
+              "officialCodename": "Skylake"
+            },
+            "8086-1917": {
+              "name": "HD Graphics",
+              "architecture": "Gen9",
+              "officialCodename": "Skylake"
+            },
+            "8086-191A": {
+              "name": "HD Graphics",
+              "architecture": "Gen9",
+              "spoofId": "8086-5912"
+            },
+            "8086-191B": {
+              "name": "HD Graphics 530",
+              "architecture": "Gen9",
+              "officialCodename": "Skylake"
+            },
+            "8086-191D": {
+              "name": "HD Graphics P530",
+              "architecture": "Gen9",
+              "spoofId": "8086-591A"
+            },
+            "8086-191E": {
+              "name": "HD Graphics 515",
+              "architecture": "Gen9",
+              "officialCodename": "Skylake"
+            },
+            "8086-1921": {
+              "name": "HD Graphics 520",
+              "architecture": "Gen9",
+              "spoofId": "8086-5916"
+            },
+            "8086-1923": {
+              "name": "HD Graphics 535",
+              "architecture": "Gen9",
+              "spoofId": "8086-5923"
+            },
+            "8086-1926": {
+              "name": "Iris Graphics 540",
+              "architecture": "Gen9",
+              "officialCodename": "Skylake"
+            },
+            "8086-1927": {
+              "name": "Iris Graphics 550",
+              "architecture": "Gen9",
+              "officialCodename": "Skylake"
+            },
+            "8086-192A": {
+              "name": "HD Graphics",
+              "architecture": "Gen9",
+              "spoofId": "8086-5912"
+            },
+            "8086-192B": {
+              "name": "Iris Graphics 555",
+              "architecture": "Gen9",
+              "spoofId": "8086-5927"
+            },
+            "8086-192D": {
+              "name": "Iris Graphics P555",
+              "architecture": "Gen9",
+              "spoofId": "8086-5927"
+            },
+            "8086-1932": {
+              "name": "Iris Pro Graphics 580",
+              "architecture": "Gen9",
+              "officialCodename": "Skylake"
+            },
+            "8086-193A": {
+              "name": "Iris Pro Graphics P580",
+              "architecture": "Gen9",
+              "spoofId": "8086-1932"
+            },
+            "8086-193B": {
+              "name": "Iris Pro Graphics 580",
+              "architecture": "Gen9",
+              "officialCodename": "Skylake"
+            },
+            "8086-193D": {
+              "name": "Iris Pro Graphics P580",
+              "architecture": "Gen9",
+              "spoofId": "8086-1932"
+            }
+          },
+          "maxDarwin": "25.99.99",
+          "maxOclp": null,
+          "minDarwin": "15.0.0",
+          "minOclp": null,
+          "vendor": "Intel",
+          "vendorId": "8086",
+          "architecture": "Gen9"
+        },
+        "kaby_lake": {
+          "codename": "Kaby Lake",
+          "devices": {
+            "8086-5912": {
+              "name": "HD Graphics 630",
+              "architecture": "Gen9"
+            },
+            "8086-5913": {
+              "name": "HD Graphics",
+              "architecture": "Gen9",
+              "spoofId": "8086-5912"
+            },
+            "8086-5915": {
+              "name": "HD Graphics",
+              "architecture": "Gen9",
+              "spoofId": "8086-5912"
+            },
+            "8086-5916": {
+              "name": "HD Graphics 620",
+              "architecture": "Gen9"
+            },
+            "8086-5917": {
+              "name": "UHD Graphics 620",
+              "architecture": "Gen9"
+            },
+            "8086-591A": {
+              "name": "HD Graphics P630",
+              "architecture": "Gen9"
+            },
+            "8086-591B": {
+              "name": "HD Graphics 630",
+              "architecture": "Gen9"
+            },
+            "8086-591C": {
+              "name": "UHD Graphics 615",
+              "architecture": "Gen9"
+            },
+            "8086-591D": {
+              "name": "HD Graphics P630",
+              "architecture": "Gen9",
+              "spoofId": "8086-591A"
+            },
+            "8086-591E": {
+              "name": "HD Graphics 615",
+              "architecture": "Gen9"
+            },
+            "8086-5921": {
+              "name": "HD Graphics 620",
+              "architecture": "Gen9",
+              "spoofId": "8086-5916"
+            },
+            "8086-5923": {
+              "name": "HD Graphics 635",
+              "architecture": "Gen9"
+            },
+            "8086-5926": {
+              "name": "Iris Plus Graphics 640",
+              "architecture": "Gen9"
+            },
+            "8086-5927": {
+              "name": "Iris Plus Graphics 650",
+              "architecture": "Gen9"
+            },
+            "8086-593B": {
+              "name": "HD Graphics",
+              "architecture": "Gen9",
+              "spoofId": "8086-5912"
+            },
+            "8086-87C0": {
+              "name": "UHD Graphics 617",
+              "architecture": "Gen9"
+            }
+          },
+          "maxDarwin": "25.99.99",
+          "maxOclp": null,
+          "minDarwin": "16.0.0",
+          "minOclp": null,
+          "vendor": "Intel",
+          "vendorId": "8086",
+          "architecture": "Gen9"
+        },
+        "coffee_lake": {
+          "codename": "Coffee Lake",
+          "devices": {
+            "8086-3E91": {
+              "name": "UHD Graphics 630",
+              "architecture": "Gen9"
+            },
+            "8086-3E92": {
+              "name": "UHD Graphics 630",
+              "architecture": "Gen9"
+            },
+            "8086-3E94": {
+              "name": "UHD Graphics P630",
+              "architecture": "Gen9",
+              "spoofId": "8086-3E96"
+            },
+            "8086-3E96": {
+              "name": "UHD Graphics P630",
+              "architecture": "Gen9"
+            },
+            "8086-3E98": {
+              "name": "UHD Graphics 630",
+              "architecture": "Gen9"
+            },
+            "8086-3E9A": {
+              "name": "UHD Graphics P630",
+              "architecture": "Gen9",
+              "spoofId": "8086-3E96"
+            },
+            "8086-3E9B": {
+              "name": "UHD Graphics 630",
+              "architecture": "Gen9"
+            },
+            "8086-3EA0": {
+              "name": "UHD Graphics 620",
+              "architecture": "Gen9"
+            },
+            "8086-3EA2": {
+              "name": "UHD Graphics",
+              "architecture": "Gen9",
+              "spoofId": "8086-3E9B"
+            },
+            "8086-3EA3": {
+              "name": "UHD Graphics",
+              "architecture": "Gen9",
+              "spoofId": "8086-3E9B"
+            },
+            "8086-3EA4": {
+              "name": "UHD Graphics",
+              "architecture": "Gen9",
+              "spoofId": "8086-3E9B"
+            },
+            "8086-3EA5": {
+              "name": "Iris Plus Graphics 655",
+              "architecture": "Gen9"
+            },
+            "8086-3EA6": {
+              "name": "Iris Plus Graphics 645",
+              "architecture": "Gen9"
+            },
+            "8086-3EA7": {
+              "name": "HD Graphics",
+              "architecture": "Gen9",
+              "spoofId": "8086-3E9B"
+            },
+            "8086-3EA8": {
+              "name": "Iris Plus Graphics 655",
+              "architecture": "Gen9",
+              "spoofId": "8086-3EA5"
+            },
+            "8086-3EA9": {
+              "name": "UHD Graphics 620",
+              "architecture": "Gen9",
+              "spoofId": "8086-3EA0"
+            },
+            "8086-87CA": {
+              "name": "UHD Graphics",
+              "architecture": "Gen9",
+              "spoofId": "8086-3E9B"
+            },
+            "8086-9BF6": {
+              "name": "UHD Graphics P630",
+              "architecture": "Gen9",
+              "spoofId": "8086-3E96"
+            }
+          },
+          "maxDarwin": "25.99.99",
+          "maxOclp": null,
+          "minDarwin": "17.0.0",
+          "minOclp": null,
+          "vendor": "Intel",
+          "vendorId": "8086",
+          "architecture": "Gen9"
+        },
+        "comet_lake": {
+          "codename": "Comet Lake",
+          "devices": {
+            "8086-9B21": {
+              "name": "UHD Graphics",
+              "architecture": "Gen9",
+              "spoofId": "8086-9BC4"
+            },
+            "8086-9B41": {
+              "name": "UHD Graphics",
+              "architecture": "Gen9",
+              "spoofId": "8086-9BC4"
+            },
+            "8086-9BA0": {
+              "name": "UHD Graphics",
+              "architecture": "Gen9",
+              "spoofId": "8086-9BC4"
+            },
+            "8086-9BA2": {
+              "name": "UHD Graphics",
+              "architecture": "Gen9",
+              "spoofId": "8086-9BC4"
+            },
+            "8086-9BAA": {
+              "name": "UHD Graphics",
+              "architecture": "Gen9",
+              "spoofId": "8086-9BC4"
+            },
+            "8086-9BAB": {
+              "name": "UHD Graphics",
+              "architecture": "Gen9",
+              "spoofId": "8086-9BC4"
+            },
+            "8086-9BAC": {
+              "name": "UHD Graphics",
+              "architecture": "Gen9",
+              "spoofId": "8086-9BC4"
+            },
+            "8086-9BC0": {
+              "name": "UHD Graphics",
+              "architecture": "Gen9",
+              "spoofId": "8086-9BC4"
+            },
+            "8086-9BC2": {
+              "name": "UHD Graphics",
+              "architecture": "Gen9",
+              "spoofId": "8086-9BC4"
+            },
+            "8086-9BC4": {
+              "name": "UHD Graphics",
+              "architecture": "Gen9"
+            },
+            "8086-9BC5": {
+              "name": "UHD Graphics 630",
+              "architecture": "Gen9"
+            },
+            "8086-9BC6": {
+              "name": "UHD Graphics P630",
+              "architecture": "Gen9"
+            },
+            "8086-9BC8": {
+              "name": "UHD Graphics 630",
+              "architecture": "Gen9"
+            },
+            "8086-9BCA": {
+              "name": "UHD Graphics",
+              "architecture": "Gen9",
+              "spoofId": "8086-9BC4"
+            },
+            "8086-9BCB": {
+              "name": "UHD Graphics",
+              "architecture": "Gen9",
+              "spoofId": "8086-9BC4"
+            },
+            "8086-9BCC": {
+              "name": "UHD Graphics",
+              "architecture": "Gen9",
+              "spoofId": "8086-9BC4"
+            },
+            "8086-9BE6": {
+              "name": "UHD Graphics P630",
+              "architecture": "Gen9",
+              "spoofId": "8086-9BC6"
+            }
+          },
+          "maxDarwin": "25.99.99",
+          "maxOclp": null,
+          "minDarwin": "19.0.0",
+          "minOclp": null,
+          "vendor": "Intel",
+          "vendorId": "8086",
+          "architecture": "Gen9"
+        },
+        "ice_lake": {
+          "codename": "Ice Lake",
+          "devices": {
+            "8086-8A50": {
+              "name": "HD Graphics",
+              "architecture": "Gen11",
+              "spoofId": "8086-8A5B"
+            },
+            "8086-8A51": {
+              "name": "Iris Plus Graphics G7",
+              "architecture": "Gen11"
+            },
+            "8086-8A52": {
+              "name": "Iris Plus Graphics G7",
+              "architecture": "Gen11"
+            },
+            "8086-8A53": {
+              "name": "Iris Plus Graphics G7",
+              "architecture": "Gen11"
+            },
+            "8086-8A54": {
+              "name": "Iris Plus Graphics",
+              "architecture": "Gen11",
+              "spoofId": "8086-8A52"
+            },
+            "8086-8A57": {
+              "name": "HD Graphics",
+              "architecture": "Gen11",
+              "spoofId": "8086-8A5B"
+            },
+            "8086-8A59": {
+              "name": "HD Graphics",
+              "architecture": "Gen11",
+              "spoofId": "8086-8A5B"
+            },
+            "8086-8A5A": {
+              "name": "Iris Plus Graphics G4",
+              "architecture": "Gen11"
+            },
+            "8086-8A5B": {
+              "name": "HD Graphics",
+              "architecture": "Gen11"
+            },
+            "8086-8A5C": {
+              "name": "Iris Plus Graphics G4",
+              "architecture": "Gen11"
+            },
+            "8086-8A5D": {
+              "name": "HD Graphics",
+              "architecture": "Gen11"
+            },
+            "8086-8A70": {
+              "name": "HD Graphics",
+              "architecture": "Gen11"
+            },
+            "8086-8A71": {
+              "name": "HD Graphics",
+              "architecture": "Gen11"
+            },
+            "8086-FF05": {
+              "name": ""
+            }
+          },
+          "maxDarwin": "25.99.99",
+          "maxOclp": null,
+          "minDarwin": "19.0.0",
+          "minOclp": null,
+          "vendor": "Intel",
+          "vendorId": "8086",
+          "architecture": "Gen11"
+        }
+      },
+      "vendor": "Intel",
+      "vendorId": "8086"
+    }
+  }
+}

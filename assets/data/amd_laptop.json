@@ -1,0 +1,123 @@
+[
+    {
+        "architecture": "Bulldozer(15h) and Jaguar(16h)",
+        "socket": "",
+        "generation": 3,
+        "year": "2012",
+        "legacy": false,
+        "motherboard": [
+            ""
+        ],
+        "initial_support": "macOS 10.13, High Sierra",
+        "last_supported": "macOS 12 Monterey",
+        "oclp_supported": "macOS Tahoe 26",
+        "note": [
+            "AMD Jaguar架构的首款处理器于2013年发布，采用28纳米制程技术",
+            "典型的处理器包括A4-5000,A6-5200,A8-6410,A10-5745M等",
+            "此处理器核显不支持任何macOS版本,因此仅核显笔记本建议放弃。对于带独显(独显直连屏幕)且可以驱动的AMD笔记本,支持安装,最高建议macOS Monterey 12及以下(配置跟不上,更高只会更卡)"
+        ],
+        "config": {
+            "refer": "https://dortania.github.io/OpenCore-Install-Guide/AMD/fx.html",
+            "bios": {
+                "disable": {
+                    "en": [
+                        "Fast Boot",
+                        "Secure Boot",
+                        "Serial/COM Port",
+                        "Parallel Port",
+                        "Compatibility Support Module (CSM) (Must be off in most cases, GPU errors/stalls like gIO are common when this option is enabled)",
+                        "IOMMU"
+                    ],
+                    "ch": [
+                        "快速启动",
+                        "安全启动",
+                        "串行/COM端口",
+                        "并行端口",
+                        "兼容性支持模块（CSM）（在大多数情况下必须关闭，启用此选项时通常会出现GPU错误/停顿，如gIO）",
+                        "AMD主板上的IOMMU功能也称为AMD-Vi虚拟化"
+                    ]
+                },
+                "enable": {
+                    "en": [
+                        "Above 4G Decoding (This must be on, if you can't find the option then add npci=0x3000 to boot-args. Do not have both this option and npci enabled at the same time.)",
+                        "EHCI/XHCI Hand-off",
+                        "OS type: Windows 8.1/10 UEFI Mode (some motherboards may require ”Other OS“ instead)",
+                        "SATA Mode: AHCI"
+                    ],
+                    "ch": [
+                        "Above 4G Decoding（如果找不到此选项，则添加npci=0x3000到boot-args中，此选项和npci不能同时启用。）",
+                        "EHCI/XHCI 切换",
+                        "操作系统类型：Windows 8.1/10 UEFI模式（某些主板可能需要选择“其他操作系统”）",
+                        "SATA模式：AHCI"
+                    ]
+                },
+                "custom": [
+                    "主板开启AHCI,关闭CSM,关闭安全引导,OS类型选其他"
+                ]
+            }
+        }
+    },
+    {
+        "architecture": "Ryzen",
+        "socket": "TRx4",
+        "generation": 8,
+        "year": "2018",
+        "legacy": false,
+        "motherboard": [
+            "B450",
+            "B550"
+        ],
+        "initial_support": "macOS 10.13, High Sierra",
+        "last_supported": "macOS Tahoe 26",
+        "oclp_supported": "",
+        "note": [
+            "Ryzen锐龙2000~5000系列核显使用三方开发者NootedRed驱动,显示支持Metal,但不支持VDA硬解",
+            "NootedRed支持整个 Vega Raven ASIC 家族（涵盖 Ryzen 1xxx 系列（Athlon Silver/Gold）到 Ryzen 5xxx，以及 7x30 系列",
+            "支持 macOS Catalina 10.15 ~ macOS Tahoe 26,对于某个大版本号macOS,特别是macOS Big Sur,建议选择比较新的macOS Big Sur版本号(例如macOS Big Sur 11.6),早期macOS Big Sur版本号,例如macOS Big Sur 11.0,可能并不支持",
+            "锐龙2000~5000系列核显可以降低使用OpenGL渲染,正常使用QQ,Edge,Chrome浏览器",
+            "建议在BIOS设置中将AMD核显显存尽量修改至2G及以上(根据自己主板和内存权衡,没有修改设置地方,可以考虑使用U盘工具修改BIOS显存设置)"
+        ],
+        "config": {
+            "refer": "https://dortania.github.io/OpenCore-Install-Guide/AMD/zen.html",
+            "bios": {
+                "disable": {
+                    "en": [
+                        "Fast Boot",
+                        "Secure Boot",
+                        "Re-Size BAR Support",
+                        "Serial/COM Port",
+                        "Parallel Port",
+                        "Compatibility Support Module (CSM) (Must be off in most cases, GPU errors/stalls like gIO are common when this option is enabled)",
+                        "IOMMU"
+                    ],
+                    "ch": [
+                        "快速启动",
+                        "安全启动",
+                        "Re-Size BAR Support (通常位于高级>PCI 子系统. 此项一般存在于新平台2020年之后的bios中)",
+                        "串行/COM端口",
+                        "并行端口",
+                        "兼容性支持模块（CSM）（在大多数情况下必须关闭，启用此选项时通常会出现GPU错误/停顿，如gIO）",
+                        "AMD主板上的IOMMU功能也称为AMD-Vi虚拟化"
+                    ]
+                },
+                "enable": {
+                    "en": [
+                        "Above 4G Decoding (This must be on, if you can't find the option then add npci=0x3000 to boot-args. Do not have both this option and npci enabled at the same time.)",
+                        "EHCI/XHCI Hand-off",
+                        "OS type: Windows 8.1/10 UEFI Mode (some motherboards may require ”Other OS“ instead)",
+                        "SATA Mode: AHCI"
+                    ],
+                    "ch": [
+                        "Above 4G Decoding（如果找不到此选项，则添加npci=0x3000到boot-args中，此选项和npci不能同时启用。）",
+                        "EHCI/XHCI 切换",
+                        "操作系统类型：Windows 8.1/10 UEFI模式（某些主板可能需要选择“其他操作系统”）",
+                        "SATA模式：AHCI"
+                    ]
+                },
+                "custom": [
+                    "主板开启AHCI,关闭CSM,关闭安全引导,OS类型选其他"
+                ]
+            }
+        }
+    }
+]

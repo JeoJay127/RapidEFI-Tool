@@ -1,0 +1,1206 @@
+[
+    {
+        "architecture": "Penryn",
+        "socket": "775",
+        "generation": 0,
+        "year": "2008",
+        "legacy": true,
+        "motherboard": [
+            "G31",
+            "G33",
+            "G35",
+            "G41",
+            "G43",
+            "G45",
+            "P41",
+            "P43",
+            "P45"
+        ],
+        "initial_support": "OS X 10.4.10 Tiger",
+        "last_supported": "macOS 10.13.6 High Sierra",
+        "oclp_supported": "macOS 10.14 Mojave ~ macOS Tahoe 26",
+        "note": [
+            "Penryn首次发布于2007年,45nm工艺,是Conroe微架构的继承者，属于英特尔的Core 2系列",
+            "“原生支持”表示显卡免驱,无需补丁即可安装macOS(1代之前的平台除外,主板GMA显卡只能安装上古OS X 10.7版本),“补丁支持”表示CPU或显卡不在官方支持列表，需要OCLP打三方补丁",
+            "CPU指令集支持SSE4.1,最高可以补丁支持最新Tahoe 26系统),否则最高只能macOS 10.11.6(截止2025年9月,显卡补丁最高只支持Sequia 15,暂不支持Tahoe 26)",
+            "SSE4是启动macOS 10.12 Sierra及更新版本所必需的,因此不支持Conroe及更旧的处理器,可以使用CPU-Z软件查看指令集支持情况",
+            "Apple在macOS Ventua 13.x中移除了USB1.1驱动,初始安装时建议使用免驱PCI转USB3.0拓展卡或者USB3.0拓展卡完成安装,安装之后再使用OCLP打USB1.1补丁",
+            "绝大多数775主板不支持UEFI,需要模拟UEFI"
+        ],
+        "config": {
+            "refer": "https://dortania.github.io/OpenCore-Install-Guide/config.plist/penryn.html",
+            "bios": {
+                "disable": {
+                    "en": [
+                        "Fast Boot",
+                        "Secure Boot",
+                        "Serial/COM Port",
+                        "Parallel Port",
+                        "VT-d (can be enabled if you set DisableIoMapper to YES)",
+                        "Compatibility Support Module (CSM) (Must be off in most cases, GPU errors/stalls like gIO are common when this option is enabled)",
+                        "Intel SGX",
+                        "Intel Platform Trust"
+                    ],
+                    "ch": [
+                        "快速启动",
+                        "安全启动",
+                        "串行/COM端口",
+                        "并行端口",
+                        "VT-d（如果将DisableIoMapper设置为YES，则可以启用）",
+                        "兼容性支持模块（CSM）（在大多数情况下必须关闭，启用此选项时通常会出现GPU错误/停顿，如gIO）",
+                        "英特尔 SGX",
+                        "英特尔平台信任"
+                    ]
+                },
+                "enable": {
+                    "en": [
+                        "VT-x",
+                        "Above 4G Decoding",
+                        "Hyper-Threading",
+                        "Execute Disable Bit",
+                        "EHCI/XHCI Hand-off",
+                        "OS type: Windows 8.1/10 UEFI Mode (some motherboards may require ”Other OS“ instead)",
+                        "SATA Mode: AHCI"
+                    ],
+                    "ch": [
+                        "VT-x虚拟化",
+                        "4G以上解码",
+                        "超线程",
+                        "执行禁用位",
+                        "EHCI/XHCI 切换",
+                        "操作系统类型：Windows 8.1/10 UEFI模式（某些主板可能需要选择“其他操作系统”）",
+                        "SATA模式：AHCI"
+                    ]
+                },
+                "custom": [
+                    "775老平台主板可能并没有官方推荐的那么多设置项，基本只需要SATA开启AHCI即可",
+                    "注意主板需要开启AHCI,没有可忽略,但是必须打免AHCI补丁(确保AppleIntelPIIXATA.kext已添加)",
+                    "BIOS没有AHCI选项,建议SATA模式选择Compatiable兼容模式"
+                ]
+            }
+        }
+    },
+    {
+        "architecture": "Clarksfield&Arrandale",
+        "socket": "1156",
+        "generation": 1,
+        "year": "2009",
+        "legacy": true,
+        "motherboard": [
+            "HM55",
+            "HM57",
+            "PM55",
+            "QM57"
+        ],
+        "initial_support": "OS X 10.6.3 Snow Leopard",
+        "last_supported": "macOS 10.13.6 High Sierra",
+        "oclp_supported": "macOS 10.14 Mojave ~ macOS Tahoe 26",
+        "note": [
+            "Clarksfield于2009年发布,45nm的Nehalem架构工艺,第一代Intel Core i5和Core i7,无显示核心.",
+            "Arrandale于2010年发布,32nm的Nehalem架构,第一代Intel Core i3，集成显示核心，并且原生免驱支持macOS 10.13.Arrandale核显通过OCLP 2.0.1及以上版本补丁支持macOS Sequoia 15.x",
+            "大多数Clarksfield和Arrandale主板不支持UEFI,需要模拟UEFI"
+        ],
+        "config": {
+            "refer": "https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/arrandale.html",
+            "bios": {
+                "disable": {
+                    "en": [
+                        "Fast Boot",
+                        "Secure Boot",
+                        "Serial/COM Port",
+                        "Parallel Port",
+                        "VT-d (can be enabled if you set DisableIoMapper to YES)",
+                        "Compatibility Support Module (CSM) (Must be off in most cases, GPU errors/stalls like gIO are common when this option is enabled)",
+                        "Thunderbolt (For initial install, as Thunderbolt can cause issues if not setup correctly)",
+                        "Intel SGX",
+                        "Intel Platform Trust",
+                        "CFG Lock (MSR 0xE2 write protection)(This must be off, if you can't find the option then enable AppleCpuPmCfgLock under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled)"
+                    ],
+                    "ch": [
+                        "快速启动",
+                        "安全启动",
+                        "串行/COM端口",
+                        "并行端口",
+                        "VT-d（如果将DisableIoMapper设置为YES，则可以启用）",
+                        "兼容性支持模块（CSM）（在大多数情况下必须关闭，启用此选项时通常会出现GPU错误/停顿，如gIO）",
+                        "雷电端口（仅用于初始安装，因为雷电端口如果设置不正确可能会引发问题）",
+                        "英特尔 SGX",
+                        "英特尔平台信任",
+                        "CFG锁定（MSR 0xE2写保护）（必须关闭，如果找不到此选项，然后在内核 -> Quirks 下启用AppleCpuPmCfgLock。启用CFG-Lock后，您的黑苹果可能无法启动）"
+                    ]
+                },
+                "enable": {
+                    "en": [
+                        "VT-x",
+                        "Above 4G Decoding",
+                        "Hyper-Threading",
+                        "Execute Disable Bit",
+                        "EHCI/XHCI Hand-off",
+                        "OS type: Windows 8.1/10 UEFI Mode (some motherboards may require ”Other OS“ instead)",
+                        "DVMT Pre-Allocated(iGPU Memory): 32MB or higher",
+                        "SATA Mode: AHCI"
+                    ],
+                    "ch": [
+                        "VT-x虚拟化",
+                        "4G以上解码",
+                        "超线程",
+                        "执行禁用位",
+                        "EHCI/XHCI 切换",
+                        "操作系统类型：Windows 8.1/10 UEFI模式（某些主板可能需要选择“其他操作系统”）",
+                        "DVMT 预分配（iGPU内存）：32MB或更高",
+                        "SATA模式：AHCI"
+                    ]
+                },
+                "custom": [
+                    "主板需要开启AHCI"
+                ]
+            }
+        }
+    },
+    {
+        "architecture": "Sandy Bridge",
+        "socket": "1155",
+        "generation": 2,
+        "year": "2011",
+        "legacy": true,
+        "motherboard": [
+            "HM65",
+            "HM67",
+            "PM65",
+            "PM67",
+            "QM65",
+            "QM67",
+            "HM75",
+            "HM76",
+            "HM77",
+            "QM77"
+        ],
+        "initial_support": "OS X 10.6.7 Snow Leopard",
+        "last_supported": "macOS 10.13.6 High Sierra",
+        "oclp_supported": "macOS 10.14 Mojave ~ macOS Tahoe 26",
+        "note": [
+            "Sandy Bridge于2011年发布,32nm架构工艺,英特尔的第二代Core系列处理器,集成图形处理单元(iGPU),例如HD3000",
+            "“原生支持”表示显卡免驱,无需补丁即可安装macOS,“补丁支持”表示CPU或显卡不在官方支持列表，需要OCLP打三方补丁",
+            "Sandy Bridge处理器中的集成图形处理单元(HD3000)在官方上最高免驱支持macOS 10.13版本。截止目前,使用OCLP 2.0.1及以上版本可以补丁支持macOS Sequoia 15.x",
+            "Sandy Bridge 6系主板(例如HM65)多数不支持UEFI,需要模拟UEFI"
+        ],
+        "config": {
+            "refer": "https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/sandy-bridge.html",
+            "bios": {
+                "disable": {
+                    "en": [
+                        "Fast Boot",
+                        "Secure Boot",
+                        "Serial/COM Port",
+                        "Parallel Port",
+                        "VT-d (can be enabled if you set DisableIoMapper to YES)",
+                        "Compatibility Support Module (CSM) (Must be off in most cases, GPU errors/stalls like gIO are common when this option is enabled)",
+                        "Thunderbolt (For initial install, as Thunderbolt can cause issues if not setup correctly)",
+                        "Intel SGX",
+                        "Intel Platform Trust",
+                        "CFG Lock (MSR 0xE2 write protection)(This must be off, if you can't find the option then enable AppleCpuPmCfgLock under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled)"
+                    ],
+                    "ch": [
+                        "快速启动",
+                        "安全启动",
+                        "串行/COM端口",
+                        "并行端口",
+                        "VT-d（如果将DisableIoMapper设置为YES，则可以启用）",
+                        "兼容性支持模块（CSM）（在大多数情况下必须关闭，启用此选项时通常会出现GPU错误/停顿，如gIO）",
+                        "雷电端口（仅用于初始安装，因为雷电端口如果设置不正确可能会引发问题）",
+                        "英特尔 SGX",
+                        "英特尔平台信任",
+                        "CFG锁定（MSR 0xE2写保护）（必须关闭，如果找不到此选项，然后在内核 -> Quirks 下启用AppleCpuPmCfgLock。启用CFG-Lock后，您的黑苹果可能无法启动）"
+                    ]
+                },
+                "enable": {
+                    "en": [
+                        "VT-x",
+                        "Above 4G Decoding",
+                        "Hyper-Threading",
+                        "Execute Disable Bit",
+                        "EHCI/XHCI Hand-off",
+                        "OS type: Windows 8.1/10 UEFI Mode (some motherboards may require ”Other OS“ instead)",
+                        "DVMT Pre-Allocated(iGPU Memory): 32MB or higher",
+                        "SATA Mode: AHCI"
+                    ],
+                    "ch": [
+                        "VT-x虚拟化",
+                        "4G以上解码",
+                        "超线程",
+                        "执行禁用位",
+                        "EHCI/XHCI 切换",
+                        "操作系统类型：Windows 8.1/10 UEFI模式（某些主板可能需要选择“其他操作系统”）",
+                        "DVMT 预分配（iGPU内存）：32MB或更高",
+                        "SATA模式：AHCI"
+                    ]
+                },
+                "custom": [
+                    "主板需要开启AHCI"
+                ]
+            }
+        }
+    },
+    {
+        "architecture": "Ivy Bridge",
+        "socket": "1155",
+        "generation": 3,
+        "year": "2012",
+        "legacy": false,
+        "motherboard": [
+            "HM65",
+            "HM67",
+            "PM65",
+            "PM67",
+            "QM65",
+            "QM67",
+            "HM75",
+            "HM76",
+            "HM77",
+            "QM77"
+        ],
+        "initial_support": "OS X 10.7, Lion",
+        "last_supported": "macOS 11 BigSur",
+        "oclp_supported": "macOS Tahoe 26",
+        "note": [
+            "Ivy Bridge于2012年发布,22nm架构工艺,英特尔的第三代Core系列处理器,集成图形处理单元(iGPU),例如HD4000",
+            "“原生支持”表示显卡免驱,无需补丁即可安装macOS,“补丁支持”表示CPU或显卡不在官方支持列表，需要OCLP打三方补丁",
+            "Ivy Bridge处理器中的集成图形处理单元(HD4000)在官方上最高免驱支持 macOS 11 Big Sur版本。截止目前,使用OCLP 2.0.1及以上版本可以补丁支持macOS Sequoia 15.x",
+            "Ivy Bridge主板开始全面支持UEFI"
+        ],
+        "config": {
+            "refer": "https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/ivy-bridge.html",
+            "bios": {
+                "disable": {
+                    "en": [
+                        "Fast Boot",
+                        "Secure Boot",
+                        "Serial/COM Port",
+                        "Parallel Port",
+                        "VT-d (can be enabled if you set DisableIoMapper to YES)",
+                        "Compatibility Support Module (CSM) (Must be off in most cases, GPU errors/stalls like gIO are common when this option is enabled)",
+                        "Thunderbolt (For initial install, as Thunderbolt can cause issues if not setup correctly)",
+                        "Intel SGX",
+                        "Intel Platform Trust",
+                        "CFG Lock (MSR 0xE2 write protection)(This must be off, if you can't find the option then enable AppleCpuPmCfgLock under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled)"
+                    ],
+                    "ch": [
+                        "快速启动",
+                        "安全启动",
+                        "串行/COM端口",
+                        "并行端口",
+                        "VT-d（如果将DisableIoMapper设置为YES，则可以启用）",
+                        "兼容性支持模块（CSM）（在大多数情况下必须关闭，启用此选项时通常会出现GPU错误/停顿，如gIO）",
+                        "雷电端口（仅用于初始安装，因为雷电端口如果设置不正确可能会引发问题）",
+                        "英特尔 SGX",
+                        "英特尔平台信任",
+                        "CFG锁定（MSR 0xE2写保护）（必须关闭，如果找不到此选项，然后在内核 -> Quirks 下启用AppleCpuPmCfgLock。启用CFG-Lock后，您的黑苹果可能无法启动）"
+                    ]
+                },
+                "enable": {
+                    "en": [
+                        "VT-x",
+                        "Above 4G Decoding",
+                        "Hyper-Threading",
+                        "Execute Disable Bit",
+                        "EHCI/XHCI Hand-off",
+                        "OS type: Windows 8.1/10 UEFI Mode (some motherboards may require ”Other OS“ instead)",
+                        "DVMT Pre-Allocated(iGPU Memory): 32MB or higher",
+                        "SATA Mode: AHCI"
+                    ],
+                    "ch": [
+                        "VT-x虚拟化",
+                        "4G以上解码",
+                        "超线程",
+                        "执行禁用位",
+                        "EHCI/XHCI 切换",
+                        "操作系统类型：Windows 8.1/10 UEFI模式（某些主板可能需要选择“其他操作系统”）",
+                        "DVMT 预分配（iGPU内存）：32MB或更高",
+                        "SATA模式：AHCI"
+                    ]
+                },
+                "custom": [
+                    "主板开启AHCI,关闭CSM,关闭安全引导,OS类型选其他"
+                ]
+            }
+        }
+    },
+    {
+        "architecture": "Haswell",
+        "socket": "1150",
+        "generation": 4,
+        "year": "2013",
+        "legacy": false,
+        "motherboard": [],
+        "initial_support": "OS X 10.8, Mountain Lion",
+        "last_supported": "macOS 12 Monterey",
+        "oclp_supported": "macOS Tahoe 26",
+        "note": [
+            "Haswell于2013年发布,22nm架构工艺,英特尔的第四代Core系列处理器,集成图形处理单元(iGPU),例如HD4400,HD4600",
+            "“原生支持”表示显卡免驱,无需补丁即可安装macOS,“补丁支持”表示CPU或显卡不在官方支持列表，需要OCLP打三方补丁",
+            "Haswell处理器中的集成图形处理单元(HD4600)在官方上最高免驱支持 macOS 12 Monterey版本。截止目前,使用OCLP 2.0.1及以上版本可以补丁支持macOS Sequoia 15.x"
+        ],
+        "config": {
+            "refer": "https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/haswell.html",
+            "bios": {
+                "disable": {
+                    "en": [
+                        "Fast Boot",
+                        "Secure Boot",
+                        "Serial/COM Port",
+                        "Parallel Port",
+                        "VT-d (can be enabled if you set DisableIoMapper to YES)",
+                        "Compatibility Support Module (CSM) (Must be off in most cases, GPU errors/stalls like gIO are common when this option is enabled)",
+                        "Thunderbolt (For initial install, as Thunderbolt can cause issues if not setup correctly)",
+                        "Intel SGX",
+                        "Intel Platform Trust",
+                        "CFG Lock (MSR 0xE2 write protection)(This must be off, if you can't find the option then enable AppleXcpmCfgLock under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled).For 10.10 and older, you'll need to enable AppleCpuPmCfgLock as well"
+                    ],
+                    "ch": [
+                        "快速启动",
+                        "安全启动",
+                        "串行/COM端口",
+                        "并行端口",
+                        "VT-d（如果将DisableIoMapper设置为YES，则可以启用）",
+                        "兼容性支持模块（CSM）（在大多数情况下必须关闭，启用此选项时通常会出现GPU错误/停顿，如gIO）",
+                        "雷电端口（仅用于初始安装，因为雷电端口如果设置不正确可能会引发问题）",
+                        "英特尔 SGX",
+                        "英特尔平台信任",
+                        "CFG锁定（MSR 0xE2写保护）（必须关闭，如果找不到此选项，然后在内核 -> Quirks 下启用AppleXcpmCfgLock。如果启用CFG-Lock，您的黑苹果可能无法启动）.对于10.10及更早版本，您还需要启用AppleCpuPmCfgLock"
+                    ]
+                },
+                "enable": {
+                    "en": [
+                        "VT-x",
+                        "Above 4G Decoding",
+                        "Hyper-Threading",
+                        "Execute Disable Bit",
+                        "EHCI/XHCI Hand-off",
+                        "OS type: Windows 8.1/10 UEFI Mode (some motherboards may require ”Other OS“ instead)",
+                        "DVMT Pre-Allocated(iGPU Memory): 32MB or higher",
+                        "SATA Mode: AHCI"
+                    ],
+                    "ch": [
+                        "VT-x虚拟化",
+                        "4G以上解码",
+                        "超线程",
+                        "执行禁用位",
+                        "EHCI/XHCI 切换",
+                        "操作系统类型：Windows 8.1/10 UEFI模式（某些主板可能需要选择“其他操作系统”）",
+                        "DVMT 预分配（iGPU内存）：32MB或更高",
+                        "SATA模式：AHCI"
+                    ]
+                },
+                "custom": [
+                    "主板开启AHCI,关闭CSM,关闭安全引导,OS类型选其他"
+                ]
+            }
+        }
+    },
+    {
+        "architecture": "Broadwell",
+        "socket": "1150",
+        "generation": 5,
+        "year": "2014",
+        "legacy": false,
+        "motherboard": [
+            "HM97"
+        ],
+        "initial_support": "OS X 10.10, Yosemite",
+        "last_supported": "macOS 12 Monterey",
+        "oclp_supported": "macOS Tahoe 26",
+        "note": [
+            "Broadwell于2014年发布,14nm架构工艺,英特尔的第五代Core系列处理器,集成图形处理单元(iGPU),例如HD5500等",
+            "“原生支持”表示显卡免驱,无需补丁即可安装macOS,“补丁支持”表示CPU或显卡不在官方支持列表，需要OCLP打三方补丁",
+            "Broadwell处理器中的集成图形处理单元(HD5500)在官方上最高免驱支持 macOS 12 Monterey版本。截止目前,使用OCLP 2.0.1及以上版本可以补丁支持macOS Sequoia 15.x"
+        ],
+        "config": {
+            "refer": "https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/broadwell.html",
+            "bios": {
+                "disable": {
+                    "en": [
+                        "Fast Boot",
+                        "Secure Boot",
+                        "Serial/COM Port",
+                        "Parallel Port",
+                        "VT-d (can be enabled if you set DisableIoMapper to YES)",
+                        "Compatibility Support Module (CSM) (Must be off in most cases, GPU errors/stalls like gIO are common when this option is enabled)",
+                        "Thunderbolt (For initial install, as Thunderbolt can cause issues if not setup correctly)",
+                        "Intel SGX",
+                        "Intel Platform Trust",
+                        "CFG Lock (MSR 0xE2 write protection)(This must be off, if you can't find the option then enable AppleXcpmCfgLock under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled).For 10.10 and older, you'll need to enable AppleCpuPmCfgLock as well"
+                    ],
+                    "ch": [
+                        "快速启动",
+                        "安全启动",
+                        "串行/COM端口",
+                        "并行端口",
+                        "VT-d（如果将DisableIoMapper设置为YES，则可以启用）",
+                        "兼容性支持模块（CSM）（在大多数情况下必须关闭，启用此选项时通常会出现GPU错误/停顿，如gIO）",
+                        "雷电端口（仅用于初始安装，因为雷电端口如果设置不正确可能会引发问题）",
+                        "英特尔 SGX",
+                        "英特尔平台信任",
+                        "CFG锁定（MSR 0xE2写保护）（必须关闭，如果找不到此选项，然后在内核 -> Quirks 下启用AppleXcpmCfgLock。如果启用CFG-Lock，您的黑苹果可能无法启动）.对于10.10及更早版本，您还需要启用AppleCpuPmCfgLock"
+                    ]
+                },
+                "enable": {
+                    "en": [
+                        "VT-x",
+                        "Above 4G Decoding",
+                        "Hyper-Threading",
+                        "Execute Disable Bit",
+                        "EHCI/XHCI Hand-off",
+                        "OS type: Windows 8.1/10 UEFI Mode (some motherboards may require ”Other OS“ instead)",
+                        "DVMT Pre-Allocated(iGPU Memory): 32MB or higher",
+                        "SATA Mode: AHCI"
+                    ],
+                    "ch": [
+                        "VT-x虚拟化",
+                        "4G以上解码",
+                        "超线程",
+                        "执行禁用位",
+                        "EHCI/XHCI 切换",
+                        "操作系统类型：Windows 8.1/10 UEFI模式（某些主板可能需要选择“其他操作系统”）",
+                        "DVMT 预分配（iGPU内存）：32MB或更高",
+                        "SATA模式：AHCI"
+                    ]
+                },
+                "custom": [
+                    "主板开启AHCI,关闭CSM,关闭安全引导,OS类型选其他"
+                ]
+            }
+        }
+    },
+    {
+        "architecture": "Skylake",
+        "socket": "1151",
+        "generation": 6,
+        "year": "2015",
+        "legacy": false,
+        "motherboard": [
+            "HM170"
+        ],
+        "initial_support": "OS X 10.11, El Capitan",
+        "last_supported": "macOS 12 Monterey",
+        "oclp_supported": "核显需仿冒HD620,HD630即可支持最新macOS Tahoe 26",
+        "note": [
+            "Skylake于2015年发布,14nm架构工艺,英特尔的第六代Core系列处理器,集成图形处理单元(iGPU),例如HD520,HD530等",
+            "Skylake处理器中的集成图形处理单元(HD520等)在官方上最高免驱支持macOS 12 Monterey版本。截止目前,核显需仿冒HD620,HD630即可支持macOS Tahoe 26"
+        ],
+        "config": {
+            "refer": "https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/skylake.html",
+            "bios": {
+                "disable": {
+                    "en": [
+                        "Fast Boot",
+                        "Secure Boot",
+                        "Serial/COM Port",
+                        "Parallel Port",
+                        "VT-d (can be enabled if you set DisableIoMapper to YES)",
+                        "Compatibility Support Module (CSM) (Must be off in most cases, GPU errors/stalls like gIO are common when this option is enabled)",
+                        "Thunderbolt (For initial install, as Thunderbolt can cause issues if not setup correctly)",
+                        "Intel SGX",
+                        "Intel Platform Trust",
+                        "CFG Lock (MSR 0xE2 write protection)(This must be off, if you can't find the option then enable AppleXcpmCfgLock under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled)"
+                    ],
+                    "ch": [
+                        "快速启动",
+                        "安全启动",
+                        "串行/COM端口",
+                        "并行端口",
+                        "VT-d（如果将DisableIoMapper设置为YES，则可以启用）",
+                        "兼容性支持模块（CSM）（在大多数情况下必须关闭，启用此选项时通常会出现GPU错误/停顿，如gIO）",
+                        "雷电端口（仅用于初始安装，因为雷电端口如果设置不正确可能会引发问题）",
+                        "英特尔 SGX",
+                        "英特尔平台信任",
+                        "CFG锁定（MSR 0xE2写保护）（必须关闭，如果找不到此选项，然后在内核 -> Quirks 下启用AppleXcpmCfgLock。如果启用CFG-Lock，您的黑苹果可能无法启动）"
+                    ]
+                },
+                "enable": {
+                    "en": [
+                        "VT-x",
+                        "Above 4G Decoding",
+                        "Hyper-Threading",
+                        "Execute Disable Bit",
+                        "EHCI/XHCI Hand-off",
+                        "OS type: Windows 8.1/10 UEFI Mode (some motherboards may require ”Other OS“ instead)",
+                        "DVMT Pre-Allocated(iGPU Memory): 32MB or higher",
+                        "SATA Mode: AHCI"
+                    ],
+                    "ch": [
+                        "VT-x虚拟化",
+                        "4G以上解码",
+                        "超线程",
+                        "执行禁用位",
+                        "EHCI/XHCI 切换",
+                        "操作系统类型：Windows 8.1/10 UEFI模式（某些主板可能需要选择“其他操作系统”）",
+                        "DVMT 预分配（iGPU内存）：32MB或更高",
+                        "SATA模式：AHCI"
+                    ]
+                },
+                "custom": [
+                    "主板开启AHCI,关闭CSM,关闭安全引导,OS类型选其他"
+                ]
+            }
+        }
+    },
+    {
+        "architecture": "Kaby Lake",
+        "socket": "1151",
+        "generation": 7,
+        "year": "2016",
+        "legacy": false,
+        "motherboard": [
+            "HM270"
+        ],
+        "initial_support": "macOS 10.12, Sierra",
+        "last_supported": "macOS Tahoe 26",
+        "oclp_supported": "",
+        "note": [
+            "Kaby Lake于2016年发布,14nm架构工艺,英特尔的第七代Core系列处理器,集成图形处理单元(iGPU),例如HD620,HD630",
+            "Kaby Lake处理器中的集成图形处理单元(HD620)在官方上最高免驱支持macOS Tahoe 26版本。"
+        ],
+        "config": {
+            "refer": "https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/kaby-lake.html",
+            "bios": {
+                "disable": {
+                    "en": [
+                        "Fast Boot",
+                        "Secure Boot",
+                        "Serial/COM Port",
+                        "Parallel Port",
+                        "VT-d (can be enabled if you set DisableIoMapper to YES)",
+                        "Compatibility Support Module (CSM) (Must be off in most cases, GPU errors/stalls like gIO are common when this option is enabled)",
+                        "Thunderbolt (For initial install, as Thunderbolt can cause issues if not setup correctly)",
+                        "Intel SGX",
+                        "Intel Platform Trust",
+                        "CFG Lock (MSR 0xE2 write protection)(This must be off, if you can't find the option then enable AppleXcpmCfgLock under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled)"
+                    ],
+                    "ch": [
+                        "快速启动",
+                        "安全启动",
+                        "串行/COM端口",
+                        "并行端口",
+                        "VT-d（如果将DisableIoMapper设置为YES，则可以启用）",
+                        "兼容性支持模块（CSM）（在大多数情况下必须关闭，启用此选项时通常会出现GPU错误/停顿，如gIO）",
+                        "雷电端口（仅用于初始安装，因为雷电端口如果设置不正确可能会引发问题）",
+                        "英特尔 SGX",
+                        "英特尔平台信任",
+                        "CFG锁定（MSR 0xE2写保护）（必须关闭，如果找不到此选项，然后在内核 -> Quirks 下启用AppleXcpmCfgLock。如果启用CFG-Lock，您的黑苹果可能无法启动）"
+                    ]
+                },
+                "enable": {
+                    "en": [
+                        "VT-x",
+                        "Above 4G Decoding",
+                        "Hyper-Threading",
+                        "Execute Disable Bit",
+                        "EHCI/XHCI Hand-off",
+                        "OS type: Windows 8.1/10 UEFI Mode (some motherboards may require ”Other OS“ instead)",
+                        "DVMT Pre-Allocated(iGPU Memory): 32MB or higher",
+                        "SATA Mode: AHCI"
+                    ],
+                    "ch": [
+                        "VT-x虚拟化",
+                        "4G以上解码",
+                        "超线程",
+                        "执行禁用位",
+                        "EHCI/XHCI 切换",
+                        "操作系统类型：Windows 8.1/10 UEFI模式（某些主板可能需要选择“其他操作系统”）",
+                        "DVMT 预分配（iGPU内存）：32MB或更高",
+                        "SATA模式：AHCI"
+                    ]
+                },
+                "custom": [
+                    "主板开启AHCI,关闭CSM,关闭安全引导,OS类型选其他"
+                ]
+            }
+        }
+    },
+    {
+        "architecture": "Coffee Lake&Whiskey Lake",
+        "socket": "1151",
+        "generation": 8,
+        "year": "2017",
+        "legacy": false,
+        "motherboard": [
+            "Z370",
+            "H370",
+            "B360",
+            "B365"
+        ],
+        "initial_support": "macOS 10.13, High Sierra",
+        "last_supported": "macOS Tahoe 26",
+        "oclp_supported": "",
+        "note": [
+            "Coffee Lake于2017年发布,14nm架构工艺,英特尔的第八代Core系列处理器,集成图形处理单元(iGPU),例如HD630,UHD630",
+            "Coffee Lake处理器中的集成图形处理单元(HD630)在官方上最高免驱支持macOS Tahoe 26版本"
+        ],
+        "config": {
+            "refer": "https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake.html",
+            "bios": {
+                "disable": {
+                    "en": [
+                        "Fast Boot",
+                        "Secure Boot",
+                        "Serial/COM Port",
+                        "Parallel Port",
+                        "VT-d (can be enabled if you set DisableIoMapper to YES)",
+                        "Compatibility Support Module (CSM) (Must be off in most cases, GPU errors/stalls like gIO are common when this option is enabled)",
+                        "Thunderbolt (For initial install, as Thunderbolt can cause issues if not setup correctly)",
+                        "Intel SGX",
+                        "Intel Platform Trust",
+                        "CFG Lock (MSR 0xE2 write protection)(This must be off, if you can't find the option then enable AppleXcpmCfgLock under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled)"
+                    ],
+                    "ch": [
+                        "快速启动",
+                        "安全启动",
+                        "串行/COM端口",
+                        "并行端口",
+                        "VT-d（如果将DisableIoMapper设置为YES，则可以启用）",
+                        "兼容性支持模块（CSM）（在大多数情况下必须关闭，启用此选项时通常会出现GPU错误/停顿，如gIO）",
+                        "雷电端口（仅用于初始安装，因为雷电端口如果设置不正确可能会引发问题）",
+                        "英特尔 SGX",
+                        "英特尔平台信任",
+                        "CFG锁定（MSR 0xE2写保护）（必须关闭，如果找不到此选项，然后在内核 -> Quirks 下启用AppleXcpmCfgLock。如果启用CFG-Lock，您的黑苹果可能无法启动）"
+                    ]
+                },
+                "enable": {
+                    "en": [
+                        "VT-x",
+                        "Above 4G Decoding",
+                        "Hyper-Threading",
+                        "Execute Disable Bit",
+                        "EHCI/XHCI Hand-off",
+                        "OS type: Windows 8.1/10 UEFI Mode (some motherboards may require ”Other OS“ instead)",
+                        "DVMT Pre-Allocated(iGPU Memory): 32MB or higher",
+                        "SATA Mode: AHCI"
+                    ],
+                    "ch": [
+                        "VT-x虚拟化",
+                        "4G以上解码",
+                        "超线程",
+                        "执行禁用位",
+                        "EHCI/XHCI 切换",
+                        "操作系统类型：Windows 8.1/10 UEFI模式（某些主板可能需要选择“其他操作系统”）",
+                        "DVMT 预分配（iGPU内存）：32MB或更高",
+                        "SATA模式：AHCI"
+                    ]
+                },
+                "custom": [
+                    "主板开启AHCI,关闭CSM,关闭安全引导,OS类型选其他"
+                ]
+            }
+        }
+    },
+    {
+        "architecture": "Coffee Lake",
+        "socket": "1151",
+        "generation": 9,
+        "year": "2019",
+        "legacy": false,
+        "motherboard": [
+            "Z370",
+            "H370",
+            "B360",
+            "B365"
+        ],
+        "initial_support": "macOS 10.13, High Sierra",
+        "last_supported": "macOS Tahoe 26",
+        "oclp_supported": "",
+        "note": [
+            "Coffee Lake于2017年发布,14nm架构工艺,英特尔的第八代Core系列处理器,集成图形处理单元(iGPU),例如HD630,UHD630",
+            "Coffee Lake处理器中的集成图形处理单元(HD630)在官方上最高免驱支持macOS Tahoe 26版本"
+        ],
+        "config": {
+            "refer": "https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake.html",
+            "bios": {
+                "disable": {
+                    "en": [
+                        "Fast Boot",
+                        "Secure Boot",
+                        "Serial/COM Port",
+                        "Parallel Port",
+                        "VT-d (can be enabled if you set DisableIoMapper to YES)",
+                        "Compatibility Support Module (CSM) (Must be off in most cases, GPU errors/stalls like gIO are common when this option is enabled)",
+                        "Thunderbolt (For initial install, as Thunderbolt can cause issues if not setup correctly)",
+                        "Intel SGX",
+                        "Intel Platform Trust",
+                        "CFG Lock (MSR 0xE2 write protection)(This must be off, if you can't find the option then enable AppleXcpmCfgLock under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled)"
+                    ],
+                    "ch": [
+                        "快速启动",
+                        "安全启动",
+                        "串行/COM端口",
+                        "并行端口",
+                        "VT-d（如果将DisableIoMapper设置为YES，则可以启用）",
+                        "兼容性支持模块（CSM）（在大多数情况下必须关闭，启用此选项时通常会出现GPU错误/停顿，如gIO）",
+                        "雷电端口（仅用于初始安装，因为雷电端口如果设置不正确可能会引发问题）",
+                        "英特尔 SGX",
+                        "英特尔平台信任",
+                        "CFG锁定（MSR 0xE2写保护）（必须关闭，如果找不到此选项，然后在内核 -> Quirks 下启用AppleXcpmCfgLock。如果启用CFG-Lock，您的黑苹果可能无法启动）"
+                    ]
+                },
+                "enable": {
+                    "en": [
+                        "VT-x",
+                        "Above 4G Decoding",
+                        "Hyper-Threading",
+                        "Execute Disable Bit",
+                        "EHCI/XHCI Hand-off",
+                        "OS type: Windows 8.1/10 UEFI Mode (some motherboards may require ”Other OS“ instead)",
+                        "DVMT Pre-Allocated(iGPU Memory): 32MB or higher",
+                        "SATA Mode: AHCI"
+                    ],
+                    "ch": [
+                        "VT-x虚拟化",
+                        "4G以上解码",
+                        "超线程",
+                        "执行禁用位",
+                        "EHCI/XHCI 切换",
+                        "操作系统类型：Windows 8.1/10 UEFI模式（某些主板可能需要选择“其他操作系统”）",
+                        "DVMT 预分配（iGPU内存）：32MB或更高",
+                        "SATA模式：AHCI"
+                    ]
+                },
+                "custom": [
+                    "主板开启AHCI,关闭CSM,关闭安全引导,OS类型选其他"
+                ]
+            }
+        }
+    },
+    {
+        "architecture": "Comet Lake",
+        "socket": "1200",
+        "generation": 10,
+        "year": "2020",
+        "legacy": false,
+        "motherboard": [
+            "Z490",
+            "H470",
+            "B460",
+            "Z590",
+            "H570",
+            "B560"
+        ],
+        "initial_support": "macOS 10.15,Catalina",
+        "last_supported": "macOS Tahoe 26",
+        "oclp_supported": "",
+        "note": [
+            "Comet Lake于2019年发布,14nm架构工艺,英特尔的第十代Core系列处理器,集成图形处理单元(iGPU),例如UHD630",
+            "Comet Lake处理器中的集成图形处理单元(UHD630)在官方上最高免驱支持macOS Tahoe 26版本",
+            "搭配Z590、H570、B560等500系主板,通常核显HDMI输出会出现黑屏情况,需要遍历总线,定制HDMI缓冲帧"
+        ],
+        "config": {
+            "refer": "https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/coffee-lake-plus.html",
+            "bios": {
+                "disable": {
+                    "en": [
+                        "Fast Boot",
+                        "Secure Boot",
+                        "Serial/COM Port",
+                        "Parallel Port",
+                        "VT-d (can be enabled if you set DisableIoMapper to YES)",
+                        "Compatibility Support Module (CSM) (Must be off in most cases, GPU errors/stalls like gIO are common when this option is enabled)",
+                        "Thunderbolt (For initial install, as Thunderbolt can cause issues if not setup correctly)",
+                        "Intel SGX",
+                        "Intel Platform Trust",
+                        "CFG Lock (MSR 0xE2 write protection)(This must be off, if you can't find the option then enable AppleXcpmCfgLock under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled)"
+                    ],
+                    "ch": [
+                        "快速启动",
+                        "安全启动",
+                        "串行/COM端口",
+                        "并行端口",
+                        "VT-d（如果将DisableIoMapper设置为YES，则可以启用）",
+                        "兼容性支持模块（CSM）（在大多数情况下必须关闭，启用此选项时通常会出现GPU错误/停顿，如gIO）",
+                        "雷电端口（仅用于初始安装，因为雷电端口如果设置不正确可能会引发问题）",
+                        "英特尔 SGX",
+                        "英特尔平台信任",
+                        "CFG锁定（MSR 0xE2写保护）（必须关闭，如果找不到此选项，然后在内核 -> Quirks 下启用AppleXcpmCfgLock。如果启用CFG-Lock，您的黑苹果可能无法启动）"
+                    ]
+                },
+                "enable": {
+                    "en": [
+                        "VT-x",
+                        "Above 4G Decoding(2020+ BIOS Notes: When enabling Above4G, Resizable BAR Support may become an available on some Z490 and newer motherboards. Please ensure that Booter -> Quirks -> ResizeAppleGpuBars is set to 0 if this is enabled)",
+                        "Hyper-Threading",
+                        "Execute Disable Bit",
+                        "EHCI/XHCI Hand-off",
+                        "OS type: Windows 8.1/10 UEFI Mode (some motherboards may require ”Other OS“ instead)",
+                        "DVMT Pre-Allocated(iGPU Memory): 32MB or higher",
+                        "SATA Mode: AHCI"
+                    ],
+                    "ch": [
+                        "VT-x虚拟化",
+                        "4G以上解码(2020年以后的BIOS说明：在启用Above4G时，一些Z490和更新的主板上可能会提供可调整的BAR支持。请确保如果启用此选项，请将Booter -> Quirks -> ResizeAppleGpuBars设置为0)",
+                        "超线程",
+                        "执行禁用位",
+                        "EHCI/XHCI 切换",
+                        "操作系统类型：Windows 8.1/10 UEFI模式（某些主板可能需要选择“其他操作系统”）",
+                        "DVMT 预分配（iGPU内存）：32MB或更高",
+                        "SATA模式：AHCI"
+                    ]
+                },
+                "custom": [
+                    "主板开启AHCI,关闭CSM,关闭安全引导,OS类型选其他"
+                ]
+            }
+        }
+    },
+    {
+        "architecture": "Ice Lake",
+        "socket": "1200",
+        "generation": 10,
+        "year": "2019",
+        "legacy": false,
+        "motherboard": [],
+        "initial_support": "macOS 10.15,Catalina",
+        "last_supported": "macOS Tahoe 26",
+        "oclp_supported": "",
+        "note": [
+            "Ice Lake于2019年发布,10nm架构工艺,英特尔的第十代Core系列处理器,集成图形处理单元(Iris Plus Graphics)",
+            "Ice Lake处理器中的集成图形处理单元(Iris Plus Graphics G4/G7)在官方上最高免驱支持macOS Tahoe 26版本"
+        ],
+        "config": {
+            "refer": "https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/icelake.html",
+            "bios": {
+                "disable": {
+                    "en": [
+                        "Fast Boot",
+                        "Secure Boot",
+                        "Serial/COM Port",
+                        "Parallel Port",
+                        "VT-d (can be enabled if you set DisableIoMapper to YES)",
+                        "Compatibility Support Module (CSM) (Must be off in most cases, GPU errors/stalls like gIO are common when this option is enabled)",
+                        "Thunderbolt (For initial install, as Thunderbolt can cause issues if not setup correctly)",
+                        "Intel SGX",
+                        "Intel Platform Trust",
+                        "CFG Lock (MSR 0xE2 write protection)(This must be off, if you can't find the option then enable AppleXcpmCfgLock under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled)"
+                    ],
+                    "ch": [
+                        "快速启动",
+                        "安全启动",
+                        "串行/COM端口",
+                        "并行端口",
+                        "VT-d（如果将DisableIoMapper设置为YES，则可以启用）",
+                        "兼容性支持模块（CSM）（在大多数情况下必须关闭，启用此选项时通常会出现GPU错误/停顿，如gIO）",
+                        "雷电端口（仅用于初始安装，因为雷电端口如果设置不正确可能会引发问题）",
+                        "英特尔 SGX",
+                        "英特尔平台信任",
+                        "CFG锁定（MSR 0xE2写保护）（必须关闭，如果找不到此选项，然后在内核 -> Quirks 下启用AppleXcpmCfgLock。如果启用CFG-Lock，您的黑苹果可能无法启动）"
+                    ]
+                },
+                "enable": {
+                    "en": [
+                        "VT-x",
+                        "Above 4G Decoding(2020+ BIOS Notes: When enabling Above4G, Resizable BAR Support may become an available on some Z490 and newer motherboards. Please ensure that Booter -> Quirks -> ResizeAppleGpuBars is set to 0 if this is enabled)",
+                        "Hyper-Threading",
+                        "Execute Disable Bit",
+                        "EHCI/XHCI Hand-off",
+                        "OS type: Windows 8.1/10 UEFI Mode (some motherboards may require ”Other OS“ instead)",
+                        "DVMT Pre-Allocated(iGPU Memory): 32MB or higher",
+                        "SATA Mode: AHCI"
+                    ],
+                    "ch": [
+                        "VT-x虚拟化",
+                        "4G以上解码(2020年以后的BIOS说明：在启用Above4G时，一些Z490和更新的主板上可能会提供可调整的BAR支持。请确保如果启用此选项，请将Booter -> Quirks -> ResizeAppleGpuBars设置为0)",
+                        "超线程",
+                        "执行禁用位",
+                        "EHCI/XHCI 切换",
+                        "操作系统类型：Windows 8.1/10 UEFI模式（某些主板可能需要选择“其他操作系统”）",
+                        "DVMT 预分配（iGPU内存）：32MB或更高",
+                        "SATA模式：AHCI"
+                    ]
+                },
+                "custom": [
+                    "主板开启AHCI,关闭CSM,关闭安全引导,OS类型选其他"
+                ]
+            }
+        }
+    },
+    {
+        "architecture": "Tiger Lake",
+        "socket": "1200",
+        "generation": 11,
+        "year": "2020",
+        "legacy": false,
+        "motherboard": [],
+        "initial_support": "macOS 10.15,Catalina",
+        "last_supported": "macOS Tahoe 26",
+        "oclp_supported": "",
+        "note": [
+            "Tiger Lake于2020年发布,10nm架构工艺,英特尔的第十一代Core系列处理器,集成图形处理单元(Iris® Xe Graphics)",
+            "Tiger Lake处理器中的集成图形处理单元(Iris® Xe Graphics)在任何macOS版本都无法驱动,因此必须搭载免驱独显(例如:RX6600M)才有意义"
+        ],
+        "config": {
+            "refer": "",
+            "bios": {
+                "disable": {
+                    "en": [
+                        "Fast Boot",
+                        "Secure Boot",
+                        "Serial/COM Port",
+                        "Parallel Port",
+                        "VT-d (can be enabled if you set DisableIoMapper to YES)",
+                        "Compatibility Support Module (CSM) (Must be off in most cases, GPU errors/stalls like gIO are common when this option is enabled)",
+                        "Thunderbolt (For initial install, as Thunderbolt can cause issues if not setup correctly)",
+                        "Intel SGX",
+                        "Intel Platform Trust",
+                        "CFG Lock (MSR 0xE2 write protection)(This must be off, if you can't find the option then enable AppleXcpmCfgLock under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled)"
+                    ],
+                    "ch": [
+                        "快速启动",
+                        "安全启动",
+                        "串行/COM端口",
+                        "并行端口",
+                        "VT-d（如果将DisableIoMapper设置为YES，则可以启用）",
+                        "兼容性支持模块（CSM）（在大多数情况下必须关闭，启用此选项时通常会出现GPU错误/停顿，如gIO）",
+                        "雷电端口（仅用于初始安装，因为雷电端口如果设置不正确可能会引发问题）",
+                        "英特尔 SGX",
+                        "英特尔平台信任",
+                        "CFG锁定（MSR 0xE2写保护）（必须关闭，如果找不到此选项，然后在内核 -> Quirks 下启用AppleXcpmCfgLock。如果启用CFG-Lock，您的黑苹果可能无法启动）"
+                    ]
+                },
+                "enable": {
+                    "en": [
+                        "VT-x",
+                        "Above 4G Decoding(2020+ BIOS Notes: When enabling Above4G, Resizable BAR Support may become an available on some Z490 and newer motherboards. Please ensure that Booter -> Quirks -> ResizeAppleGpuBars is set to 0 if this is enabled)",
+                        "Hyper-Threading",
+                        "Execute Disable Bit",
+                        "EHCI/XHCI Hand-off",
+                        "OS type: Windows 8.1/10 UEFI Mode (some motherboards may require ”Other OS“ instead)",
+                        "DVMT Pre-Allocated(iGPU Memory): 32MB or higher",
+                        "SATA Mode: AHCI"
+                    ],
+                    "ch": [
+                        "VT-x虚拟化",
+                        "4G以上解码(2020年以后的BIOS说明：在启用Above4G时，一些Z490和更新的主板上可能会提供可调整的BAR支持。请确保如果启用此选项，请将Booter -> Quirks -> ResizeAppleGpuBars设置为0)",
+                        "超线程",
+                        "执行禁用位",
+                        "EHCI/XHCI 切换",
+                        "操作系统类型：Windows 8.1/10 UEFI模式（某些主板可能需要选择“其他操作系统”）",
+                        "DVMT 预分配（iGPU内存）：32MB或更高",
+                        "SATA模式：AHCI"
+                    ]
+                },
+                "custom": [
+                    "主板开启AHCI,关闭CSM,关闭安全引导,OS类型选其他"
+                ]
+            }
+        }
+    },
+    {
+        "architecture": "Alder Lake",
+        "socket": "1200",
+        "generation": 12,
+        "year": "2022",
+        "legacy": false,
+        "motherboard": [],
+        "initial_support": "macOS 10.15,Catalina",
+        "last_supported": "macOS Tahoe 26",
+        "oclp_supported": "",
+        "note": [
+            "Alder Lake于2022年发布,7nm架构工艺,英特尔的第十二代Core系列处理器,集成图形处理单元(Iris® Xe Graphics)",
+            "Alder Lake处理器中的集成图形处理单元(Iris® Xe Graphics)在任何macOS版本都无法驱动,因此必须搭载免驱独显(例如:RX6600M)才有意义"
+        ],
+        "config": {
+            "refer": "",
+            "bios": {
+                "disable": {
+                    "en": [
+                        "Fast Boot",
+                        "Secure Boot",
+                        "Serial/COM Port",
+                        "Parallel Port",
+                        "VT-d (can be enabled if you set DisableIoMapper to YES)",
+                        "Compatibility Support Module (CSM) (Must be off in most cases, GPU errors/stalls like gIO are common when this option is enabled)",
+                        "Thunderbolt (For initial install, as Thunderbolt can cause issues if not setup correctly)",
+                        "Intel SGX",
+                        "Intel Platform Trust",
+                        "CFG Lock (MSR 0xE2 write protection)(This must be off, if you can't find the option then enable AppleXcpmCfgLock under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled)"
+                    ],
+                    "ch": [
+                        "快速启动",
+                        "安全启动",
+                        "串行/COM端口",
+                        "并行端口",
+                        "VT-d（如果将DisableIoMapper设置为YES，则可以启用）",
+                        "兼容性支持模块（CSM）（在大多数情况下必须关闭，启用此选项时通常会出现GPU错误/停顿，如gIO）",
+                        "雷电端口（仅用于初始安装，因为雷电端口如果设置不正确可能会引发问题）",
+                        "英特尔 SGX",
+                        "英特尔平台信任",
+                        "CFG锁定（MSR 0xE2写保护）（必须关闭，如果找不到此选项，然后在内核 -> Quirks 下启用AppleXcpmCfgLock。如果启用CFG-Lock，您的黑苹果可能无法启动）"
+                    ]
+                },
+                "enable": {
+                    "en": [
+                        "VT-x",
+                        "Above 4G Decoding(2020+ BIOS Notes: When enabling Above4G, Resizable BAR Support may become an available on some Z490 and newer motherboards. Please ensure that Booter -> Quirks -> ResizeAppleGpuBars is set to 0 if this is enabled)",
+                        "Hyper-Threading",
+                        "Execute Disable Bit",
+                        "EHCI/XHCI Hand-off",
+                        "OS type: Windows 8.1/10 UEFI Mode (some motherboards may require ”Other OS“ instead)",
+                        "DVMT Pre-Allocated(iGPU Memory): 32MB or higher",
+                        "SATA Mode: AHCI"
+                    ],
+                    "ch": [
+                        "VT-x虚拟化",
+                        "4G以上解码(2020年以后的BIOS说明：在启用Above4G时，一些Z490和更新的主板上可能会提供可调整的BAR支持。请确保如果启用此选项，请将Booter -> Quirks -> ResizeAppleGpuBars设置为0)",
+                        "超线程",
+                        "执行禁用位",
+                        "EHCI/XHCI 切换",
+                        "操作系统类型：Windows 8.1/10 UEFI模式（某些主板可能需要选择“其他操作系统”）",
+                        "DVMT 预分配（iGPU内存）：32MB或更高",
+                        "SATA模式：AHCI"
+                    ]
+                },
+                "custom": [
+                    "主板开启AHCI,关闭CSM,关闭安全引导,OS类型选其他"
+                ]
+            }
+        }
+    },
+    {
+        "architecture": "Raptor Lake",
+        "socket": "1200",
+        "generation": 13,
+        "year": "2022",
+        "legacy": false,
+        "motherboard": [],
+        "initial_support": "macOS 10.15,Catalina",
+        "last_supported": "macOS Tahoe 26",
+        "oclp_supported": "",
+        "note": [
+            "Raptor Lake于2022年发布,7nm架构工艺,英特尔的第十三代Core系列处理器,集成图形处理单元(Iris® Xe Graphics)",
+            "Raptor Lake处理器中的集成图形处理单元(Iris® Xe Graphics)在任何macOS版本都无法驱动,因此必须搭载免驱独显(例如:RX6600M)才有意义"
+        ],
+        "config": {
+            "refer": "",
+            "bios": {
+                "disable": {
+                    "en": [
+                        "Fast Boot",
+                        "Secure Boot",
+                        "Serial/COM Port",
+                        "Parallel Port",
+                        "VT-d (can be enabled if you set DisableIoMapper to YES)",
+                        "Compatibility Support Module (CSM) (Must be off in most cases, GPU errors/stalls like gIO are common when this option is enabled)",
+                        "Thunderbolt (For initial install, as Thunderbolt can cause issues if not setup correctly)",
+                        "Intel SGX",
+                        "Intel Platform Trust",
+                        "CFG Lock (MSR 0xE2 write protection)(This must be off, if you can't find the option then enable AppleXcpmCfgLock under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled)"
+                    ],
+                    "ch": [
+                        "快速启动",
+                        "安全启动",
+                        "串行/COM端口",
+                        "并行端口",
+                        "VT-d（如果将DisableIoMapper设置为YES，则可以启用）",
+                        "兼容性支持模块（CSM）（在大多数情况下必须关闭，启用此选项时通常会出现GPU错误/停顿，如gIO）",
+                        "雷电端口（仅用于初始安装，因为雷电端口如果设置不正确可能会引发问题）",
+                        "英特尔 SGX",
+                        "英特尔平台信任",
+                        "CFG锁定（MSR 0xE2写保护）（必须关闭，如果找不到此选项，然后在内核 -> Quirks 下启用AppleXcpmCfgLock。如果启用CFG-Lock，您的黑苹果可能无法启动）"
+                    ]
+                },
+                "enable": {
+                    "en": [
+                        "VT-x",
+                        "Above 4G Decoding(2020+ BIOS Notes: When enabling Above4G, Resizable BAR Support may become an available on some Z490 and newer motherboards. Please ensure that Booter -> Quirks -> ResizeAppleGpuBars is set to 0 if this is enabled)",
+                        "Hyper-Threading",
+                        "Execute Disable Bit",
+                        "EHCI/XHCI Hand-off",
+                        "OS type: Windows 8.1/10 UEFI Mode (some motherboards may require ”Other OS“ instead)",
+                        "DVMT Pre-Allocated(iGPU Memory): 32MB or higher",
+                        "SATA Mode: AHCI"
+                    ],
+                    "ch": [
+                        "VT-x虚拟化",
+                        "4G以上解码(2020年以后的BIOS说明：在启用Above4G时，一些Z490和更新的主板上可能会提供可调整的BAR支持。请确保如果启用此选项，请将Booter -> Quirks -> ResizeAppleGpuBars设置为0)",
+                        "超线程",
+                        "执行禁用位",
+                        "EHCI/XHCI 切换",
+                        "操作系统类型：Windows 8.1/10 UEFI模式（某些主板可能需要选择“其他操作系统”）",
+                        "DVMT 预分配（iGPU内存）：32MB或更高",
+                        "SATA模式：AHCI"
+                    ]
+                },
+                "custom": [
+                    "主板开启AHCI,关闭CSM,关闭安全引导,OS类型选其他"
+                ]
+            }
+        }
+    },
+    {
+        "architecture": "Raptor Lake Refresh",
+        "socket": "1200",
+        "generation": 14,
+        "year": "2022",
+        "legacy": false,
+        "motherboard": [],
+        "initial_support": "macOS 10.15,Catalina",
+        "last_supported": "macOS Tahoe 26",
+        "oclp_supported": "",
+        "note": [
+            "Raptor Lake于2022年发布,14nm架构工艺,英特尔的第十一代Core系列处理器,集成图形处理单元(Iris® Xe Graphics)",
+            "Raptor Lake处理器中的集成图形处理单元(Iris® Xe Graphics)在任何macOS版本都无法驱动,因此必须搭载免驱独显(例如:RX6600M)才有意义"
+        ],
+        "config": {
+            "refer": "",
+            "bios": {
+                "disable": {
+                    "en": [
+                        "Fast Boot",
+                        "Secure Boot",
+                        "Serial/COM Port",
+                        "Parallel Port",
+                        "VT-d (can be enabled if you set DisableIoMapper to YES)",
+                        "Compatibility Support Module (CSM) (Must be off in most cases, GPU errors/stalls like gIO are common when this option is enabled)",
+                        "Thunderbolt (For initial install, as Thunderbolt can cause issues if not setup correctly)",
+                        "Intel SGX",
+                        "Intel Platform Trust",
+                        "CFG Lock (MSR 0xE2 write protection)(This must be off, if you can't find the option then enable AppleXcpmCfgLock under Kernel -> Quirks. Your hack will not boot with CFG-Lock enabled)"
+                    ],
+                    "ch": [
+                        "快速启动",
+                        "安全启动",
+                        "串行/COM端口",
+                        "并行端口",
+                        "VT-d（如果将DisableIoMapper设置为YES，则可以启用）",
+                        "兼容性支持模块（CSM）（在大多数情况下必须关闭，启用此选项时通常会出现GPU错误/停顿，如gIO）",
+                        "雷电端口（仅用于初始安装，因为雷电端口如果设置不正确可能会引发问题）",
+                        "英特尔 SGX",
+                        "英特尔平台信任",
+                        "CFG锁定（MSR 0xE2写保护）（必须关闭，如果找不到此选项，然后在内核 -> Quirks 下启用AppleXcpmCfgLock。如果启用CFG-Lock，您的黑苹果可能无法启动）"
+                    ]
+                },
+                "enable": {
+                    "en": [
+                        "VT-x",
+                        "Above 4G Decoding(2020+ BIOS Notes: When enabling Above4G, Resizable BAR Support may become an available on some Z490 and newer motherboards. Please ensure that Booter -> Quirks -> ResizeAppleGpuBars is set to 0 if this is enabled)",
+                        "Hyper-Threading",
+                        "Execute Disable Bit",
+                        "EHCI/XHCI Hand-off",
+                        "OS type: Windows 8.1/10 UEFI Mode (some motherboards may require ”Other OS“ instead)",
+                        "DVMT Pre-Allocated(iGPU Memory): 32MB or higher",
+                        "SATA Mode: AHCI"
+                    ],
+                    "ch": [
+                        "VT-x虚拟化",
+                        "4G以上解码(2020年以后的BIOS说明：在启用Above4G时，一些Z490和更新的主板上可能会提供可调整的BAR支持。请确保如果启用此选项，请将Booter -> Quirks -> ResizeAppleGpuBars设置为0)",
+                        "超线程",
+                        "执行禁用位",
+                        "EHCI/XHCI 切换",
+                        "操作系统类型：Windows 8.1/10 UEFI模式（某些主板可能需要选择“其他操作系统”）",
+                        "DVMT 预分配（iGPU内存）：32MB或更高",
+                        "SATA模式：AHCI"
+                    ]
+                },
+                "custom": [
+                    "主板开启AHCI,关闭CSM,关闭安全引导,OS类型选其他"
+                ]
+            }
+        }
+    }
+]

@@ -1,0 +1,29 @@
+[
+    {
+      "id": "hfs.hfspluslegacy",
+      "title": "HfsPlusLegacy",
+      "path": "HfsPlusLegacy.efi",
+      "category": "hfs",
+      "tip":"使用HfsPlusLegacy,通常适用于3代及之前传统老平台,特别是奔腾赛扬处理器优先考虑此驱动。如果出现OpenCore引导UI不显示(卡主板Logo,灰屏等),可以尝试使用HfsPlus或OpenHfsPlus",
+      "description": "旧平台兼容 HFS 驱动",
+      "legacyAliases": ["UEFIHfsType.HfsPlusLegacy", "HfsPlusLegacy"]
+    },
+    {
+      "id": "hfs.hfsplus",
+      "title": "HfsPlus",
+      "path": "HfsPlus.efi",
+      "category": "hfs",
+      "tip":"使用HfsPlus,通常适用于3代及更新平台。如果出现OpenCore引导UI不显示(卡主板Logo,灰屏等),可以尝试使用HfsPlusLegacy或OpenHfsPlus",
+      "description": "推荐默认 HFS 驱动",
+      "legacyAliases": ["UEFIHfsType.HfsPlus", "HfsPlus"]
+    },
+    {
+      "id": "hfs.openhfsplus",
+      "title": "OpenHfsPlus",
+      "path": "OpenHfsPlus.efi",
+      "category": "hfs",
+      "tip":"使用OpenHfsPlus,通常适用于3代及更新平台,新平台奔腾赛扬优先考虑,如非必要,不推荐使用此驱动.如果出现OpenCore引导UI不显示(卡主板Logo,灰屏等),可以尝试使用HfsPlusLegacy或HfsPlus",
+      "description": "OpenCore 开源 HFS 驱动",
+      "legacyAliases": ["UEFIHfsType.OpenHfsPlus", "OpenHfsPlus"]
+    }
+  ]

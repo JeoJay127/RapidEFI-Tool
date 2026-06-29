@@ -1,0 +1,22 @@
+{
+  "bluetoothInternalControllerInfo": [
+    {
+      "id": "bluetooth.nvram.default",
+      "title": "蓝牙NVRAM参数方案一(默认方案,当添加蓝牙驱动后,自动添加此NVRAM参数)",
+      "key": "bluetoothInternalControllerInfo",
+      "dataType": "data",
+      "value": "0000000000000000000000000000",
+      "description": "默认蓝牙 NVRAM 参数",
+      "legacyAliases": ["BluetoothNVRAMType.BluetoothNVRAMType1"]
+    },
+    {
+      "id": "bluetooth.nvram.ax",
+      "title": "蓝牙NVRAM参数方案二(适用于部分 Intel AX200/AX201 等网卡)",
+      "key": "bluetoothInternalControllerInfo",
+      "dataType": "data",
+      "value": "000000000000000089653A552EFD",
+      "description": "适用于部分 Intel AX200/AX201 等网卡",
+      "legacyAliases": ["BluetoothNVRAMType.BluetoothNVRAMType2"]
+    }
+  ]
+}
