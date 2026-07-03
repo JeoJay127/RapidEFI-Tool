@@ -8,6 +8,7 @@ import 'merge.dart';
 import 'ssdt.dart';
 import 'config.dart';
 import 'table.dart';
+import '../log/log.dart';
 
 class PatchContext {
   dynamic data;
@@ -120,7 +121,7 @@ class ACPIToolManager {
           ssdt.ssdtPMC(prebuilt: _pb(context)),
       ACPITable.ssdtAPIC.name: (
               {PatchContext? context, Map<String, dynamic>? action}) =>
-          ssdt.ssdtAPIC(apicPath: context?.data),    
+          ssdt.ssdtAPIC(apicPath: context?.data),
       ACPITable.ssdtDMAR.name: (
               {PatchContext? context, Map<String, dynamic>? action}) =>
           ssdt.ssdtDMAR(dmarPath: context?.data),
@@ -146,8 +147,8 @@ class ACPIToolManager {
           {PatchContext? context, Map<String, dynamic>? action}) {
         final data = _actionData(context, action);
         return ssdt.ssdtPCIDISABLE(
-          acpiPath: _dataValue(data, 0, 'acpiPath') ??
-              _dataValue(data, 0, 'pciPath'),
+          acpiPath:
+              _dataValue(data, 0, 'acpiPath') ?? _dataValue(data, 0, 'pciPath'),
           disableMethod: _dataValue(data, 1, 'disableMethod'),
           type: _dataValue(data, 2, 'type'),
         );
@@ -156,8 +157,8 @@ class ACPIToolManager {
           {PatchContext? context, Map<String, dynamic>? action}) {
         final data = _actionData(context, action);
         return ssdt.ssdtGPUSPOOF(
-          gpuPath: _dataValue(data, 0, 'acpiPath') ??
-              _dataValue(data, 0, 'gpuPath'),
+          gpuPath:
+              _dataValue(data, 0, 'acpiPath') ?? _dataValue(data, 0, 'gpuPath'),
           deviceId: _dataValue(data, 1, 'deviceId'),
           fakeModel: _dataValue(data, 2, 'fakeModel'),
         );
@@ -264,6 +265,7 @@ class ACPIToolManager {
     final executor = _actionMap[action.name];
     if (executor != null) {
       try {
+        Log('------------------------------------------ 开始定制 ${action.name} ------------------------------------------'); 
         final ctx = context ?? PatchContext();
         ssdt.outputFolder = outputFolder ?? resultFolder;
         await executor(context: ctx, action: action);
@@ -383,11 +385,13 @@ class ACPIToolManager {
     String filePath, {
     bool disassemble = false,
     Future<String?> Function()? onRequestSudoPassword,
+    bool throwOnFailure = false,
   }) async =>
       await ssdt.dumpTables(
         filePath,
         disassemble: disassemble,
         onRequestSudoPassword: onRequestSudoPassword,
+        throwOnFailure: throwOnFailure,
       );
 
   Future<String?> loadTables(String dumpPath) async =>

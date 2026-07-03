@@ -55,7 +55,7 @@ class _AppHost extends StatelessWidget {
           vertical: 10.0,
         ),
         radius: 10,
-        position: ToastPosition.top,
+        position: ToastPosition.center,
         child: DoubleClickBackExitApp(
           tips: () => showToast('再次点击退出'),
           child: _buildFluentApp(context, appTheme),

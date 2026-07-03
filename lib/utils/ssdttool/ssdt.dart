@@ -13,6 +13,9 @@ import 'prebuilt.dart';
 import 'run.dart';
 import 'package:path/path.dart' as path;
 
+typedef _NativePnlfDevice =
+    ({String tableName, Map<String, dynamic> table, List<dynamic> path});
+
 class SSDT {
   final Run run = Run();
   final DSDT d;
@@ -73,11 +76,13 @@ class SSDT {
     String filePath, {
     bool disassemble = false,
     Future<String?> Function()? onRequestSudoPassword,
+    bool throwOnFailure = false,
   }) async =>
       await d.dumpTables(
         filePath,
         disassemble: disassemble,
         onRequestSudoPassword: onRequestSudoPassword,
+        throwOnFailure: throwOnFailure,
       );
 
   void checkIaslValid({bool? local, bool? legacy}) {
@@ -2249,6 +2254,40 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "HPET", 0x00000000)
               manualIGPUPath: manualIGPUPath,
             );
 
+  bool _isExactPnlfDevicePath(List<dynamic> pathInfo) {
+    if (pathInfo.length < 3 || pathInfo[2] != "Device") return false;
+
+    final lastSegment = pathInfo[0]
+        .toString()
+        .split(".")
+        .last
+        .replaceAll(RegExp(r"_+$"), "")
+        .toUpperCase();
+    return lastSegment == "PNLF";
+  }
+
+  List<_NativePnlfDevice> _findNativePnlfDevices() {
+    final matches = <_NativePnlfDevice>[];
+    final sortedTableNames = sortedNicely(d.acpiTables.keys.toList());
+
+    for (final tableName in sortedTableNames) {
+      final rawTable = d.acpiTables[tableName];
+      if (rawTable is! Map<String, dynamic>) continue;
+
+      final paths = d.getPathOfType(
+        objType: "Device",
+        obj: "PNLF",
+        table: rawTable,
+      );
+      for (final pathInfo in paths) {
+        if (!_isExactPnlfDevicePath(pathInfo)) continue;
+        matches.add((tableName: tableName, table: rawTable, path: pathInfo));
+      }
+    }
+
+    return matches;
+  }
+
   /// 背光修复
   /// [uid] UID
   /// [getIgpu] UID=14时,是否包含GPU寄存器代码
@@ -2455,21 +2494,21 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "HPET", 0x00000000)
     final tableNameList = d.acpiTables.keys.toList();
     final sortedTableNames = sortedNicely(tableNameList);
 
-    // 检查所有表，寻找包含 "PNLF" 的表，并生成一个重命名
-    for (String tableName in sortedTableNames) {
-      final table = d.acpiTables[tableName]!;
-      if (table["table"] != null &&
-          table["table"].isNotEmpty &&
-          table["table"]!.contains("PNLF")) {
-        Log("=> 在 $tableName 中检测到 PNLF, 正在生成重命名补丁…");
-        patches.add({
-          "Comment": "PNLF to XNLF rename - requires $ssdtName.aml",
-          "Find": "504E4C46",
-          "Replace": "584E4C46",
-        });
-        // 只生成一个重命名后退出循环
-        break;
-      }
+    Log("正在检查 ACPI 表中是否存在原生 PNLF 设备…");
+    final nativePnlfDevices = _findNativePnlfDevices();
+    if (nativePnlfDevices.isNotEmpty) {
+      final nativePnlf = nativePnlfDevices.first;
+      Log("=> 已在 ${nativePnlf.tableName} 找到原生 PNLF 设备: ${nativePnlf.path[0]}");
+      Log("=> 需要将原生 PNLF 重命名为 XNLF, 正在生成重命名补丁…");
+      patches.add({
+        "Comment": "PNLF to XNLF rename - requires $ssdtName.aml",
+        "Find": "504E4C46",
+        "Replace": "584E4C46",
+        "Table": nativePnlf.table,
+      });
+    } else {
+      Log("=> 未找到原生 PNLF 设备!");
+      Log("=> 无需生成 PNLF to XNLF 重命名补丁!");
     }
 
     // NBCF 二进制模式

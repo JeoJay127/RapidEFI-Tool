@@ -1,6 +1,7 @@
 import 'package:rapidefi/utils/config/config_model.dart';
 import 'package:rapidefi/utils/config/catalogs/efi_drivers/efi_driver_option.dart';
 import 'package:rapidefi/utils/config/models/uefi/uefi_drivers_item.dart';
+import 'package:path/path.dart' as path;
 
 class EfiDriverAccessor {
   EfiDriverAccessor._();
@@ -21,8 +22,7 @@ class EfiDriverAccessor {
     for (final item in model.uefi.uefiDriversItems) {
       final itemPath = item.path.toLowerCase();
       for (final option in options) {
-        if (itemPath == option.path.toLowerCase() ||
-            itemPath.contains(option.path.toLowerCase())) {
+        if (_sameDriverPath(itemPath, option.path)) {
           return option;
         }
       }
@@ -45,7 +45,7 @@ class EfiDriverAccessor {
     final items = model.uefi.uefiDriversItems.map((item) {
       final itemPath = item.path.toLowerCase();
       final isCategoryDriver = categoryPaths.any(
-        (path) => itemPath == path || itemPath.contains(path),
+        (driverPath) => _sameDriverPath(itemPath, driverPath),
       );
       if (!isCategoryDriver) return item;
       replaced = true;
@@ -60,5 +60,13 @@ class EfiDriverAccessor {
     }
 
     model.uefi.uefiDriversItems = items;
+  }
+
+  static bool _sameDriverPath(String left, String right) {
+    final normalizedLeft = left.toLowerCase();
+    final normalizedRight = right.toLowerCase();
+
+    return normalizedLeft == normalizedRight ||
+        path.basename(normalizedLeft) == path.basename(normalizedRight);
   }
 }

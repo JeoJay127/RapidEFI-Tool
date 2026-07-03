@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:rapidefi/utils/config/services/config_service.dart';
 import 'package:rapidefi/utils/file_util.dart';
+import 'package:rapidefi/utils/hardware/hardware_info.dart';
 import 'package:rapidefi/utils/hardware/ssdt/ssdt_selection.dart';
 import 'widgets/hardware_toolbar.dart';
 import 'widgets/hardware_status_bar.dart';
@@ -205,8 +206,16 @@ class _HardwarePageState extends State<HardwarePage> {
   Future<void> _exportLocalAcpiTables() async {
     await _controller.exportLocalAcpiTables(
       onRequestSudoPassword:
-          Platform.isLinux ? () => _requestSudoPassword() : null,
+          Platform.isLinux ? () => _requestSudoPasswordForAcpiExport() : null,
     );
+  }
+
+  Future<String?> _requestSudoPasswordForAcpiExport() async {
+    final password = await _requestSudoPassword();
+    if (password != null && password.trim().isNotEmpty) {
+      showToast('正在验证管理员密码...');
+    }
+    return password;
   }
 
   Future<String?> _requestSudoPassword() async {
@@ -335,10 +344,10 @@ class _HardwarePageState extends State<HardwarePage> {
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Text(
-          '拖入当前工具导出的硬件报告文件夹(自动识别 sysInfo.txt 和 ACPI 目录)',
+          '拖入当前工具导出的硬件报告文件夹\n(自动识别sysInfo.txt和ACPI目录)',
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: 13,
+            fontSize: 11,
             color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
         ),
@@ -558,7 +567,8 @@ bool _isReportFile(File file) {
   }
 
   try {
-    return jsonDecode(file.readAsStringSync()) is Map;
+    return jsonDecode(HardwareInfo.readHardwareReportFileSync(file.path))
+        is Map;
   } catch (_) {
     return false;
   }

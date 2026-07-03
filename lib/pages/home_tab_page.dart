@@ -37,7 +37,7 @@ class _HomeTabPageState extends State<HomeTabPage>
   }
 
   void _initTabData() {
-    final showAutoEFI = Device.isWindows || Device.isMacOS;
+    final showAutoEFI = Device.isDesktop;
     tabName = _getTabNames(showAutoEFI);
     pages = _getPages(showAutoEFI);
   }

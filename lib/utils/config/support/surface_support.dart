@@ -33,12 +33,10 @@ class SurfaceSupport {
     return KextAccessor.selectedKextsIn(model, touchPadKexts);
   }
 
-  static void apply(ConfigModel model, {bool includeBrightnessKeys = false}) {
+  static void apply(ConfigModel model) {
+    KextAccessor.removeKexts(model, [ConfigKernel.BrightnessKeys]);
     KextAccessor.removeKexts(model, _conflictingKexts);
     KextAccessor.addKexts(model, ConfigKextGroups.bigSurface.kexts);
-    if (includeBrightnessKeys) {
-      KextAccessor.addKext(model, ConfigKernel.BrightnessKeys);
-    }
 
     _removeAcpiByPath(model, ConfigAcpi.SSDT_ALS0.path);
     _addAcpiIfMissing(model, ConfigAcpi.SSDT_SURFACE);

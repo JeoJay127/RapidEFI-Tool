@@ -1234,11 +1234,24 @@ class HardwareDeviceData {
   };
 
   static final Map<String, SupportedNetworkDeviceInfo> supportedNetworkDevices =
-      {
-    for (final g in _networkGroups)
-      for (final id in g.deviceIds)
-        id: SupportedNetworkDeviceInfo(category: g.category, kext: g.kext),
-  };
+      _buildSupportedNetworkDevices();
+
+  static Map<String, SupportedNetworkDeviceInfo>
+      _buildSupportedNetworkDevices() {
+    final result = <String, SupportedNetworkDeviceInfo>{};
+    for (final group in _networkGroups) {
+      for (final id in group.deviceIds) {
+        result.putIfAbsent(
+          id,
+          () => SupportedNetworkDeviceInfo(
+            category: group.category,
+            kext: group.kext,
+          ),
+        );
+      }
+    }
+    return Map.unmodifiable(result);
+  }
 
   static bool isUnsupportedNvmeDisk(String deviceId) =>
       unsupportedStorageControllers.containsKey(_normalize(deviceId));

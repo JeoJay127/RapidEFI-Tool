@@ -6,7 +6,7 @@ class CustomToast {
   static void show(BuildContext context, String message) {
     if (_overlayEntry == null) {
       _overlayEntry = _createOverlayEntry(context, message);
-      Overlay.of(context).insert(_overlayEntry!);
+      Overlay.of(context, rootOverlay: true).insert(_overlayEntry!);
     }
   }
 
@@ -19,6 +19,7 @@ class CustomToast {
       BuildContext context, String message) {
     return OverlayEntry(
       builder: (BuildContext overlayContext) {
+        final colorScheme = Theme.of(overlayContext).colorScheme;
         return Positioned(
           top: 0,
           bottom: 0,
@@ -29,18 +30,18 @@ class CustomToast {
             child: Container(
               color: Colors.transparent,
               child: Center(
-                child: Card(
-                  color: Theme.of(context).colorScheme.primary,
+                child: Material(
+                  color: colorScheme.primary,
+                  borderRadius: BorderRadius.circular(10),
+                  elevation: 6,
                   child: Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          message,
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                      ],
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 15,
+                      vertical: 10,
+                    ),
+                    child: Text(
+                      message,
+                      style: const TextStyle(color: Colors.white),
                     ),
                   ),
                 ),

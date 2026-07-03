@@ -24,8 +24,21 @@ import 'package:rapidefi/utils/config/models/platform_info/pi_generic.dart';
 import 'package:rapidefi/utils/hardware/model/allinfo.dart';
 import 'package:rapidefi/utils/log/log.dart';
 import 'package:rapidefi/utils/ssdttool/config.dart';
+import 'package:rapidefi/utils/ssdttool/dsdt.dart';
 import 'package:rapidefi/utils/ssdttool/manager.dart';
 import 'package:rapidefi/utils/ssdttool/table.dart';
+
+class _AcpiExportResult {
+  const _AcpiExportResult({
+    this.path,
+    this.failureMessage,
+  });
+
+  final String? path;
+  final String? failureMessage;
+
+  bool get exported => path != null && path!.isNotEmpty;
+}
 
 class HardwarePageController extends ChangeNotifier {
   static const String _idleStatus = '等待刷新硬件信息';
@@ -54,11 +67,9 @@ class HardwarePageController extends ChangeNotifier {
 
   bool get hasImportedHardware => importedHardwarePath.trim().isNotEmpty;
 
-  bool get hasImportedAcpiTables =>
-      importedAcpiTablesPath.trim().isNotEmpty;
+  bool get hasImportedAcpiTables => importedAcpiTablesPath.trim().isNotEmpty;
 
-  bool get customSsdtAvailable =>
-      !hasImportedHardware || hasImportedAcpiTables;
+  bool get customSsdtAvailable => !hasImportedHardware || hasImportedAcpiTables;
 
   void init() {
     _initOutputDirectory();
@@ -259,14 +270,14 @@ class HardwarePageController extends ChangeNotifier {
       directoryPath: reportDirectory,
     );
 
-    final acpiDirectory = await _exportLocalAcpiTables(
+    final acpiResult = await _exportLocalAcpiTables(
       reportDirectory,
       folderName: 'ACPI',
     );
     showToast(
-      acpiDirectory != null
+      acpiResult.exported
           ? '硬件报告和 ACPI 表已导出到 $reportDirectory'
-          : '硬件报告已导出到 $reportDirectory，ACPI 表导出失败或不支持',
+          : '硬件报告已导出到 $reportDirectory，${acpiResult.failureMessage ?? 'ACPI 表导出失败或不支持'}',
     );
   }
 
@@ -276,57 +287,98 @@ class HardwarePageController extends ChangeNotifier {
     final baseDirectory = outputDirectory.isEmpty
         ? await FileUtils.getDefaultOutputDirectory()
         : outputDirectory;
-    final exportedPath = await _exportLocalAcpiTables(
+    final result = await _exportLocalAcpiTables(
       baseDirectory,
       folderName: 'RapidEFI-ACPI',
       onRequestSudoPassword: onRequestSudoPassword,
     );
     showToast(
-      exportedPath != null
-          ? 'ACPI 表已导出到 $exportedPath'
-          : 'ACPI 表导出失败或不支持',
+      result.exported
+          ? 'ACPI 表已导出到 ${result.path}'
+          : result.failureMessage ?? 'ACPI 表导出失败或不支持',
     );
   }
 
-  Future<String?> _exportLocalAcpiTables(
+  Future<_AcpiExportResult> _exportLocalAcpiTables(
     String reportDirectory, {
     required String folderName,
     Future<String?> Function()? onRequestSudoPassword,
   }) async {
+    Directory? tempDirectory;
+    var tempMoved = false;
     try {
       Log('正在导出本机 ACPI 表...');
+      final baseDirectory = Directory(reportDirectory);
+      await baseDirectory.create(recursive: true);
       final acpiDirectoryPath = path.join(reportDirectory, folderName);
-      final acpiRoot = Directory(acpiDirectoryPath);
-      if (await acpiRoot.exists()) {
-        await acpiRoot.delete(recursive: true);
-      }
-      final acpiDirectory = await FileUtils.createDirectory(
+      final tempDirectoryPath = path.join(
         reportDirectory,
-        folderName,
+        '.$folderName.tmp_${DateTime.now().microsecondsSinceEpoch}',
       );
-      if (acpiDirectory.isEmpty) return null;
+      tempDirectory = Directory(tempDirectoryPath);
+      await tempDirectory.create(recursive: true);
 
       final manager = ACPIToolManager(
         acpiConfig: AcpiConfig(
-          outputDirectory: acpiDirectory,
-          acpiDirectory: acpiDirectory,
+          outputDirectory: tempDirectory.path,
+          acpiDirectory: tempDirectory.path,
           overwriteEFI: true,
         ),
       );
       final dumpPath = await manager.dumpTables(
-        acpiDirectory,
+        tempDirectory.path,
         onRequestSudoPassword: onRequestSudoPassword,
+        throwOnFailure: true,
       );
       final exported = dumpPath != null && dumpPath.isNotEmpty;
-      if (exported) {
-        Log('本机 ACPI 表导出完成: $acpiDirectory');
-      } else {
+      if (!exported) {
         Log.warning('本机 ACPI 表导出失败');
+        return const _AcpiExportResult(failureMessage: 'ACPI 表导出失败或不支持');
       }
-      return exported ? acpiDirectory : null;
+
+      final acpiRoot = Directory(acpiDirectoryPath);
+      if (await acpiRoot.exists()) {
+        await acpiRoot.delete(recursive: true);
+      }
+      await tempDirectory.rename(acpiDirectoryPath);
+      tempMoved = true;
+      Log('本机 ACPI 表导出完成: $acpiDirectoryPath');
+      return _AcpiExportResult(path: acpiDirectoryPath);
+    } on AcpiDumpException catch (error) {
+      Log.warning('本机 ACPI 表导出失败: $error');
+      return _AcpiExportResult(
+        failureMessage: _acpiDumpFailureMessage(error),
+      );
     } catch (error) {
       Log.warning('本机 ACPI 表导出失败: $error');
-      return null;
+      return const _AcpiExportResult(failureMessage: 'ACPI 表导出失败或不支持');
+    } finally {
+      if (!tempMoved && tempDirectory != null && await tempDirectory.exists()) {
+        try {
+          await tempDirectory.delete(recursive: true);
+        } catch (error) {
+          Log.warning('ACPI 表临时目录清理失败: $error');
+        }
+      }
+    }
+  }
+
+  String _acpiDumpFailureMessage(AcpiDumpException error) {
+    switch (error.type) {
+      case AcpiDumpFailureType.toolMissing:
+        return 'ACPI 导出工具未准备就绪';
+      case AcpiDumpFailureType.unsupportedPlatform:
+        return '当前平台不支持导出 ACPI 表';
+      case AcpiDumpFailureType.authorizationCancelled:
+        return '已取消管理员授权，未导出 ACPI 表';
+      case AcpiDumpFailureType.passwordRequired:
+        return '未输入管理员密码，无法导出 ACPI 表';
+      case AcpiDumpFailureType.incorrectPassword:
+        return '管理员密码不正确，无法导出 ACPI 表';
+      case AcpiDumpFailureType.emptyResult:
+        return 'ACPI 表导出失败：未找到有效 ACPI 表';
+      case AcpiDumpFailureType.processFailed:
+        return 'ACPI 表导出失败：导出进程执行失败';
     }
   }
 
@@ -336,7 +388,7 @@ class HardwarePageController extends ChangeNotifier {
   }) async {
     if (filePath.isEmpty) return;
     try {
-      final text = await File(filePath).readAsString();
+      final text = await HardwareInfo.readHardwareReportFile(filePath);
       final decoded = jsonDecode(text);
       if (decoded is! Map<String, dynamic>) {
         throw const FormatException('硬件信息文件不是 JSON 对象');
@@ -384,7 +436,10 @@ class HardwarePageController extends ChangeNotifier {
 
   List<Directory> _preferredAcpiDirectoryCandidates(Directory directory) {
     try {
-      return directory.listSync(followLinks: false).whereType<Directory>().where(
+      return directory
+          .listSync(followLinks: false)
+          .whereType<Directory>()
+          .where(
         (entity) {
           final name = entity.path.split(Platform.pathSeparator).last;
           final lowerName = name.toLowerCase();
@@ -421,14 +476,11 @@ class HardwarePageController extends ChangeNotifier {
   }
 
   bool _containsSingleDsdt(Directory directory) {
-    final files = directory
-        .listSync(followLinks: false)
-        .whereType<File>()
-        .where((file) {
-          final lower = file.path.toLowerCase();
-          return lower.endsWith('.aml') || lower.endsWith('.dat');
-        })
-        .toList();
+    final files =
+        directory.listSync(followLinks: false).whereType<File>().where((file) {
+      final lower = file.path.toLowerCase();
+      return lower.endsWith('.aml') || lower.endsWith('.dat');
+    }).toList();
     if (files.isEmpty) return false;
 
     var dsdtCount = 0;
@@ -486,15 +538,16 @@ class HardwarePageController extends ChangeNotifier {
       progress.addLine(
         'ConfigModel 已生成: ${configModel.cpuType.name}/${configModel.platformType.name}/${configModel.platformCode}',
       );
-      final resolvedSsdtSelection = effectiveSsdtBuildMode == SsdtBuildMode.custom
-          ? ssdtSelection ??
-              SsdtSelection(
-                cpuType: configModel.cpuType,
-                platformType: configModel.platformType,
-                platformCode: configModel.platformCode,
-                items: _defaultSsdtItems(configModel, info),
-              )
-          : null;
+      final resolvedSsdtSelection =
+          effectiveSsdtBuildMode == SsdtBuildMode.custom
+              ? ssdtSelection ??
+                  SsdtSelection(
+                    cpuType: configModel.cpuType,
+                    platformType: configModel.platformType,
+                    platformCode: configModel.platformCode,
+                    items: _defaultSsdtItems(configModel, info),
+                  )
+              : null;
       if (resolvedSsdtSelection != null) {
         progress.addLine(
           '准备定制 SSDT: ${resolvedSsdtSelection.items.map((item) => item.name).join(', ')}',

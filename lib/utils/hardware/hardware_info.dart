@@ -88,6 +88,16 @@ class HardwareInfo {
     return _rawReport;
   }
 
+  static Future<String> readHardwareReportFile(String filePath) async {
+    final bytes = await File(filePath).readAsBytes();
+    return _decodeProcessOutput(bytes);
+  }
+
+  static String readHardwareReportFileSync(String filePath) {
+    final bytes = File(filePath).readAsBytesSync();
+    return _decodeProcessOutput(bytes);
+  }
+
   static Future<bool> loadCachedInfo(String taskId) async {
     if (_allHardwareInfo != null && _rawInfo != null) {
       _hardwareCache[taskId] = _allHardwareInfo!;
@@ -253,19 +263,19 @@ class HardwareInfo {
     final result = await Process.run(
       executablePath,
       ['-all'],
-      stdoutEncoding: utf8,
-      stderrEncoding: utf8,
+      stdoutEncoding: null,
+      stderrEncoding: null,
     );
     if (result.exitCode != 0) {
       throw ProcessException(
         executablePath,
         ['-all'],
-        result.stderr.toString(),
+        _decodeProcessOutput(result.stderr),
         result.exitCode,
       );
     }
 
-    final output = result.stdout.toString().trim();
+    final output = _decodeProcessOutput(result.stdout).trim();
     if (output.isEmpty) {
       throw const FormatException('sysInfo.exe 未返回硬件信息');
     }
@@ -276,6 +286,14 @@ class HardwareInfo {
     }
     await _loadRawInfo('all', decoded, persist: true);
     _sendProgressMessage('sysInfo.exe 查询完成');
+  }
+
+  static String _decodeProcessOutput(Object? output) {
+    if (output is String) return output;
+    if (output is List<int>) {
+      return utf8.decode(output, allowMalformed: true);
+    }
+    return output?.toString() ?? '';
   }
 
   static Future<String> _ensureSysInfoExecutable() {

@@ -84,6 +84,10 @@ class HardwareConfigModelBuilder {
           apply: _applyMotherboardConfiguration,
         ),
         HardwareConfigStage(
+          id: 'brand_sensor',
+          apply: _applyBrandSensorConfiguration,
+        ),
+        HardwareConfigStage(
           id: 'integrated_gpu',
           apply: _applyIntegratedGpuConfiguration,
         ),
@@ -152,6 +156,23 @@ class HardwareConfigModelBuilder {
       cpuType: model.cpuType,
       platformCode: model.platformCode,
     );
+  }
+
+  void _applyBrandSensorConfiguration(
+    HardwareConfigBuildContext context,
+    ConfigModel model,
+  ) {
+    if (model.platformType != PlatformType.laptop) return;
+
+    final kext = switch (model.brand) {
+      Brand.asus => ConfigKernel.AsusSMC,
+      Brand.dell => ConfigKernel.SMCDellSensors,
+      Brand.lenovo => ConfigKernel.YogaSMC,
+      _ => null,
+    };
+    if (kext == null) return;
+
+    _addKexts(model, [kext]);
   }
 
   void _applyIntegratedGpuConfiguration(
@@ -423,7 +444,7 @@ class HardwareConfigModelBuilder {
     ConfigModel model,
   ) {
     if (!SurfaceSupport.matchesText(_motherboardSearchText(context))) return;
-    SurfaceSupport.apply(model, includeBrightnessKeys: true);
+    SurfaceSupport.apply(model);
   }
 
   void _applyPersonalizedOptions(
@@ -970,6 +991,10 @@ class HardwareConfigModelBuilder {
     }
     if (_containsAny(text, const ['dell', 'alienware', '戴尔'])) {
       return Brand.dell;
+    }
+    if (_containsAny(
+        text, const ['lenovo', 'thinkpad', 'thinkbook', 'ideapad', '联想'])) {
+      return Brand.lenovo;
     }
     if (_containsAny(text, const ['vaio', 'sony', '索尼'])) {
       return Brand.vaio;

@@ -1,5 +1,6 @@
 import 'package:rapidefi/utils/config/config_model.dart';
 import 'package:rapidefi/utils/config/models/enums/config_enums.dart';
+import 'package:rapidefi/utils/config/presets/sections/config_kernel.dart';
 import 'platform_profile.dart';
 
 typedef ConfigModelFactory = ConfigModel Function();
@@ -43,20 +44,21 @@ class ConfigsRepository {
     final factories = _data[cpuType]?[platformType];
     final factory = factories?[resolvedCode] ?? factories?.values.first;
 
-    if (factory == null) {
-      return ConfigModel(
-        cpuType: cpuType,
-        platformType: platformType,
-        platformCode: resolvedCode,
-      ).detached();
-    }
-
-    final model = factory();
+    final model = factory?.call() ??
+        ConfigModel(
+          cpuType: cpuType,
+          platformType: platformType,
+          platformCode: resolvedCode,
+        );
 
     model
       ..cpuType = cpuType
       ..platformType = platformType
       ..platformCode = resolvedCode;
+
+    if (platformType == PlatformType.laptop) {
+      KextAccessor.addKext(model, ConfigKernel.BrightnessKeys);
+    }
 
     return model.detached();
   }

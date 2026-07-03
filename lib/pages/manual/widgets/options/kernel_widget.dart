@@ -128,7 +128,11 @@ class _KernelWidgetState extends State<KernelWidget> {
       allowToggle: true,
       subTitle: 'Kernel - Quirks 建议保持默认配置,除非必要或者清楚每一项的含义',
       onChanged: (value) {
-        var quirksMap = {for (var property in value) property: true};
+        selectedChoices = List<String>.from(value);
+        final selected = selectedChoices.toSet();
+        final quirksMap = {
+          for (final property in choices) property: selected.contains(property),
+        };
         widget.onChanged.call(KernelQuirks.fromJson(quirksMap));
       },
     );

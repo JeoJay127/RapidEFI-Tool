@@ -6,6 +6,8 @@ import 'package:rapidefi/pages/shared/widgets/title_card.dart';
 import 'package:rapidefi/pages/manual/widgets/platform/touchpad.dart';
 import 'package:rapidefi/utils/config/models/kernel/kext_group.dart';
 import 'package:rapidefi/utils/config/models/kernel/kernel_kext.dart';
+import 'package:rapidefi/utils/config/presets/sections/config_kext_groups.dart';
+import 'package:rapidefi/utils/config/presets/sections/config_kernel.dart';
 import 'package:rapidefi/widgets/state_keep_container.dart';
 
 // 笔记本特有驱动
@@ -72,6 +74,10 @@ class _LaptopWidgetState extends State<LaptopWidget> {
       if (!merged.contains(kext)) {
         merged.add(kext);
       }
+    }
+
+    if (ConfigKextGroups.bigSurface.kexts.any(merged.contains)) {
+      merged.remove(ConfigKernel.BrightnessKeys);
     }
 
     widget.onChanged?.call(merged);

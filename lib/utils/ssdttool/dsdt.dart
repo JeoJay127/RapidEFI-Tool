@@ -11,6 +11,34 @@ import 'util.dart';
 import 'package:path/path.dart' as path;
 import 'run.dart';
 
+enum AcpiDumpFailureType {
+  toolMissing,
+  unsupportedPlatform,
+  authorizationCancelled,
+  passwordRequired,
+  incorrectPassword,
+  emptyResult,
+  processFailed,
+}
+
+class AcpiDumpException implements Exception {
+  AcpiDumpException(
+    this.type,
+    this.message, {
+    this.detail = '',
+  });
+
+  final AcpiDumpFailureType type;
+  final String message;
+  final String detail;
+
+  @override
+  String toString() {
+    if (detail.trim().isEmpty) return message;
+    return '$message: $detail';
+  }
+}
+
 class DSDT {
   final ACPITool acpiTool;
   final Run r = Run();
@@ -756,14 +784,43 @@ class DSDT {
     String filePath, {
     bool disassemble = false,
     Future<String?> Function()? onRequestSudoPassword,
+    bool throwOnFailure = false,
   }) async {
+    String? fail(
+      AcpiDumpFailureType type,
+      String message, {
+      String detail = '',
+      bool warning = true,
+    }) {
+      final logMessage = detail.trim().isEmpty ? message : '$message: $detail';
+      if (warning) {
+        Log.warning(logMessage);
+      } else {
+        Log.error(logMessage);
+      }
+      if (throwOnFailure) {
+        throw AcpiDumpException(type, message, detail: detail);
+      }
+      return null;
+    }
+
+    bool isIncorrectSudoPassword(String stderr) {
+      final lower = stderr.toLowerCase();
+      return lower.contains('sorry, try again') ||
+          lower.contains('incorrect password') ||
+          lower.contains('authentication failure') ||
+          lower.contains('try again.');
+    }
+
     if (Platform.isWindows || Platform.isMacOS || Platform.isLinux) {
       await acpiTool.initialize();
     }
     final exePath = await _getDumpToolPath(useLocaliAsl: useLocaliAsl);
     if (exePath == null || !File(exePath).existsSync()) {
-      Log.warning("acpidump 工具未准备就绪！已终止操作！");
-      return null;
+      return fail(
+        AcpiDumpFailureType.toolMissing,
+        "ACPI 导出工具未准备就绪",
+      );
     }
 
     Log("正在导出 ACPI 表...");
@@ -773,8 +830,11 @@ class DSDT {
     );
 
     if (!(Platform.isWindows || Platform.isLinux || Platform.isMacOS)) {
-      Log.error("当前平台不支持!");
-      return null;
+      return fail(
+        AcpiDumpFailureType.unsupportedPlatform,
+        "当前平台不支持导出 ACPI 表",
+        warning: false,
+      );
     }
 
     Future<ProcessResult> runDump({String? sudoPassword}) async {
@@ -813,16 +873,36 @@ class DSDT {
     if (Platform.isLinux && onRequestSudoPassword != null) {
       Log("等待输入 sudo 密码授权...");
       sudoPassword = await onRequestSudoPassword();
-      if (sudoPassword == null || sudoPassword.isEmpty) {
-        Log.warning("用户取消授权");
-        return null;
+      if (sudoPassword == null) {
+        return fail(
+          AcpiDumpFailureType.authorizationCancelled,
+          "已取消管理员授权",
+        );
+      }
+      if (sudoPassword.trim().isEmpty) {
+        return fail(
+          AcpiDumpFailureType.passwordRequired,
+          "未输入管理员密码",
+        );
       }
     }
     final result = await runDump(sudoPassword: sudoPassword);
 
     if (result.exitCode != 0) {
-      Log.error("发生错误: ${result.stderr}");
-      return null;
+      final stderr = result.stderr.toString();
+      if (Platform.isLinux && isIncorrectSudoPassword(stderr)) {
+        return fail(
+          AcpiDumpFailureType.incorrectPassword,
+          "管理员密码不正确",
+          detail: stderr,
+        );
+      }
+      return fail(
+        AcpiDumpFailureType.processFailed,
+        "ACPI 表导出进程执行失败",
+        detail: stderr,
+        warning: false,
+      );
     }
 
     bool hasTable = Directory(outputPath).listSync().any(
@@ -831,8 +911,10 @@ class DSDT {
               file.path.toLowerCase().endsWith(".dat"),
         );
     if (!hasTable) {
-      Log.warning("当前平台提取 ACPI 表为空或不支持导出 ACPI 表！");
-      return null;
+      return fail(
+        AcpiDumpFailureType.emptyResult,
+        "当前平台提取 ACPI 表为空或不支持导出 ACPI 表",
+      );
     }
 
     if (!Directory(
@@ -848,8 +930,12 @@ class DSDT {
           ],
           workingDirectory: outputPath);
       if (dsdtResult.exitCode != 0) {
-        Log.error("发生错误: ${dsdtResult.stderr}");
-        return null;
+        return fail(
+          AcpiDumpFailureType.processFailed,
+          "DSDT 表导出失败",
+          detail: dsdtResult.stderr.toString(),
+          warning: false,
+        );
       }
     }
 

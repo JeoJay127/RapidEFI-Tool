@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:path/path.dart' as path;
 import 'package:rapidefi/utils/config/catalogs/efi_drivers/efi_driver_option.dart';
 import 'package:rapidefi/utils/config/models/uefi/uefi.dart';
 import 'package:rapidefi/pages/shared/widgets/choice_list.dart';
@@ -37,7 +38,8 @@ class _UEFIWidgetState extends State<UEFIWidget> {
       return widget.uefi.uefiDriversItems.any((item) {
         final itemPath = item.path.toLowerCase();
         final optionPath = option.path.toLowerCase();
-        return itemPath == optionPath || itemPath.contains(optionPath);
+        return itemPath == optionPath ||
+            path.basename(itemPath) == path.basename(optionPath);
       });
     }).firstOrNull;
     selectedChoices = selected == null ? [] : [selected.tip];

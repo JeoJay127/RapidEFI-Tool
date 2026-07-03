@@ -37,6 +37,12 @@ enum Brand {
       description: 'Dell',
     ),
   ),
+  lenovo(
+    text: EnumText(
+      title: '联想',
+      description: 'Lenovo',
+    ),
+  ),
   vaio(
     text: EnumText(
       title: '索尼',
@@ -92,6 +98,8 @@ enum Brand {
         'AsRock': Brand.asrock,
         'Brand.msi': Brand.msi,
         'Brand.dell': Brand.dell,
+        'Brand.lenovo': Brand.lenovo,
+        'Lenovo': Brand.lenovo,
         'Brand.vaio': Brand.vaio,
         'Brand.hp': Brand.hp,
         'Brand.chrome': Brand.chrome,
@@ -102,6 +110,7 @@ enum Brand {
         '华擎(ASRock)': Brand.asrock,
         '微星(MSI)': Brand.msi,
         '戴尔(Dell)': Brand.dell,
+        '联想(Lenovo)': Brand.lenovo,
         '索尼(VAIO)': Brand.vaio,
         '惠普(HP)': Brand.hp,
         '谷歌(Chromebook)': Brand.chrome,

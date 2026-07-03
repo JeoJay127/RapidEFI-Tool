@@ -67,13 +67,20 @@ class HistoryPageState extends State<HistoryPage> {
       });
     }
 
-    final models = SpUtil.getObjList(
-          Constant.historyConfigModel,
-          (value) => HistoryModel.fromJson(value as Map<String, dynamic>),
-        ) ??
-        <HistoryModel>[];
+    var models = <HistoryModel>[];
 
-    models.sort((a, b) => b.timestamp.compareTo(a.timestamp));
+    try {
+      models = SpUtil.getObjList(
+            Constant.historyConfigModel,
+            (value) => HistoryModel.fromJson(value as Map<String, dynamic>),
+          ) ??
+          <HistoryModel>[];
+
+      models.sort((a, b) => b.timestamp.compareTo(a.timestamp));
+    } catch (error, stackTrace) {
+      debugPrint('loadHistoryModels failed: $error');
+      debugPrintStack(stackTrace: stackTrace);
+    }
 
     if (!mounted) return;
 
