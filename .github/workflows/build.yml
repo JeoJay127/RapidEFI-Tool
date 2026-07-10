@@ -1,62 +1,109 @@
 name: Build & Release
 
+# ── 触发规则 ────────────────────────────────────────────
+# push main/master  → Alpha（自动，固定 tag "alpha"）
+# workflow_dispatch → Beta（手动，固定 tag "beta"）
+#                  → Stable（手动，输入版本号，生成 tag "vX.Y.Z"）
+# push v* tag       → Stable（手动推 tag 也可触发）
+# ─────────────────────────────────────────────────────────
 on:
-  # 手动触发：输入版本号并选择是否为 beta
+  push:
+    branches: [ main, master ]       # → alpha
+    tags:     [ 'v*' ]               # → stable
+
   workflow_dispatch:
     inputs:
+      channel:
+        description: '发布渠道'
+        required: true
+        type: choice
+        options:
+          - beta                     # 固定 tag "beta"
+          - stable                   # tag = "v{version}"
       version:
-        description: '版本号（如 5.1.0，不含 v 前缀）'
-        required: true
+        description: '版本号（stable 必填，如 5.1.0；beta 留空）'
+        required: false
         type: string
-      prerelease:
-        description: '发布为 Beta（预发布）？'
-        required: true
-        type: boolean
-        default: false
-
-  # 推送 v* tag 时也可自动触发（可选保留）
-  push:
-    tags: [ 'v*' ]
 
 env:
   APP_NAME: RapidEFI
 
+# 同一 ref 的旧构建自动取消（节省 runner 资源）
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  # ────────────────────────────────────────────────
-  # 解析版本号（统一来源）
-  # ────────────────────────────────────────────────
+  # ──────────────────────────────────────────────────────
+  # 1. 解析发布通道 & tag
+  # ──────────────────────────────────────────────────────
   prepare:
-    name: Prepare version
+    name: Prepare
     runs-on: ubuntu-latest
     outputs:
-      version: ${{ steps.ver.outputs.version }}
-      tag:     ${{ steps.ver.outputs.tag }}
-      prerelease: ${{ steps.ver.outputs.prerelease }}
+      channel:    ${{ steps.info.outputs.channel }}
+      tag:        ${{ steps.info.outputs.tag }}
+      version:    ${{ steps.info.outputs.version }}
+      fixed_tag:  ${{ steps.info.outputs.fixed_tag }}  # "true" → alpha / beta
+
     steps:
-      - name: Resolve version & tag
-        id: ver
+      - name: Resolve channel / tag / version
+        id: info
         run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            VERSION="${{ github.event.inputs.version }}"
-            PRERELEASE="${{ github.event.inputs.prerelease }}"
-          else
-            # push tag 触发，从 tag 名中去掉 v 前缀
+          EVENT="${{ github.event_name }}"
+
+          if [ "$EVENT" = "push" ] && [[ "${{ github.ref }}" == refs/heads/* ]]; then
+            # ── Alpha：push 到分支 ──────────────────────
+            CHANNEL=alpha
+            TAG=alpha
+            VERSION="alpha.$(date -u +%Y%m%d%H%M).${GITHUB_SHA::7}"
+            FIXED_TAG=true
+
+          elif [ "$EVENT" = "push" ] && [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            # ── Stable：推送 v* tag ────────────────────
             TAG="${GITHUB_REF#refs/tags/}"
             VERSION="${TAG#v}"
-            # tag 含 - 视为预发布（如 v5.0.0-beta）
-            if [[ "$TAG" == *"-"* ]]; then PRERELEASE=true; else PRERELEASE=false; fi
-          fi
-          TAG="v${VERSION}"
-          echo "version=$VERSION"   >> "$GITHUB_OUTPUT"
-          echo "tag=$TAG"           >> "$GITHUB_OUTPUT"
-          echo "prerelease=$PRERELEASE" >> "$GITHUB_OUTPUT"
-          echo "### Build info" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Tag: \`$TAG\`"          >> "$GITHUB_STEP_SUMMARY"
-          echo "- Prerelease: \`$PRERELEASE\`" >> "$GITHUB_STEP_SUMMARY"
+            CHANNEL=stable
+            FIXED_TAG=false
 
-  # ────────────────────────────────────────────────
-  # 矩阵构建：6 个组合（2 arch × 3 OS）
-  # ────────────────────────────────────────────────
+          elif [ "$EVENT" = "workflow_dispatch" ]; then
+            CHANNEL="${{ github.event.inputs.channel }}"
+
+            if [ "$CHANNEL" = "beta" ]; then
+              # ── Beta：固定 tag "beta" ─────────────────
+              TAG=beta
+              VERSION="beta.$(date -u +%Y%m%d%H%M).${GITHUB_SHA::7}"
+              FIXED_TAG=true
+            else
+              # ── Stable：手动指定版本 ──────────────────
+              VERSION="${{ github.event.inputs.version }}"
+              if [ -z "$VERSION" ]; then
+                echo "::error::stable 渠道必须填写版本号" && exit 1
+              fi
+              TAG="v${VERSION}"
+              FIXED_TAG=false
+            fi
+          fi
+
+          echo "channel=$CHANNEL"     >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG"             >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION"     >> "$GITHUB_OUTPUT"
+          echo "fixed_tag=$FIXED_TAG" >> "$GITHUB_OUTPUT"
+
+          # Step summary
+          {
+            echo "### 📦 Build info"
+            echo "| Key | Value |"
+            echo "|-----|-------|"
+            echo "| Channel | \`$CHANNEL\` |"
+            echo "| Tag | \`$TAG\` |"
+            echo "| Version | \`$VERSION\` |"
+            echo "| Fixed tag | \`$FIXED_TAG\` |"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  # ──────────────────────────────────────────────────────
+  # 2. 矩阵构建：6 个组合（2 arch × 3 OS）
+  # ──────────────────────────────────────────────────────
   build:
     name: Build · ${{ matrix.label }}
     needs: prepare
@@ -64,58 +111,57 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # ── Windows ──────────────────────────────
-          - label:    Windows-x64
-            runner:   windows-latest
-            os:       windows
-            arch:     x64
+          # ── Windows ────────────────────────────────
+          - label:     Windows-x64
+            runner:    windows-latest
+            os:        windows
+            arch:      x64
             build_dir: build/windows/x64/runner/Release
-            pkg_ext:  zip
+            pkg_ext:   zip
 
-          - label:    Windows-arm64
-            runner:   windows-11-arm
-            os:       windows
-            arch:     arm64
+          - label:     Windows-arm64
+            runner:    windows-11-arm
+            os:        windows
+            arch:      arm64
             build_dir: build/windows/arm64/runner/Release
-            pkg_ext:  zip
+            pkg_ext:   zip
 
-          # ── Linux ────────────────────────────────
-          - label:    Linux-x64
-            runner:   ubuntu-latest
-            os:       linux
-            arch:     x64
+          # ── Linux ──────────────────────────────────
+          - label:     Linux-x64
+            runner:    ubuntu-latest
+            os:        linux
+            arch:      x64
             build_dir: build/linux/x64/release/bundle
-            pkg_ext:  tar.gz
+            pkg_ext:   tar.gz
 
-          - label:    Linux-arm64
-            runner:   ubuntu-24.04-arm
-            os:       linux
-            arch:     arm64
+          - label:     Linux-arm64
+            runner:    ubuntu-24.04-arm
+            os:        linux
+            arch:      arm64
             build_dir: build/linux/arm64/release/bundle
-            pkg_ext:  tar.gz
+            pkg_ext:   tar.gz
 
-          # ── macOS ────────────────────────────────
-          - label:    macOS-x64
-            runner:   macos-13
-            os:       macos
-            arch:     x64
+          # ── macOS ──────────────────────────────────
+          - label:     macOS-x64
+            runner:    macos-13
+            os:        macos
+            arch:      x64
             build_dir: build/macos/Build/Products/Release
-            pkg_ext:  zip
+            pkg_ext:   zip
 
-          - label:    macOS-arm64
-            runner:   macos-latest
-            os:       macos
-            arch:     arm64
+          - label:     macOS-arm64
+            runner:    macos-latest
+            os:        macos
+            arch:      arm64
             build_dir: build/macos/Build/Products/Release
-            pkg_ext:  zip
+            pkg_ext:   zip
 
     runs-on: ${{ matrix.runner }}
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      # ── Linux 系统依赖 ────────────────────────────
+      # ── Linux 系统依赖 ──────────────────────────────
       - name: Install Linux dependencies
         if: matrix.os == 'linux'
         run: |
@@ -126,90 +172,131 @@ jobs:
             libglib2.0-dev libpango1.0-dev libcairo2-dev \
             libgdk-pixbuf2.0-dev libatk1.0-dev
 
-      # ── Flutter 安装 ──────────────────────────────
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+      # ── Flutter ────────────────────────────────────
+      - uses: subosito/flutter-action@v2
         with:
           channel: stable
           cache: true
 
-      - name: Flutter pub get
-        run: flutter pub get
+      - run: flutter pub get
 
-      # ── 写入版本号到 pubspec.yaml ─────────────────
-      - name: Patch version in pubspec.yaml
+      # ── 版本号写入 pubspec.yaml ─────────────────────
+      - name: Patch pubspec version
         shell: bash
         run: |
           VERSION="${{ needs.prepare.outputs.version }}"
           sed -i.bak "s/^version: .*/version: ${VERSION}+${{ github.run_number }}/" pubspec.yaml
-          echo "Patched pubspec version → $(grep '^version:' pubspec.yaml)"
+          grep '^version:' pubspec.yaml
 
-      # ── 构建 ──────────────────────────────────────
-      - name: Build (${{ matrix.label }})
+      # ── 构建 ───────────────────────────────────────
+      - name: Build
         shell: bash
         run: flutter build ${{ matrix.os }} --release
 
-      # ── 打包（Windows）────────────────────────────
-      - name: Package · Windows (zip)
+      # ── 打包：Windows ───────────────────────────────
+      - name: Package (Windows zip)
         if: matrix.os == 'windows'
         shell: pwsh
         run: |
-          $src  = "${{ matrix.build_dir }}"
           $dest = "${{ env.APP_NAME }}-${{ matrix.label }}.zip"
-          Compress-Archive -Path "$src\*" -DestinationPath $dest -Force
-          Write-Host "Created $dest"
+          Compress-Archive -Path "${{ matrix.build_dir }}\*" -DestinationPath $dest -Force
 
-      # ── 打包（Linux）─────────────────────────────
-      - name: Package · Linux (tar.gz)
+      # ── 打包：Linux ─────────────────────────────────
+      - name: Package (Linux tar.gz)
         if: matrix.os == 'linux'
         run: |
-          DEST="$GITHUB_WORKSPACE/${{ env.APP_NAME }}-${{ matrix.label }}.tar.gz"
-          tar -czf "$DEST" -C "${{ matrix.build_dir }}" .
-          echo "Created $DEST"
+          tar -czf "$GITHUB_WORKSPACE/${{ env.APP_NAME }}-${{ matrix.label }}.tar.gz" \
+              -C "${{ matrix.build_dir }}" .
 
-      # ── 打包（macOS）─────────────────────────────
-      - name: Package · macOS (zip)
+      # ── 打包：macOS ─────────────────────────────────
+      - name: Package (macOS zip)
         if: matrix.os == 'macos'
         run: |
-          DEST="$GITHUB_WORKSPACE/${{ env.APP_NAME }}-${{ matrix.label }}.zip"
           cd "${{ matrix.build_dir }}"
-          zip -r "$DEST" *.app
-          echo "Created $DEST"
+          zip -r "$GITHUB_WORKSPACE/${{ env.APP_NAME }}-${{ matrix.label }}.zip" *.app
 
-      # ── 上传构建产物 ──────────────────────────────
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
+      # ── 上传 ───────────────────────────────────────
+      - uses: actions/upload-artifact@v4
         with:
           name: ${{ env.APP_NAME }}-${{ matrix.label }}
           path: ${{ env.APP_NAME }}-${{ matrix.label }}.${{ matrix.pkg_ext }}
           retention-days: 7
 
-  # ────────────────────────────────────────────────
-  # 创建 GitHub Release，附上所有平台产物
-  # ────────────────────────────────────────────────
+  # ──────────────────────────────────────────────────────
+  # 3. 发布 Release
+  #    alpha / beta：强制覆盖同名 tag & release
+  #    stable      ：创建全新版本 release
+  # ──────────────────────────────────────────────────────
   release:
-    name: Create Release
+    name: Release · ${{ needs.prepare.outputs.tag }}
     needs: [ prepare, build ]
     runs-on: ubuntu-latest
     permissions:
       contents: write
 
     steps:
-      - name: Download all artifacts
-        uses: actions/download-artifact@v4
+      - uses: actions/checkout@v4
+
+      # ── 强制移动 alpha/beta tag 到当前 commit ────────
+      - name: Force-update fixed tag
+        if: needs.prepare.outputs.fixed_tag == 'true'
+        run: |
+          TAG="${{ needs.prepare.outputs.tag }}"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name  "github-actions[bot]"
+          git tag -f "$TAG"
+          git push origin "$TAG" --force
+
+      # ── 下载所有构建产物 ────────────────────────────
+      - uses: actions/download-artifact@v4
         with:
           path: dist
           merge-multiple: true
 
-      - name: List artifacts
-        run: ls -lh dist/
+      - run: ls -lh dist/
 
-      - name: Create / Update GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ needs.prepare.outputs.tag }}
-          name: "${{ env.APP_NAME }} ${{ needs.prepare.outputs.tag }}"
-          files: dist/*
-          generate_release_notes: true
-          draft: false
-          prerelease: ${{ needs.prepare.outputs.prerelease == 'true' }}
+      # ── alpha / beta：删除旧 release，重新创建 ───────
+      #    （确保附件始终是最新构建，不残留旧文件）
+      - name: Delete existing alpha/beta release
+        if: needs.prepare.outputs.fixed_tag == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="${{ needs.prepare.outputs.tag }}"
+          gh release delete "$TAG" --yes --cleanup-tag || true
+          # cleanup-tag 会删 tag，但我们上面已强制重建了，所以重新推一次
+          git push origin "$TAG" --force
+
+      # ── 创建 Release（alpha / beta）─────────────────
+      - name: Create alpha/beta release
+        if: needs.prepare.outputs.fixed_tag == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="${{ needs.prepare.outputs.tag }}"
+          CHANNEL="${{ needs.prepare.outputs.channel }}"
+          VERSION="${{ needs.prepare.outputs.version }}"
+
+          if [ "$CHANNEL" = "alpha" ]; then
+            TITLE="🔬 Alpha Build"
+            NOTES="自动构建（每次推送到主分支更新此 Release）。\n\n**版本快照：** \`${VERSION}\`\n**构建号：** #${{ github.run_number }}\n**Commit：** ${{ github.sha }}"
+          else
+            TITLE="🧪 Beta Build"
+            NOTES="Beta 手动构建（每次触发 Beta 发布更新此 Release）。\n\n**版本快照：** \`${VERSION}\`\n**构建号：** #${{ github.run_number }}\n**Commit：** ${{ github.sha }}"
+          fi
+
+          gh release create "$TAG" dist/* \
+            --prerelease \
+            --title "$TITLE" \
+            --notes "$(printf "$NOTES")"
+
+      # ── 创建 Release（stable）───────────────────────
+      - name: Create stable release
+        if: needs.prepare.outputs.fixed_tag == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="${{ needs.prepare.outputs.tag }}"
+          gh release create "$TAG" dist/* \
+            --title "${{ env.APP_NAME }} ${TAG}" \
+            --generate-notes
