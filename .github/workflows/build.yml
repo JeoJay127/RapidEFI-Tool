@@ -177,8 +177,17 @@ jobs:
       - name: Install Linux dependencies
         if: matrix.os == 'linux'
         run: |
+          # ARM64 runner 用 ports.ubuntu.com 经常超时，切换到 Azure 镜像 + 强制 IPv4
+          echo 'Acquire::ForceIPv4 "true";' | sudo tee /etc/apt/apt.conf.d/99force-ipv4
+          # sources.list（传统格式）
+          sudo sed -i 's|http://ports.ubuntu.com|http://azure.ports.ubuntu.com|g' \
+            /etc/apt/sources.list 2>/dev/null || true
+          # ubuntu.sources（Ubuntu 24.04 DEB822 格式）
+          sudo sed -i 's|http://ports.ubuntu.com|http://azure.ports.ubuntu.com|g' \
+            /etc/apt/sources.list.d/ubuntu.sources 2>/dev/null || true
+
           sudo apt-get update -y
-          sudo apt-get install -y \
+          sudo apt-get install -y -o Acquire::Retries=3 \
             clang cmake ninja-build pkg-config \
             libgtk-3-dev liblzma-dev libstdc++-12-dev \
             libglib2.0-dev libpango1.0-dev libcairo2-dev \
