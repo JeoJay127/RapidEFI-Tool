@@ -199,13 +199,28 @@ jobs:
         if: matrix.flutter_manual
         shell: bash
         run: |
-          FLUTTER_VER=$(curl -fsSL \
-            "https://storage.googleapis.com/flutter_infra_release/releases/releases_linux.json" \
-            | jq -r '.current_release.stable as $h | .releases[] | select(.hash == $h) | .version' \
-            | head -1)
-          echo "Installing Flutter $FLUTTER_VER (linux/arm64)"
-          URL="https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_arm64_${FLUTTER_VER}-stable.tar.xz"
-          curl -fsSL "$URL" -o flutter.tar.xz
+          BASE="https://storage.googleapis.com/flutter_infra_release/"
+          JSON=$(curl -fsSL "${BASE}releases/releases_linux.json")
+
+          # 优先从 JSON archive 字段获取 arm64 路径（最可靠，不用猜文件名格式）
+          ARCHIVE=$(echo "$JSON" | jq -r '
+            .current_release.stable as $h |
+            .releases[] |
+            select(.hash == $h) |
+            select(.archive | test("arm64"; "i")) |
+            .archive
+          ' | head -1)
+
+          # 回退：版本号拼 URL
+          if [ -z "$ARCHIVE" ]; then
+            VER=$(echo "$JSON" | jq -r \
+              '.current_release.stable as $h | .releases[] | select(.hash == $h) | .version' \
+              | head -1)
+            ARCHIVE="releases/stable/linux/flutter_linux_arm64_${VER}-stable.tar.xz"
+          fi
+
+          echo "Downloading: ${BASE}${ARCHIVE}"
+          curl -fsSL "${BASE}${ARCHIVE}" -o flutter.tar.xz
           tar xf flutter.tar.xz -C "$HOME"
           rm flutter.tar.xz
           echo "$HOME/flutter/bin" >> "$GITHUB_PATH"
