@@ -121,14 +121,15 @@ jobs:
             flutter_sdk_arch: x64      # 原生 x64 SDK
             flutter_manual: false
 
-          - label:          Windows-arm64
-            runner:         windows-11-arm
-            os:             windows
-            arch:           arm64
-            build_dir:      build/windows/arm64/runner/Release
-            pkg_ext:        zip
-            flutter_sdk_arch: x64      # x64 SDK via WOW64，可编译 arm64 产物
-            flutter_manual: false
+          # Windows-arm64 暂时禁用
+          # - label:          Windows-arm64
+          #   runner:         windows-11-arm
+          #   os:             windows
+          #   arch:           arm64
+          #   build_dir:      build/windows/arm64/runner/Release
+          #   pkg_ext:        zip
+          #   flutter_sdk_arch: x64
+          #   flutter_manual: false
 
           # ── Linux ──────────────────────────────────
           - label:          Linux-x64
