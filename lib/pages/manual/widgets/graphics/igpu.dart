@@ -64,6 +64,8 @@ class _IgpuWidgetState extends State<IgpuWidget> with TickerProviderStateMixin {
         onChanged: (value) {
           widget.onChanged?.call(value);
         },
+        onDevicePropertiesChanged: widget.onDevicePropertiesChanged,
+        selectedDevicePropertyItems: widget.selectedDevicePropertyItems,
       )),
       StateKeepContainer(
           child: IgpuAdvance(
@@ -102,6 +104,7 @@ class _IgpuWidgetState extends State<IgpuWidget> with TickerProviderStateMixin {
       title: "核显配置:",
       subTitle: "(对应则勾选,否则不勾选)",
       initiallyExpanded: false,
+      height: 560,
       content: const OclpLinkButton(),
       controller: _tabController,
       tabs: tabName.map((name) => Tab(text: name)).toList(),

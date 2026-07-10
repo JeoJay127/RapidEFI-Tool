@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rapidefi/pages/manual/manual_config_controller.dart';
+import 'package:rapidefi/pages/manual/sections/motherboard_section.dart';
 import 'package:rapidefi/pages/manual/widgets/platform/amd.dart';
 import 'package:rapidefi/pages/manual/widgets/platform/cpu.dart';
 import 'package:rapidefi/pages/manual/widgets/platform/laptop.dart';
@@ -156,6 +157,8 @@ class PlatformBaseSectionView extends StatelessWidget {
                   });
                 },
               ),
+            // ── 主板型号配置（独立区域，最后应用，不被平台预设覆盖）─
+            const MotherboardSectionView(),
           ],
         );
       },

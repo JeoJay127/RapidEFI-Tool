@@ -32,6 +32,14 @@ set(CMAKE_CXX_FLAGS_PROFILE "${CMAKE_CXX_FLAGS_RELEASE}")
 # Use Unicode for all projects.
 add_definitions(-DUNICODE -D_UNICODE)
 
+# Suppress deprecated <experimental/coroutine> error raised by MSVC 14.51+ (VS 2022 17.x+).
+# add_compile_definitions() does not reliably propagate into plugin subdirectories;
+# CMAKE_CXX_FLAGS is global and guaranteed to reach every target.
+if(MSVC)
+  set(CMAKE_CXX_FLAGS
+      "${CMAKE_CXX_FLAGS} /D_SILENCE_EXPERIMENTAL_COROUTINE_DEPRECATION_WARNINGS")
+endif()
+
 # Compilation settings that should be applied to most targets.
 #
 # Be cautious about adding new options here, as plugins use this function by

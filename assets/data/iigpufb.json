@@ -1,0 +1,2783 @@
+{
+  "Intel 2nd Sandy Bridge": {
+    "i3-2310m(HD3000)": {
+      "AAPL,snb-platform-id": "0x00020000",
+      "igpu": "HD3000",
+      "model": "Intel HD Graphics 3000",
+      "_note": "⚠️ SNB 移动端 pid 已改为 0x00020000，建议核实"
+    },
+    "i5-2410m(HD3000)": {
+      "AAPL,snb-platform-id": "0x00020000",
+      "igpu": "HD3000",
+      "model": "Intel HD Graphics 3000",
+      "_note": "⚠️ SNB 移动端 pid 已改为 0x00020000，建议核实"
+    },
+    "i5-2500k(HD3000)": {
+      "AAPL,snb-platform-id": "0x00030010",
+      "igpu": "HD3000",
+      "model": "Intel HD Graphics 3000"
+    },
+    "i5-2520m(HD3000)": {
+      "AAPL,snb-platform-id": "0x00020000",
+      "igpu": "HD3000",
+      "model": "Intel HD Graphics 3000",
+      "_note": "⚠️ SNB 移动端 pid 已改为 0x00020000，建议核实"
+    },
+    "i5-2540m(HD3000)": {
+      "AAPL,snb-platform-id": "0x00020000",
+      "igpu": "HD3000",
+      "model": "Intel HD Graphics 3000",
+      "_note": "⚠️ SNB 移动端 pid 已改为 0x00020000，建议核实"
+    },
+    "i7-2600k(HD3000)": {
+      "AAPL,snb-platform-id": "0x00030010",
+      "igpu": "HD3000",
+      "model": "Intel HD Graphics 3000"
+    },
+    "i7-2620m(HD3000)": {
+      "AAPL,snb-platform-id": "0x00020000",
+      "igpu": "HD3000",
+      "model": "Intel HD Graphics 3000",
+      "_note": "⚠️ SNB 移动端 pid 已改为 0x00020000，建议核实"
+    },
+    "i7-2630qm(HD3000)": {
+      "AAPL,snb-platform-id": "0x00020000",
+      "igpu": "HD3000",
+      "model": "Intel HD Graphics 3000",
+      "_note": "⚠️ SNB 移动端 pid 已改为 0x00020000，建议核实"
+    },
+    "i7-2700k(HD3000)": {
+      "AAPL,snb-platform-id": "0x00030010",
+      "igpu": "HD3000",
+      "model": "Intel HD Graphics 3000"
+    },
+    "i3-2330m(HD3000)": {
+      "AAPL,snb-platform-id": "0x00020000",
+      "igpu": "HD3000",
+      "model": "Intel HD Graphics 3000",
+      "_note": "⚠️ SNB 移动端 pid 已改为 0x00020000，建议核实"
+    },
+    "i3-2348m(HD3000)": {
+      "AAPL,snb-platform-id": "0x00020000",
+      "igpu": "HD3000",
+      "model": "Intel HD Graphics 3000",
+      "_note": "⚠️ SNB 移动端 pid 已改为 0x00020000，建议核实"
+    },
+    "i3-2350m(HD3000)": {
+      "AAPL,snb-platform-id": "0x00020000",
+      "igpu": "HD3000",
+      "model": "Intel HD Graphics 3000",
+      "_note": "⚠️ SNB 移动端 pid 已改为 0x00020000，建议核实"
+    },
+    "i3-2370m(HD3000)": {
+      "AAPL,snb-platform-id": "0x00020000",
+      "igpu": "HD3000",
+      "model": "Intel HD Graphics 3000",
+      "_note": "⚠️ SNB 移动端 pid 已改为 0x00020000，建议核实"
+    },
+    "i5-2430m(HD3000)": {
+      "AAPL,snb-platform-id": "0x00020000",
+      "igpu": "HD3000",
+      "model": "Intel HD Graphics 3000",
+      "_note": "⚠️ SNB 移动端 pid 已改为 0x00020000，建议核实"
+    },
+    "i5-2435m(HD3000)": {
+      "AAPL,snb-platform-id": "0x00020000",
+      "igpu": "HD3000",
+      "model": "Intel HD Graphics 3000",
+      "_note": "⚠️ SNB 移动端 pid 已改为 0x00020000，建议核实"
+    },
+    "i5-2450m(HD3000)": {
+      "AAPL,snb-platform-id": "0x00020000",
+      "igpu": "HD3000",
+      "model": "Intel HD Graphics 3000",
+      "_note": "⚠️ SNB 移动端 pid 已改为 0x00020000，建议核实"
+    },
+    "i5-2510e(HD3000)": {
+      "AAPL,snb-platform-id": "0x00020000",
+      "igpu": "HD3000",
+      "model": "Intel HD Graphics 3000",
+      "_note": "⚠️ SNB 移动端 pid 已改为 0x00020000，建议核实"
+    },
+    "i5-2537m(HD3000)": {
+      "AAPL,snb-platform-id": "0x00020000",
+      "igpu": "HD3000",
+      "model": "Intel HD Graphics 3000",
+      "_note": "⚠️ SNB 移动端 pid 已改为 0x00020000，建议核实"
+    },
+    "i5-2557m(HD3000)": {
+      "AAPL,snb-platform-id": "0x00020000",
+      "igpu": "HD3000",
+      "model": "Intel HD Graphics 3000",
+      "_note": "⚠️ SNB 移动端 pid 已改为 0x00020000，建议核实"
+    },
+    "i7-2635qm(HD3000)": {
+      "AAPL,snb-platform-id": "0x00020000",
+      "igpu": "HD3000",
+      "model": "Intel HD Graphics 3000",
+      "_note": "⚠️ SNB 移动端 pid 已改为 0x00020000，建议核实"
+    },
+    "i7-2640m(HD3000)": {
+      "AAPL,snb-platform-id": "0x00020000",
+      "igpu": "HD3000",
+      "model": "Intel HD Graphics 3000",
+      "_note": "⚠️ SNB 移动端 pid 已改为 0x00020000，建议核实"
+    },
+    "i7-2670qm(HD3000)": {
+      "AAPL,snb-platform-id": "0x00020000",
+      "igpu": "HD3000",
+      "model": "Intel HD Graphics 3000",
+      "_note": "⚠️ SNB 移动端 pid 已改为 0x00020000，建议核实"
+    },
+    "i7-2675qm(HD3000)": {
+      "AAPL,snb-platform-id": "0x00020000",
+      "igpu": "HD3000",
+      "model": "Intel HD Graphics 3000",
+      "_note": "⚠️ SNB 移动端 pid 已改为 0x00020000，建议核实"
+    },
+    "i7-2760qm(HD3000)": {
+      "AAPL,snb-platform-id": "0x00020000",
+      "igpu": "HD3000",
+      "model": "Intel HD Graphics 3000",
+      "_note": "⚠️ SNB 移动端 pid 已改为 0x00020000，建议核实"
+    },
+    "i7-2820qm(HD3000)": {
+      "AAPL,snb-platform-id": "0x00020000",
+      "igpu": "HD3000",
+      "model": "Intel HD Graphics 3000",
+      "_note": "⚠️ SNB 移动端 pid 已改为 0x00020000，建议核实"
+    },
+    "i7-2860qm(HD3000)": {
+      "AAPL,snb-platform-id": "0x00020000",
+      "igpu": "HD3000",
+      "model": "Intel HD Graphics 3000",
+      "_note": "⚠️ SNB 移动端 pid 已改为 0x00020000，建议核实"
+    },
+    "i7-2720qm(HD3000)": {
+      "AAPL,snb-platform-id": "0x00020000",
+      "igpu": "HD3000",
+      "model": "Intel HD Graphics 3000",
+      "_note": "⚠️ SNB 移动端 pid 已改为 0x00020000，建议核实"
+    },
+    "i3-2100(HD2000)": {
+      "AAPL,snb-platform-id": "0x00000100",
+      "igpu": "HD2000",
+      "model": "Intel HD Graphics 2000"
+    },
+    "i3-2120(HD2000)": {
+      "AAPL,snb-platform-id": "0x00000100",
+      "igpu": "HD2000",
+      "model": "Intel HD Graphics 2000"
+    },
+    "i3-2125(HD2000)": {
+      "AAPL,snb-platform-id": "0x00000100",
+      "igpu": "HD2000",
+      "model": "Intel HD Graphics 2000"
+    },
+    "i3-2130(HD2000)": {
+      "AAPL,snb-platform-id": "0x00000100",
+      "igpu": "HD2000",
+      "model": "Intel HD Graphics 2000"
+    },
+    "i5-2300(HD2000)": {
+      "AAPL,snb-platform-id": "0x00000100",
+      "igpu": "HD2000",
+      "model": "Intel HD Graphics 2000"
+    },
+    "i5-2310(HD2000)": {
+      "AAPL,snb-platform-id": "0x00000100",
+      "igpu": "HD2000",
+      "model": "Intel HD Graphics 2000"
+    },
+    "i5-2320(HD2000)": {
+      "AAPL,snb-platform-id": "0x00000100",
+      "igpu": "HD2000",
+      "model": "Intel HD Graphics 2000"
+    },
+    "i5-2400(HD2000)": {
+      "AAPL,snb-platform-id": "0x00000100",
+      "igpu": "HD2000",
+      "model": "Intel HD Graphics 2000"
+    },
+    "i5-2500(HD2000)": {
+      "AAPL,snb-platform-id": "0x00000100",
+      "igpu": "HD2000",
+      "model": "Intel HD Graphics 2000"
+    },
+    "i7-2600(HD2000)": {
+      "AAPL,snb-platform-id": "0x00000100",
+      "igpu": "HD2000",
+      "model": "Intel HD Graphics 2000"
+    },
+    "i5-2390t(HD2000)": {
+      "AAPL,snb-platform-id": "0x00000100",
+      "igpu": "HD2000",
+      "model": "Intel HD Graphics 2000"
+    },
+    "i5-2400s(HD2000)": {
+      "AAPL,snb-platform-id": "0x00000100",
+      "igpu": "HD2000",
+      "model": "Intel HD Graphics 2000"
+    },
+    "i5-2500s(HD2000)": {
+      "AAPL,snb-platform-id": "0x00000100",
+      "igpu": "HD2000",
+      "model": "Intel HD Graphics 2000"
+    },
+    "i5-2500t(HD2000)": {
+      "AAPL,snb-platform-id": "0x00000100",
+      "igpu": "HD2000",
+      "model": "Intel HD Graphics 2000"
+    },
+    "i7-2600s(HD2000)": {
+      "AAPL,snb-platform-id": "0x00000100",
+      "igpu": "HD2000",
+      "model": "Intel HD Graphics 2000"
+    }
+  },
+  "Intel 3rd Ivy Bridge": {
+    "i3-3110m(HD4000)": {
+      "AAPL,ig-platform-id": "0x0300c89b",
+      "device-id": "0x9b3e0000",
+      "igpu": "HD4000",
+      "model": "Intel HD Graphics 4000"
+    },
+    "i3-3120m(HD4000)": {
+      "AAPL,ig-platform-id": "0x03006601",
+      "igfxfw": "0x02000000",
+      "igpu": "HD4000",
+      "model": "Intel HD Graphics 4000",
+      "device-id": "0x01660000"
+    },
+    "i5-3210m(HD4000)": {
+      "AAPL,ig-platform-id": "0x03006601",
+      "igpu": "HD4000",
+      "model": "Intel HD Graphics 4000",
+      "device-id": "0x01660000"
+    },
+    "i5-3230m(HD4000)": {
+      "AAPL,ig-platform-id": "0x0300c89b",
+      "device-id": "0x9b3e0000",
+      "igpu": "HD4000",
+      "model": "Intel HD Graphics 4000"
+    },
+    "i5-3320m(HD4000)": {
+      "AAPL,ig-platform-id": "0x03006601",
+      "igpu": "HD4000",
+      "model": "Intel HD Graphics 4000",
+      "device-id": "0x01660000"
+    },
+    "i5-3360m(HD4000)": {
+      "AAPL,ig-platform-id": "0x0300c89b",
+      "device-id": "0x9b3e0000",
+      "igpu": "HD4000",
+      "model": "Intel HD Graphics 4000"
+    },
+    "i5-3380m(HD4000)": {
+      "AAPL,ig-platform-id": "0x0300c89b",
+      "device-id": "0x9b3e0000",
+      "igpu": "HD4000",
+      "model": "Intel HD Graphics 4000"
+    },
+    "i5-3427u(HD4000)": {
+      "AAPL,ig-platform-id": "0x0300c89b",
+      "device-id": "0x9b3e0000",
+      "igpu": "HD4000",
+      "model": "Intel HD Graphics 4000"
+    },
+    "i5-3437u(HD4000)": {
+      "AAPL,ig-platform-id": "0x0300c89b",
+      "device-id": "0x9b3e0000",
+      "igpu": "HD4000",
+      "model": "Intel HD Graphics 4000"
+    },
+    "i5-3570k(HD4000)": {
+      "AAPL,ig-platform-id": "0x0166000a",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Graphics Controller",
+      "hda-gfx": "onboard-1",
+      "model": "Intel HD Graphics 4000",
+      "igpu": "HD4000",
+      "device-id": "0x01660000"
+    },
+    "i7-3520m(HD4000)": {
+      "AAPL,ig-platform-id": "0x0300c89b",
+      "device-id": "0x9b3e0000",
+      "igpu": "HD4000",
+      "model": "Intel HD Graphics 4000"
+    },
+    "i7-3540m(HD4000)": {
+      "AAPL,ig-platform-id": "0x0300c89b",
+      "device-id": "0x9b3e0000",
+      "igpu": "HD4000",
+      "model": "Intel HD Graphics 4000"
+    },
+    "i7-3610qm(HD4000)": {
+      "AAPL,ig-platform-id": "0x0300c89b",
+      "device-id": "0x9b3e0000",
+      "igpu": "HD4000",
+      "model": "Intel HD Graphics 4000"
+    },
+    "i7-3630qm(HD4000)": {
+      "AAPL,ig-platform-id": "0x0300c89b",
+      "device-id": "0x9b3e0000",
+      "igpu": "HD4000",
+      "model": "Intel HD Graphics 4000"
+    },
+    "i7-3720qm(HD4000)": {
+      "AAPL,ig-platform-id": "0x0300c89b",
+      "device-id": "0x9b3e0000",
+      "igpu": "HD4000",
+      "model": "Intel HD Graphics 4000"
+    },
+    "i7-3770(HD4000)": {
+      "AAPL,ig-platform-id": "0x0166000a",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Graphics Controller",
+      "hda-gfx": "onboard-1",
+      "model": "Intel HD Graphics 4000",
+      "igpu": "HD4000",
+      "device-id": "0x01660000"
+    },
+    "i7-3770k(HD4000)": {
+      "AAPL,ig-platform-id": "0x0166000a",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Graphics Controller",
+      "hda-gfx": "onboard-1",
+      "model": "Intel HD Graphics 4000",
+      "igpu": "HD4000",
+      "device-id": "0x01660000"
+    },
+    "i7-3770s(HD4000)": {
+      "AAPL,ig-platform-id": "0x0166000a",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Graphics Controller",
+      "hda-gfx": "onboard-1",
+      "model": "Intel HD Graphics 4000",
+      "igpu": "HD4000",
+      "device-id": "0x01660000"
+    },
+    "i3-3130m(HD4000)": {
+      "AAPL,ig-platform-id": "0x0300c89b",
+      "device-id": "0x9b3e0000",
+      "igpu": "HD4000",
+      "model": "Intel HD Graphics 4000"
+    },
+    "i5-3340m(HD4000)": {
+      "AAPL,ig-platform-id": "0x0300c89b",
+      "device-id": "0x9b3e0000",
+      "igpu": "HD4000",
+      "model": "Intel HD Graphics 4000"
+    },
+    "i7-3740qm(HD4000)": {
+      "AAPL,ig-platform-id": "0x0300c89b",
+      "device-id": "0x9b3e0000",
+      "igpu": "HD4000",
+      "model": "Intel HD Graphics 4000"
+    },
+    "i7-3770t(HD4000)": {
+      "AAPL,ig-platform-id": "0x0166000a",
+      "device-id": "0x9b3e0000",
+      "igpu": "HD4000",
+      "model": "Intel HD Graphics 4000"
+    },
+    "i7-3840qm(HD4000)": {
+      "AAPL,ig-platform-id": "0x0300c89b",
+      "device-id": "0x9b3e0000",
+      "igpu": "HD4000",
+      "model": "Intel HD Graphics 4000"
+    },
+    "i3-3220(HD2500)": {
+      "AAPL,ig-platform-id": "0x01620005",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Graphics Controller",
+      "hda-gfx": "onboard-1",
+      "model": "Intel HD Graphics 2500",
+      "igpu": "HD2500",
+      "device-id": "0x01660000"
+    },
+    "i3-3225(HD2500)": {
+      "AAPL,ig-platform-id": "0x01620005",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Graphics Controller",
+      "hda-gfx": "onboard-1",
+      "model": "Intel HD Graphics 2500",
+      "igpu": "HD2500",
+      "device-id": "0x01660000"
+    },
+    "i3-3240(HD2500)": {
+      "AAPL,ig-platform-id": "0x01620005",
+      "device-id": "0x01660000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "AAPL01,override-no-connect": "0x",
+      "AAPL02,override-no-connect": "0x",
+      "force-online": "0x01000000",
+      "hda-gfx": "onboard-1",
+      "disable-hdmi-patches": "0x01000000",
+      "igpu": "HD2500",
+      "model": "Intel HD Graphics 2500"
+    },
+    "i5-3330(HD2500)": {
+      "AAPL,ig-platform-id": "0x01620005",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Graphics Controller",
+      "hda-gfx": "onboard-1",
+      "model": "Intel HD Graphics 2500",
+      "igpu": "HD2500",
+      "device-id": "0x01660000"
+    },
+    "i5-3450(HD2500)": {
+      "AAPL,ig-platform-id": "0x01620005",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Graphics Controller",
+      "hda-gfx": "onboard-1",
+      "model": "Intel HD Graphics 2500",
+      "igpu": "HD2500",
+      "device-id": "0x01660000"
+    },
+    "i5-3470(HD2500)": {
+      "AAPL,ig-platform-id": "0x01620005",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Graphics Controller",
+      "hda-gfx": "onboard-1",
+      "model": "Intel HD Graphics 2500",
+      "igpu": "HD2500",
+      "device-id": "0x01660000"
+    },
+    "i5-3570(HD2500)": {
+      "AAPL,ig-platform-id": "0x01620005",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Graphics Controller",
+      "hda-gfx": "onboard-1",
+      "model": "Intel HD Graphics 2500",
+      "igpu": "HD2500",
+      "device-id": "0x01660000"
+    },
+    "i3-3210(HD2500)": {
+      "AAPL,ig-platform-id": "0x01620005",
+      "device-id": "0x9b3e0000",
+      "igpu": "HD2500",
+      "model": "Intel HD Graphics 2500"
+    },
+    "i3-3245(HD2500)": {
+      "AAPL,ig-platform-id": "0x01620005",
+      "device-id": "0x9b3e0000",
+      "igpu": "HD2500",
+      "model": "Intel HD Graphics 2500"
+    },
+    "i5-3340(HD2500)": {
+      "AAPL,ig-platform-id": "0x01620005",
+      "device-id": "0x9b3e0000",
+      "igpu": "HD2500",
+      "model": "Intel HD Graphics 2500"
+    },
+    "i5-3550(HD2500)": {
+      "AAPL,ig-platform-id": "0x01620005",
+      "device-id": "0x9b3e0000",
+      "igpu": "HD2500",
+      "model": "Intel HD Graphics 2500"
+    }
+  },
+  "Intel 4th Haswell": {
+    "i3-4000m(HD4600)": {
+      "AAPL,ig-platform-id": "0x0300220d",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD4600",
+      "model": "Intel HD Graphics 4600"
+    },
+    "i3-4100m(HD4600)": {
+      "AAPL,ig-platform-id": "0x0300220d",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD4600",
+      "model": "Intel HD Graphics 4600"
+    },
+    "i3-4130(HD4400)": {
+      "AAPL,ig-platform-id": "0x0600260a",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "igpu": "HD4400",
+      "model": "Intel HD Graphics 4400"
+    },
+    "i3-4150(HD4400)": {
+      "AAPL,ig-platform-id": "0x0600260a",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "igpu": "HD4400",
+      "model": "Intel HD Graphics 4400"
+    },
+    "i3-4160(HD4400)": {
+      "AAPL,ig-platform-id": "0x0600260a",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "igpu": "HD4400",
+      "model": "Intel HD Graphics 4400"
+    },
+    "i3-4170(HD4400)": {
+      "AAPL,ig-platform-id": "0x0600260a",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "igpu": "HD4400",
+      "model": "Intel HD Graphics 4400"
+    },
+    "i5-4200m(HD4600)": {
+      "AAPL,ig-platform-id": "0x0300220d",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD4600",
+      "model": "Intel HD Graphics 4600"
+    },
+    "i5-4200u(HD4400)": {
+      "AAPL,ig-platform-id": "0x0600260a",
+      "device-id": "0x12040000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "igpu": "HD4400",
+      "model": "Intel HD Graphics 4400"
+    },
+    "i5-4210u(HD4400)": {
+      "AAPL,ig-platform-id": "0x0600260a",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "igpu": "HD4400",
+      "model": "Intel HD Graphics 4400"
+    },
+    "i5-4258u(IrisPro5200)": {
+      "AAPL,ig-platform-id": "0x0d260009",
+      "device-id": "0x04260000",
+      "igpu": "IrisPro5200",
+      "model": "Intel Iris Pro Graphics 5200"
+    },
+    "i5-4278u(IrisPro5200)": {
+      "AAPL,ig-platform-id": "0x0d260009",
+      "device-id": "0x04260000",
+      "igpu": "IrisPro5200",
+      "model": "Intel Iris Pro Graphics 5200"
+    },
+    "i5-4300u(HD4400)": {
+      "AAPL,ig-platform-id": "0x0600260a",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "igpu": "HD4400",
+      "model": "Intel HD Graphics 4400"
+    },
+    "i5-4310u(HD4400)": {
+      "AAPL,ig-platform-id": "0x0600260a",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "igpu": "HD4400",
+      "model": "Intel HD Graphics 4400"
+    },
+    "i5-4430(HD4600)": {
+      "AAPL,ig-platform-id": "0x0300220d",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD4600",
+      "model": "Intel HD Graphics 4600"
+    },
+    "i5-4460(HD4600)": {
+      "AAPL,ig-platform-id": "0x0300220d",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD4600",
+      "model": "Intel HD Graphics 4600"
+    },
+    "i5-4570(HD4600)": {
+      "AAPL,ig-platform-id": "0x0300220d",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD4600",
+      "model": "Intel HD Graphics 4600"
+    },
+    "i5-4590(HD4600)": {
+      "AAPL,ig-platform-id": "0x0d220003",
+      "device-id": "0x04120000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "framebuffer-cursormem": "0x00009000",
+      "enable-hdmi20": "0x01000000",
+      "force-online": "0x01000000",
+      "hda-gfx": "onboard-1",
+      "disable-hdmi-patches": "0x01000000",
+      "igpu": "HD4600",
+      "model": "Intel HD Graphics 4600"
+    },
+    "i5-4670(HD4600)": {
+      "AAPL,ig-platform-id": "0x0300220d",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD4600",
+      "model": "Intel HD Graphics 4600"
+    },
+    "i5-4670k(HD4600)": {
+      "AAPL,ig-platform-id": "0x0300220d",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD4600",
+      "model": "Intel HD Graphics 4600"
+    },
+    "i7-4500u(HD4400)": {
+      "AAPL,ig-platform-id": "0x0600260a",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "igpu": "HD4400",
+      "model": "Intel HD Graphics 4400"
+    },
+    "i7-4510u(HD4400)": {
+      "AAPL,ig-platform-id": "0x0600260a",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "igpu": "HD4400",
+      "model": "Intel HD Graphics 4400"
+    },
+    "i7-4700hq(HD4600)": {
+      "AAPL,ig-platform-id": "0x0300220d",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD4600",
+      "model": "Intel HD Graphics 4600"
+    },
+    "i7-4700mq(HD4600)": {
+      "AAPL,ig-platform-id": "0x0300220d",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD4600",
+      "model": "Intel HD Graphics 4600"
+    },
+    "i7-4710hq(HD4600)": {
+      "AAPL,ig-platform-id": "0x0300220d",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD4600",
+      "model": "Intel HD Graphics 4600"
+    },
+    "i7-4720hq(HD4600)": {
+      "AAPL,ig-platform-id": "0x0300220d",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD4600",
+      "model": "Intel HD Graphics 4600"
+    },
+    "i7-4750hq(IrisPro5200)": {
+      "AAPL,ig-platform-id": "0x0d260009",
+      "device-id": "0x04260000",
+      "igpu": "IrisPro5200",
+      "model": "Intel Iris Pro Graphics 5200"
+    },
+    "i7-4770(HD4600)": {
+      "AAPL,ig-platform-id": "0x04001204",
+      "igpu": "HD4600",
+      "model": "Intel HD Graphics 4600",
+      "device-id": "0x04120000"
+    },
+    "i7-4770k(HD4600)": {
+      "AAPL,ig-platform-id": "0x0300220d",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD4600",
+      "model": "Intel HD Graphics 4600"
+    },
+    "i7-4790(HD4600)": {
+      "AAPL,ig-platform-id": "0x0300220d",
+      "device-id": "0x12040000",
+      "disable-external-gpu": "0x01000000",
+      "disable-hdmi-patches": "0x01000000",
+      "dpcd-max-link-rate": "0x14000000",
+      "enable-dpcd-max-link-rate-fix": "0x01000000",
+      "enable-hdmi20": "0x00000000",
+      "enable-max-pixel-clock-override": "0x01000000",
+      "force-online": "0x00000000",
+      "framebuffer-fbmem": "0x00000003",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-portcount": "0x02000000",
+      "framebuffer-stolenmem": "0x00000004",
+      "hda-gfx": "onboard-1",
+      "rps-control": "0x01000000",
+      "igpu": "HD4600",
+      "model": "Intel HD Graphics 4600"
+    },
+    "i7-4790k(HD4600)": {
+      "AAPL,ig-platform-id": "0x0300220d",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD4600",
+      "model": "Intel HD Graphics 4600"
+    },
+    "i7-4800mq(HD4600)": {
+      "AAPL,ig-platform-id": "0x0300220d",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD4600",
+      "model": "Intel HD Graphics 4600"
+    },
+    "i7-4850hq(IrisPro5200)": {
+      "AAPL,ig-platform-id": "0x0d260009",
+      "device-id": "0x04260000",
+      "igpu": "IrisPro5200",
+      "model": "Intel Iris Pro Graphics 5200"
+    },
+    "i7-4870hq(IrisPro5200)": {
+      "AAPL,ig-platform-id": "0x0d260009",
+      "device-id": "0x04260000",
+      "igpu": "IrisPro5200",
+      "model": "Intel Iris Pro Graphics 5200"
+    },
+    "i7-4950hq(IrisPro5200)": {
+      "AAPL,ig-platform-id": "0x0d260009",
+      "device-id": "0x04260000",
+      "igpu": "IrisPro5200",
+      "model": "Intel Iris Pro Graphics 5200"
+    },
+    "i3-4120u(HD4400)": {
+      "AAPL,ig-platform-id": "0x0600260a",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "igpu": "HD4400",
+      "model": "Intel HD Graphics 4400",
+      "_note": "⚠️ Haswell ULT 移动端 platform-id 待确认"
+    },
+    "i3-4340(HD4400)": {
+      "AAPL,ig-platform-id": "0x0600260a",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "igpu": "HD4400",
+      "model": "Intel HD Graphics 4400"
+    },
+    "i3-4360(HD4400)": {
+      "AAPL,ig-platform-id": "0x0600260a",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "igpu": "HD4400",
+      "model": "Intel HD Graphics 4400"
+    },
+    "i3-4370(HD4400)": {
+      "AAPL,ig-platform-id": "0x0600260a",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "igpu": "HD4400",
+      "model": "Intel HD Graphics 4400"
+    },
+    "i5-4440(HD4600)": {
+      "AAPL,ig-platform-id": "0x0d220003",
+      "device-id": "0x04120000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD4600",
+      "model": "Intel HD Graphics 4600"
+    },
+    "i5-4690(HD4600)": {
+      "AAPL,ig-platform-id": "0x0d220003",
+      "device-id": "0x04120000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD4600",
+      "model": "Intel HD Graphics 4600"
+    },
+    "i5-4690k(HD4600)": {
+      "AAPL,ig-platform-id": "0x0d220003",
+      "device-id": "0x04120000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD4600",
+      "model": "Intel HD Graphics 4600"
+    },
+    "i7-4771(HD4600)": {
+      "AAPL,ig-platform-id": "0x0d220003",
+      "device-id": "0x04120000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD4600",
+      "model": "Intel HD Graphics 4600"
+    },
+    "i7-4710mq(HD4600)": {
+      "AAPL,ig-platform-id": "0x0300220d",
+      "device-id": "0x12040000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD4600",
+      "model": "Intel HD Graphics 4600"
+    },
+    "i7-4770hq(IrisPro5200)": {
+      "AAPL,ig-platform-id": "0x0d260009",
+      "device-id": "0x04260000",
+      "igpu": "IrisPro5200",
+      "model": "Intel Iris Pro Graphics 5200"
+    },
+    "i7-4860hq(IrisPro5200)": {
+      "AAPL,ig-platform-id": "0x0d260009",
+      "device-id": "0x04260000",
+      "igpu": "IrisPro5200",
+      "model": "Intel Iris Pro Graphics 5200"
+    },
+    "i7-4960hq(IrisPro5200)": {
+      "AAPL,ig-platform-id": "0x0d260009",
+      "device-id": "0x04260000",
+      "igpu": "IrisPro5200",
+      "model": "Intel Iris Pro Graphics 5200"
+    },
+    "i7-4980hq(IrisPro5200)": {
+      "AAPL,ig-platform-id": "0x0d260009",
+      "device-id": "0x04260000",
+      "igpu": "IrisPro5200",
+      "model": "Intel Iris Pro Graphics 5200"
+    },
+    "i5-4288u(Iris5100)": {
+      "igpu": "Iris5100",
+      "model": "Intel Iris Graphics 5100",
+      "_note": "❌ 实际为 Iris 5100 (GT3)，需独立配置"
+    },
+    "i5-4350u(HD5000)": {
+      "igpu": "HD5000",
+      "model": "Intel HD Graphics 5000",
+      "_note": "❌ 实际为 HD 5000 (GT3)，需独立配置"
+    },
+    "i7-4550u(HD5000)": {
+      "igpu": "HD5000",
+      "model": "Intel HD Graphics 5000",
+      "_note": "❌ 实际为 HD 5000 (GT3)，需独立配置"
+    }
+  },
+  "Intel 5th Broadwell": {
+    "i3-5010u(HD5500)": {
+      "AAPL,ig-platform-id": "0x06002616",
+      "device-id": "0x16160000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "VGA compatible controller",
+      "disable-external-gpu": "0x01000000",
+      "enable-hdmi-dividers-fix": "0x01000000",
+      "enable-hdmi20": "0x01000000",
+      "enable-lspcon-support": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-portcount": "0x02000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "hda-gfx": "onboard-1",
+      "model": "Intel HD Graphics 5500",
+      "igpu": "HD5500"
+    },
+    "i3-5015u(HD5500)": {
+      "AAPL,ig-platform-id": "0x06002616",
+      "device-id": "0x16160000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "VGA compatible controller",
+      "disable-external-gpu": "0x01000000",
+      "enable-hdmi-dividers-fix": "0x01000000",
+      "enable-hdmi20": "0x01000000",
+      "enable-lspcon-support": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-portcount": "0x02000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "hda-gfx": "onboard-1",
+      "model": "Intel HD Graphics 5500",
+      "igpu": "HD5500"
+    },
+    "i3-5020u(HD5500)": {
+      "AAPL,ig-platform-id": "0x06002616",
+      "device-id": "0x16160000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "VGA compatible controller",
+      "disable-external-gpu": "0x01000000",
+      "enable-hdmi-dividers-fix": "0x01000000",
+      "enable-hdmi20": "0x01000000",
+      "enable-lspcon-support": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-portcount": "0x02000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "hda-gfx": "onboard-1",
+      "model": "Intel HD Graphics 5500",
+      "igpu": "HD5500"
+    },
+    "i5-5200u(HD5500)": {
+      "AAPL,ig-platform-id": "0x06002616",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device-id": "0x16160000",
+      "device_type": "VGA compatible controller",
+      "disable-external-gpu": "0x01000000",
+      "enable-hdmi-dividers-fix": "0x01000000",
+      "enable-hdmi20": "0x01000000",
+      "enable-lspcon-support": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-portcount": "0x02000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "hda-gfx": "onboard-1",
+      "igpu": "HD5500",
+      "model": "Intel HD Graphics 5500"
+    },
+    "i5-5250u(HD6000)": {
+      "AAPL,ig-platform-id": "0x16260006",
+      "device-id": "0x16260000",
+      "igpu": "HD6000",
+      "model": "Intel HD Graphics 6000"
+    },
+    "i5-5257u(Iris6100)": {
+      "AAPL,ig-platform-id": "0x162b0000",
+      "device-id": "0x162b0000",
+      "igpu": "Iris6100",
+      "model": "Intel Iris Graphics 6100"
+    },
+    "i5-5287u(Iris6100)": {
+      "AAPL,ig-platform-id": "0x162b0000",
+      "device-id": "0x162b0000",
+      "igpu": "Iris6100",
+      "model": "Intel Iris Graphics 6100"
+    },
+    "i5-5300u(HD5500)": {
+      "AAPL,ig-platform-id": "0x06002616",
+      "AAPL,slot-name": "iGPU",
+      "device_type": "VGA compatible controller",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "enable-backlight-smoother": "0x01000000",
+      "backlight-smoother-steps": "0x20000000",
+      "backlight-smoother-interval": "0x04000000",
+      "backlight-smoother-threshold": "0x00000000",
+      "igpu": "HD5500",
+      "model": "Intel HD Graphics 5500",
+      "device-id": "0x16160000"
+    },
+    "i7-5500u(HD5500)": {
+      "AAPL,ig-platform-id": "0x06002616",
+      "device-id": "0x16160000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "VGA compatible controller",
+      "disable-external-gpu": "0x01000000",
+      "enable-hdmi-dividers-fix": "0x01000000",
+      "enable-hdmi20": "0x01000000",
+      "enable-lspcon-support": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-portcount": "0x02000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "hda-gfx": "onboard-1",
+      "model": "Intel HD Graphics 5500",
+      "igpu": "HD5500"
+    },
+    "i7-5550u(HD6000)": {
+      "AAPL,ig-platform-id": "0x16260006",
+      "device-id": "0x16260000",
+      "igpu": "HD6000",
+      "model": "Intel HD Graphics 6000"
+    },
+    "i7-5557u(IrisPro6200)": {
+      "AAPL,ig-platform-id": "0x16260008",
+      "device-id": "0x16260000",
+      "igpu": "IrisPro6200",
+      "model": "Intel Iris Pro Graphics 6200"
+    },
+    "i7-5600u(HD5500)": {
+      "AAPL,ig-platform-id": "0x06002616",
+      "device-id": "0x16160000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "VGA compatible controller",
+      "disable-external-gpu": "0x01000000",
+      "enable-hdmi-dividers-fix": "0x01000000",
+      "enable-hdmi20": "0x01000000",
+      "enable-lspcon-support": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-portcount": "0x02000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "hda-gfx": "onboard-1",
+      "model": "Intel HD Graphics 5500",
+      "igpu": "HD5500"
+    },
+    "i7-5650u(HD6000)": {
+      "AAPL,ig-platform-id": "0x16260006",
+      "device-id": "0x16260000",
+      "igpu": "HD6000",
+      "model": "Intel HD Graphics 6000"
+    },
+    "i7-5700hq(IrisPro6200)": {
+      "AAPL,ig-platform-id": "0x16260008",
+      "device-id": "0x16260000",
+      "igpu": "IrisPro6200",
+      "model": "Intel Iris Pro Graphics 6200"
+    },
+    "i7-5750hq(IrisPro6200)": {
+      "AAPL,ig-platform-id": "0x16260008",
+      "device-id": "0x16260000",
+      "igpu": "IrisPro6200",
+      "model": "Intel Iris Pro Graphics 6200"
+    },
+    "i7-5775c(IrisPro6200)": {
+      "AAPL,ig-platform-id": "0x16260008",
+      "device-id": "0x16260000",
+      "igpu": "IrisPro6200",
+      "model": "Intel Iris Pro Graphics 6200"
+    },
+    "i7-5775r(IrisPro6200)": {
+      "AAPL,ig-platform-id": "0x16260008",
+      "device-id": "0x16260000",
+      "igpu": "IrisPro6200",
+      "model": "Intel Iris Pro Graphics 6200"
+    },
+    "i3-5005u(HD5500)": {
+      "AAPL,ig-platform-id": "0x06002616",
+      "device-id": "0x16160000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "VGA compatible controller",
+      "disable-external-gpu": "0x01000000",
+      "enable-hdmi-dividers-fix": "0x01000000",
+      "enable-hdmi20": "0x01000000",
+      "enable-lspcon-support": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-portcount": "0x02000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "hda-gfx": "onboard-1",
+      "model": "Intel HD Graphics 5500",
+      "igpu": "HD5500"
+    },
+    "i3-5157u(Iris6100)": {
+      "AAPL,ig-platform-id": "0x162b0000",
+      "device-id": "0x162b0000",
+      "igpu": "Iris6100",
+      "model": "Intel Iris Graphics 6100"
+    },
+    "i5-5350h(IrisPro6200)": {
+      "AAPL,ig-platform-id": "0x16260008",
+      "device-id": "0x16260000",
+      "igpu": "IrisPro6200",
+      "model": "Intel Iris Pro Graphics 6200"
+    },
+    "i5-5350u(HD6000)": {
+      "AAPL,ig-platform-id": "0x16260006",
+      "device-id": "0x16260000",
+      "igpu": "HD6000",
+      "model": "Intel HD Graphics 6000"
+    },
+    "i5-5675c(IrisPro6200)": {
+      "AAPL,ig-platform-id": "0x16260006",
+      "device-id": "0x16260000",
+      "igpu": "IrisPro6200",
+      "model": "Intel Iris Pro Graphics 6200"
+    },
+    "i5-5675r(IrisPro6200)": {
+      "AAPL,ig-platform-id": "0x16260006",
+      "device-id": "0x16260000",
+      "igpu": "IrisPro6200",
+      "model": "Intel Iris Pro Graphics 6200"
+    }
+  },
+  "Intel 6th Skylake": {
+    "i3-6006u(HD520)": {
+      "AAPL,ig-platform-id": "0x0000c087",
+      "device-id": "0x16590000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "VGA compatible controller",
+      "enable-hdmi20": "0x01000000",
+      "enable-lspcon-support": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "hda-gfx": "onboard-1",
+      "model": "Intel HD Graphics 520",
+      "igpu": "HD520"
+    },
+    "i3-6100(HD530)": {
+      "AAPL,ig-platform-id": "0x00001219",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD530",
+      "model": "Intel HD Graphics 530",
+      "device-id": "0x19120000"
+    },
+    "i3-6100u(HD520)": {
+      "AAPL,ig-platform-id": "0x00001619",
+      "enable-backlight-smoother": "0x01000000",
+      "force-online": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "hda-gfx": "onboard-1",
+      "rps-control": "0x01000000",
+      "igpu": "HD520",
+      "model": "Intel HD Graphics 520",
+      "device-id": "0x19160000"
+    },
+    "i3-6167u(HD520)": {
+      "AAPL,ig-platform-id": "0x00001619",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "VGA compatible controller",
+      "enable-hdmi20": "0x1",
+      "force-online": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-memorycount": "0x3",
+      "framebuffer-patch-enable": "0x1",
+      "framebuffer-pipecount": "0x3",
+      "framebuffer-portcount": "0x3",
+      "framebuffer-stolenmem": "0x00003001",
+      "hda-gfx": "onboard-1",
+      "model": "Intel Skylake GT2 [HD Graphics 520]",
+      "igpu": "HD520",
+      "device-id": "0x19160000"
+    },
+    "i3-6300(HD530)": {
+      "AAPL,ig-platform-id": "0x00001219",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD530",
+      "model": "Intel HD Graphics 530",
+      "device-id": "0x19120000"
+    },
+    "i3-6320(HD530)": {
+      "AAPL,ig-platform-id": "0x00001219",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD530",
+      "model": "Intel HD Graphics 530",
+      "device-id": "0x19120000"
+    },
+    "i5-6200u(HD520)": {
+      "AAPL,ig-platform-id": "0x00001619",
+      "device-id": "0x16190000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "force-online": "0x01000000",
+      "hda-gfx": "onboard-1",
+      "enable-hdmi-dividers-fix": "0x01000000",
+      "enable-lspcon-support": "0x01000000",
+      "enable-backlight-smoother": "0x01000000",
+      "igpu": "HD520",
+      "model": "Intel HD Graphics 520"
+    },
+    "i5-6260u(Iris540)": {
+      "AAPL,ig-platform-id": "0x19260000",
+      "device-id": "0x19260000",
+      "igpu": "Iris540",
+      "model": "Intel Iris Graphics 540"
+    },
+    "i5-6267u(Iris550)": {
+      "AAPL,ig-platform-id": "0x00002719",
+      "framebuffer-fbmem": "0x00005001",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00002002",
+      "igpu": "Iris550",
+      "model": "Intel Iris Graphics 550",
+      "device-id": "0x19160000"
+    },
+    "i5-6300hq(HD530)": {
+      "AAPL,ig-platform-id": "0x00001b19",
+      "device-id": "0x1b190000",
+      "device_type": "HDMI compatible controller",
+      "disable-external-gpu": "0x01000000",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-portcount": "0x02000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "hda-gfx": "onboard-1",
+      "model": "Intel HD Graphics 530",
+      "igpu": "HD530"
+    },
+    "i5-6300u(HD520)": {
+      "AAPL,ig-platform-id": "0x00001619",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "VGA compatible controller",
+      "enable-hdmi20": "0x1",
+      "force-online": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-memorycount": "0x3",
+      "framebuffer-patch-enable": "0x1",
+      "framebuffer-pipecount": "0x3",
+      "framebuffer-portcount": "0x3",
+      "framebuffer-stolenmem": "0x00003001",
+      "hda-gfx": "onboard-1",
+      "model": "Intel Skylake GT2 [HD Graphics 520]",
+      "igpu": "HD520",
+      "device-id": "0x19160000"
+    },
+    "i5-6350hq(HD530)": {
+      "AAPL,ig-platform-id": "0x00001b19",
+      "device-id": "0x1b190000",
+      "device_type": "HDMI compatible controller",
+      "disable-external-gpu": "0x01000000",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-portcount": "0x02000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "hda-gfx": "onboard-1",
+      "model": "Intel HD Graphics 530",
+      "igpu": "HD530"
+    },
+    "i5-6400(HD530)": {
+      "AAPL,ig-platform-id": "0x00001219",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD530",
+      "model": "Intel HD Graphics 530",
+      "device-id": "0x19120000"
+    },
+    "i5-6500(HD530)": {
+      "AAPL,ig-platform-id": "0x19120000",
+      "device-id": "0x19120000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "force-online": "0x01000000",
+      "hda-gfx": "onboard-1",
+      "enable-lspcon-support": "0x01000000",
+      "AAPL,GfxYTile": "0x01000000",
+      "igpu": "HD530",
+      "model": "Intel HD Graphics 530"
+    },
+    "i5-6600(HD530)": {
+      "AAPL,ig-platform-id": "0x00001219",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD530",
+      "model": "Intel HD Graphics 530",
+      "device-id": "0x19120000"
+    },
+    "i5-6600k(HD530)": {
+      "AAPL,ig-platform-id": "0x00001219",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD530",
+      "model": "Intel HD Graphics 530",
+      "device-id": "0x19120000"
+    },
+    "i7-6500u(HD520)": {
+      "AAPL,ig-platform-id": "0x00001659",
+      "device-id": "0x1b590000",
+      "@0,display-dual-link": "0x1",
+      "AAPL,GfxYTile": "0x01000000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-pipecount": "0x03000000",
+      "framebuffer-portcount": "0x03000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "hda-gfx": "onboard-1",
+      "model": "Intel HD Graphics 520",
+      "igpu": "HD520"
+    },
+    "i7-6560u(Iris550)": {
+      "AAPL,ig-platform-id": "0x00002619",
+      "igpu": "Iris550",
+      "model": "Intel Iris Graphics 550",
+      "device-id": "0x19160000"
+    },
+    "i7-6567u(Iris550)": {
+      "AAPL,ig-platform-id": "0x00002719",
+      "framebuffer-fbmem": "0x00005001",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00002002",
+      "igpu": "Iris550",
+      "model": "Intel Iris Graphics 550",
+      "device-id": "0x19160000"
+    },
+    "i7-6600u(HD520)": {
+      "AAPL,ig-platform-id": "0x00001619",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "VGA compatible controller",
+      "enable-hdmi20": "0x1",
+      "force-online": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-memorycount": "0x3",
+      "framebuffer-patch-enable": "0x1",
+      "framebuffer-pipecount": "0x3",
+      "framebuffer-portcount": "0x3",
+      "framebuffer-stolenmem": "0x00003001",
+      "hda-gfx": "onboard-1",
+      "model": "Intel Skylake GT2 [HD Graphics 520]",
+      "igpu": "HD520",
+      "device-id": "0x19160000"
+    },
+    "i7-6700(HD530)": {
+      "AAPL,ig-platform-id": "0x00001219",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD530",
+      "model": "Intel HD Graphics 530",
+      "device-id": "0x19120000"
+    },
+    "i7-6700hq(HD530)": {
+      "AAPL,ig-platform-id": "0x19120000",
+      "device-id": "0x19120000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "force-online": "0x01000000",
+      "hda-gfx": "onboard-1",
+      "disable-hdmi-patches": "0x01000000",
+      "rps-control": "0x01000000",
+      "enable-hdmi-dividers-fix": "0x01000000",
+      "enable-backlight-smoother": "0x01000000",
+      "AAPL,GfxYTile": "0x01000000",
+      "disable-external-gpu": "0x01000000",
+      "enable-lspcon-support": "0x01000000",
+      "igpu": "HD530",
+      "model": "Intel HD Graphics 530"
+    },
+    "i7-6700k(HD530)": {
+      "AAPL,ig-platform-id": "0x04001204",
+      "device-id": "0x12190001",
+      "igpu": "HD530",
+      "model": "Intel HD Graphics 530"
+    },
+    "i7-6700t(HD530)": {
+      "AAPL,ig-platform-id": "0x00001219",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD530",
+      "model": "Intel HD Graphics 530",
+      "device-id": "0x19120000"
+    },
+    "i7-6820hq(HD530)": {
+      "AAPL,ig-platform-id": "0x00001619",
+      "enable-lspcon-support": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "igpu": "HD530",
+      "model": "Intel HD Graphics 530",
+      "device-id": "0x19120000"
+    },
+    "i3-6100t(HD530)": {
+      "AAPL,ig-platform-id": "0x00001219",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD530",
+      "model": "Intel HD Graphics 530",
+      "device-id": "0x19120000"
+    },
+    "i3-6300t(HD530)": {
+      "AAPL,ig-platform-id": "0x00001219",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD530",
+      "model": "Intel HD Graphics 530",
+      "device-id": "0x19120000"
+    },
+    "i5-6440hq(HD530)": {
+      "AAPL,ig-platform-id": "0x00001b19",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD530",
+      "model": "Intel HD Graphics 530",
+      "device-id": "0x1b190000"
+    },
+    "i5-6500t(HD530)": {
+      "AAPL,ig-platform-id": "0x00001219",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD530",
+      "model": "Intel HD Graphics 530",
+      "device-id": "0x19120000"
+    },
+    "i5-6600t(HD530)": {
+      "AAPL,ig-platform-id": "0x00001219",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "igpu": "HD530",
+      "model": "Intel HD Graphics 530",
+      "device-id": "0x19120000"
+    }
+  },
+  "Intel 7th Kaby Lake": {
+    "i3-7020u(HD620)": {
+      "AAPL,ig-platform-id": "0x00001659",
+      "device-id": "0x16590000",
+      "igpu": "HD620",
+      "model": "Intel HD Graphics 620"
+    },
+    "i3-7100(HD630)": {
+      "AAPL,ig-platform-id": "0x03001259",
+      "device-id": "0x12590000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Display controller",
+      "model": "Intel HD Graphics 630",
+      "igpu": "HD630"
+    },
+    "i3-7100u(HD620)": {
+      "AAPL,ig-platform-id": "0x00001659",
+      "device-id": "0x16590000",
+      "igpu": "HD620",
+      "model": "Intel HD Graphics 620"
+    },
+    "i3-7130u(HD620)": {
+      "AAPL,ig-platform-id": "0x00001659",
+      "device-id": "0x16590000",
+      "igpu": "HD620",
+      "model": "Intel HD Graphics 620"
+    },
+    "i3-7300(HD630)": {
+      "AAPL,ig-platform-id": "0x03001259",
+      "device-id": "0x12590000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Display controller",
+      "model": "Intel HD Graphics 630",
+      "igpu": "HD630"
+    },
+    "i3-7320(HD630)": {
+      "AAPL,ig-platform-id": "0x03001259",
+      "device-id": "0x12590000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Display controller",
+      "model": "Intel HD Graphics 630",
+      "igpu": "HD630"
+    },
+    "i3-7350k(HD630)": {
+      "AAPL,ig-platform-id": "0x03001259",
+      "device-id": "0x12590000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Display controller",
+      "model": "Intel HD Graphics 630",
+      "igpu": "HD630"
+    },
+    "i5-7200u(HD620)": {
+      "AAPL,ig-platform-id": "0x09001659",
+      "device-id": "0x12590000",
+      "AAPL,GfxYTile": "0x01000000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "VGA compatible controller",
+      "disable-external-gpu": "0x01000000",
+      "enable-hdmi-dividers-fix": "0x01000000",
+      "enable-hdmi20": "0x01000000",
+      "enable-lspcon-support": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "hda-gfx": "onboard-1",
+      "model": "Intel HD Graphics 630",
+      "igpu": "HD620"
+    },
+    "i5-7260u(Iris640)": {
+      "AAPL,ig-platform-id": "0x59160000",
+      "device-id": "0x59160000",
+      "igpu": "Iris640",
+      "model": "Intel Iris Plus Graphics 640"
+    },
+    "i5-7267u(Iris650)": {
+      "AAPL,ig-platform-id": "0x59150002",
+      "device-id": "0x59150000",
+      "igpu": "Iris650",
+      "model": "Intel Iris Plus Graphics 650"
+    },
+    "i5-7300hq(HD630)": {
+      "AAPL,ig-platform-id": "0x59120000",
+      "device-id": "0x59120000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "AAPL01,override-no-connect": "0x",
+      "AAPL02,override-no-connect": "0x",
+      "enable-hdmi20": "0x01000000",
+      "force-online": "0x01000000",
+      "rps-control": "0x01000000",
+      "hda-gfx": "onboard-1",
+      "enable-hdmi-dividers-fix": "0x01000000",
+      "enable-backlight-smoother": "0x01000000",
+      "enable-backlight-registers-alternative-fix": "0x01000000",
+      "disable-external-gpu": "0x01000000",
+      "enable-lspcon-support": "0x01000000",
+      "igpu": "HD630",
+      "model": "Intel HD Graphics 630"
+    },
+    "i5-7300u(HD620)": {
+      "AAPL,ig-platform-id": "0x00001659",
+      "device-id": "0x16590000",
+      "AAPL,GfxYTile": "0x01000000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "VGA compatible controller",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "model": "Intel HD Graphics 620",
+      "igpu": "HD620"
+    },
+    "i5-7400(HD630)": {
+      "AAPL,ig-platform-id": "0x03001259",
+      "device-id": "0x12590000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Display controller",
+      "model": "Intel HD Graphics 630",
+      "igpu": "HD630"
+    },
+    "i5-7500(HD630)": {
+      "AAPL,ig-platform-id": "0x59120000",
+      "device-id": "0x59120000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "enable-hdmi20": "0x01000000",
+      "force-online": "0x01000000",
+      "rps-control": "0x01000000",
+      "hda-gfx": "onboard-1",
+      "disable-hdmi-patches": "0x01000000",
+      "enable-hdmi-dividers-fix": "0x01000000",
+      "enable-lspcon-support": "0x01000000",
+      "igpu": "HD630",
+      "model": "Intel HD Graphics 630"
+    },
+    "i5-7600(HD630)": {
+      "AAPL,ig-platform-id": "0x03001259",
+      "device-id": "0x12590000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Display controller",
+      "model": "Intel HD Graphics 630",
+      "igpu": "HD630"
+    },
+    "i5-7600k(HD630)": {
+      "AAPL,ig-platform-id": "0x03001259",
+      "AAPL,slot-name": "built-in",
+      "enable-metal": "0x1",
+      "igpu": "HD630",
+      "model": "Intel HD Graphics 630",
+      "device-id": "0x59120000"
+    },
+    "i7-7500u(HD620)": {
+      "AAPL,ig-platform-id": "0x00001659",
+      "device-id": "0x16590000",
+      "igpu": "HD620",
+      "model": "Intel HD Graphics 620"
+    },
+    "i7-7560u(Iris640)": {
+      "AAPL,ig-platform-id": "0x59160000",
+      "device-id": "0x59160000",
+      "igpu": "Iris640",
+      "model": "Intel Iris Plus Graphics 640"
+    },
+    "i7-7567u(Iris650)": {
+      "AAPL,ig-platform-id": "0x59150002",
+      "device-id": "0x59150000",
+      "igpu": "Iris650",
+      "model": "Intel Iris Plus Graphics 650"
+    },
+    "i7-7600u(HD620)": {
+      "AAPL,ig-platform-id": "0x00001659",
+      "device-id": "0x16590000",
+      "enable-backlight-smoother": "0x01000000",
+      "enable-max-pixel-clock-override": "0x01000000",
+      "force-online": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "igpu": "HD620",
+      "model": "Intel HD Graphics 620"
+    },
+    "i7-7700(HD630)": {
+      "AAPL,ig-platform-id": "00001259",
+      "igpu": "HD630",
+      "model": "Intel HD Graphics 630",
+      "device-id": "0x59120000"
+    },
+    "i7-7700hq(HD630)": {
+      "AAPL,ig-platform-id": "0x00001659",
+      "device-id": "0x16590000",
+      "framebuffer-patch-enable\t": "0x1",
+      "framebuffer-stolenmem\t": "0x00003001",
+      "framebuffer-fbmem\t": "0x00009000",
+      "igpu": "HD630",
+      "model": "Intel HD Graphics 630"
+    },
+    "i7-7700k(HD630)": {
+      "AAPL,ig-platform-id": "0x00001259",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "igpu": "HD630",
+      "model": "Intel HD Graphics 630",
+      "device-id": "0x59120000"
+    },
+    "i7-7700t(HD630)": {
+      "AAPL,ig-platform-id": "0x03001259",
+      "device-id": "0x12590000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Display controller",
+      "model": "Intel HD Graphics 630",
+      "igpu": "HD630"
+    },
+    "i7-7820hq(HD630)": {
+      "AAPL,ig-platform-id": "0x00001b59",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "igpu": "HD630",
+      "model": "Intel HD Graphics 630",
+      "device-id": "0x59120000"
+    },
+    "i3-7100t(HD630)": {
+      "AAPL,ig-platform-id": "0x03001259",
+      "device-id": "0x12590000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Display controller",
+      "model": "Intel HD Graphics 630",
+      "igpu": "HD630"
+    },
+    "i3-7300t(HD630)": {
+      "AAPL,ig-platform-id": "0x03001259",
+      "device-id": "0x12590000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Display controller",
+      "model": "Intel HD Graphics 630",
+      "igpu": "HD630"
+    },
+    "i5-7400t(HD630)": {
+      "AAPL,ig-platform-id": "0x03001259",
+      "device-id": "0x12590000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Display controller",
+      "model": "Intel HD Graphics 630",
+      "igpu": "HD630"
+    },
+    "i5-7440hq(HD630)": {
+      "AAPL,ig-platform-id": "0x59120000",
+      "device-id": "0x59120000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Display controller",
+      "model": "Intel HD Graphics 630",
+      "igpu": "HD630"
+    },
+    "i5-7500t(HD630)": {
+      "AAPL,ig-platform-id": "0x03001259",
+      "device-id": "0x12590000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Display controller",
+      "model": "Intel HD Graphics 630",
+      "igpu": "HD630"
+    },
+    "i5-7600t(HD630)": {
+      "AAPL,ig-platform-id": "0x03001259",
+      "device-id": "0x12590000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Display controller",
+      "model": "Intel HD Graphics 630",
+      "igpu": "HD630"
+    }
+  },
+  "Intel 8th Coffee Lake": {
+    "i3-8100(UHD630)": {
+      "AAPL,ig-platform-id": "0x00009b3e",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Display controller",
+      "hda-gfx": "onboard-1",
+      "model": "Intel 8th Gen Core Processor Gaussian Mixture Model",
+      "igpu": "UHD630",
+      "device-id": "0x3e9b0000"
+    },
+    "i3-8130u(UHD620)": {
+      "AAPL,ig-platform-id": "0x00001659",
+      "complete-modeset-framebuffers": "0x0000000000000001",
+      "device-id": "0x16590000",
+      "enable-hdmi20": "0x01000000",
+      "force-online": "0x01000000",
+      "force-online-framebuffers": "0x0000000000000001",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "igpu": "UHD620",
+      "model": "Intel UHD Graphics 620"
+    },
+    "i3-8300(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300983e",
+      "device-id": "0x983e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00009003",
+      "framebuffer-unifiedmem": "0x00000060",
+      "hda-gfx": "onboard-2",
+      "igfxfw": "0x02000000",
+      "model": "Intel UHD Graphics 630",
+      "igpu": "UHD630"
+    },
+    "i3-8350k(UHD630)": {
+      "AAPL,ig-platform-id": "0x07009b3e",
+      "device-id": "0x9b3e0000",
+      "enable-metal": "0x01000000",
+      "rps-control": "0x01000000",
+      "igpu": "UHD630",
+      "model": "Intel UHD Graphics 630"
+    },
+    "i5-8250u(UHD620)": {
+      "AAPL,ig-platform-id": "0x05001c59",
+      "device-id": "0x16590000",
+      "AAPL,slot-name": "Internal",
+      "complete-modeset-framebuffers": "0x0000000000000001",
+      "force-online": "0x01000000",
+      "force-online-framebuffers": "0x0000000000000001",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-flags": "0x0b07e300",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "hda-gfx": "onboard-1",
+      "igpu": "UHD620",
+      "model": "Intel UHD Graphics 620"
+    },
+    "i5-8265u(UHD620)": {
+      "AAPL,ig-platform-id": "0x00009b3e",
+      "device-id": "0x9b3e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "VGA compatible controller",
+      "disable-external-gpu": "0x01000000",
+      "enable-hdmi-dividers-fix": "0x01000000",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00009003",
+      "framebuffer-unifiedmem": "0x00000080",
+      "hda-gfx": "onboard-2",
+      "model": "Intel UHD Graphics 620",
+      "igpu": "UHD620"
+    },
+    "i5-8300h(UHD630)": {
+      "AAPL,ig-platform-id": "0x00009b3e",
+      "agdpmod": "vit9696",
+      "disable-external-gpu": "0x01000000",
+      "dpcd-max-link-rate": "0x0a000000",
+      "enable-backlight-registers-fix": "0x01000000",
+      "enable-dpcd-max-link-rate-fix": "0x01000000",
+      "enable-lspcon-support": "0x01000000",
+      "enable-max-pixel-clock-override": "0x01000000",
+      "force-online": "0x01000000",
+      "force-online-framebuffers": "0x0000000000000003",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-portcount": "0x04000000",
+      "framebuffer-unifiedmem": "0x00000080",
+      "igpu": "UHD630",
+      "model": "Intel UHD Graphics 630",
+      "device-id": "0x3e9b0000"
+    },
+    "i5-8400(UHD630)": {
+      "AAPL,ig-platform-id": "0x07009b3e",
+      "igpu": "UHD630",
+      "model": "Intel UHD Graphics 630",
+      "device-id": "0x3e9b0000"
+    },
+    "i5-8500(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300983e",
+      "device-id": "0x983e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00009003",
+      "framebuffer-unifiedmem": "0x00000060",
+      "hda-gfx": "onboard-2",
+      "igfxfw": "0x02000000",
+      "model": "Intel UHD Graphics 630",
+      "igpu": "UHD630"
+    },
+    "i5-8600(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300983e",
+      "device-id": "0x983e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00009003",
+      "framebuffer-unifiedmem": "0x00000060",
+      "hda-gfx": "onboard-2",
+      "igfxfw": "0x02000000",
+      "model": "Intel UHD Graphics 630",
+      "igpu": "UHD630"
+    },
+    "i5-8600k(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300913e",
+      "hda-gfx": "onboard-1",
+      "igpu": "UHD630",
+      "model": "Intel UHD Graphics 630",
+      "device-id": "0x3e9b0000"
+    },
+    "i7-8086k(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300983e",
+      "device-id": "0x983e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00009003",
+      "framebuffer-unifiedmem": "0x00000060",
+      "hda-gfx": "onboard-2",
+      "igfxfw": "0x02000000",
+      "model": "Intel UHD Graphics 630",
+      "igpu": "UHD630"
+    },
+    "i7-8550u(UHD620)": {
+      "AAPL,ig-platform-id": "0x00001659",
+      "device-id": "0x16590000",
+      "AAPL,GfxYTile": "0x01000000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "VGA compatible controller",
+      "enable-hdmi-dividers-fix": "0x01000000",
+      "enable-hdmi20": "0x01000000",
+      "enable-lspcon-support": "0x01000000",
+      "force-online": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "hda-gfx": "onboard-1",
+      "model": "Intel UHD Graphics 620",
+      "igpu": "UHD620"
+    },
+    "i7-8565u(UHD620)": {
+      "AAPL,ig-platform-id": "0x0900a53e",
+      "device-id": "0xa53e0000",
+      "AAPL,GfxYTile": "0x01000000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "VGA compatible controller",
+      "disable-external-gpu": "0x01000000",
+      "enable-hdmi20": "0x01000000",
+      "enable-lspcon-support": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "hda-gfx": "onboard-1",
+      "model": "Intel UHD Graphics 620",
+      "igpu": "UHD620"
+    },
+    "i7-8700(UHD630)": {
+      "AAPL,ig-platform-id": "0x3e9b0007",
+      "device-id": "0x3e9b0000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "enable-hdmi20": "0x01000000",
+      "force-online": "0x01000000",
+      "rps-control": "0x01000000",
+      "hda-gfx": "onboard-1",
+      "disable-hdmi-patches": "0x01000000",
+      "igpu": "UHD630",
+      "model": "Intel UHD Graphics 630"
+    },
+    "i7-8700b(UHD630)": {
+      "AAPL,ig-platform-id": "0x00009b3e",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "VGA compatible controller",
+      "disable-agdc": "0x01000000",
+      "disable-external-gpu": "0x01000000",
+      "enable-backlight-registers-fix": "0x01000000",
+      "enable-hdmi20": "0x01000000",
+      "enable-lspcon-support": "0x01000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-portcount": "0x02000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "model": "Intel UHD Graphics 630",
+      "rps-control": "0x01000000",
+      "igpu": "UHD630",
+      "device-id": "0x3e9b0000"
+    },
+    "i7-8700k(UHD630)": {
+      "AAPL,ig-platform-id": "0x07009b3e",
+      "device-id": "0x923e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "VGA compatible controller",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "hda-gfx": "onboard-1",
+      "model": "Intel CoffeeLake-S GT2 [UHD Graphics 630]",
+      "igpu": "UHD630"
+    },
+    "i7-8750h(UHD630)": {
+      "AAPL,ig-platform-id": "0x00009b3e",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "VGA compatible controller",
+      "disable-agdc": "0x01000000",
+      "disable-external-gpu": "0x01000000",
+      "enable-backlight-registers-fix": "0x01000000",
+      "enable-hdmi20": "0x01000000",
+      "enable-lspcon-support": "0x01000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-portcount": "0x02000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "model": "Intel UHD Graphics 630",
+      "rps-control": "0x01000000",
+      "igpu": "UHD630",
+      "device-id": "0x3e9b0000"
+    },
+    "i7-8850h(UHD630)": {
+      "AAPL,ig-platform-id": "0x00009b3e",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "VGA compatible controller",
+      "disable-agdc": "0x01000000",
+      "disable-external-gpu": "0x01000000",
+      "enable-backlight-registers-fix": "0x01000000",
+      "enable-hdmi20": "0x01000000",
+      "enable-lspcon-support": "0x01000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-portcount": "0x02000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "model": "Intel UHD Graphics 630",
+      "rps-control": "0x01000000",
+      "igpu": "UHD630",
+      "device-id": "0x3e9b0000"
+    },
+    "i3-8100t(UHD630)": {
+      "AAPL,ig-platform-id": "0x00009b3e",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Display controller",
+      "hda-gfx": "onboard-1",
+      "model": "Intel 8th Gen Core Processor Gaussian Mixture Model",
+      "igpu": "UHD630",
+      "device-id": "0x3e9b0000"
+    },
+    "i3-8145u(UHD620)": {
+      "AAPL,ig-platform-id": "0x00001659",
+      "complete-modeset-framebuffers": "0x0000000000000001",
+      "device-id": "0x16590000",
+      "enable-hdmi20": "0x01000000",
+      "force-online": "0x01000000",
+      "force-online-framebuffers": "0x0000000000000001",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "igpu": "UHD620",
+      "model": "Intel UHD Graphics 620"
+    },
+    "i3-8300t(UHD630)": {
+      "AAPL,ig-platform-id": "0x00009b3e",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Display controller",
+      "hda-gfx": "onboard-1",
+      "model": "Intel 8th Gen Core Processor Gaussian Mixture Model",
+      "igpu": "UHD630",
+      "device-id": "0x3e9b0000"
+    },
+    "i5-8400t(UHD630)": {
+      "AAPL,ig-platform-id": "0x00009b3e",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Display controller",
+      "hda-gfx": "onboard-1",
+      "model": "Intel 8th Gen Core Processor Gaussian Mixture Model",
+      "igpu": "UHD630",
+      "device-id": "0x3e9b0000"
+    },
+    "i5-8500t(UHD630)": {
+      "AAPL,ig-platform-id": "0x00009b3e",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Display controller",
+      "hda-gfx": "onboard-1",
+      "model": "Intel 8th Gen Core Processor Gaussian Mixture Model",
+      "igpu": "UHD630",
+      "device-id": "0x3e9b0000"
+    },
+    "i5-8600t(UHD630)": {
+      "AAPL,ig-platform-id": "0x00009b3e",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Display controller",
+      "hda-gfx": "onboard-1",
+      "model": "Intel 8th Gen Core Processor Gaussian Mixture Model",
+      "igpu": "UHD630",
+      "device-id": "0x3e9b0000"
+    },
+    "i7-8700t(UHD630)": {
+      "AAPL,ig-platform-id": "0x00009b3e",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Display controller",
+      "hda-gfx": "onboard-1",
+      "model": "Intel 8th Gen Core Processor Gaussian Mixture Model",
+      "igpu": "UHD630",
+      "device-id": "0x3e9b0000"
+    },
+    "i7-8706g(UHD630)": {
+      "AAPL,ig-platform-id": "0x00009b3e",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Display controller",
+      "hda-gfx": "onboard-1",
+      "model": "Intel 8th Gen Core Processor Gaussian Mixture Model",
+      "igpu": "UHD630",
+      "_note": "⚠️ 搭载RX Vega M，iGPU 部分需结合 WhateverGreen 单独配置",
+      "device-id": "0x3e9b0000"
+    },
+    "i5-8259u(IrisPlus655)": {
+      "igpu": "IrisPlus655",
+      "model": "Intel Iris Plus Graphics 655",
+      "_note": "❌ 实际为 Iris Plus 655 (GT3e)，需独立配置"
+    },
+    "i5-8269u(IrisPlus655)": {
+      "igpu": "IrisPlus655",
+      "model": "Intel Iris Plus Graphics 655",
+      "_note": "❌ 实际为 Iris Plus 655 (GT3e)，需独立配置"
+    },
+    "i5-8279u(IrisPlus655)": {
+      "igpu": "IrisPlus655",
+      "model": "Intel Iris Plus Graphics 655",
+      "_note": "❌ 实际为 Iris Plus 655 (GT3e)，需独立配置"
+    },
+    "i7-8557u(IrisPlus650)": {
+      "igpu": "IrisPlus650",
+      "model": "Intel Iris Plus Graphics 650",
+      "_note": "❌ 实际为 Iris Plus 650 (GT3e)，需独立配置"
+    },
+    "i7-8559u(IrisPlus655)": {
+      "igpu": "IrisPlus655",
+      "model": "Intel Iris Plus Graphics 655",
+      "_note": "❌ 实际为 Iris Plus 655 (GT3e)，需独立配置"
+    },
+    "i7-8569u(IrisPlus655)": {
+      "igpu": "IrisPlus655",
+      "model": "Intel Iris Plus Graphics 655",
+      "_note": "❌ 实际为 Iris Plus 655 (GT3e)，需独立配置"
+    }
+  },
+  "Intel 9th Coffee Lake": {
+    "i3-9100(UHD630)": {
+      "AAPL,ig-platform-id": "0x07009b3e",
+      "framebuffer-patch-enable": "0x01000000",
+      "igpu": "UHD630",
+      "model": "Intel UHD Graphics 630",
+      "device-id": "0x3e9b0000"
+    },
+    "i3-9300(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300983e",
+      "device-id": "0x983e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "Display controller",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "hda-gfx": "onboard-2",
+      "model": "Intel UHD Graphics 630",
+      "igpu": "UHD630"
+    },
+    "i3-9350k(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300983e",
+      "device-id": "0x983e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00009003",
+      "framebuffer-unifiedmem": "0x00000060",
+      "hda-gfx": "onboard-2",
+      "igfxfw": "0x02000000",
+      "model": "Intel UHD Graphics 630",
+      "igpu": "UHD630"
+    },
+    "i5-9400(UHD630)": {
+      "AAPL,ig-platform-id": "0x3e9b0007",
+      "device-id": "0x3e9b0000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "force-online": "0x01000000",
+      "hda-gfx": "onboard-1",
+      "disable-hdmi-patches": "0x01000000",
+      "enable-lspcon-support": "0x01000000",
+      "igpu": "UHD630",
+      "model": "Intel UHD Graphics 630"
+    },
+    "i5-9500(UHD630)": {
+      "AAPL,ig-platform-id": "0x3e9b0007",
+      "device-id": "0x3e9b0000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "enable-hdmi20": "0x01000000",
+      "force-online": "0x01000000",
+      "rps-control": "0x01000000",
+      "disable-hdmi-patches": "0x01000000",
+      "hda-gfx": "onboard-1",
+      "enable-lspcon-support": "0x01000000",
+      "igpu": "UHD630",
+      "model": "Intel UHD Graphics 630"
+    },
+    "i5-9600(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300983e",
+      "device-id": "0x983e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00009003",
+      "framebuffer-unifiedmem": "0x00000060",
+      "hda-gfx": "onboard-2",
+      "igfxfw": "0x02000000",
+      "model": "Intel UHD Graphics 630",
+      "igpu": "UHD630"
+    },
+    "i5-9600k(UHD630)": {
+      "AAPL,ig-platform-id": "0x07009b3e",
+      "device-id": "0x983e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "framebuffer-fbmem": "0x00000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00009003",
+      "framebuffer-unifiedmem": "0x00000080",
+      "hda-gfx": "onboard-1",
+      "igpu": "UHD630",
+      "model": "Intel UHD Graphics 630"
+    },
+    "i7-9700(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300983e",
+      "device-id": "0x983e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00009003",
+      "framebuffer-unifiedmem": "0x00000060",
+      "hda-gfx": "onboard-2",
+      "igfxfw": "0x02000000",
+      "model": "Intel UHD Graphics 630",
+      "igpu": "UHD630"
+    },
+    "i7-9700k(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300983e",
+      "device-id": "0x983e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00009003",
+      "framebuffer-unifiedmem": "0x00000060",
+      "hda-gfx": "onboard-2",
+      "igfxfw": "0x02000000",
+      "model": "Intel UHD Graphics 630",
+      "igpu": "UHD630"
+    },
+    "i9-9900(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300983e",
+      "device-id": "0x983e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00009003",
+      "framebuffer-unifiedmem": "0x00000060",
+      "hda-gfx": "onboard-2",
+      "igfxfw": "0x02000000",
+      "model": "Intel UHD Graphics 630",
+      "igpu": "UHD630"
+    },
+    "i9-9900k(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300983e",
+      "device-id": "0x9b3e0000",
+      "AAPL,slot-name": "Built In",
+      "device_type": "Display controller",
+      "enable-metal": "0x01000000",
+      "force-online": "0x01000000",
+      "hda-gfx": "onboard-2",
+      "igfxfw": "0x02000000",
+      "model": "Intel UHD Graphics 630",
+      "name": "Intel UHD Graphics 630",
+      "rps-control": "0x01000000",
+      "igpu": "UHD630"
+    },
+    "i9-9900ks(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300983e",
+      "device-id": "0x983e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00009003",
+      "framebuffer-unifiedmem": "0x00000060",
+      "hda-gfx": "onboard-2",
+      "igfxfw": "0x02000000",
+      "model": "Intel UHD Graphics 630",
+      "igpu": "UHD630"
+    },
+    "i3-9100t(UHD630)": {
+      "AAPL,ig-platform-id": "0x07009b3e",
+      "framebuffer-patch-enable": "0x01000000",
+      "igpu": "UHD630",
+      "model": "Intel UHD Graphics 630",
+      "device-id": "0x3e9b0000"
+    },
+    "i3-9300t(UHD630)": {
+      "AAPL,ig-platform-id": "0x07009b3e",
+      "framebuffer-patch-enable": "0x01000000",
+      "igpu": "UHD630",
+      "model": "Intel UHD Graphics 630",
+      "device-id": "0x3e9b0000"
+    },
+    "i5-9400t(UHD630)": {
+      "AAPL,ig-platform-id": "0x07009b3e",
+      "framebuffer-patch-enable": "0x01000000",
+      "igpu": "UHD630",
+      "model": "Intel UHD Graphics 630",
+      "device-id": "0x3e9b0000"
+    },
+    "i5-9500t(UHD630)": {
+      "AAPL,ig-platform-id": "0x07009b3e",
+      "framebuffer-patch-enable": "0x01000000",
+      "igpu": "UHD630",
+      "model": "Intel UHD Graphics 630",
+      "device-id": "0x3e9b0000"
+    },
+    "i5-9600t(UHD630)": {
+      "AAPL,ig-platform-id": "0x07009b3e",
+      "framebuffer-patch-enable": "0x01000000",
+      "igpu": "UHD630",
+      "model": "Intel UHD Graphics 630",
+      "device-id": "0x3e9b0000"
+    },
+    "i7-9700t(UHD630)": {
+      "AAPL,ig-platform-id": "0x07009b3e",
+      "framebuffer-patch-enable": "0x01000000",
+      "igpu": "UHD630",
+      "model": "Intel UHD Graphics 630",
+      "device-id": "0x3e9b0000"
+    },
+    "i9-9880h(UHD630)": {
+      "AAPL,ig-platform-id": "0x3e9b0000",
+      "framebuffer-patch-enable": "0x01000000",
+      "igpu": "UHD630",
+      "model": "Intel UHD Graphics 630",
+      "device-id": "0x3e9b0000"
+    },
+    "i9-9900t(UHD630)": {
+      "AAPL,ig-platform-id": "0x07009b3e",
+      "framebuffer-patch-enable": "0x01000000",
+      "igpu": "UHD630",
+      "model": "Intel UHD Graphics 630",
+      "device-id": "0x3e9b0000"
+    },
+    "i9-9980hk(UHD630)": {
+      "AAPL,ig-platform-id": "0x3e9b0000",
+      "framebuffer-patch-enable": "0x01000000",
+      "igpu": "UHD630",
+      "model": "Intel UHD Graphics 630",
+      "device-id": "0x3e9b0000"
+    }
+  },
+  "Intel 10th Comet Lake": {
+    "i3-10100(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300983e",
+      "device-id": "0x983e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00009003",
+      "framebuffer-unifiedmem": "0x00000060",
+      "hda-gfx": "onboard-2",
+      "igfxfw": "0x02000000",
+      "model": "Intel UHD Graphics 630",
+      "igpu": "UHD630"
+    },
+    "i3-10110u(UHD620)": {
+      "AAPL,ig-platform-id": "0x0900a53e",
+      "device-id": "0xa53e0000",
+      "enable-backlight-registers-fix": "0x01000000",
+      "force-online": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-portcount": "0x02000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "hda-gfx": "onboard-1",
+      "igpu": "UHD620",
+      "model": "Intel UHD Graphics 620"
+    },
+    "i3-10300(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300983e",
+      "device-id": "0x983e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00009003",
+      "framebuffer-unifiedmem": "0x00000060",
+      "hda-gfx": "onboard-2",
+      "igfxfw": "0x02000000",
+      "model": "Intel UHD Graphics 630",
+      "igpu": "UHD630"
+    },
+    "i5-10210u(UHD620)": {
+      "AAPL,ig-platform-id": "0x00009b3e",
+      "device-id": "0x9b3e0000",
+      "AAPL,GfxYTile": "0x01000000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "VGA compatible controller",
+      "enable-backlight-registers-alternative-fix": "0x01000000",
+      "enable-backlight-smoother": "0x01000000",
+      "enable-cdclk-frequency-fix": "0x01000000",
+      "enable-cfl-backlight-fix": "0x01000000",
+      "enable-dvmt-calc-fix": "0x01000000",
+      "enable-hdmi-dividers-fix": "0x01000000",
+      "enable-hdmi20": "0x01000000",
+      "enable-lspcon-support": "0x01000000",
+      "force-online": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0xffffffff",
+      "hda-gfx": "onboard-1",
+      "igfxfw": "0x02000000",
+      "model": "Intel UHD Graphics 630 (Mobile)",
+      "rps-control": "0x01000000",
+      "igpu": "UHD620"
+    },
+    "i5-10300h(UHD630)": {
+      "AAPL,ig-platform-id": "0x00009b3e",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "VGA compatible controller",
+      "disable-agdc": "0x01000000",
+      "disable-external-gpu": "0x01000000",
+      "enable-backlight-registers-fix": "0x01000000",
+      "enable-hdmi20": "0x01000000",
+      "enable-lspcon-support": "0x01000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-portcount": "0x02000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "model": "Intel UHD Graphics 630",
+      "rps-control": "0x01000000",
+      "igpu": "UHD630",
+      "device-id": "0x3e9b0000"
+    },
+    "i5-10400(UHD630)": {
+      "AAPL,ig-platform-id": "0x3e9b0007",
+      "device-id": "0x3e9b0000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "AAPL01,override-no-connect": "0x",
+      "AAPL02,override-no-connect": "0x",
+      "enable-hdmi20": "0x01000000",
+      "force-online": "0x01000000",
+      "rps-control": "0x01000000",
+      "hda-gfx": "onboard-1",
+      "disable-hdmi-patches": "0x01000000",
+      "enable-lspcon-support": "0x01000000",
+      "igpu": "UHD630",
+      "model": "Intel UHD Graphics 630"
+    },
+    "i5-10500(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300c89b",
+      "device-id": "0x923e0000",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00000003",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "igpu": "UHD630",
+      "model": "Intel UHD Graphics 630"
+    },
+    "i5-10600(UHD630)": {
+      "AAPL,ig-platform-id": "0x07009b3e",
+      "device-id": "0x9b3e0000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "model": "Intel UHD Graphics 630",
+      "igpu": "UHD630"
+    },
+    "i5-10600k(UHD630)": {
+      "AAPL,ig-platform-id": "0x07009b3e",
+      "device-id": "0x9b3e0000",
+      "framebuffer-patch-enable": "0x01000000",
+      "igpu": "UHD630",
+      "model": "Intel UHD Graphics 630"
+    },
+    "i7-10510u(UHD620)": {
+      "AAPL,ig-platform-id": "0x09009b3e",
+      "device-id": "0x9b3e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "VGA compatible controller",
+      "disable-external-gpu": "0x01000000",
+      "enable-hdmi-dividers-fix": "0x01000000",
+      "enable-hdmi20": "0x01000000",
+      "enable-lspcon-support": "0x01000000",
+      "framebuffer-flags": "0x0f1bf300",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-portcount": "0x02000000",
+      "framebuffer-stolenmem": "0x0000e001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "model": "Intel UHD 620",
+      "igpu": "UHD620"
+    },
+    "i7-10700(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300c89b",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device-id": "0x9b3e0000",
+      "device_type": "Display controller",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "hda-gfx": "onboard-1",
+      "igpu": "UHD630",
+      "model": "Intel UHD Graphics 630"
+    },
+    "i7-10700k(UHD630)": {
+      "AAPL,ig-platform-id": "0x07009b3e",
+      "device-id": "0x9b3e0000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "model": "Intel UHD Graphics 630",
+      "igpu": "UHD630"
+    },
+    "i7-10750h(UHD630)": {
+      "AAPL,ig-platform-id": "0x3e9b0000",
+      "device-id": "0x3e9b0000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "enable-hdmi20": "0x01000000",
+      "force-online": "0x01000000",
+      "rps-control": "0x01000000",
+      "enable-backlight-smoother": "0x01000000",
+      "disable-external-gpu": "0x01000000",
+      "enable-dpcd-max-link-rate-fix": "0x01000000",
+      "enable-lspcon-support": "0x01000000",
+      "igpu": "UHD630",
+      "model": "Intel UHD Graphics 630"
+    },
+    "i7-10875h(UHD630)": {
+      "AAPL,ig-platform-id": "0x00009b3e",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "device_type": "VGA compatible controller",
+      "disable-agdc": "0x01000000",
+      "disable-external-gpu": "0x01000000",
+      "enable-backlight-registers-fix": "0x01000000",
+      "enable-hdmi20": "0x01000000",
+      "enable-lspcon-support": "0x01000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-portcount": "0x02000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "framebuffer-unifiedmem": "0x00000080",
+      "model": "Intel UHD Graphics 630",
+      "rps-control": "0x01000000",
+      "igpu": "UHD630",
+      "device-id": "0x3e9b0000"
+    },
+    "i9-10900(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300983e",
+      "device-id": "0x983e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00009003",
+      "framebuffer-unifiedmem": "0x00000060",
+      "hda-gfx": "onboard-2",
+      "igfxfw": "0x02000000",
+      "model": "Intel UHD Graphics 630",
+      "igpu": "UHD630"
+    },
+    "i9-10900k(UHD630)": {
+      "AAPL,ig-platform-id": "0x07009b3e",
+      "device-id": "0x9b3e0000",
+      "disable-agdc": "0x01000000",
+      "enable-hdmi-dividers-fix": "0x01000000",
+      "enable-hdmi20": "0x01000000",
+      "enable-metal": "0x01000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "hda-gfx": "onboard-1",
+      "igfxfw": "0x02000000",
+      "model": "Intel UHD Graphics 630",
+      "rps-control": "0x01000000",
+      "igpu": "UHD630"
+    },
+    "i3-10100t(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300983e",
+      "device-id": "0x983e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00009003",
+      "framebuffer-unifiedmem": "0x00000060",
+      "hda-gfx": "onboard-2",
+      "igfxfw": "0x02000000",
+      "model": "Intel UHD Graphics 630",
+      "igpu": "UHD630"
+    },
+    "i3-10110y(UHD620)": {
+      "AAPL,ig-platform-id": "0x0900a53e",
+      "device-id": "0xa53e0000",
+      "enable-backlight-registers-fix": "0x01000000",
+      "force-online": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-portcount": "0x02000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "hda-gfx": "onboard-1",
+      "igpu": "UHD620",
+      "model": "Intel UHD Graphics 620"
+    },
+    "i3-10300t(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300983e",
+      "device-id": "0x983e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00009003",
+      "framebuffer-unifiedmem": "0x00000060",
+      "hda-gfx": "onboard-2",
+      "igfxfw": "0x02000000",
+      "model": "Intel UHD Graphics 630",
+      "igpu": "UHD630"
+    },
+    "i3-10320(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300983e",
+      "device-id": "0x983e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00009003",
+      "framebuffer-unifiedmem": "0x00000060",
+      "hda-gfx": "onboard-2",
+      "igfxfw": "0x02000000",
+      "model": "Intel UHD Graphics 630",
+      "igpu": "UHD630"
+    },
+    "i3-10325(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300983e",
+      "device-id": "0x983e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00009003",
+      "framebuffer-unifiedmem": "0x00000060",
+      "hda-gfx": "onboard-2",
+      "igfxfw": "0x02000000",
+      "model": "Intel UHD Graphics 630",
+      "igpu": "UHD630"
+    },
+    "i5-10210y(UHD620)": {
+      "AAPL,ig-platform-id": "0x0900a53e",
+      "device-id": "0xa53e0000",
+      "enable-backlight-registers-fix": "0x01000000",
+      "force-online": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-portcount": "0x02000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "hda-gfx": "onboard-1",
+      "igpu": "UHD620",
+      "model": "Intel UHD Graphics 620"
+    },
+    "i5-10310u(UHD620)": {
+      "AAPL,ig-platform-id": "0x0900a53e",
+      "device-id": "0xa53e0000",
+      "enable-backlight-registers-fix": "0x01000000",
+      "force-online": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-portcount": "0x02000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "hda-gfx": "onboard-1",
+      "igpu": "UHD620",
+      "model": "Intel UHD Graphics 620"
+    },
+    "i5-10400t(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300983e",
+      "device-id": "0x983e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00009003",
+      "framebuffer-unifiedmem": "0x00000060",
+      "hda-gfx": "onboard-2",
+      "igfxfw": "0x02000000",
+      "model": "Intel UHD Graphics 630",
+      "igpu": "UHD630"
+    },
+    "i5-10500t(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300983e",
+      "device-id": "0x983e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00009003",
+      "framebuffer-unifiedmem": "0x00000060",
+      "hda-gfx": "onboard-2",
+      "igfxfw": "0x02000000",
+      "model": "Intel UHD Graphics 630",
+      "igpu": "UHD630"
+    },
+    "i5-10505(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300983e",
+      "device-id": "0x983e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00009003",
+      "framebuffer-unifiedmem": "0x00000060",
+      "hda-gfx": "onboard-2",
+      "igfxfw": "0x02000000",
+      "model": "Intel UHD Graphics 630",
+      "igpu": "UHD630"
+    },
+    "i5-10600t(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300983e",
+      "device-id": "0x983e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00009003",
+      "framebuffer-unifiedmem": "0x00000060",
+      "hda-gfx": "onboard-2",
+      "igfxfw": "0x02000000",
+      "model": "Intel UHD Graphics 630",
+      "igpu": "UHD630"
+    },
+    "i7-10510y(UHD620)": {
+      "AAPL,ig-platform-id": "0x0900a53e",
+      "device-id": "0xa53e0000",
+      "enable-backlight-registers-fix": "0x01000000",
+      "force-online": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-portcount": "0x02000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "hda-gfx": "onboard-1",
+      "igpu": "UHD620",
+      "model": "Intel UHD Graphics 620",
+      "_note": "⚠️ Y系列超低压，platform-id 待确认"
+    },
+    "i7-10610u(UHD620)": {
+      "AAPL,ig-platform-id": "0x0900a53e",
+      "device-id": "0xa53e0000",
+      "enable-backlight-registers-fix": "0x01000000",
+      "force-online": "0x01000000",
+      "framebuffer-fbmem": "0x00009000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-portcount": "0x02000000",
+      "framebuffer-stolenmem": "0x00003001",
+      "hda-gfx": "onboard-1",
+      "igpu": "UHD620",
+      "model": "Intel UHD Graphics 620"
+    },
+    "i7-10700t(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300983e",
+      "device-id": "0x983e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00009003",
+      "framebuffer-unifiedmem": "0x00000060",
+      "hda-gfx": "onboard-2",
+      "igfxfw": "0x02000000",
+      "model": "Intel UHD Graphics 630",
+      "igpu": "UHD630"
+    },
+    "i9-10900t(UHD630)": {
+      "AAPL,ig-platform-id": "0x0300983e",
+      "device-id": "0x983e0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00009003",
+      "framebuffer-unifiedmem": "0x00000060",
+      "hda-gfx": "onboard-2",
+      "igfxfw": "0x02000000",
+      "model": "Intel UHD Graphics 630",
+      "igpu": "UHD630"
+    },
+    "i9-10980hk(UHD630)": {
+      "AAPL,ig-platform-id": "0x3e9b0000",
+      "device-id": "0x3e9b0000",
+      "AAPL,slot-name": "Internal@0,2,0",
+      "enable-hdmi20": "0x01000000",
+      "framebuffer-fbmem": "0x00000000",
+      "framebuffer-patch-enable": "0x01000000",
+      "framebuffer-stolenmem": "0x00009003",
+      "framebuffer-unifiedmem": "0x00000060",
+      "hda-gfx": "onboard-2",
+      "igfxfw": "0x02000000",
+      "model": "Intel UHD Graphics 630",
+      "igpu": "UHD630",
+      "_note": "⚠️ mobile HK，pid 已改为 0x3e9b0000"
+    }
+  }
+}
