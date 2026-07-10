@@ -201,12 +201,8 @@ jobs:
         run: |
           FLUTTER_VER=$(curl -fsSL \
             "https://storage.googleapis.com/flutter_infra_release/releases/releases_linux.json" \
-            | python3 -c "
-import sys, json
-d = json.load(sys.stdin)
-h = d['current_release']['stable']
-print(next(r['version'] for r in d['releases'] if r['hash'] == h))
-")
+            | jq -r '.current_release.stable as $h | .releases[] | select(.hash == $h) | .version' \
+            | head -1)
           echo "Installing Flutter $FLUTTER_VER (linux/arm64)"
           URL="https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_arm64_${FLUTTER_VER}-stable.tar.xz"
           curl -fsSL "$URL" -o flutter.tar.xz
