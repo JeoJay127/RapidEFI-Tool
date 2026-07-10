@@ -239,6 +239,17 @@ jobs:
 
       - run: flutter pub get
 
+      # ── Windows：设置与构建目标架构匹配的 JDK ─────────
+      # windows-latest 现已是 ARM64 runner，默认 JDK 也是 aarch64；
+      # jni 插件链接时需要与目标架构一致的 jvm.lib，必须显式指定。
+      - name: Setup Java (match build arch)
+        if: matrix.os == 'windows'
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          architecture: ${{ matrix.arch }}
+
       # ── 修复 permission_handler_windows 在 MSVC 14.51+ 下的 C2338 错误 ──
       # CMAKE_CXX_FLAGS 无法可靠传递到插件 vcxproj，直接 patch pub cache 是唯一可靠方案
       - name: Patch permission_handler_windows (MSVC coroutine compat)
@@ -312,7 +323,7 @@ jobs:
 
   # ──────────────────────────────────────────────────────
   # 3. 发布 Release
-  #    alpha / beta：强制覆盖同名 tag & release
+  #    alpha / beta：强制覆盖同名 tag & release（固定入口）
   #    stable      ：创建全新版本 release
   # ──────────────────────────────────────────────────────
   release:
@@ -325,16 +336,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # ── 强制移动 alpha/beta tag 到当前 commit ────────
-      - name: Force-update fixed tag
-        if: needs.prepare.outputs.fixed_tag == 'true'
-        run: |
-          TAG="${{ needs.prepare.outputs.tag }}"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config user.name  "github-actions[bot]"
-          git tag -f "$TAG"
-          git push origin "$TAG" --force
-
       # ── 下载所有构建产物 ────────────────────────────
       - uses: actions/download-artifact@v4
         with:
@@ -343,20 +344,9 @@ jobs:
 
       - run: ls -lh dist/
 
-      # ── alpha / beta：删除旧 release，重新创建 ───────
-      #    （确保附件始终是最新构建，不残留旧文件）
-      - name: Delete existing alpha/beta release
-        if: needs.prepare.outputs.fixed_tag == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          TAG="${{ needs.prepare.outputs.tag }}"
-          gh release delete "$TAG" --yes --cleanup-tag || true
-          # cleanup-tag 会删 tag，但我们上面已强制重建了，所以重新推一次
-          git push origin "$TAG" --force
-
-      # ── 创建 Release（alpha / beta）─────────────────
-      - name: Create alpha/beta release
+      # ── alpha / beta：原子操作——删旧 release+tag，建新 tag，发新 release ──
+      # 合并为单步，避免"先推 tag 又被 --cleanup-tag 删掉"的冗余操作
+      - name: Publish alpha/beta release (overwrite)
         if: needs.prepare.outputs.fixed_tag == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -365,21 +355,33 @@ jobs:
           CHANNEL="${{ needs.prepare.outputs.channel }}"
           VERSION="${{ needs.prepare.outputs.version }}"
 
+          # 1. 删除旧 release（含 tag），忽略不存在时的错误
+          gh release delete "$TAG" --yes --cleanup-tag 2>/dev/null || true
+
+          # 2. 强制推新 tag 到当前 commit
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name  "github-actions[bot]"
+          git tag -f "$TAG"
+          git push origin "$TAG" --force
+
+          # 3. 创建新 release（使用 printf '%s' 防止变量中特殊字符被解析）
           if [ "$CHANNEL" = "alpha" ]; then
             TITLE="🔬 Alpha Build"
-            NOTES="自动构建（每次推送到主分支更新此 Release）。\n\n**版本快照：** \`${VERSION}\`\n**构建号：** #${{ github.run_number }}\n**Commit：** ${{ github.sha }}"
+            NOTES=$(printf '自动构建（每次推送到主分支更新此 Release）。\n\n**版本快照：** `%s`\n**构建号：** #%s\n**Commit：** %s' \
+              "$VERSION" "${{ github.run_number }}" "${{ github.sha }}")
           else
             TITLE="🧪 Beta Build"
-            NOTES="Beta 手动构建（每次触发 Beta 发布更新此 Release）。\n\n**版本快照：** \`${VERSION}\`\n**构建号：** #${{ github.run_number }}\n**Commit：** ${{ github.sha }}"
+            NOTES=$(printf 'Beta 手动构建（每次触发 Beta 发布更新此 Release）。\n\n**版本快照：** `%s`\n**构建号：** #%s\n**Commit：** %s' \
+              "$VERSION" "${{ github.run_number }}" "${{ github.sha }}")
           fi
 
           gh release create "$TAG" dist/* \
             --prerelease \
             --title "$TITLE" \
-            --notes "$(printf "$NOTES")"
+            --notes "$NOTES"
 
-      # ── 创建 Release（stable）───────────────────────
-      - name: Create stable release
+      # ── stable：创建正式版本 release ──────────────────
+      - name: Publish stable release
         if: needs.prepare.outputs.fixed_tag == 'false'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -387,4 +389,5 @@ jobs:
           TAG="${{ needs.prepare.outputs.tag }}"
           gh release create "$TAG" dist/* \
             --title "${{ env.APP_NAME }} ${TAG}" \
-            --generate-notes
+            --generate-notes \
+            --latest
