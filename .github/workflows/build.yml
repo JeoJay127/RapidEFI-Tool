@@ -140,14 +140,15 @@ jobs:
             flutter_sdk_arch: x64
             flutter_manual: false
 
-          - label:          Linux-arm64
-            runner:         ubuntu-24.04-arm
-            os:             linux
-            arch:           arm64
-            build_dir:      build/linux/arm64/release/bundle
-            pkg_ext:        tar.gz
-            flutter_sdk_arch: arm64    # 无模拟层，必须原生 arm64 SDK
-            flutter_manual: true       # subosito/flutter-action 不支持 linux arm64
+          # Linux-arm64 暂时禁用（ubuntu-24.04-arm runner 网络不稳定）
+          # - label:          Linux-arm64
+          #   runner:         ubuntu-24.04-arm
+          #   os:             linux
+          #   arch:           arm64
+          #   build_dir:      build/linux/arm64/release/bundle
+          #   pkg_ext:        tar.gz
+          #   flutter_sdk_arch: arm64
+          #   flutter_manual: true
 
           # ── macOS ──────────────────────────────────
           - label:          macOS-x64
@@ -237,6 +238,27 @@ jobs:
           "$HOME/flutter/bin/flutter" --version
 
       - run: flutter pub get
+
+      # ── 修复 permission_handler_windows 在 MSVC 14.51+ 下的 C2338 错误 ──
+      # CMAKE_CXX_FLAGS 无法可靠传递到插件 vcxproj，直接 patch pub cache 是唯一可靠方案
+      - name: Patch permission_handler_windows (MSVC coroutine compat)
+        if: matrix.os == 'windows'
+        shell: pwsh
+        run: |
+          $hosted = "$env:LOCALAPPDATA\Pub\Cache\hosted\pub.dev"
+          $dirs   = Get-ChildItem -Path $hosted -Filter "permission_handler_windows*" -Directory -ErrorAction SilentlyContinue
+          foreach ($dir in $dirs) {
+            $cmake = Join-Path $dir.FullName "windows\CMakeLists.txt"
+            if (Test-Path $cmake) {
+              $txt = Get-Content $cmake -Raw
+              if ($txt -notmatch '_SILENCE_EXPERIMENTAL_COROUTINE_DEPRECATION_WARNINGS') {
+                Add-Content -Path $cmake -Value "`nadd_compile_definitions(_SILENCE_EXPERIMENTAL_COROUTINE_DEPRECATION_WARNINGS)"
+                Write-Host "Patched: $cmake"
+              } else {
+                Write-Host "Already patched: $cmake"
+              }
+            }
+          }
 
       # ── 版本号写入 pubspec.yaml ─────────────────────
       # pubspec 只接受 X.Y.Z+buildNumber 格式（纯整数）
