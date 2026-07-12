@@ -66,6 +66,11 @@ class ConfigRuleEngine {
     final patchModel = configService.buildPatchModel(configService.configModel);
     final persistedModel =
         configService.buildPersistedConfigModel(configService.configModel);
+    _removeExcludedAcpiItems(
+      patchModel,
+      persistedModel,
+      options.excludedAcpiPaths,
+    );
     await _removeMissingStaticAcpiItems(
       patchModel,
       persistedModel,
@@ -85,6 +90,26 @@ class ConfigRuleEngine {
       zipEfi: options.zipEfi,
       afterConfigWritten: options.afterConfigWritten,
     );
+  }
+
+  void _removeExcludedAcpiItems(
+    ConfigModel patchModel,
+    ConfigModel persistedModel,
+    Set<String> excludedPaths,
+  ) {
+    if (excludedPaths.isEmpty) return;
+    final normalizedPaths = excludedPaths
+        .map((path) => path.trim().toLowerCase())
+        .where((path) => path.isNotEmpty)
+        .toSet();
+    if (normalizedPaths.isEmpty) return;
+
+    bool excluded(AcpiAddItem item) => normalizedPaths.contains(
+          item.path.trim().toLowerCase(),
+        );
+
+    patchModel.acpi.acpiAddItems.removeWhere(excluded);
+    persistedModel.acpi.acpiAddItems.removeWhere(excluded);
   }
 
   Future<void> _removeMissingStaticAcpiItems(

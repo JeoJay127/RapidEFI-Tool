@@ -1504,14 +1504,12 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "RMNE", 0x00001000)
 """;
 
   static const String ssdtFixShutdown = r"""
-DefinitionBlock ("", "SSDT", 2, "RAPID", "ZPTS", 0x00000000)
+DefinitionBlock ("", "SSDT", 2, "RAPID", "PFSH", 0x00000000)
 {
     External (_SB_.PCI0.XHC_.PMEE, FieldUnitObj)
-    External (ZPTS, MethodObj)    
 
-    Method (_PTS, 1, NotSerialized)  
+    Method (PFSH, 1, NotSerialized)
     {
-        ZPTS (Arg0)
         If ((0x05 == Arg0))
         {
             \_SB.PCI0.XHC.PMEE = Zero

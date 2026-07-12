@@ -457,7 +457,9 @@ class HardwareInfo {
         _backfillGpuCodename(item, key, cpuCodename ?? _primaryCpuCodename());
       }
 
-      if (_s(item['Device Type']).isEmpty) {
+      if (_hasAmdIntegratedGpuEvidence(item, key)) {
+        item['Device Type'] = gpu_cd.GpuResolvedType.integrated.label;
+      } else if (_s(item['Device Type']).isEmpty) {
         _backfillGpuDeviceType(item, key, _s(item['Codename']),
             cpuCodename ?? _primaryCpuCodename());
       }
@@ -505,13 +507,6 @@ class HardwareInfo {
       }
     }
 
-    final bracketCodename =
-        gpu_cd.GpuCodenameData.extractCodenameFromBracket(gpuName);
-    if (bracketCodename != null && bracketCodename.isNotEmpty) {
-      gpu['Codename'] = bracketCodename;
-      return;
-    }
-
     if (gpu_cd.GpuCodenameData.isIntelGpu(deviceId) && cpuCodename != null) {
       gpu['Codename'] = cpuCodename;
       return;
@@ -530,6 +525,30 @@ class HardwareInfo {
       gpu['Codename'] = cpuCodename;
       return;
     }
+
+    gpu['Codename'] = 'Unknown';
+  }
+
+  static bool _hasAmdIntegratedGpuEvidence(
+    Map<String, dynamic> gpu,
+    String gpuName,
+  ) {
+    final deviceId = _s(gpu['Device ID']);
+    final displayName = [
+      gpuName,
+      _s(gpu['Name']),
+      _s(gpu['DeviceDesc']),
+      _s(gpu['Device Description']),
+      _s(gpu['Description']),
+    ].where((value) => value.isNotEmpty).join(' ');
+
+    return gpu_cd.GpuCodenameData.hasAmdIntegratedGpuEvidence(
+      name: displayName,
+      deviceId: deviceId,
+      rawDeviceType: gpu['Device Type'],
+      codename: _s(gpu['Codename']),
+      pciIdsDeviceName: gpu_cd.GpuCodenameData.lookupDeviceName(deviceId),
+    );
   }
 
   static bool _gpuCodenameNeedsBackfill(
@@ -541,6 +560,7 @@ class HardwareInfo {
 
     final normalizedCodename = _normalizeGpuModelText(codename);
     if (normalizedCodename.isEmpty) return true;
+    if (gpu_cd.GpuCodenameData.isIntegratedByName(codename)) return true;
 
     final candidates = [
       gpuName,

@@ -298,6 +298,7 @@ jobs:
         if: matrix.os == 'windows'
         shell: pwsh
         run: |
+          Copy-Item -Path "docs\dll\*.dll" -Destination "${{ matrix.build_dir }}" -Force
           $dest = "${{ env.APP_NAME }}-${{ matrix.label }}.zip"
           Compress-Archive -Path "${{ matrix.build_dir }}\*" -DestinationPath $dest -Force
 
@@ -313,7 +314,7 @@ jobs:
         if: matrix.os == 'macos'
         run: |
           cd "${{ matrix.build_dir }}"
-          zip -r "$GITHUB_WORKSPACE/${{ env.APP_NAME }}-${{ matrix.label }}.zip" *.app
+          zip -ry "$GITHUB_WORKSPACE/${{ env.APP_NAME }}-${{ matrix.label }}.zip" *.app
 
       # ── 上传 ───────────────────────────────────────
       - uses: actions/upload-artifact@v4

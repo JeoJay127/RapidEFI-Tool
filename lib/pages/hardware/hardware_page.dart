@@ -442,7 +442,7 @@ class _HardwarePageState extends State<HardwarePage> {
       case _HardwareSection.bluetooth:
         return BluetoothSection(data, detailed: detailed);
       case _HardwareSection.io:
-        return IOSection(data);
+        return IOSection(data, detailed: detailed);
       case _HardwareSection.bios:
         return BiosSection(data);
     }
@@ -482,6 +482,8 @@ const List<Object> _simpleSections = [
   _HardwareSection.audio,
   _HardwareSectionGap.gap,
   _HardwareSection.bluetooth,
+  _HardwareSectionGap.gap,
+  _HardwareSection.io,
   _HardwareSectionGap.gap,
   _HardwareSection.bios,
 ];

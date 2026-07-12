@@ -21,15 +21,15 @@ RapidEFI 的配置逻辑遵循 OpenCore 官方文档与 Dortania OpenCore 安装
   <tr>
     <td align="center">
       <strong>Windows 用户</strong><br>
-      <a href="https://github.com/JeoJay127/RapidEFI-Tool/releases/latest/download/RapidEFI-Pro-Windows.zip"><img src="https://img.shields.io/badge/Windows-Download-0078D6?logo=windows&logoColor=white" alt="Download for Windows"></a>
+      <a href="https://github.com/JeoJay127/RapidEFI-Tool/releases/latest/download/RapidEFI-Windows-x64.zip"><img src="https://img.shields.io/badge/Windows-Download-0078D6?logo=windows&logoColor=white" alt="Download for Windows"></a>
     </td>
     <td align="center">
       <strong>macOS 用户</strong><br>
-      <a href="https://github.com/JeoJay127/RapidEFI-Tool/releases/latest/download/RapidEFI-Pro-macOS.zip"><img src="https://img.shields.io/badge/macOS-Download-000000?logo=apple&logoColor=white" alt="Download for macOS"></a>
+      <a href="https://github.com/JeoJay127/RapidEFI-Tool/releases/latest/download/RapidEFI-macOS-x64.zip"><img src="https://img.shields.io/badge/macOS-Download-000000?logo=apple&logoColor=white" alt="Download for macOS"></a>
     </td>
     <td align="center">
       <strong>Linux 用户</strong><br>
-      <a href="https://github.com/JeoJay127/RapidEFI-Tool/releases/latest/download/RapidEFI-Pro-Linux.tar.xz"><img src="https://img.shields.io/badge/Linux-Download-FCC624?logo=linux&logoColor=black" alt="Download for Linux"></a>
+      <a href="https://github.com/JeoJay127/RapidEFI-Tool/releases/latest/download/RapidEFI-Linux-x64.tar.gz"><img src="https://img.shields.io/badge/Linux-Download-FCC624?logo=linux&logoColor=black" alt="Download for Linux"></a>
     </td>
   </tr>
 </table>

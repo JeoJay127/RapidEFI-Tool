@@ -7,6 +7,7 @@ import 'package:path/path.dart' as path;
 import 'merge.dart';
 import 'ssdt.dart';
 import 'config.dart';
+import 'parser.dart';
 import 'table.dart';
 import '../log/log.dart';
 
@@ -48,6 +49,12 @@ class ACPIToolManager {
   AcpiConfig _acpiConfig;
   AcpiConfig get acpiConfig => _acpiConfig;
   final String resultFolder = 'Results';
+  static const Map<String, String> _sleepHookActionSsdtNames = {
+    'SSDT-LID': 'SSDT-LID',
+    'SSDT-FixShutdown': 'SSDT-FixShutdown',
+    'SSDT-WakeScreen': 'SSDT-WakeScreen',
+    'SSDT-LED': 'SSDT-LED',
+  };
 
   set acpiConfig(AcpiConfig config) {
     _acpiConfig = config;
@@ -261,16 +268,25 @@ class ACPIToolManager {
     PatchContext? context,
     String? outputFolder,
     Function(String)? onError,
+    bool generateSleepHook = true,
   }) async {
     final executor = _actionMap[action.name];
     if (executor != null) {
+      final dependencySsdtName = _sleepHookActionSsdtNames[action.name];
       try {
         Log('------------------------------------------ 开始定制 ${action.name} ------------------------------------------'); 
         final ctx = context ?? PatchContext();
         ssdt.outputFolder = outputFolder ?? resultFolder;
+        if (dependencySsdtName != null) {
+          await _removeSsdtArtifacts(dependencySsdtName, outputFolder);
+        }
         await executor(context: ctx, action: action);
       } catch (e) {
         onError?.call('执行失败: $action, 错误: $e');
+      } finally {
+        if (generateSleepHook && dependencySsdtName != null) {
+          await _rebuildSleepHookFromOutput(outputFolder);
+        }
       }
     } else {
       onError?.call('不支持的补丁操作: $action');
@@ -314,17 +330,200 @@ class ACPIToolManager {
         context: context,
         outputFolder: outputFolder,
         onError: onError,
+        generateSleepHook: false,
       );
     }
 
-    final outputPath = path.join(ssdt.config.outputDirectory!, outputFolder);
+    final generatedDependencies = <String>{};
+    for (final action in actions) {
+      final ssdtName = _sleepHookActionSsdtNames[action.name];
+      if (ssdtName != null && _hasRegisteredSsdt(ssdtName, outputFolder)) {
+        generatedDependencies.add(ssdtName);
+      }
+    }
+    await _rebuildSleepHook(generatedDependencies, outputFolder);
+
+    final targetOutputFolder = outputFolder ?? resultFolder;
+    final outputPath = path.join(
+      ssdt.config.outputDirectory!,
+      targetOutputFolder,
+    );
     final resultPath = path.join(ssdt.config.outputDirectory!, resultFolder);
 
     await _waitForDirectoryStable(outputPath);
 
-    if (copyToResults) {
+    if (copyToResults && outputPath != resultPath) {
       await ssdt.util.copyDirectory(outputPath, resultPath);
     }
+  }
+
+  Future<void> _rebuildSleepHookFromOutput(String? outputFolder) async {
+    final generatedDependencies = _sleepHookActionSsdtNames.values
+        .where((name) => _hasRegisteredSsdt(name, outputFolder))
+        .toSet();
+    await _rebuildSleepHook(generatedDependencies, outputFolder);
+  }
+
+  Future<void> _rebuildSleepHook(
+    Set<String> generatedDependencies,
+    String? outputFolder,
+  ) async {
+    final includeLid = generatedDependencies.contains('SSDT-LID');
+    final includeFixShutdown = generatedDependencies.contains(
+      'SSDT-FixShutdown',
+    );
+    final includeWakeScreen = generatedDependencies.contains('SSDT-WakeScreen');
+    final includeLed = generatedDependencies.contains('SSDT-LED');
+    final needsPtsHook = includeLid || includeFixShutdown;
+    final needsWakHook = includeLid || includeWakeScreen || includeLed;
+
+    await _removeSsdtArtifacts('SSDT-SleepHook', outputFolder);
+    if (needsPtsHook || needsWakHook) {
+      ssdt.outputFolder = outputFolder ?? resultFolder;
+      await ssdt.ssdtSleepHook(
+        needsPts: needsPtsHook,
+        needsWak: needsWakHook,
+        includeLid: includeLid,
+        includeLed: includeLed,
+        includeWakeScreen: includeWakeScreen,
+        includeFixShutdown: includeFixShutdown,
+      );
+      Log("");
+    }
+  }
+
+  bool _hasRegisteredSsdt(String ssdtName, String? outputFolder) {
+    final pathName = '$ssdtName.aml';
+    final plistState = _plistContainsSsdt(pathName, outputFolder);
+    return _hasGeneratedSsdt(ssdtName, outputFolder) && plistState == true;
+  }
+
+  bool? _plistContainsSsdt(String pathName, String? outputFolder) {
+    if (ssdt.batchedPlistContainsSsdt(pathName)) return true;
+
+    final baseDirectory = ssdt.config.outputDirectory;
+    if (baseDirectory == null || baseDirectory.isEmpty) return null;
+
+    final targetFolder = outputFolder ?? resultFolder;
+    final parser = PlistParser();
+    bool foundAnyPlist = false;
+    final plistPaths = [
+      path.join(baseDirectory, targetFolder, 'patches_OC.plist'),
+      path.join(baseDirectory, targetFolder, 'patches_Clover.plist'),
+    ];
+
+    for (final plistPath in plistPaths) {
+      final result = parser.loadPlist(plistPath);
+      if (result.status != PlistParseStatus.success) continue;
+      foundAnyPlist = true;
+      final data = result.data ?? {};
+      if (_openCoreAddContains(data, pathName) ||
+          _cloverSortedOrderContains(data, pathName)) {
+        return true;
+      }
+    }
+
+    return foundAnyPlist ? false : null;
+  }
+
+  bool _openCoreAddContains(Map<String, dynamic> plist, String pathName) {
+    final add = plist['ACPI']?['Add'];
+    if (add is! List) return false;
+    return add.any(
+      (entry) => entry is Map && entry['Path']?.toString() == pathName,
+    );
+  }
+
+  bool _cloverSortedOrderContains(Map<String, dynamic> plist, String pathName) {
+    final sortedOrder = plist['ACPI']?['SortedOrder'];
+    if (sortedOrder is! List) return false;
+    return sortedOrder.any((entry) => entry?.toString() == pathName);
+  }
+
+  bool _hasGeneratedSsdt(String ssdtName, String? outputFolder) {
+    final baseDirectory = ssdt.config.outputDirectory;
+    if (baseDirectory == null || baseDirectory.isEmpty) return false;
+
+    final targetFolder = outputFolder ?? resultFolder;
+    final amlPath = path.join(baseDirectory, targetFolder, '$ssdtName.aml');
+    return File(amlPath).existsSync();
+  }
+
+  Future<void> _removeSsdtArtifacts(
+    String ssdtName,
+    String? outputFolder,
+  ) async {
+    final baseDirectory = ssdt.config.outputDirectory;
+    if (baseDirectory == null || baseDirectory.isEmpty) return;
+
+    final targetFolder = outputFolder ?? resultFolder;
+    ssdt.removeBatchedSsdtArtifacts(
+      '$ssdtName.aml',
+      removeSleepHookPatches: ssdtName == 'SSDT-SleepHook',
+    );
+    for (final extension in ['aml', 'dsl']) {
+      final file = File(
+        path.join(baseDirectory, targetFolder, '$ssdtName.$extension'),
+      );
+      if (await file.exists()) await file.delete();
+    }
+
+    final parser = PlistParser();
+    final plistPaths = [
+      path.join(baseDirectory, targetFolder, 'patches_OC.plist'),
+      path.join(baseDirectory, targetFolder, 'patches_Clover.plist'),
+    ];
+
+    for (final plistPath in plistPaths) {
+      final result = parser.loadPlist(plistPath);
+      if (result.status != PlistParseStatus.success) continue;
+
+      final data = result.data ?? {};
+      final removed = _removeSsdtFromPlist(data, '$ssdtName.aml');
+      if (removed) {
+        parser.savePlist(plistPath, data);
+      }
+    }
+  }
+
+  bool _removeSsdtFromPlist(Map<String, dynamic> plist, String pathName) {
+    var removed = false;
+    final openCoreAdd = plist['ACPI']?['Add'];
+    if (openCoreAdd is List) {
+      final before = openCoreAdd.length;
+      openCoreAdd.removeWhere(
+        (entry) => entry is Map && entry['Path']?.toString() == pathName,
+      );
+      removed = removed || openCoreAdd.length != before;
+    }
+
+    final cloverOrder = plist['ACPI']?['SortedOrder'];
+    if (cloverOrder is List) {
+      final before = cloverOrder.length;
+      cloverOrder.removeWhere((entry) => entry?.toString() == pathName);
+      removed = removed || cloverOrder.length != before;
+    }
+
+    for (final patches in [
+      plist['ACPI']?['Patch'],
+      plist['ACPI']?['DSDT']?['Patches'],
+    ]) {
+      if (patches is! List) continue;
+      final before = patches.length;
+      patches.removeWhere((entry) {
+        if (entry is! Map) return false;
+        final comment = entry['Comment']?.toString() ?? '';
+        return comment.contains('requires $pathName') ||
+            (pathName == 'SSDT-SleepHook.aml' &&
+                _isSleepHookRenamePatch(comment));
+      });
+      removed = removed || patches.length != before;
+    }
+    return removed;
+  }
+
+  bool _isSleepHookRenamePatch(String comment) {
+    return comment.contains('_PTS to ZPTS') || comment.contains('_WAK to ZWAK');
   }
 
   Future<void> copyPatchOutputToResults(String outputFolder) async {

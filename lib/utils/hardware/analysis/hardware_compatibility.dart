@@ -4,7 +4,6 @@ import 'package:rapidefi/utils/hardware/analysis/hardware_utils.dart';
 import 'package:rapidefi/utils/config/support/macos_version.dart';
 import 'package:rapidefi/utils/config/services/apple_alc_resolver.dart';
 import 'package:rapidefi/utils/hardware/data/alc_data.dart';
-import 'package:rapidefi/utils/hardware/data/gpu_codename_data.dart';
 import 'package:rapidefi/utils/hardware/data/hardware_device_data.dart';
 import 'package:rapidefi/utils/hardware/data/manufacturer_data.dart';
 
@@ -344,42 +343,12 @@ class _GpuSupportOutput {
 }
 
 bool _isNootedRedSupportedIntegratedGpu(
-  String name,
+  String _,
   Map<String, dynamic> gpu,
 ) {
-  if (!HardwareDeviceData.isNootedRedSupportedDeviceId(
+  return HardwareDeviceData.isNootedRedSupportedDeviceId(
     safeStr(gpu['Device ID']),
-  )) {
-    return false;
-  }
-
-  final rawType = safeStr(gpu['Device Type']).toLowerCase();
-  if (rawType.contains('discrete') || rawType.contains('独立')) {
-    return false;
-  }
-  if (rawType.contains('integrated') || rawType.contains('核心')) {
-    return true;
-  }
-
-  final displayName = [
-    name,
-    safeStr(gpu['Name']),
-    safeStr(gpu['DeviceDesc']),
-    safeStr(gpu['Device Description']),
-    safeStr(gpu['Description']),
-  ].where((value) => value.trim().isNotEmpty).join(' ');
-
-  final resolvedType = GpuCodenameData.resolveGpuType(
-    name: displayName,
-    deviceId: safeStr(gpu['Device ID']),
-    rawDeviceType: gpu['Device Type'],
-    acpiPath: safeStr(gpu['ACPI Path']),
-    pciPath: safeStr(gpu['PCI Path']),
-    codename: safeStr(gpu['Codename']),
   );
-  if (resolvedType == GpuResolvedType.discrete) return false;
-
-  return true;
 }
 
 String _gpuSupportDetail({
@@ -393,9 +362,7 @@ String _gpuSupportDetail({
     details.add(record.name);
   }
 
-  final supportPrefix = record.requiresSpoof
-      ? '仿冒支持'
-      : '原生支持';
+  final supportPrefix = record.requiresSpoof ? '仿冒支持' : '原生支持';
 
   details.add(
     '$supportPrefix ${_macOSRangeFromDarwin(record.minDarwin, effectiveMaxDarwin)}',
@@ -1043,7 +1010,7 @@ CompatibilityNote? storageCompatibility(Map<String, dynamic> data) {
 List<MapEntry<String, dynamic>> qtSdEntries(Map<String, dynamic> data) {
   final seen = <String>{};
 
-  return hardwareDevices(data['SD Controller']).where((entry) {
+  return hardwareDevices(data['SD Controllers']).where((entry) {
     final device = safeMap(entry.value);
     final id =
         '${entry.key}|${safeStr(device['Device ID'])}|${safeStr(device['PCI Path'])}';

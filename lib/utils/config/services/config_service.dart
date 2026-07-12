@@ -721,6 +721,7 @@ class ConfigService {
     if (_configModelMode == ConfigModelMode.auto) {
       _ensureDefaultDebugBootArgs(configModel);
     }
+    _normalizeIntelBacklightBootArg(configModel);
     configModel.platformCode = PlatformCodeRegistry.resolveCode(
       configModel.cpuType,
       configModel.platformType,
@@ -728,6 +729,22 @@ class ConfigService {
     );
     configModel.kernel.kernelKexts =
         normalizeKernelKexts(configModel.kernel.kernelKexts);
+  }
+
+  void _normalizeIntelBacklightBootArg(ConfigModel model) {
+    final hasBacklightArg =
+        BootArgsAccessor.contains(model, ConfigNvram.igfxblr.arg) ||
+            BootArgsAccessor.contains(model, ConfigNvram.igfxblt.arg);
+    if (!hasBacklightArg) return;
+
+    BootArgsAccessor.remove(model, ConfigNvram.igfxblr.arg);
+    BootArgsAccessor.remove(model, ConfigNvram.igfxblt.arg);
+    BootArgsAccessor.add(
+      model,
+      model.darwinMajorVersion >= 22
+          ? ConfigNvram.igfxblt.arg
+          : ConfigNvram.igfxblr.arg,
+    );
   }
 
   void _seedLegacyRuntimeFields(ConfigModel model) {

@@ -13,8 +13,11 @@ import 'prebuilt.dart';
 import 'run.dart';
 import 'package:path/path.dart' as path;
 
-typedef _NativePnlfDevice =
-    ({String tableName, Map<String, dynamic> table, List<dynamic> path});
+typedef _NativePnlfDevice = ({
+  String tableName,
+  Map<String, dynamic> table,
+  List<dynamic> path
+});
 
 class SSDT {
   final Run run = Run();
@@ -22,6 +25,14 @@ class SSDT {
   final Util util = Util();
   final targetIrqs = [0, 2, 8, 11];
   final illegalNames = ["XHC1", "EHC1", "EHC2", "PXSX"];
+  final Map<String, List<String>> ssdtDependencies = const {
+    "SSDT-SleepHook.aml": [
+      "SSDT-LID.aml",
+      "SSDT-FixShutdown.aml",
+      "SSDT-WakeScreen.aml",
+      "SSDT-LED.aml",
+    ],
+  };
 
   final String legacyWarning =
       '注意:旧版iasl-legacy仅支持macOS 10.6及更早版本，目前主流系统使用可能存在兼容性问题,谨慎使用!!!\n';
@@ -5316,11 +5327,193 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "IMEI", 0x00000000)
 
   Future<void> ssdtLED({bool prebuilt = false}) async => _ssdtLED();
 
+  String _methodFlag(List<dynamic> info) {
+    if (info.length >= 5) return info[4].toString();
+    return "NotSerialized";
+  }
+
+  Map<String, dynamic> _renameMethodPatch({
+    required String method,
+    required String renamed,
+    required String flag,
+    required String comment,
+  }) {
+    final methodHex = method.codeUnits
+        .map((value) => value.toRadixString(16).padLeft(2, '0'))
+        .join()
+        .toUpperCase();
+    final renamedHex = renamed.codeUnits
+        .map((value) => value.toRadixString(16).padLeft(2, '0'))
+        .join()
+        .toUpperCase();
+    final suffix = flag == "NotSerialized" ? "01" : "09";
+    return {
+      "Comment": comment,
+      "Find": "$methodHex$suffix",
+      "Replace": "$renamedHex$suffix",
+    };
+  }
+
+  Future<void> ssdtSleepHook({
+    required bool needsPts,
+    required bool needsWak,
+    bool includeLid = false,
+    bool includeLed = false,
+    bool includeWakeScreen = false,
+    bool includeFixShutdown = false,
+  }) async {
+    if (!needsPts && !needsWak) return;
+    if (!await ensureDSDT()) return;
+
+    List<dynamic> pts = [];
+    List<dynamic> wak = [];
+    var sortedTables = sortedNicely(d.acpiTables.keys.toList());
+    for (var tableName in sortedTables) {
+      var table = d.acpiTables[tableName];
+      Log("正在检查 $tableName…");
+      if (needsPts && pts.isEmpty) {
+        Log("正在检查是否存在 _PTS 方法...");
+        pts = d.getMethodInfo(obj: "_PTS", table: table);
+        if (pts.isNotEmpty) {
+          Log("=> 已找到 ${pts.first} 方法!");
+        } else {
+          Log("=> 未找到 _PTS 方法!");
+        }
+      }
+      if (needsWak && wak.isEmpty) {
+        Log("正在检查是否存在 _WAK 方法...");
+        wak = d.getMethodInfo(obj: "_WAK", table: table);
+        if (wak.isNotEmpty) {
+          Log("=> 已找到 ${wak.first} 方法!");
+        } else {
+          Log("=> 未找到 _WAK 方法!");
+        }
+      }
+      if ((!needsPts || pts.isNotEmpty) && (!needsWak || wak.isNotEmpty)) {
+        break;
+      }
+    }
+
+    if (needsPts && pts.isEmpty) {
+      Log.warning("=> 未找到 _PTS 方法, 将不生成 _PTS 调度入口和重命名补丁!");
+    }
+    if (needsWak && wak.isEmpty) {
+      Log.warning("=> 未找到 _WAK 方法, 将不生成 _WAK 调度入口和重命名补丁!");
+    }
+    final hasPtsEntry = needsPts && pts.isNotEmpty;
+    final hasWakEntry = needsWak && wak.isNotEmpty;
+    if (!hasPtsEntry && !hasWakEntry) {
+      Log.warning("=> 未找到可调度的 _PTS/_WAK 方法, 已跳过 SSDT-SleepHook!\n");
+      return;
+    }
+
+    final ssdtName = "SSDT-SleepHook";
+    Log("正在创建 $ssdtName.dsl...");
+
+    final buffer = StringBuffer();
+    buffer.writeln(
+      'DefinitionBlock ("", "SSDT", 2, "RAPID", "SLPHOOK", 0x00000000)',
+    );
+    buffer.writeln('{');
+    if (pts.isNotEmpty) {
+      buffer.writeln('    External (ZPTS, MethodObj)');
+      if (includeLid) buffer.writeln('    External (PLID, MethodObj)');
+      if (includeFixShutdown) buffer.writeln('    External (PFSH, MethodObj)');
+    }
+    if (wak.isNotEmpty) {
+      buffer.writeln('    External (ZWAK, MethodObj)');
+      if (includeLid) buffer.writeln('    External (WLID, MethodObj)');
+      if (includeWakeScreen) buffer.writeln('    External (WSCN, MethodObj)');
+      if (includeLed) buffer.writeln('    External (WLED, MethodObj)');
+    }
+    if (pts.isNotEmpty) {
+      buffer.writeln('');
+      buffer.writeln('    Method (_PTS, 1, ${_methodFlag(pts)})');
+      buffer.writeln('    {');
+      if (includeLid) {
+        buffer.writeln('''
+        If (CondRefOf (PLID))
+        {
+            PLID (Arg0)
+        }''');
+      }
+      if (includeFixShutdown) {
+        buffer.writeln('''
+        If (CondRefOf (PFSH))
+        {
+            PFSH (Arg0)
+        }''');
+      }
+      buffer.writeln('''
+        ZPTS (Arg0)
+    }
+''');
+    }
+    if (wak.isNotEmpty) {
+      buffer.writeln('');
+      buffer.writeln('    Method (_WAK, 1, ${_methodFlag(wak)})');
+      buffer.writeln('    {');
+      if (includeLid) {
+        buffer.writeln('''
+        If (CondRefOf (WLID))
+        {
+            WLID (Arg0)
+        }''');
+      }
+      if (includeWakeScreen) {
+        buffer.writeln('''
+        If (CondRefOf (WSCN))
+        {
+            WSCN (Arg0)
+        }''');
+      }
+      if (includeLed) {
+        buffer.writeln('''
+        If (CondRefOf (WLED))
+        {
+            WLED (Arg0)
+        }''');
+      }
+      buffer.writeln('''
+        Return (ZWAK (Arg0))
+    }
+''');
+    }
+    buffer.writeln('}');
+
+    if (!await writeSSDT(ssdtName, buffer.toString())) return;
+    final acpi = {
+      "Comment": "Dispatch _PTS/_WAK hooks for selected SSDTs",
+      "Enabled": true,
+      "Path": "$ssdtName.aml",
+    };
+    final patches = <Map<String, dynamic>>[];
+    if (pts.isNotEmpty) {
+      patches.add(
+        _renameMethodPatch(
+          method: "_PTS",
+          renamed: "ZPTS",
+          flag: _methodFlag(pts),
+          comment: "_PTS to ZPTS rename - requires $ssdtName.aml",
+        ),
+      );
+    }
+    if (wak.isNotEmpty) {
+      patches.add(
+        _renameMethodPatch(
+          method: "_WAK",
+          renamed: "ZWAK",
+          flag: _methodFlag(wak),
+          comment: "_WAK to ZWAK rename - requires $ssdtName.aml",
+        ),
+      );
+    }
+    await makePlist(acpi: acpi, patches: patches, replace: true);
+  }
+
   Future<void> _ssdtLED() async {
     if (!await ensureDSDT()) return;
     String sstPath = "";
-    List<dynamic> wak = [];
-    List<dynamic> zwak = [];
     var sortedTables = sortedNicely(d.acpiTables.keys.toList());
     for (var tableName in sortedTables) {
       var table = d.acpiTables[tableName];
@@ -5335,27 +5528,6 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "IMEI", 0x00000000)
           Log("=> 未找到 _SST 方法!");
         }
       }
-      if (wak.isEmpty) {
-        Log("正在检查是否存在 _WAK方法...");
-        wak = d.getMethodInfo(obj: "_WAK", table: table);
-        if (wak.isNotEmpty) {
-          Log("=> 已找到 ${wak.first} 方法!");
-        } else {
-          Log("=> 未找到 _WAK 方法!");
-        }
-      }
-
-      if (wak.isEmpty && zwak.isEmpty) {
-        Log("正在检查是否存在 ZWAK 方法...");
-        // 检查是否存在 ZWAK 方法
-        zwak = d.getMethodInfo(obj: "ZWAK");
-        if (zwak.isNotEmpty) {
-          Log.warning("=> 已找到 ${zwak.first} 方法!");
-        }
-        if (zwak.isNotEmpty) {
-          Log.warning("=> 当前方法已经被重命名,可能非原始ACPI表!");
-        }
-      }
     }
     if (sstPath.isEmpty) {
       Log.warning("=> 在上述所有ACPI表中均未找到 _SST 方法! 已终止操作！\n");
@@ -5367,36 +5539,26 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "IMEI", 0x00000000)
  DefinitionBlock ("", "SSDT", 1, "RAPID", "LED", 0x00000000)
 {
     External ($sstPath, MethodObj)
-    External (ZWAK, MethodObj)
-    Method (_WAK, 1, ${wak.last})
+    Method (WLED, 1, NotSerialized)
     {
       
       If (_OSI ("Darwin"))
         {
-            If (Arg0 = 0x03)
+            If (Arg0 == 0x03)
             {
                 $sstPath (One)
             }
         }
-
-        Return (ZWAK (Arg0))
     }
 }
     ''';
-    writeSSDT(ssdtName, ssdt);
+    if (!await writeSSDT(ssdtName, ssdt)) return;
     final acpi = {
-      "Comment": "Fixing LED issues - requires _WAK to ZWAK rename",
+      "Comment": "Fixing LED issues - called by SSDT-SleepHook",
       "Enabled": true,
       "Path": "$ssdtName.aml",
     };
-    final patches = [
-      {
-        "Comment": "_WAK to ZWAK (1,${wak.last[0]})",
-        "Find": wak.last == "NotSerialized" ? "5F57414B01" : "5F57414B09",
-        "Replace": wak.last == "NotSerialized" ? "5A57414B01" : "5A57414B09",
-      },
-    ];
-    makePlist(acpi: acpi, patches: patches, replace: true);
+    await makePlist(acpi: acpi, replace: true);
   }
 
   Future<void> ssdtWakeScreen({bool prebuilt = false}) async =>
@@ -5405,8 +5567,6 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "IMEI", 0x00000000)
   Future<void> _ssdtWakeScreen() async {
     if (!await ensureDSDT()) return;
     String devicePath = "";
-    List<dynamic> wak = [];
-    List<dynamic> zwak = [];
     var sortedTables = sortedNicely(d.acpiTables.keys.toList());
     for (var tableName in sortedTables) {
       var table = d.acpiTables[tableName];
@@ -5421,35 +5581,9 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "IMEI", 0x00000000)
           Log("=> 未找到 PNP0C0D 设备!");
         }
       }
-      if (wak.isEmpty) {
-        Log("正在检查是否存在 _WAK方法...");
-        wak = d.getMethodInfo(obj: "_WAK", table: table);
-        if (wak.isNotEmpty) {
-          Log("=> 已找到 ${wak.first} 方法!");
-          break;
-        } else {
-          Log("=> 未找到 _WAK 方法!");
-        }
-      }
-      if (wak.isEmpty && zwak.isEmpty) {
-        Log("正在检查是否存在 ZWAK 方法...");
-        // 检查是否存在 ZWAK 方法
-        zwak = d.getMethodInfo(obj: "ZWAK");
-        if (zwak.isNotEmpty) {
-          Log.warning("=> 已找到 ${zwak.first} 方法!");
-          break;
-        }
-        if (zwak.isNotEmpty) {
-          Log.warning("=> 当前方法已经被重命名,可能非原始ACPI表!");
-        }
-      }
     }
     if (devicePath.isEmpty) {
       Log.warning("=> 在上述所有ACPI表中均未找到 PNP0C0D 设备! 已终止操作！\n");
-      return;
-    }
-    if (wak.isEmpty && zwak.isEmpty) {
-      Log.warning("=> 在上述所有ACPI表中均未找到 _WAK、ZWAK 方法! 已终止操作！\n");
       return;
     }
     final ssdtName = "SSDT-WakeScreen";
@@ -5458,34 +5592,25 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "IMEI", 0x00000000)
   DefinitionBlock("", "SSDT", 2, "RAPID", "WakeS", 0x00000000)
 {
     External($devicePath, DeviceObj)
-    External (ZWAK, MethodObj)
-    Method (_WAK, 1, ${wak.last})
-    {   
+    Method (WSCN, 1, NotSerialized)
+    {
         If (_OSI ("Darwin"))
         {
-            If (Arg0 = 0x03)
+            If (Arg0 == 0x03)
             {
                 Notify ($devicePath, 0x80)
             }
         }
-        Return (ZWAK (Arg0))
     }
 }      
       ''';
-    writeSSDT(ssdtName, ssdt);
+    if (!await writeSSDT(ssdtName, ssdt)) return;
     final acpi = {
-      "Comment": "Fixing WakeScreen issues - requires _WAK to ZWAK rename",
+      "Comment": "Fixing WakeScreen issues - called by SSDT-SleepHook",
       "Enabled": true,
       "Path": "$ssdtName.aml",
     };
-    final patches = [
-      {
-        "Comment": "_WAK to ZWAK (1,${wak.last[0]})",
-        "Find": wak.last == "NotSerialized" ? "5F57414B01" : "5F57414B09",
-        "Replace": wak.last == "NotSerialized" ? "5A57414B01" : "5A57414B09",
-      },
-    ];
-    makePlist(acpi: acpi, patches: patches, replace: true);
+    await makePlist(acpi: acpi, replace: true);
   }
 
   /// 检查系统状态支持情况（_S0, _S3, _S4, _S5）
@@ -5688,11 +5813,7 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "IMEI", 0x00000000)
   Future<void> _ssdtLID() async {
     if (!await ensureDSDT()) return;
     String devicePath = "";
-    List<dynamic> pts = [];
-    List<dynamic> wak = [];
     List<dynamic> tts = [];
-    List<dynamic> zpts = [];
-    List<dynamic> zwak = [];
     bool foundMethodLID = false;
     var sortedTables = sortedNicely(d.acpiTables.keys.toList());
     for (var tableName in sortedTables) {
@@ -5719,24 +5840,6 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "IMEI", 0x00000000)
           Log("=> 未找到 Method _LID!");
         }
       }
-      if (pts.isEmpty) {
-        Log("正在检查是否存在 _PTS方法...");
-        pts = d.getMethodInfo(obj: "_PTS", table: table);
-        if (pts.isNotEmpty) {
-          Log("=> 已找到 ${pts.first} 方法!");
-        } else {
-          Log("=> 未找到 _PTS 方法!");
-        }
-      }
-      if (wak.isEmpty) {
-        Log("正在检查是否存在 _WAK方法...");
-        wak = d.getMethodInfo(obj: "_WAK", table: table);
-        if (wak.isNotEmpty) {
-          Log("=> 已找到 ${wak.first} 方法!");
-        } else {
-          Log("=> 未找到 _WAK 方法!");
-        }
-      }
       if (tts.isEmpty) {
         Log("正在检查是否存在 _TTS方法...");
         tts = d.getMethodInfo(obj: "_TTS", table: table);
@@ -5755,25 +5858,9 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "IMEI", 0x00000000)
           }
         }
       }
-      if (pts.isNotEmpty && wak.isNotEmpty && tts.isNotEmpty) {
+      if (tts.isNotEmpty) {
         Log("");
         break;
-      }
-      // 通常是成对处理 _PTS 和 _WAK 方法
-      if ((pts.isEmpty || wak.isEmpty) && zpts.isEmpty && zwak.isEmpty) {
-        Log("正在检查是否存在 ZPTS/ZWAK 方法...");
-        // 检查是否存在 ZPTS 方法
-        zpts = d.getMethodInfo(obj: "ZPTS");
-        zwak = d.getMethodInfo(obj: "ZWAK");
-        if (zpts.isNotEmpty) {
-          Log.warning("=> 已找到 ${zpts.first} 方法!");
-        }
-        if (zwak.isNotEmpty) {
-          Log.warning("=> 已找到 ${zwak.first} 方法!");
-        }
-        if (zpts.isNotEmpty || zwak.isNotEmpty) {
-          Log.warning("=> 当前方法已经被重命名,可能非原始ACPI表!");
-        }
       }
     }
     if (devicePath.isEmpty) {
@@ -5784,13 +5871,6 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "IMEI", 0x00000000)
       Log.warning("=> 在上述ACPI表中均未找到 Method _LID!已终止操作!\n");
       return;
     }
-    if (pts.isEmpty || wak.isEmpty) {
-      Log.warning("=> 在上述所有ACPI表中均未找到 _PTS/_WAK 方法! 已终止操作！\n");
-      return;
-    }
-    if (zpts.isNotEmpty || zwak.isNotEmpty) {
-      Log.warning("=> 注意: 当前提取的ACPI表中,方法_PTS/_WAK已经被重命名为ZPTS/ZWAK!\n");
-    }
 
     final ssdtName = "SSDT-LID";
     Log("正在创建 $ssdtName.dsl...");
@@ -5799,8 +5879,6 @@ DefinitionBlock("", "SSDT", 2, "RAPID", "LID", 0x00000000)
 {
     External($devicePath, DeviceObj)
     External($devicePath.XLID, MethodObj)
-    External (ZPTS, MethodObj)
-    External (ZWAK, MethodObj)
     Scope (_SB)
     {
         Device (PCI9)
@@ -5820,8 +5898,8 @@ DefinitionBlock("", "SSDT", 2, "RAPID", "LID", 0x00000000)
             }
         }
     }
-   
-    Method (_PTS, 1, NotSerialized)
+
+    Method (PLID, 1, NotSerialized)
     {
       If (_OSI ("Darwin")) {
           If (Arg0 == 0x03)
@@ -5833,15 +5911,13 @@ DefinitionBlock("", "SSDT", 2, "RAPID", "LID", 0x00000000)
             \\_SB.PCI9.FNOK = 0
         }
        }
-       ZPTS(Arg0)
     }
 
-    Method (_WAK, 1, NotSerialized)
+    Method (WLID, 1, NotSerialized)
     {
        If (_OSI ("Darwin")) {
             \\_SB.PCI9.FNOK = 0
         }
-        Return (ZWAK(Arg0))
     }
 
     Scope ($devicePath)
@@ -5868,7 +5944,7 @@ DefinitionBlock("", "SSDT", 2, "RAPID", "LID", 0x00000000)
 }
 ''';
 
-    writeSSDT(ssdtName, ssdt);
+    if (!await writeSSDT(ssdtName, ssdt)) return;
 
     final acpi = {
       "Comment":
@@ -5878,22 +5954,12 @@ DefinitionBlock("", "SSDT", 2, "RAPID", "LID", 0x00000000)
     };
     final patches = [
       {
-        "Comment": "_PTS to ZPTS (1,${pts.last[0]})",
-        "Find": pts.last == "NotSerialized" ? "5F50545301" : "5F50545309",
-        "Replace": pts.last == "NotSerialized" ? "5A50545301" : "5A50545309",
-      },
-      {
-        "Comment": "_WAK to ZWAK (1,${wak.last[0]})",
-        "Find": wak.last == "NotSerialized" ? "5F57414B01" : "5F57414B09",
-        "Replace": wak.last == "NotSerialized" ? "5A57414B01" : "5A57414B09",
-      },
-      {
         "Comment": "_LID to XLID rename - requires $ssdtName.aml",
         "Find": "5F4C494400",
         "Replace": "584C494400",
       },
     ];
-    makePlist(acpi: acpi, patches: patches, replace: true);
+    await makePlist(acpi: acpi, patches: patches, replace: true);
   }
 
   Future<void> ssdtPWRB({bool prebuilt = false}) async =>
@@ -6105,22 +6171,14 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "SLPB", 0x00000000)
     final String ssdtName = "SSDT-FixShutdown";
     Log("正在创建预编译 $ssdtName.dsl...");
     final ssdt = Prebuilt.ssdtFixShutdown;
-    writeSSDT(ssdtName, ssdt);
+    if (!await writeSSDT(ssdtName, ssdt)) return;
     final acpi = {
       "Comment":
-          "Fixing Shutdown for XHC Controllers - requires _PTS to ZPTS rename",
+          "Fixing Shutdown for XHC Controllers - called by SSDT-SleepHook",
       "Enabled": true,
       "Path": "$ssdtName.aml",
     };
-    final patches = [
-      {
-        "Comment": "_PTS to ZPTS rename - requires $ssdtName.aml",
-        "Find": "5F505453",
-        "Replace": "5A505453",
-        "Count": 1,
-      },
-    ];
-    makePlist(acpi: acpi, patches: patches, replace: true);
+    await makePlist(acpi: acpi, replace: true);
   }
 
   /// SSDT-FixShutdown
@@ -6169,12 +6227,11 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "SLPB", 0x00000000)
   /* Powers down the USB controller which is needed for proper shutdown.
  * When done incorrectly, macOS will not power down USB as it needs an
  * explicit call for S5 for proper shutdown procedure.
- * Do note this SSDT requires an ACPI hot patch for _PTS to ZPTS as 
- * we're rerouting the old calls.
+ * Do note this SSDT is called by SSDT-SleepHook from the unified _PTS hook.
  * Source for SSDT: Rehabman
  */
 
-DefinitionBlock ("", "SSDT", 2, "RAPID", "ZPTS", 0x00000000)
+DefinitionBlock ("", "SSDT", 2, "RAPID", "PFSH", 0x00000000)
 {
   """;
 
@@ -6182,12 +6239,10 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "ZPTS", 0x00000000)
       ssdt += '    External ($basePath.PMEE, FieldUnitObj)\n';
     }
     ssdt += '\n';
-    ssdt += '    External (ZPTS, MethodObj)';
 
     ssdt += '''
-    Method (_PTS, 1, NotSerialized) 
+    Method (PFSH, 1, NotSerialized)
     {
-        ZPTS (Arg0)
         If ((0x05 == Arg0))
         {  
             If (_OSI ("Darwin"))
@@ -6206,22 +6261,14 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "ZPTS", 0x00000000)
 
     ssdt += "\n}\n";
 
-    writeSSDT(ssdtName, ssdt);
+    if (!await writeSSDT(ssdtName, ssdt)) return;
     final acpi = {
       "Comment":
-          "Fixing Shutdown for XHC Controllers - requires _PTS to ZPTS rename",
+          "Fixing Shutdown for XHC Controllers - called by SSDT-SleepHook",
       "Enabled": true,
       "Path": "$ssdtName.aml",
     };
-    final patches = [
-      {
-        "Comment": "_PTS to ZPTS rename - requires $ssdtName.aml",
-        "Find": "5F505453",
-        "Replace": "5A505453",
-        "Count": 1,
-      },
-    ];
-    makePlist(acpi: acpi, patches: patches, replace: true);
+    await makePlist(acpi: acpi, replace: true);
   }
 
   Future<void> ssdtGPRW({bool prebuilt = true}) async =>
@@ -7536,6 +7583,59 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "SBUSMCHC", 0x00000000)
     _plistBatchDepth++;
   }
 
+  bool batchedPlistContainsSsdt(String pathName) {
+    for (final plist in _batchedPlists.values) {
+      final add = plist['ACPI']?['Add'];
+      if (add is List &&
+          add.any(
+            (entry) => entry is Map && entry['Path']?.toString() == pathName,
+          )) {
+        return true;
+      }
+
+      final sortedOrder = plist['ACPI']?['SortedOrder'];
+      if (sortedOrder is List &&
+          sortedOrder.any((entry) => entry?.toString() == pathName)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  void removeBatchedSsdtArtifacts(
+    String pathName, {
+    bool removeSleepHookPatches = false,
+  }) {
+    for (final plist in _batchedPlists.values) {
+      final add = plist['ACPI']?['Add'];
+      if (add is List) {
+        add.removeWhere(
+          (entry) => entry is Map && entry['Path']?.toString() == pathName,
+        );
+      }
+
+      final sortedOrder = plist['ACPI']?['SortedOrder'];
+      if (sortedOrder is List) {
+        sortedOrder.removeWhere((entry) => entry?.toString() == pathName);
+      }
+
+      for (final patches in [
+        plist['ACPI']?['Patch'],
+        plist['ACPI']?['DSDT']?['Patches'],
+      ]) {
+        if (patches is! List) continue;
+        patches.removeWhere((entry) {
+          if (entry is! Map) return false;
+          final comment = entry['Comment']?.toString() ?? '';
+          return comment.contains('requires $pathName') ||
+              (removeSleepHookPatches &&
+                  (comment.contains('_PTS to ZPTS') ||
+                      comment.contains('_WAK to ZWAK')));
+        });
+      }
+    }
+  }
+
   Future<void> endPlistBatch({bool save = true}) async {
     if (_plistBatchDepth == 0) return;
 
@@ -7701,6 +7801,7 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "SBUSMCHC", 0x00000000)
       replace: replace,
       logCallback: (i) => i.toString(),
     );
+    _sortOpenCoreAcpiAddByDependencies(plist);
   }
 
   void _prepareClover(
@@ -7761,6 +7862,7 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "SBUSMCHC", 0x00000000)
       replace: replace,
       logCallback: (i) => i.toString(),
     );
+    _sortCloverAcpiSortedOrderByDependencies(plist);
   }
 
   List<T?> _normalizeItems<T>(dynamic input) {
@@ -7771,6 +7873,95 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "SBUSMCHC", 0x00000000)
     } else {
       return [input as T?];
     }
+  }
+
+  void _sortOpenCoreAcpiAddByDependencies(Map<String, dynamic> plist) {
+    final add = plist['ACPI']?['Add'];
+    if (add is! List || add.length < 2) return;
+
+    final paths = add
+        .whereType<Map>()
+        .map((entry) => entry['Path']?.toString())
+        .whereType<String>()
+        .toList();
+    final order = _dependencySortedPaths(paths);
+    if (order.isEmpty) return;
+
+    final rank = {for (var i = 0; i < order.length; i++) order[i]: i};
+    final indexed = add.asMap().entries.toList();
+    indexed.sort((a, b) {
+      final aPath = a.value is Map ? a.value['Path']?.toString() : null;
+      final bPath = b.value is Map ? b.value['Path']?.toString() : null;
+      final aRank = rank[aPath];
+      final bRank = rank[bPath];
+      if (aRank == null && bRank == null) return a.key.compareTo(b.key);
+      if (aRank == null) return 1;
+      if (bRank == null) return -1;
+      final result = aRank.compareTo(bRank);
+      return result != 0 ? result : a.key.compareTo(b.key);
+    });
+
+    for (var i = 0; i < indexed.length; i++) {
+      add[i] = indexed[i].value;
+    }
+  }
+
+  void _sortCloverAcpiSortedOrderByDependencies(Map<String, dynamic> plist) {
+    final sortedOrder = plist['ACPI']?['SortedOrder'];
+    if (sortedOrder is! List || sortedOrder.length < 2) return;
+
+    final paths = sortedOrder
+        .map((entry) => entry?.toString())
+        .whereType<String>()
+        .toList();
+    final order = _dependencySortedPaths(paths);
+    if (order.isEmpty) return;
+
+    final rank = {for (var i = 0; i < order.length; i++) order[i]: i};
+    final indexed = sortedOrder.asMap().entries.toList();
+    indexed.sort((a, b) {
+      final aRank = rank[a.value?.toString()];
+      final bRank = rank[b.value?.toString()];
+      if (aRank == null && bRank == null) return a.key.compareTo(b.key);
+      if (aRank == null) return 1;
+      if (bRank == null) return -1;
+      final result = aRank.compareTo(bRank);
+      return result != 0 ? result : a.key.compareTo(b.key);
+    });
+
+    for (var i = 0; i < indexed.length; i++) {
+      sortedOrder[i] = indexed[i].value;
+    }
+  }
+
+  List<String> _dependencySortedPaths(List<String> paths) {
+    final uniquePaths = <String>[];
+    final seen = <String>{};
+    for (final path in paths) {
+      if (seen.add(path)) uniquePaths.add(path);
+    }
+
+    final available = uniquePaths.toSet();
+    final sorted = <String>[];
+    final visiting = <String>{};
+    final visited = <String>{};
+
+    void visit(String path) {
+      if (visited.contains(path)) return;
+      if (visiting.contains(path)) return;
+      visiting.add(path);
+      for (final dependency in ssdtDependencies[path] ?? const <String>[]) {
+        if (available.contains(dependency)) visit(dependency);
+      }
+      visiting.remove(path);
+      visited.add(path);
+      sorted.add(path);
+    }
+
+    for (final path in uniquePaths) {
+      visit(path);
+    }
+    return sorted;
   }
 
   void _processSectionWrapper<T>({

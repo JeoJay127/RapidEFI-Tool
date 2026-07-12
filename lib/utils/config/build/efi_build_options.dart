@@ -9,6 +9,7 @@ class EfiBuildOptions {
     this.saveConfigModel,
     this.zipEfi,
     this.afterConfigWritten,
+    this.excludedAcpiPaths = const <String>{},
   });
 
   final String? outDirectory;
@@ -18,4 +19,5 @@ class EfiBuildOptions {
   final bool? saveConfigModel;
   final bool? zipEfi;
   final EfiBuildHook? afterConfigWritten;
+  final Set<String> excludedAcpiPaths;
 }

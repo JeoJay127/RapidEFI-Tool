@@ -17,6 +17,7 @@ import 'package:rapidefi/utils/hardware/config/hardware_config_build_context.dar
 import 'package:rapidefi/utils/hardware/config/hardware_config_model_builder.dart';
 import 'package:rapidefi/utils/hardware/config/hardware_config_options.dart';
 import 'package:rapidefi/utils/hardware/hardware_info.dart';
+import 'package:rapidefi/utils/hardware/ssdt/custom_ssdt_prebuilt_pruner.dart';
 import 'package:rapidefi/utils/hardware/ssdt/ssdt_platform_catalog.dart';
 import 'package:rapidefi/utils/hardware/ssdt/ssdt_selection.dart';
 import 'package:rapidefi/utils/hardware/ssdt/win_ssdt_build_service.dart';
@@ -548,7 +549,11 @@ class HardwarePageController extends ChangeNotifier {
                     items: _defaultSsdtItems(configModel, info),
                   )
               : null;
+      final customSsdtManagedPaths = resolvedSsdtSelection == null
+          ? const <String>{}
+          : customSsdtManagedAmlPaths(resolvedSsdtSelection);
       if (resolvedSsdtSelection != null) {
+        removeCustomSsdtPrebuiltItems(configModel, resolvedSsdtSelection);
         progress.addLine(
           '准备定制 SSDT: ${resolvedSsdtSelection.items.map((item) => item.name).join(', ')}',
         );
@@ -565,6 +570,7 @@ class HardwarePageController extends ChangeNotifier {
         mode: ConfigModelMode.auto,
         options: EfiBuildOptions(
           outDirectory: outputDirectory,
+          excludedAcpiPaths: customSsdtManagedPaths,
           afterConfigWritten: resolvedSsdtSelection == null
               ? null
               : (draft) async {

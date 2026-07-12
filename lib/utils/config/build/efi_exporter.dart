@@ -29,11 +29,14 @@ class EfiExporter {
       await FileUtils.deleteFilesAndDirectories(path);
     }
 
+    final acpiDirectory = join(draft.ocPath, 'ACPI');
+    await Directory(acpiDirectory).create(recursive: true);
+
     await AssetUtils.copyMultipleAssetsToDirectory(
       assetPlan.acpiAssets,
-      join(draft.ocPath, 'ACPI'),
+      acpiDirectory,
     );
-    await _copyCachedFiles(acpiFileBytes, join(draft.ocPath, 'ACPI'));
+    await _copyCachedFiles(acpiFileBytes, acpiDirectory);
 
     await FileUtils.copyAssetsAndUnzip(
       assetPlan.kextZipAssets,

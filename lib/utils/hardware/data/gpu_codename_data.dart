@@ -1,4 +1,5 @@
 import '../pci_ids_parser.dart';
+import 'hardware_device_data.dart';
 
 enum GpuResolvedType {
   integrated,
@@ -45,12 +46,30 @@ class GpuCodenameData {
 
   static String? lookupCodename(String deviceId) {
     final normalized = IdsParser.normalizeFullDeviceId(deviceId);
-    if (normalized.isEmpty || isIntelGpu(normalized)) return null;
+    if (normalized.isEmpty) return null;
 
     final deviceName = _pciIds?.deviceNameByFullId(normalized);
     if (deviceName == null || deviceName.isEmpty) return null;
 
+    if (isIntelGpu(normalized)) {
+      return extractIntelCodenameFromDeviceName(deviceName);
+    }
+
     return IdsParser.extractCodenameFromDeviceName(deviceName);
+  }
+
+  static String? extractIntelCodenameFromDeviceName(String name) {
+    final text = name.trim();
+    if (text.isEmpty) return null;
+
+    final bracket = text.indexOf('[');
+    if (bracket <= 0) return null;
+
+    final prefix = text.substring(0, bracket).trim();
+    if (prefix.isEmpty || isIntegratedByName(prefix)) return null;
+    if (!RegExp(r'[A-Za-z]').hasMatch(prefix)) return null;
+
+    return prefix;
   }
 
   static String? lookupDeviceName(String deviceId) {
@@ -76,7 +95,16 @@ class GpuCodenameData {
   }
 
   static String? extractCodenameFromBracket(String description) {
-    return IdsParser.extractCodenameFromDeviceName(description);
+    final text = description.trim();
+    if (text.isEmpty) return null;
+
+    final bracket = text.indexOf('[');
+    if (bracket <= 0) return null;
+
+    final prefix = text.substring(0, bracket).trim();
+    if (prefix.isEmpty || isIntegratedByName(prefix)) return null;
+
+    return IdsParser.extractCodenameFromDeviceName(prefix);
   }
 
   static const _intelIgpPatterns = [
@@ -147,6 +175,47 @@ class GpuCodenameData {
     if (RegExp(r'\bradeon\s+[0-9]{3,4}\b').hasMatch(lower)) {
       return true;
     }
+
+    return false;
+  }
+
+  static bool hasAmdIntegratedGpuEvidence({
+    required String name,
+    required String deviceId,
+    dynamic rawDeviceType,
+    String codename = '',
+    String? pciIdsDeviceName,
+  }) {
+    final normalizedId = IdsParser.normalizeFullDeviceId(deviceId);
+    if (!isAmdGpu(normalizedId)) return false;
+
+    if (HardwareDeviceData.isNootedRedSupportedDeviceId(normalizedId)) {
+      return true;
+    }
+
+    final primaryName = name.trim();
+    final lowerPrimaryName = primaryName.toLowerCase();
+    final primaryNameIsIntegrated = isIntegratedByName(primaryName) ||
+        RegExp(r'\bradeon\s*\(tm\)\s+[0-9]{3,4}m\b')
+            .hasMatch(lowerPrimaryName);
+    if (isDiscreteByName(primaryName) && !primaryNameIsIntegrated) {
+      return false;
+    }
+
+    final text = [
+      primaryName,
+      pciIdsDeviceName ?? '',
+      codename,
+    ].where((value) => value.trim().isNotEmpty).join(' ');
+    final lower = text.toLowerCase();
+    final hasIntegratedName = isIntegratedByName(text) ||
+        RegExp(r'\bradeon\s*\(tm\)\s+[0-9]{3,4}m\b')
+            .hasMatch(lower);
+
+    final rawType = typeFromRawDeviceType(rawDeviceType);
+    if (rawType == GpuResolvedType.integrated) return true;
+
+    if (hasIntegratedName) return true;
 
     return false;
   }

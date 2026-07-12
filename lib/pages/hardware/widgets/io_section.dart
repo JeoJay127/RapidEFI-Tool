@@ -5,15 +5,18 @@ import 'package:rapidefi/utils/hardware/analysis/hardware_analysis.dart';
 
 class IOSection extends StatelessWidget {
   final Map<String, dynamic> rawInfo;
+  final bool detailed;
 
-  const IOSection(this.rawInfo, {super.key});
+  const IOSection(this.rawInfo, {super.key, this.detailed = false});
 
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      _inputSection(),
-      const SizedBox(height: 6),
       _sdSection(),
+      if (detailed) ...[
+        const SizedBox(height: 6),
+        _inputSection(),
+      ],
     ]);
   }
 
@@ -41,7 +44,7 @@ class IOSection extends StatelessWidget {
           if (safeStr(device['Device Type']).isNotEmpty)
             '类型: ${safeStr(device['Device Type'])}',
         ]),
-        HardwarePathLine(device),
+        if (detailed) HardwarePathLine(device),
       ]);
     }).toList();
     if (lines.isEmpty) return const SizedBox.shrink();
@@ -64,7 +67,7 @@ class IOSection extends StatelessWidget {
         ], color: color),
         if (entry.serialNumber.isNotEmpty)
           HardwareLine(['序列号: ${entry.serialNumber}'], color: color),
-        HardwarePathLine(entry.rawDevice, color: color),
+        if (detailed) HardwarePathLine(entry.rawDevice, color: color),
       ]);
     }).toList();
     if (lines.isEmpty) return const SizedBox.shrink();
