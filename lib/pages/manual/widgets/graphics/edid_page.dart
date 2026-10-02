@@ -53,7 +53,7 @@ class _EDIDPageState extends State<EDIDPage> {
   }
 
   String _cleanEdid(String edid) {
-    return edid.replaceAll(RegExp(r'\s+'), '');
+    return edid.replaceAll(RegExp(r'[\s,，]+'), '');
   }
 
   void _validateAndFormatEdid() {
@@ -111,7 +111,7 @@ class _EDIDPageState extends State<EDIDPage> {
             maxLines: 3,
             expandWidth: true,
             keyboardType: TextInputType.text,
-            hintText: '填写显示器 EDID，仅保留十六进制字符',
+            hintText: '填写显示器 EDID（通常为 256 位或 512 位，自动处理换行、空格和逗号）',
             hintStyle: TextStyle(
               fontSize: 12,
               color: isDarkMode ? Colors.grey.shade500 : Colors.grey.shade400,

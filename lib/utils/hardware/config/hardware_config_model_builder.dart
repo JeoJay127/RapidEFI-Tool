@@ -1,3 +1,4 @@
+import 'package:rapidefi/utils/config/accessors/amd_settings_accessor.dart';
 import 'package:rapidefi/utils/config/config_model.dart';
 import 'package:rapidefi/utils/config/models/enums/brand_enum.dart';
 import 'package:rapidefi/utils/config/models/enums/cpu_type_enum.dart';
@@ -157,10 +158,13 @@ class HardwareConfigModelBuilder {
     final boardText = _motherboardSearchText(context);
 
     model.brand = _resolveMotherboardBrand(boardText);
-    model.specialMotherboard = _resolveSpecialMotherboard(
-      boardText,
-      cpuType: model.cpuType,
-      platformCode: model.platformCode,
+    AmdSettingsAccessor.setSpecialMotherboard(
+      model,
+      _resolveSpecialMotherboard(
+        boardText,
+        cpuType: model.cpuType,
+        platformCode: model.platformCode,
+      ),
     );
   }
 

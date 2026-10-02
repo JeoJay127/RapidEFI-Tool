@@ -9,8 +9,8 @@
 #	The latest version can be obtained from
 #		http://www.linux-usb.org/usb.ids
 #
-# Version: 2025.12.13
-# Date:    2025-12-13 20:34:01
+# Version: 2026.06.26
+# Date:    2026-06-26 20:34:02
 #
 
 # Vendors, devices and interfaces. Please keep sorted.
@@ -2303,7 +2303,7 @@
 	0008  SideWinder Precision Pro
 	0009  IntelliMouse
 	000b  Natural Keyboard Elite
-	000e  SideWinder® Freestyle Pro
+	000e  SideWinder庐 Freestyle Pro
 	0014  Digital Sound System 80
 	001a  SideWinder Precision Racing Wheel
 	001b  SideWinder Force Feedback 2 Joystick
@@ -3541,7 +3541,7 @@
 	0afb  Android Fastboot device
 	1307  Cytronix 6in1 Card Reader
 	163d  Cool Icam Digi-MP3
-	2015  TouchChip® Fingerprint Reader
+	2015  TouchChip庐 Fingerprint Reader
 	2016  Fingerprint Reader
 	2017  Biometric Smart Card Reader
 	2018  BioSimKey
@@ -5116,7 +5116,7 @@
 	7025  HP HD Webcam
 	7046  TOSHIBA Web Camera - HD
 	7054  HP HD Webcam
-	705a  HD Webcam (960×540)
+	705a  HD Webcam (960脳540)
 	9304  Hub
 	f01c  TT1280DA DVB-T TV Tuner
 04cb  Fuji Photo Film Co., Ltd
@@ -5531,18 +5531,18 @@
 04e7  Elo TouchSystems
 	0001  TouchScreen
 	0002  Touchmonitor Interface 2600 Rev 2
-	0004  4000U CarrollTouch® Touchmonitor Interface
-	0007  2500U IntelliTouch® Touchmonitor Interface
-	0008  3000U AccuTouch® Touchmonitor Interface
-	0009  4000U CarrollTouch® Touchmonitor Interface
+	0004  4000U CarrollTouch庐 Touchmonitor Interface
+	0007  2500U IntelliTouch庐 Touchmonitor Interface
+	0008  3000U AccuTouch庐 Touchmonitor Interface
+	0009  4000U CarrollTouch庐 Touchmonitor Interface
 	0020  Touchscreen Interface (2700)
 	0021  Touchmonitor Interface
-	0030  4500U CarrollTouch® Touchmonitor Interface
+	0030  4500U CarrollTouch庐 Touchmonitor Interface
 	0032  Touchmonitor Interface
 	0033  Touchmonitor Interface
 	0041  5010 Surface Capacitive Touchmonitor Interface
 	0042  Touchmonitor Interface
-	0050  2216 AccuTouch® Touchmonitor Interface
+	0050  2216 AccuTouch庐 Touchmonitor Interface
 	0071  Touchmonitor Interface
 	0072  Touchmonitor Interface
 	0081  Touchmonitor Interface
@@ -11319,6 +11319,7 @@
 	4500  LV-20 Digital Camera
 	6101  fx-9750gII
 	6102  fx-CP400
+	6103  fx-CG50
 	6801  PL-40R
 	6802  MIDI Keyboard
 	6803  CTK-3500 (MIDI keyboard)
@@ -12232,9 +12233,9 @@
 	2295  Colorado 300
 	22b6  eTrex Vista HCx (Mass Storage mode)
 	231b  Oregon 400t
-	2353  Nüvi 205T
+	2353  N眉vi 205T
 	2380  Oregon series
-	23cc  nüvi 1350
+	23cc  n眉vi 1350
 	2459  GPSmap 62/78 series
 	2491  Edge 800
 	2518  eTrex 10
@@ -13057,6 +13058,7 @@
 	5804  BCM5880 Secure Applications Processor with fingerprint swipe sensor
 	5832  BCM5880 Secure Applications Processor Smartcard reader
 	5843  BCM58200 ControlVault 3 (FingerPrint sensor + Contacted SmartCard)
+	5865  Fingerprint Reader (Dell Control Vault)
 	6300  Pirelli Remote NDIS Device
 	6410  BCM20703A1 Bluetooth 4.1 + LE
 	bd11  BCM4320 802.11bg Wireless Adapter
@@ -14079,7 +14081,7 @@
 	5751  Integrated Webcam
 	5775  HP "Truevision HD" laptop camera
 	5776  HP Truevision HD integrated webcam
-	57b3  Acer 640 × 480 laptop camera
+	57b3  Acer 640 脳 480 laptop camera
 	57cc  HD Webcam - Realtek Semiconductor
 	57cf  HD WebCam
 	57da  Built-In Video Camera
@@ -14672,7 +14674,7 @@
 	0035  Miditech Play'n Roll
 	0036  Cinergy 250 Audio
 	0037  Cinergy 250 Audio
-	0038  Cinergy T² DVB-T Receiver
+	0038  Cinergy T虏 DVB-T Receiver
 	0039  Grabster AV 400
 	003b  Cinergy 400
 	003c  Grabster AV 250
@@ -14681,7 +14683,7 @@
 	004e  Cinergy T XS
 	004f  Cinergy Analog XS
 	0055  Cinergy T XE (Version 1, AF9005)
-	005c  Cinergy T²
+	005c  Cinergy T虏
 	0069  Cinergy T XE (Version 2, AF9015)
 	006b  Cinergy HT PVR (EU)
 	0072  Cinergy Hybrid T
@@ -21004,7 +21006,7 @@
 	0402  FTDI232 [EasyPort]
 	0403  FTDI232 [EasyPort Mini]
 	0404  FTDI232 [Netzteil-GL]
-	0405  FTDI232 [MotorPrüfstand]
+	0405  FTDI232 [MotorPr眉fstand]
 	0406  STM32F103 [EasyKit]
 	0407  LPC2378 [Robotino]
 	0408  LPC2378 [Robotino-Arm]
@@ -23736,8 +23738,8 @@
 	2448  82801 PCI Bridge
 	3100  PRO/DSL 3220 Modem - WAN
 	3101  PRO/DSL 3220 Modem
-	3240  AnyPoint® 3240 Modem - WAN
-	3241  AnyPoint® 3240 Modem
+	3240  AnyPoint庐 3240 Modem - WAN
+	3241  AnyPoint庐 3240 Modem
 	8602  Miniature Card Slot
 	8c26  8 Series/C220 Series  EHCI #1
 	8c2d  8 Series/C220 Series EHCI #2
@@ -24539,7 +24541,7 @@ HUT 07  Keyboard
 	031  \ and | (Backslash and Bar)
 	032  # and ~ (Hash and Tilde, Non-US Keyboard near right shift)
 	033  ; and : (Semicolon and Colon)
-	034  � and " (Accent Acute and Double Quotes)
+	034  � and " (Accent Acute and Double Quotes)
 	035  ` and ~ (Accent Grace and Tilde)
 	036  , and < (Comma and Less)
 	037  . and > (Period and Greater)

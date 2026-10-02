@@ -7,6 +7,7 @@ import 'package:rapidefi/utils/config/config_model.dart';
 import 'package:rapidefi/utils/config/models/enums/platform_type_enum.dart';
 import 'package:rapidefi/utils/config/presets/sections/config_kernel.dart';
 import 'package:rapidefi/utils/config/presets/sections/config_nvram.dart';
+import 'package:rapidefi/utils/config/support/intel_igpu_memory_policy.dart';
 
 class IgpuSectionView extends StatelessWidget {
   const IgpuSectionView({super.key});
@@ -40,7 +41,12 @@ class IgpuSectionView extends StatelessWidget {
                 controller.editor.selectedIGPUDeviceProperties(),
             onDevicePropertiesChanged: (deviceProperties) {
               controller.updateIgpu((editor) {
-                editor.updateIGPUDeviceProperties(deviceProperties);
+                if (IntelIgpuMemoryPolicy.hasManualDisplay(
+                        editor.configModel) ||
+                    IntelIgpuMemoryPolicy.hasDisplayProperties(
+                        deviceProperties)) {
+                  editor.updateIGPUDeviceProperties(deviceProperties);
+                }
               });
             },
             onConnectorAllDataChanged: (connectorIndex, value) {
@@ -49,9 +55,7 @@ class IgpuSectionView extends StatelessWidget {
               });
             },
             onChanged: (value) {
-              controller.updateIgpu((editor) {
-                editor.updateDeviceProperties(value);
-              });
+              controller.selectIgpuMode(value);
             },
             onEdidChanged: (value) {
               controller.updateIgpu((editor) {

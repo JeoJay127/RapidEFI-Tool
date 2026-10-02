@@ -21,7 +21,7 @@ void main() {
       }
     });
 
-    test('desktop defaults select only basic items', () {
+    test('desktop defaults select basic items and SSDT-GPRW', () {
       final keys = SsdtPlatformCatalog.defaultSelectedKeys(
         CpuType.intel,
         PlatformType.desktop,
@@ -34,7 +34,40 @@ void main() {
       ).where((item) => keys.contains(item.key));
 
       expect(selectedItems, isNotEmpty);
-      expect(selectedItems.every((item) => item.isBasic), isTrue);
+      expect(
+        selectedItems.map((item) => item.name),
+        contains(ACPITable.ssdtGPRW.name),
+      );
+      expect(
+        selectedItems.every(
+          (item) => item.isBasic || item.name == ACPITable.ssdtGPRW.name,
+        ),
+        isTrue,
+      );
+    });
+
+    test('all auto EFI platforms default-select SSDT-GPRW', () {
+      for (final cpuType in [CpuType.intel, CpuType.amd]) {
+        for (final platformType in PlatformType.values) {
+          for (final code in SsdtPlatformCatalog.platformCodes(
+            cpuType,
+            platformType,
+          )) {
+            final keys = SsdtPlatformCatalog.defaultSelectedKeys(
+              cpuType,
+              platformType,
+              code,
+            );
+            final gprw = SsdtPlatformCatalog.items(
+              cpuType,
+              platformType,
+              code,
+            ).firstWhere((item) => item.name == ACPITable.ssdtGPRW.name);
+
+            expect(keys, contains(gprw.key));
+          }
+        }
+      }
     });
 
     test('laptop, nuc, and hedt defaults include recommended items', () {

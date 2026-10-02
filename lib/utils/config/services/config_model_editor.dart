@@ -252,27 +252,12 @@ class ConfigModelEditor {
   }
 
   void updateAMDOptions(SpecialMotherboard amdmlb, String amdCore) {
-    configModel.specialMotherboard = amdmlb;
+    AmdSettingsAccessor.setSpecialMotherboard(configModel, amdmlb);
     AmdSettingsAccessor.setAmdCore(configModel, amdCore);
     if (amdmlb == SpecialMotherboard.amdB550A520 &&
         !configModel.acpi.acpiAddItems
             .any((item) => item.path == ConfigAcpi.SSDT_CPUR.path)) {
       configModel.acpi.acpiAddItems.add(ConfigAcpi.SSDT_CPUR.copyWith());
-    }
-
-    if (_configService.isAMD) {
-      configModel.booter.booterQuirks.devirtualiseMmio =
-          configModel.specialMotherboard == amdmlb;
-
-      if (configModel.specialMotherboard == amdmlb ||
-          configModel.specialMotherboard == SpecialMotherboard.amdB550A520 ||
-          configModel.specialMotherboard == SpecialMotherboard.amdX470B450 ||
-          configModel.specialMotherboard == SpecialMotherboard.amdX570) {
-        configModel.booter.booterQuirks.setupVirtualMap = false;
-      } else {
-        configModel.booter.booterQuirks.setupVirtualMap =
-            originConfigModel.booter.booterQuirks.setupVirtualMap;
-      }
     }
   }
 

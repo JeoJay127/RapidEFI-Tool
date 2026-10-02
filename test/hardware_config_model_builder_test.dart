@@ -174,6 +174,7 @@ void main() {
 
       expect(model.brand, Brand.msi);
       expect(model.specialMotherboard, SpecialMotherboard.intelZ490);
+      expect(model.booter.booterQuirks.setupVirtualMap, isTrue);
     });
 
     test('maps AMD special motherboard from chipset', () {
@@ -190,6 +191,32 @@ void main() {
 
       expect(model.brand, Brand.asrock);
       expect(model.specialMotherboard, SpecialMotherboard.amdB550A520);
+      expect(model.booter.booterQuirks.devirtualiseMmio, isFalse);
+      expect(model.booter.booterQuirks.setupVirtualMap, isFalse);
+    });
+
+    test('sets AMD Booter quirks for each motherboard type', () {
+      const cases = <String, (SpecialMotherboard, bool, bool)>{
+        'AMD X670': (SpecialMotherboard.amdNormal, true, false),
+        'AMD TRX40': (SpecialMotherboard.amdTrx40, false, true),
+        'AMD X570': (SpecialMotherboard.amdX570, false, false),
+        'AMD X470': (SpecialMotherboard.amdX470B450, false, false),
+        'AMD B550': (SpecialMotherboard.amdB550A520, false, false),
+      };
+
+      for (final entry in cases.entries) {
+        final model = _buildModel(_rawInfo(
+          cpuManufacturer: 'AMD',
+          cpuName: 'AMD Ryzen 7 5800X',
+          cpuCodename: 'Vermeer',
+          motherboardProduct: entry.key,
+          motherboardChipset: entry.key,
+        ));
+
+        expect(model.specialMotherboard, entry.value.$1);
+        expect(model.booter.booterQuirks.setupVirtualMap, entry.value.$2);
+        expect(model.booter.booterQuirks.devirtualiseMmio, entry.value.$3);
+      }
     });
 
     test('maps mixed Ivy Bridge CPU with 6-series motherboard', () {

@@ -13,6 +13,7 @@ import 'package:rapidefi/utils/config/models/enums/config_enums.dart';
 import 'package:rapidefi/utils/config/presets/sections/config_kernel.dart';
 import 'package:rapidefi/utils/config/services/config_service.dart';
 import 'package:rapidefi/utils/config/services/config_session.dart';
+import 'package:rapidefi/utils/config/support/intel_igpu_memory_policy.dart';
 import 'package:rapidefi/utils/file_util.dart';
 import 'package:rapidefi/utils/hardware/config/hardware_config_build_context.dart';
 import 'package:rapidefi/utils/hardware/config/hardware_config_model_builder.dart';
@@ -537,6 +538,8 @@ class HardwarePageController extends ChangeNotifier {
           platformCode: platformCode,
         ),
       );
+      IntelIgpuMemoryPolicy.applyAutomaticDefault(
+          configModel, info.monitorsInfo);
       progress.addLine(
         'ConfigModel 已生成: ${configModel.cpuType.name}/${configModel.platformType.name}/${configModel.platformCode}',
       );

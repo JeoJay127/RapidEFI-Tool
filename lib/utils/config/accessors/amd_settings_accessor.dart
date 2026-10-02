@@ -3,12 +3,27 @@ import 'dart:typed_data';
 import 'package:rapidefi/extension/int_extension.dart';
 import 'package:rapidefi/extension/string_extension.dart';
 import 'package:rapidefi/utils/config/config_model.dart';
+import 'package:rapidefi/utils/config/models/enums/config_enums.dart';
 import 'package:rapidefi/utils/config/presets/patches/kernel_patch.dart';
 import 'package:rapidefi/utils/config/presets/sections/config_kernel.dart';
 import 'package:rapidefi/utils/config/models/kernel/kernel_patch_item.dart';
 
 class AmdSettingsAccessor {
   AmdSettingsAccessor._();
+
+  static void setSpecialMotherboard(
+    ConfigModel model,
+    SpecialMotherboard motherboard,
+  ) {
+    model.specialMotherboard = motherboard;
+    if (model.cpuType == CpuType.amd &&
+        motherboard.vendor == MotherboardVendor.amd) {
+      model.booter.booterQuirks.devirtualiseMmio =
+          motherboard == SpecialMotherboard.amdTrx40;
+      model.booter.booterQuirks.setupVirtualMap =
+          motherboard == SpecialMotherboard.amdNormal;
+    }
+  }
 
   static bool usesRyzenGpu(ConfigModel model) {
     return model.kernel.kernelKexts.any(

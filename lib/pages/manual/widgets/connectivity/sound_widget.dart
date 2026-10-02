@@ -230,7 +230,7 @@ class _SoundWidgetState extends State<SoundWidget> {
             ),
           ),
           Text(
-            "(鼠标滑轮选择后,点击确认即可)",
+            "(鼠标滑轮选择后,点击确定即可)",
             style: TextStyle(
               fontSize: 14,
               color: Colors.grey[600],

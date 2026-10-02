@@ -7,11 +7,16 @@ import 'package:rapidefi/utils/config/presets/platform_profiles/platform_configs
 import 'package:rapidefi/utils/config/presets/platform_profiles/platform_profile.dart';
 import 'package:rapidefi/utils/config/models/enums/config_enums.dart';
 import 'package:rapidefi/utils/config/config_model.dart';
+import 'package:rapidefi/utils/config/models/device_properties/device_property_item.dart';
+import 'package:rapidefi/utils/config/models/device_properties/igpu_model.dart';
+import 'package:rapidefi/utils/config/presets/sections/config_device_properties.dart';
 import 'package:rapidefi/utils/config/models/platform_info/pi_generic.dart';
 import 'package:rapidefi/utils/config/services/apple_alc_resolver.dart';
 import 'package:rapidefi/utils/config/services/config_model_editor.dart';
 import 'package:rapidefi/utils/config/services/config_service.dart';
 import 'package:rapidefi/utils/config/services/config_session.dart';
+import 'package:rapidefi/utils/config/support/intel_igpu_memory_policy.dart';
+import 'package:rapidefi/utils/config/support/platform_properties.dart';
 import 'package:rapidefi/utils/config/support/smbios_compatibility.dart';
 import 'package:rapidefi/utils/device_util.dart';
 import 'package:rapidefi/utils/file_util.dart';
@@ -34,6 +39,8 @@ class ManualConfigController extends ChangeNotifier {
   int _uefiSupportRevision = 0;
   int _normalRevision = 0;
   int _platformSelectionRevision = 0;
+
+  List<DevicePropertyItem>? _igpuAdvancedItems;
 
   PlatformModel? _cachedPlatformModel;
   CpuType? _cachedPlatformCpuType;
@@ -84,6 +91,7 @@ class ManualConfigController extends ChangeNotifier {
 
     try {
       _mode = mode;
+      _igpuAdvancedItems = null;
       activateSession();
       if (initialModel != null) {
         _editor.setConfigModel(initialModel);
@@ -217,6 +225,7 @@ class ManualConfigController extends ChangeNotifier {
     bool notify = true,
   }) {
     final previousGeneric = _configService.configModel.platformInfo.generic;
+    _igpuAdvancedItems = null;
     _editor.setConfigModel(
       _configFor(
         cpuType,
@@ -268,6 +277,35 @@ class ManualConfigController extends ChangeNotifier {
     _configService.normalizeRuntimeConfigModel();
     _igpuRevision++;
     notifyListeners();
+  }
+
+  void selectIgpuMode(List<IgpuPropertyModel>? addList) {
+    updateIgpu((editor) {
+      final model = editor.configModel;
+      if (IntelIgpuMemoryPolicy.hasManualDisplay(model)) {
+        final keys =
+            selectableIGPUDeviceProperties().map((item) => item.key).toSet();
+        _igpuAdvancedItems = DevicePropertiesAccessor.getModel(
+              model,
+              ConfigDp.pciPath,
+            )
+                ?.propertyItems
+                .where((item) => keys.contains(item.key))
+                .map((item) => item.copyWith())
+                .toList() ??
+            [];
+      }
+
+      editor.updateDeviceProperties(
+        addList?.map((item) => item.copyWith()).toList(),
+      );
+      IntelIgpuMemoryPolicy.applyManualDefault(model);
+      if (IntelIgpuMemoryPolicy.hasManualDisplay(model) &&
+          _igpuAdvancedItems != null) {
+        DevicePropertiesAccessor.replaceIGPUProperties(model, {});
+        DevicePropertiesAccessor.addIGPUProperties(model, _igpuAdvancedItems!);
+      }
+    });
   }
 
   void updatePlatformBase(void Function(ConfigModelEditor editor) action) {
@@ -363,6 +401,7 @@ class ManualConfigController extends ChangeNotifier {
           platformType: platformType,
           platformIndex: platformIndex,
         );
+    IntelIgpuMemoryPolicy.applyManualDefault(model);
     return model;
   }
 

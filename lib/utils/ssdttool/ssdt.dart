@@ -339,6 +339,75 @@ class SSDT {
     }
   }
 
+  String _normalizeObjectPath(String path) {
+    return path
+        .trim()
+        .replaceAll('\\', '')
+        .split('.')
+        .map((segment) {
+          var normalized = segment.toUpperCase();
+          while (normalized.endsWith('_')) {
+            normalized = normalized.substring(0, normalized.length - 1);
+          }
+          return normalized;
+        })
+        .where((segment) => segment.isNotEmpty)
+        .join('.');
+  }
+
+  /// 分配一个不会与所有已加载 ACPI 表中任意对象类型冲突的 NameSeg。
+  ({String name, int number}) getUniqueObjectName(
+    String parentPath,
+    String baseName, {
+    int startingNumber = -1,
+    List<String> usedNames = const [],
+  }) {
+    var base = baseName.trim().toUpperCase();
+    if (base.length > 4) base = base.substring(0, 4);
+    if (base.isEmpty) return (name: '', number: startingNumber);
+
+    final unavailable = usedNames
+        .map((name) => name.trim().toUpperCase())
+        .toSet();
+    final parent = _normalizeObjectPath(parentPath);
+    final parentPrefix = parent.isEmpty ? '' : '$parent.';
+
+    for (final rawTable in d.acpiTables.values) {
+      if (rawTable is! Map) continue;
+      final table = Map<String, dynamic>.from(rawTable);
+      final rawPaths = table['paths'];
+      final paths = rawPaths is List && rawPaths.isNotEmpty
+          ? rawPaths
+          : d.getPaths(table: table);
+      for (final rawPath in paths) {
+        if (rawPath is! List || rawPath.isEmpty) continue;
+        final normalized = _normalizeObjectPath(rawPath.first.toString());
+        if (!normalized.startsWith(parentPrefix)) continue;
+        final child = normalized.substring(parentPrefix.length);
+        if (child.isNotEmpty && !child.contains('.')) {
+          unavailable.add(child);
+        }
+      }
+    }
+
+    var number = startingNumber;
+    while (true) {
+      if (number < 0) {
+        if (!unavailable.contains(base)) return (name: base, number: 0);
+        number = 0;
+        continue;
+      }
+      final suffix = number.toRadixString(16).toUpperCase();
+      final prefixLength = 4 - suffix.length;
+      final candidate =
+          '${prefixLength > 0 ? base.substring(0, prefixLength) : ''}$suffix';
+      if (!unavailable.contains(candidate)) {
+        return (name: candidate, number: number);
+      }
+      number += 1;
+    }
+  }
+
   /// 获取唯一名称
   /// [name] 名称
   /// [targetFolder] 目标文件夹
@@ -5279,6 +5348,18 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "IMEI", 0x00000000)
     if (!needsPts && !needsWak) return;
     if (!await ensureDSDT()) return;
 
+    final lidHelper = includeLid
+        ? getUniqueObjectName('\\_SB', 'RAPD', startingNumber: -1).name
+        : '';
+    final lidPrepareMethod = includeLid ? '\\_SB.$lidHelper.PLID' : '';
+    final lidWakeMethod = includeLid ? '\\_SB.$lidHelper.WLID' : '';
+    final wakeScreenMethod = includeWakeScreen
+        ? '\\${getUniqueObjectName('\\', 'WSCN', startingNumber: -1).name}'
+        : '';
+    final ledMethod = includeLed
+        ? '\\${getUniqueObjectName('\\', 'WLED', startingNumber: -1).name}'
+        : '';
+
     List<dynamic> pts = [];
     List<dynamic> wak = [];
     var sortedTables = sortedNicely(d.acpiTables.keys.toList());
@@ -5331,14 +5412,20 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "IMEI", 0x00000000)
     buffer.writeln('{');
     if (pts.isNotEmpty) {
       buffer.writeln('    External (ZPTS, MethodObj)');
-      if (includeLid) buffer.writeln('    External (PLID, MethodObj)');
+      if (includeLid) {
+        buffer.writeln('    External ($lidPrepareMethod, MethodObj)');
+      }
       if (includeFixShutdown) buffer.writeln('    External (PFSH, MethodObj)');
     }
     if (wak.isNotEmpty) {
       buffer.writeln('    External (ZWAK, MethodObj)');
-      if (includeLid) buffer.writeln('    External (WLID, MethodObj)');
-      if (includeWakeScreen) buffer.writeln('    External (WSCN, MethodObj)');
-      if (includeLed) buffer.writeln('    External (WLED, MethodObj)');
+      if (includeLid) {
+        buffer.writeln('    External ($lidWakeMethod, MethodObj)');
+      }
+      if (includeWakeScreen) {
+        buffer.writeln('    External ($wakeScreenMethod, MethodObj)');
+      }
+      if (includeLed) buffer.writeln('    External ($ledMethod, MethodObj)');
     }
     if (pts.isNotEmpty) {
       buffer.writeln('');
@@ -5346,9 +5433,9 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "IMEI", 0x00000000)
       buffer.writeln('    {');
       if (includeLid) {
         buffer.writeln('''
-        If (CondRefOf (PLID))
+        If (CondRefOf ($lidPrepareMethod))
         {
-            PLID (Arg0)
+            $lidPrepareMethod (Arg0)
         }''');
       }
       if (includeFixShutdown) {
@@ -5369,23 +5456,23 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "IMEI", 0x00000000)
       buffer.writeln('    {');
       if (includeLid) {
         buffer.writeln('''
-        If (CondRefOf (WLID))
+        If (CondRefOf ($lidWakeMethod))
         {
-            WLID (Arg0)
+            $lidWakeMethod (Arg0)
         }''');
       }
       if (includeWakeScreen) {
         buffer.writeln('''
-        If (CondRefOf (WSCN))
+        If (CondRefOf ($wakeScreenMethod))
         {
-            WSCN (Arg0)
+            $wakeScreenMethod (Arg0)
         }''');
       }
       if (includeLed) {
         buffer.writeln('''
-        If (CondRefOf (WLED))
+        If (CondRefOf ($ledMethod))
         {
-            WLED (Arg0)
+            $ledMethod (Arg0)
         }''');
       }
       buffer.writeln('''
@@ -5447,6 +5534,14 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "IMEI", 0x00000000)
       Log.warning("=> 在上述所有ACPI表中均未找到 _SST 方法! 已终止操作！\n");
       return;
     }
+    final hookMethod = getUniqueObjectName(
+      '\\',
+      'WLED',
+      startingNumber: -1,
+    ).name;
+    if (hookMethod != 'WLED') {
+      Log("=> 根作用域 WLED 已被占用，改用 $hookMethod。");
+    }
     final ssdtName = "SSDT-LED";
     Log("正在创建 $ssdtName.dsl...");
     final ssdt =
@@ -5454,7 +5549,7 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "IMEI", 0x00000000)
  DefinitionBlock ("", "SSDT", 1, "RAPID", "LED", 0x00000000)
 {
     External ($sstPath, MethodObj)
-    Method (WLED, 1, NotSerialized)
+    Method ($hookMethod, 1, NotSerialized)
     {
       
       If (_OSI ("Darwin"))
@@ -5501,6 +5596,14 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "IMEI", 0x00000000)
       Log.warning("=> 在上述所有ACPI表中均未找到 PNP0C0D 设备! 已终止操作！\n");
       return;
     }
+    final hookMethod = getUniqueObjectName(
+      '\\',
+      'WSCN',
+      startingNumber: -1,
+    ).name;
+    if (hookMethod != 'WSCN') {
+      Log("=> 根作用域 WSCN 已被占用，改用 $hookMethod。");
+    }
     final ssdtName = "SSDT-WakeScreen";
     Log("正在创建 $ssdtName.dsl...");
     String ssdt =
@@ -5508,7 +5611,7 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "IMEI", 0x00000000)
   DefinitionBlock("", "SSDT", 2, "RAPID", "WakeS", 0x00000000)
 {
     External($devicePath, DeviceObj)
-    Method (WSCN, 1, NotSerialized)
+    Method ($hookMethod, 1, NotSerialized)
     {
         If (_OSI ("Darwin"))
         {
@@ -5789,6 +5892,15 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "IMEI", 0x00000000)
       return;
     }
 
+    final helperDevice = getUniqueObjectName(
+      '\\_SB',
+      'RAPD',
+      startingNumber: -1,
+    ).name;
+    if (helperDevice != 'RAPD') {
+      Log("=> _SB.RAPD 已被占用，改用 _SB.$helperDevice。");
+    }
+
     final ssdtName = "SSDT-LID";
     Log("正在创建 $ssdtName.dsl...");
     final ssdt =
@@ -5799,7 +5911,7 @@ DefinitionBlock("", "SSDT", 2, "RAPID", "LID", 0x00000000)
     External($devicePath.XLID, MethodObj)
     Scope (_SB)
     {
-        Device (PCI9)
+        Device ($helperDevice)
         {
             Name (_ADR, Zero)
             Name (FNOK, Zero)
@@ -5814,27 +5926,29 @@ DefinitionBlock("", "SSDT", 2, "RAPID", "LID", 0x00000000)
                     Return (Zero)
                 }
             }
-        }
-    }
 
-    Method (PLID, 1, NotSerialized)
-    {
-      If (_OSI ("Darwin")) {
-          If (Arg0 == 0x03)
-        {
-            \\_SB.PCI9.FNOK = 1
-        }
-        Else
-        {
-            \\_SB.PCI9.FNOK = 0
-        }
-       }
-    }
+            Method (PLID, 1, NotSerialized)
+            {
+                If (_OSI ("Darwin"))
+                {
+                    If (Arg0 == 0x03)
+                    {
+                        \\_SB.$helperDevice.FNOK = One
+                    }
+                    Else
+                    {
+                        \\_SB.$helperDevice.FNOK = Zero
+                    }
+                }
+            }
 
-    Method (WLID, 1, NotSerialized)
-    {
-       If (_OSI ("Darwin")) {
-            \\_SB.PCI9.FNOK = 0
+            Method (WLID, 1, NotSerialized)
+            {
+                If (_OSI ("Darwin"))
+                {
+                    \\_SB.$helperDevice.FNOK = Zero
+                }
+            }
         }
     }
 
@@ -5844,7 +5958,7 @@ DefinitionBlock("", "SSDT", 2, "RAPID", "LID", 0x00000000)
         {
             If (_OSI ("Darwin"))
             {
-                if(\\_SB.PCI9.FNOK==1)
+                If (\\_SB.$helperDevice.FNOK == One)
                 {
                     Return (Zero)
                 }
@@ -6194,27 +6308,154 @@ DefinitionBlock ("", "SSDT", 2, "RAPID", "PFSH", 0x00000000)
   Future<void> ssdtGPRW({bool prebuilt = true}) async =>
       prebuilt ? await _ssdtGPRWPrebuilt() : await _ssdtGPRW();
 
-  Future<void> _ssdtGPRW() async {
-    if (!await ensureDSDT()) return;
-    // 检查是否存在 GPRW 方法
-    Log('正在检查是否存在 GPRW 方法...');
-    var gprw = d.getMethodPaths(obj: 'GPRW');
-    if (gprw.isEmpty) {
-      Log.warning('=> 未找到 GPRW 方法！');
-      // 检查是否存在 XPRW 方法
-      Log('正在检查是否存在 XPRW 方法...');
-      var xprw = d.getMethodPaths(obj: 'XPRW');
-      if (xprw.isNotEmpty) {
-        Log.warning('=> 已找到 XPRW 方法！当前方法已经被重命名,可能非原始ACPI表!请重新获取原始ACPI表后再尝试!\n');
-        return;
+  int _rawOccurrenceCount(dynamic raw, List<int> needle) {
+    if (raw is! List || needle.isEmpty || raw.length < needle.length) return 0;
+
+    var count = 0;
+    for (var i = 0; i <= raw.length - needle.length;) {
+      var matches = true;
+      for (var j = 0; j < needle.length; j++) {
+        if (raw[i + j] != needle[j]) {
+          matches = false;
+          break;
+        }
+      }
+      if (matches) {
+        count++;
+        i += needle.length;
       } else {
-        Log.warning('=> 未找到 XPRW 方法！已终止操作！');
+        i++;
       }
     }
-    if (gprw.isNotEmpty) {
-      Log('=> 已在 ${gprw[0][0]} 找到 GPRW 方法！');
-      _ssdtGPRWPrebuilt();
+    return count;
+  }
+
+  bool _isTargetPrwPackage(Map<String, dynamic> table, int line) {
+    if (line < 0) return false;
+
+    final scope = d
+        .getScope(
+          startingIndex: line,
+          stripComments: true,
+          table: table,
+        )
+        .join(' ');
+    final match = RegExp(
+      r'Package\s*\([^\)]*\)\s*\{\s*(0x[0-9A-F]+|[0-9]+)\s*,\s*(0x[0-9A-F]+|[0-9]+)\b',
+      caseSensitive: false,
+    ).firstMatch(scope);
+    if (match == null) return false;
+
+    int? parseInteger(String? value) {
+      if (value == null) return null;
+      final text = value.trim();
+      final hexadecimal = text.toLowerCase().startsWith('0x');
+      return int.tryParse(
+        hexadecimal ? text.substring(2) : text,
+        radix: hexadecimal ? 16 : 10,
+      );
     }
+
+    return parseInteger(match.group(1)) == 0x6D &&
+        parseInteger(match.group(2)) == 0x04;
+  }
+
+  Future<void> _ssdtGPRW() async {
+    if (!await ensureDSDT()) return;
+
+    const prwPackageHex = '1206020A6D0A04';
+    const patchedPrwPackageHex = '1206020A6D0A00';
+    final tableNames = sortedNicely(d.acpiTables.keys.toList());
+    String gprwPath = '';
+    var hasXprw = false;
+    for (final tableName in tableNames) {
+      final table = d.acpiTables[tableName]!;
+      if (gprwPath.isEmpty) {
+        final methods = d.getMethodPaths(obj: 'GPRW', table: table);
+        if (methods.isNotEmpty) gprwPath = methods.first[0].toString();
+      }
+      if (!hasXprw) {
+        hasXprw = d.getMethodPaths(obj: 'XPRW', table: table).isNotEmpty;
+      }
+    }
+
+    Log('正在检查是否存在 GPRW 方法...');
+    if (gprwPath.isNotEmpty) {
+      Log('=> 已在 $gprwPath 找到 GPRW 方法！');
+      await _ssdtGPRWPrebuilt();
+      return;
+    }
+
+    Log.warning('=> 未找到 GPRW 方法，正在检查直接定义的 _PRW Package...');
+    if (hasXprw) {
+      Log.warning('=> 已找到 XPRW 方法，当前 ACPI 可能已被修改；仍将按实际 _PRW 内容继续检查。');
+    }
+
+    final targetBytes = util.getHexBytes(prwPackageHex);
+    var totalRawOccurrences = 0;
+    for (final tableName in tableNames) {
+      totalRawOccurrences += _rawOccurrenceCount(
+        d.acpiTables[tableName]!['raw'],
+        targetBytes,
+      );
+    }
+
+    final patches = <Map<String, dynamic>>[];
+    final patchKeys = <String>{};
+    for (final tableName in tableNames) {
+      final table = d.acpiTables[tableName]!;
+      if (_rawOccurrenceCount(table['raw'], targetBytes) == 0) continue;
+
+      final prwObjects = <List<dynamic>>[
+        ...d.getNamePaths(obj: '_PRW', table: table),
+        ...d.getMethodPaths(obj: '_PRW', table: table),
+      ];
+      for (final object in prwObjects) {
+        final objectLine = object[1] as int;
+        if (!_isTargetPrwPackage(table, objectLine)) continue;
+
+        var find = prwPackageHex;
+        var replace = patchedPrwPackageHex;
+        if (totalRawOccurrences > 1) {
+          try {
+            final hexLine = d.findNextHex(index: objectLine, table: table).$2;
+            final (leftPad, rightPad) = d.getShortestUniquePad(
+              currentHex: prwPackageHex,
+              index: hexLine,
+              table: table,
+            );
+            find = leftPad + prwPackageHex + rightPad;
+            replace = leftPad + patchedPrwPackageHex + rightPad;
+          } catch (_) {
+            Log.warning(
+              '=> $tableName 中 ${object[0]} 的目标字节不是唯一值，无法安全定位，已跳过。',
+            );
+            continue;
+          }
+        }
+
+        final key = '$tableName:$find';
+        if (!patchKeys.add(key)) continue;
+        patches.add({
+          'Comment': 'Instant Wake Fix (_PRW 0x6D, 0x04 to 0)',
+          'Find': find,
+          'Replace': replace,
+        });
+        Log('=> 已在 $tableName 的 ${object[0]} 找到目标 _PRW Package。');
+        Log('           Find: $find');
+        Log('     Replace: $replace');
+      }
+    }
+
+    if (patches.isEmpty) {
+      Log.warning(
+        '=> 未找到可安全修复的 _PRW Package (0x6D, 0x04)，不生成 SSDT-GPRW 或二进制补丁。',
+      );
+      return;
+    }
+
+    await makePlist(patches: patches, replace: true);
+    Log('=> 已生成 ${patches.length} 个 _PRW 即时唤醒修复补丁；此场景不需要 SSDT-GPRW。');
   }
 
   /// SSDT-GPRW

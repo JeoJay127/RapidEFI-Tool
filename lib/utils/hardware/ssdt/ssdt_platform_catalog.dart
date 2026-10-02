@@ -685,6 +685,7 @@ class SsdtPlatformCatalog {
         .where(
           (item) =>
               item.isBasic ||
+              item.name == ACPITable.ssdtGPRW.name ||
               (item.isRecommend && platformType != PlatformType.desktop),
         )
         .map((item) => item.key)

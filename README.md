@@ -25,7 +25,7 @@ RapidEFI 的配置逻辑遵循 OpenCore 官方文档与 Dortania OpenCore 安装
     </td>
     <td align="center">
       <strong>macOS 用户</strong><br>
-      <a href="https://github.com/JeoJay127/RapidEFI-Tool/releases/latest/download/RapidEFI-macOS-x64.zip"><img src="https://img.shields.io/badge/macOS-Download-000000?logo=apple&logoColor=white" alt="Download for macOS"></a>
+      <a href="https://github.com/JeoJay127/RapidEFI-Tool/releases/latest/download/RapidEFI-macOS-universal.zip"><img src="https://img.shields.io/badge/macOS-Download-000000?logo=apple&logoColor=white" alt="Download for macOS"></a>
     </td>
     <td align="center">
       <strong>Linux 用户</strong><br>

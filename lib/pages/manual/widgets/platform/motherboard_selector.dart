@@ -137,7 +137,9 @@ class _MotherboardSelectorWidgetState
                   : '(选择主板型号，勾选要应用的配置)',
               style: TextStyle(
                 fontSize: 13,
-                color: _selModel != null ? null : Colors.grey,
+                color: _selModel != null
+                    ? null
+                    : FluentTheme.of(context).resources.textFillColorSecondary,
               ),
             ),
           ]),
@@ -207,8 +209,13 @@ class _MotherboardSelectorWidgetState
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(label,
-            style: const TextStyle(fontSize: 12, color: Colors.grey)),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 12,
+            color: FluentTheme.of(context).resources.textFillColorSecondary,
+          ),
+        ),
         const SizedBox(height: 4),
         SizedBox(
           width: width,
@@ -277,8 +284,13 @@ class _MotherboardSelectorWidgetState
               style:
                   TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
           const SizedBox(width: 8),
-          Text('(${_checked.length}/$total 已选)',
-              style: const TextStyle(fontSize: 12, color: Colors.grey)),
+          Text(
+            '(${_checked.length}/$total 已选)',
+            style: TextStyle(
+              fontSize: 12,
+              color: FluentTheme.of(context).resources.textFillColorSecondary,
+            ),
+          ),
         ]),
       ),
     );

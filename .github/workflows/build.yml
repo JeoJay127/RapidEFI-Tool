@@ -103,7 +103,7 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
 
   # ──────────────────────────────────────────────────────
-  # 2. 矩阵构建：6 个组合（2 arch × 3 OS）
+  # 2. 矩阵构建：3 个组合
   # ──────────────────────────────────────────────────────
   build:
     name: Build · ${{ matrix.label }}
@@ -153,19 +153,9 @@ jobs:
           #   flutter_manual: true
 
           # ── macOS ──────────────────────────────────
-          - label:          macOS-x64
-            runner:         macos-26
-            os:             macos
-            arch:           x64
-            build_dir:      build/macos/Build/Products/Release
-            pkg_ext:        zip
-            flutter_sdk_arch: x64
-            flutter_manual: false
-
-          - label:          macOS-arm64
+          - label:          macOS-universal
             runner:         macos-15
             os:             macos
-            arch:           arm64
             build_dir:      build/macos/Build/Products/Release
             pkg_ext:        zip
             flutter_sdk_arch: arm64
