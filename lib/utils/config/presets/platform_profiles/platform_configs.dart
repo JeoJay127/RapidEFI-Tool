@@ -646,9 +646,9 @@ class Configs {
       MacPro7_1,
       iMacPro1_1
     ], igpuModes: [
+      ConfigDp.intel_desktop_6th_3,
       ConfigDp.intel_desktop_6th_1,
       ConfigDp.intel_desktop_6th_2,
-      ConfigDp.intel_desktop_6th_3,
       ConfigDp.intel_desktop_display_none_6th,
       ConfigDp.intel_desktop_computing_6th
     ]),
@@ -823,8 +823,8 @@ class Configs {
       MacBookPro16_2,
       MacBookPro16_4
     ], igpuModes: [
-      ConfigDp.intel_laptop_6th_1,
       ConfigDp.intel_laptop_6th_2,
+      ConfigDp.intel_laptop_6th_1,
       ConfigDp.intel_laptop_6th_3,
       ConfigDp.intel_laptop_6th_4,
       ConfigDp.intel_laptop_6th_5
@@ -996,9 +996,9 @@ class Configs {
       MacBookPro16_2,
       MacBookPro16_4
     ], igpuModes: [
+      ConfigDp.intel_nuc_6th_3,
       ConfigDp.intel_nuc_6th_1,
       ConfigDp.intel_nuc_6th_2,
-      ConfigDp.intel_nuc_6th_3,
       ConfigDp.intel_nuc_6th_4,
       ConfigDp.intel_nuc_6th_5,
       ConfigDp.intel_nuc_6th_6,

@@ -4,6 +4,7 @@ import 'package:rapidefi/extension/string_extension.dart';
 import 'package:rapidefi/utils/config/models/device_properties/device_property_item.dart';
 import 'package:rapidefi/utils/config/models/device_properties/igpu_model.dart';
 import 'package:rapidefi/utils/config/models/device_properties/iigpufb_model.dart';
+import 'package:rapidefi/utils/config/presets/sections/config_device_properties.dart';
 import 'package:rapidefi/utils/config/support/iigpufb_service.dart';
 import 'package:rapidefi/pages/shared/widgets/choice_list.dart';
 import 'package:rapidefi/pages/shared/widgets/scrollable_choice_list_panel.dart';
@@ -221,9 +222,8 @@ class _IgpuBaseState extends State<IgpuBase> {
     final choices = igpuModels
         .map((e) => e.first.propertyItems.first.comment ?? '')
         .toList();
-    final selectedChoice = selectedModel != null && selectedModel!.isNotEmpty
-        ? selectedModel?.first.propertyItems.first.comment
-        : '';
+    // 按实际属性识别方案，避免旧文案或高级属性影响当前勾选状态。
+    final selectedChoice = _selectedPresetChoice();
     final tips = igpuModels.map((e) {
       return '${e.first.propertyItems.first.key} : ${e.first.propertyItems.first.value}';
     }).toList();
@@ -250,6 +250,27 @@ class _IgpuBaseState extends State<IgpuBase> {
         widget.onChanged.call(selectedModel);
       },
     );
+  }
+
+  String _selectedPresetChoice() {
+    final selected = selectedModel;
+    if (selected == null || selected.isEmpty) return '';
+
+    for (final mode in igpuModels) {
+      final matches = mode.every((expectedDevice) => selected.any(
+            (device) =>
+                (device.pciPath == expectedDevice.pciPath ||
+                    expectedDevice.pciPath == ConfigDp.pciPath) &&
+                expectedDevice.propertyItems.every((expected) =>
+                    device.propertyItems.any((item) =>
+                        item.key == expected.key &&
+                        item.dataType == expected.dataType &&
+                        item.value?.toUpperCase() ==
+                            expected.value?.toUpperCase())),
+          ));
+      if (matches) return mode.first.propertyItems.first.comment ?? '';
+    }
+    return '';
   }
 
   // ── CPU 选择面板 ──────────────────────────────────────────────

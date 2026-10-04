@@ -73,11 +73,13 @@ class ConfigModelEditor {
   }
 
   void setMacOSVersion(String value) {
-    configModel.macOSVersion = value;
+    setDarwinMajorVersion(MacOSVersions.darwinMajorFromLabel(value));
   }
 
   void setDarwinMajorVersion(int value) {
+    if (configModel.darwinMajorVersion == value) return;
     configModel.darwinMajorVersion = value;
+    DevicePropertiesAccessor.synchronizeSkylakeDisplayMode(configModel);
   }
 
   void setPlatformInfoGeneric(
@@ -165,9 +167,27 @@ class ConfigModelEditor {
   Set<DevicePropertyItem> selectedIGPUDeviceProperties() =>
       DevicePropertiesAccessor.selectedIGPUProperties(configModel);
 
-  void updateIGPUDeviceProperties(Set<DevicePropertyItem> selectedItems) =>
-      DevicePropertiesAccessor.replaceIGPUProperties(
-          configModel, selectedItems);
+  void updateIGPUDeviceProperties(Set<DevicePropertyItem> selectedItems) {
+    String basicConfiguration() => [
+          'AAPL,ig-platform-id',
+          'AAPL,snb-platform-id',
+          'device-id',
+        ].map((key) {
+          final item = DevicePropertiesAccessor.getProperty(
+            configModel,
+            ConfigDp.pciPath,
+            key,
+          );
+          return '$key:${item?.value?.toUpperCase()}:${item?.dataType}:${item?.display}';
+        }).join('|');
+
+    final previous = basicConfiguration();
+    DevicePropertiesAccessor.replaceIGPUProperties(configModel, selectedItems);
+    // 按 CPU 型号加载也会改变基础 ID；普通高级勾选不重新应用默认值。
+    if (previous != basicConfiguration()) {
+      IntelIgpuMemoryPolicy.applyDisplayDefaults(configModel);
+    }
+  }
 
   void updateIntelConnectorAllData(int connectorIndex, String value) =>
       DevicePropertiesAccessor.setIntelConnectorAllData(

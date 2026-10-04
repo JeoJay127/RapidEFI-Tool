@@ -141,7 +141,7 @@ DevicePropertyItem get framebuffer_force_online => _deviceProperty(
       'force-online',
       'data',
       '01000000',
-      "在所有显示器上强制在线状态,对核显多屏输出有所帮助,某些时候可以避免睡眠唤醒后黑屏或开机需要插拔显示器线才能点亮屏幕等问题(通常适用于8代Coffee Lake及以上核显)",
+      "在所有显示器上强制在线状态,对核显多屏输出有所帮助,某些时候可以避免睡眠唤醒后黑屏或开机需要插拔显示器线才能点亮屏幕等问题(Intel 6代及以上核显用于输出时默认启用)",
     );
 DevicePropertyItem get framebuffer_rps_control => _deviceProperty(
       'rps-control',
@@ -206,13 +206,13 @@ DevicePropertyItem get framebuffer_enable_max_pixel_clock_override =>
       'enable-max-pixel-clock-override',
       'data',
       '01000000',
-      "修复10代 Ice Lake 核显HDMI高分辨率显示器在 4K@60Hz、部分 2K/4K 高刷新场景下黑屏、无信号、分辨率无法正确输出的问题(强制启用核显（IGPU）的 “最大像素时钟覆盖（max pixel clock override）)",
+      "提高 Intel 核显最大像素时钟上限，解除由驱动上限造成的分辨率或刷新率限制，等效 -igfxmpc。默认上限为 675 MHz，可通过 max-pixel-clock-frequency 调整（单位 Hz）；实际显示能力仍受 GPU、接口、线材和显示器限制。",
     );
 DevicePropertyItem get framebuffer_aapl_GfxYTile => _deviceProperty(
       'AAPL,GfxYTile',
       'data',
       '01000000',
-      "用于修复核显毛刺效果或者闪屏问题(比如核显HD530)",
+      "用于修复核显毛刺效果或者闪屏问题(HD 530、HD P530 核显用于输出时默认启用)",
     );
 DevicePropertyItem get framebuffer_disable_external_gpu => _deviceProperty(
       'disable-external-gpu',
@@ -553,8 +553,9 @@ List<IgpuDevicePropertyOption> selectableIGPUDevicePropertyOptions() {
     ),
     _option(
       id: 'ice_lake_4k_clock',
-      title: framebuffer_enable_max_pixel_clock_override.comment ?? '',
-      category: igpuCategoryIceLake,
+      title:
+          '提高 Intel 核显最大像素时钟上限（等效 -igfxmpc），解除驱动上限造成的分辨率或刷新率限制；默认上限 675 MHz。',
+      category: igpuCategoryCommon,
       items: [framebuffer_enable_max_pixel_clock_override],
     ),
     _option(

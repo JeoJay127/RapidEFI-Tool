@@ -262,11 +262,11 @@ class ConfigDp {
   ///6代,核显输出
   static DevicePropertyItem intel_desktop_display_6th_1 =
       intel_desktop_display_3th.copyWith(
-          value: '00001659', comment: 'HD520,HD530等仿冒HD620核显(适用于Ventura以上系统)');
+          value: '00001259', comment: 'HD520,HD530等仿冒HD630核显(适用于Ventura以上系统)');
 
   static DevicePropertyItem intel_desktop_display_fakeid_6th_1 =
       device_id.copyWith(
-    value: '16590000',
+    value: '12590000',
   );
 
   static DevicePropertyItem intel_desktop_display_6th_2 =
@@ -286,7 +286,7 @@ class ConfigDp {
 
   static DevicePropertyItem intel_desktop_display_fakeid_6th_3 =
       device_id.copyWith(
-    value: '1B190000',
+    value: '12190000',
   );
 
   static DevicePropertyItem intel_desktop_computing_id_6th =
@@ -692,7 +692,7 @@ class ConfigDp {
     key: 'AAPL,ig-platform-id',
     dataType: 'data',
     value: '00001659',
-    comment: 'HD520,HD530等仿冒HD620核显(用于Ventura以上系统)',
+    comment: 'HD520,HD530等仿冒HD620核显(适用于Ventura以上系统)',
   );
   static DevicePropertyItem intel_laptop_device_id_6th_1 =
       intel_laptop_device_id.copyWith(
@@ -1090,7 +1090,7 @@ class ConfigDp {
     key: 'AAPL,ig-platform-id',
     dataType: 'data',
     value: '00001B59',
-    comment: 'HD520,HD530等仿冒HD620核显(用于Ventura以上系统)',
+    comment: 'HD520,HD530等仿冒HD620核显(适用于Ventura以上系统)',
   );
   static DevicePropertyItem intel_nuc_device_id_6th_1 =
       intel_laptop_device_id.copyWith(
@@ -1105,7 +1105,7 @@ class ConfigDp {
   static DevicePropertyItem intel_nuc_display_6th_3 =
       intel_laptop_display_6th_1.copyWith(
     value: '02001619',
-    comment: 'HD 520/530核显',
+    comment: 'HD 520/530核显(适用于Monterey及以下系统)',
   );
   static DevicePropertyItem intel_nuc_device_id_6th_3 =
       intel_laptop_device_id.copyWith(

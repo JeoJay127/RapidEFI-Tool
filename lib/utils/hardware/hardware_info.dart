@@ -457,7 +457,10 @@ class HardwareInfo {
         _backfillGpuCodename(item, key, cpuCodename ?? _primaryCpuCodename());
       }
 
-      if (_hasAmdIntegratedGpuEvidence(item, key)) {
+      if (gpu_cd.GpuCodenameData.isKnownIntelIntegratedGpu(
+            _s(item['Device ID']),
+          ) ||
+          _hasAmdIntegratedGpuEvidence(item, key)) {
         item['Device Type'] = gpu_cd.GpuResolvedType.integrated.label;
       } else if (_s(item['Device Type']).isEmpty) {
         _backfillGpuDeviceType(item, key, _s(item['Codename']),

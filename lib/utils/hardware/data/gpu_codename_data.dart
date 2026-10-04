@@ -1,3 +1,4 @@
+import '../analysis/gpu_compatibility_data.dart';
 import '../pci_ids_parser.dart';
 import 'hardware_device_data.dart';
 
@@ -84,6 +85,23 @@ class GpuCodenameData {
 
   static bool isIntelGpu(String deviceId) {
     return IdsParser.normalizeFullDeviceId(deviceId).startsWith('8086-');
+  }
+
+  /// 精确 PCI ID 的已知核显型号优先于报告中可能误填的 Device Type。
+  /// 不按 Intel 厂商号或报告名称直接覆盖，避免把 Arc 等独显当作核显。
+  static bool isKnownIntelIntegratedGpu(String deviceId) {
+    final normalized = IdsParser.normalizeFullDeviceId(deviceId);
+    if (!normalized.startsWith('8086-')) return false;
+
+    final names = [
+      GpuCompatibilityData.findSync(normalized)?.name ?? '',
+      lookupDeviceName(normalized) ?? '',
+    ];
+    final integratedModel = RegExp(
+      r'\b(?:u?hd|iris(?:\s+(?:plus|pro))?)\s+graphics\b',
+      caseSensitive: false,
+    );
+    return names.any(integratedModel.hasMatch);
   }
 
   static bool isAmdGpu(String deviceId) {

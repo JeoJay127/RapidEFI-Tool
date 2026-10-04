@@ -23,6 +23,29 @@ class IntelIgpuMemoryPolicy {
     'ice_lake',
   };
 
+  static final _headlessPlatformIds = {
+    '11223344',
+    for (final item in [
+      ConfigDp.intel_desktop_computing_id_2th,
+      ConfigDp.intel_desktop_computing_id_3th,
+      ConfigDp.intel_desktop_computing_id_4th,
+      ConfigDp.intel_desktop_computing_id_5th,
+      ConfigDp.intel_desktop_computing_id_6th,
+      ConfigDp.intel_desktop_computing_id_7th,
+      ConfigDp.intel_desktop_computing_id_8th,
+      ConfigDp.intel_desktop_computing_id_10th,
+    ])
+      item.value?.toUpperCase(),
+  };
+
+  static const _gfxYTileDeviceIds = {
+    // Intel 官方 Legacy GPUs PCI ID 表：HD 530、HD P530。
+    // https://dgpu-docs.intel.com/overview/supported-hardware/legacy-gpus.html
+    '8086-1912',
+    '8086-191B',
+    '8086-191D',
+  };
+
   static bool hasDrivenFramebuffer(ConfigModel model) =>
       _drivenFramebuffer(model) != null;
 
@@ -40,6 +63,63 @@ class IntelIgpuMemoryPolicy {
               item.key == 'AAPL,snb-platform-id' ||
               item.key == 'framebuffer-patch-enable') &&
           item.value != '11223344');
+
+  // 新增高级默认项单独排除仅计算方案，不改变既有 HDMI 和显存默认规则。
+  static bool _hasDisplayOutput(Iterable<DevicePropertyItem> items) {
+    for (final item in items) {
+      final key = item.key?.toLowerCase();
+      if (key != 'aapl,ig-platform-id' && key != 'aapl,snb-platform-id') {
+        continue;
+      }
+      final value = item.value?.trim().toUpperCase();
+      return item.display &&
+          (value?.isNotEmpty ?? false) &&
+          !_headlessPlatformIds.contains(value);
+    }
+    return items.any((item) =>
+        item.key == 'framebuffer-patch-enable' &&
+        item.display &&
+        item.value == '01000000');
+  }
+
+  /// 只在平台或基础核显方案变化时重算，不覆盖用户随后手动调整的状态。
+  static void applyDisplayDefaults(
+    ConfigModel model, {
+    String pciPath = ConfigDp.pciPath,
+    String? sourceDeviceId,
+  }) {
+    final path = pciPath.trim().isEmpty ? ConfigDp.pciPath : pciPath.trim();
+    final codes = PlatformCodeRegistry.codes(model.cpuType, model.platformType);
+    final skylakeIndex = codes.indexOf(
+        model.platformType == PlatformType.hedt ? 'skylake_x_w' : 'skylake');
+    final forceOnline = model.cpuType == CpuType.intel &&
+        skylakeIndex >= 0 &&
+        codes.indexOf(model.platformCode) >= skylakeIndex;
+
+    for (final device in model.deviceProperties.addList ?? []) {
+      if (device.pciPath != path && device.pciPath != ConfigDp.pciPath) {
+        continue;
+      }
+      if (device.pciPath == path &&
+          (sourceDeviceId?.trim().isNotEmpty ?? false)) {
+        device.sourceDeviceId = sourceDeviceId!.trim();
+      }
+      final id = DevicePropertiesAccessor.intelDeviceId(device);
+      DevicePropertiesAccessor.rememberIntelDeviceId(device);
+      device.propertyItems.removeWhere((item) =>
+          item.key?.toLowerCase() == 'force-online' ||
+          item.key?.toLowerCase() == 'aapl,gfxytile');
+
+      if (device.pciPath != path ||
+          !_hasDisplayOutput(device.propertyItems)) {
+        continue;
+      }
+      if (forceOnline) device.propertyItems.add(framebuffer_force_online);
+      if (model.cpuType == CpuType.intel && _gfxYTileDeviceIds.contains(id)) {
+        device.propertyItems.add(framebuffer_aapl_GfxYTile);
+      }
+    }
+  }
 
   static void applyManualDefault(ConfigModel model) {
     if (model.cpuType != CpuType.intel ||
@@ -76,6 +156,11 @@ class IntelIgpuMemoryPolicy {
       return;
     }
 
+    // 输出构建器仅为标准路径补总开关，硬件报告的实际路径需要显式添加。
+    if (framebuffer.pciPath != ConfigDp.pciPath) {
+      DevicePropertiesAccessor.setProperty(
+          model, framebuffer.pciPath, framebuffer_patch_enable);
+    }
     _applyUnifiedMemoryDefault(model, framebuffer);
 
     final resolution = model.platformType == PlatformType.laptop
@@ -95,7 +180,7 @@ class IntelIgpuMemoryPolicy {
       DevicePropertiesAccessor.removeProperty(
           model, framebuffer.pciPath, framebuffer_fbmem.key!);
     }
-    _applyHdmiDefaults(model, framebuffer);
+    _applyHdmiDefaults(model, framebuffer, includeLaptop: true);
   }
 
   static void _applyUnifiedMemoryDefault(
@@ -112,10 +197,12 @@ class IntelIgpuMemoryPolicy {
 
   static void _applyHdmiDefaults(
     ConfigModel model,
-    IgpuPropertyModel framebuffer,
-  ) {
+    IgpuPropertyModel framebuffer, {
+    bool includeLaptop = false,
+  }) {
     if (model.platformType != PlatformType.desktop &&
-            model.platformType != PlatformType.nuc ||
+            model.platformType != PlatformType.nuc &&
+            !(includeLaptop && model.platformType == PlatformType.laptop) ||
         !_supportedPlatforms.contains(model.platformCode)) {
       return;
     }

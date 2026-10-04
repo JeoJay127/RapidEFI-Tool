@@ -1,9 +1,11 @@
 import 'package:rapidefi/utils/config/config_model.dart';
 import 'package:rapidefi/utils/config/models/device_properties/device_property_item.dart';
 import 'package:rapidefi/utils/config/models/device_properties/igpu_model.dart';
+import 'package:rapidefi/utils/config/models/enums/config_enums.dart';
 import 'package:rapidefi/utils/config/presets/sections/config_device_properties.dart';
 import 'package:rapidefi/utils/config/support/device_id_util.dart';
 import 'package:rapidefi/utils/config/support/platform_properties.dart';
+import 'package:rapidefi/utils/hardware/analysis/gpu_compatibility_data.dart';
 
 class DevicePropertiesAccessor {
   DevicePropertiesAccessor._();
@@ -17,6 +19,82 @@ class DevicePropertiesAccessor {
 
   static Set<DevicePropertyItem> selectableIGPUProperties() =>
       selectableIGPUDeviceProperties();
+
+  /// 六代核显用于输出时，按目标系统推荐基础方案，与列表排序无关。
+  static List<IgpuPropertyModel>? skylakeDisplayModeForTarget(
+    ConfigModel model,
+  ) {
+    if (model.cpuType != CpuType.intel || model.platformCode != 'skylake') {
+      return null;
+    }
+
+    final modern = model.darwinMajorVersion >= 22;
+    final mode = switch (model.platformType) {
+      PlatformType.desktop =>
+        modern ? ConfigDp.intel_desktop_6th_1 : ConfigDp.intel_desktop_6th_3,
+      PlatformType.laptop =>
+        modern ? ConfigDp.intel_laptop_6th_1 : ConfigDp.intel_laptop_6th_2,
+      PlatformType.nuc =>
+        modern ? ConfigDp.intel_nuc_6th_1 : ConfigDp.intel_nuc_6th_3,
+      PlatformType.hedt => null,
+    };
+    return mode?.map((item) => item.copyWith()).toList();
+  }
+
+  /// 在系统版本改变或自动构建初始化时调用，保留随后手动选择的方案。
+  static void synchronizeSkylakeDisplayMode(ConfigModel model) {
+    final mode = skylakeDisplayModeForTarget(model);
+    final devices = model.deviceProperties.addList;
+    if (mode == null || devices == null) return;
+
+    for (final device in devices) {
+      final outputsDisplay = device.propertyItems.any((item) {
+        final value = item.value?.trim().toUpperCase();
+        return item.key?.toLowerCase() == igPlatformIdKey.toLowerCase() &&
+            item.display &&
+            (value?.isNotEmpty ?? false) &&
+            value != '11223344' &&
+            value != ConfigDp.intel_desktop_computing_id_6th.value;
+      });
+      if (!outputsDisplay) continue;
+
+      rememberIntelDeviceId(device);
+      // 仅替换基础 ID，不改变 PCI 路径、DVMT、接口、EDID 或其他设备。
+      device.propertyItems = [
+        ...mode.first.propertyItems.map((item) => item.copyWith()),
+        ...device.propertyItems.where((item) {
+          final key = item.key?.toLowerCase();
+          return key != igPlatformIdKey.toLowerCase() && key != deviceIdKey;
+        }),
+      ];
+    }
+  }
+
+  static String intelDeviceId(IgpuPropertyModel device) {
+    if (device.sourceDeviceId.trim().isNotEmpty) {
+      final id = GpuCompatibilityData.normalizeFullDeviceId(
+        device.sourceDeviceId.replaceAll(':', '-'),
+      ).replaceFirst(RegExp(r'^0X'), '');
+      return RegExp(r'^[0-9A-F]{4}$').hasMatch(id) ? '8086-$id' : id;
+    }
+
+    for (final item in device.propertyItems) {
+      if (item.key?.toLowerCase() != deviceIdKey || item.dataType != 'data') {
+        continue;
+      }
+      final value = item.value?.trim().toUpperCase() ?? '';
+      if (!RegExp(r'^[0-9A-F]{4}0000$').hasMatch(value)) return '';
+      return '8086-${DeviceIdUtils.reverseDeviceId(value.substring(0, 4))}';
+    }
+    return '';
+  }
+
+  static void rememberIntelDeviceId(IgpuPropertyModel device) {
+    if (device.sourceDeviceId.isNotEmpty) return;
+    final id = intelDeviceId(device);
+    // 兼容性仿冒 ID 不能确定原始硬件；保留原生六代 ID 供后续切换使用。
+    if (id.startsWith('8086-19')) device.sourceDeviceId = id;
+  }
 
   static IgpuPropertyModel ensureModel(ConfigModel model, String pciPath) {
     final addList = model.deviceProperties.addList ??= [];

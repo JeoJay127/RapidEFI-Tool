@@ -1,5 +1,6 @@
 import 'package:rapidefi/utils/hardware/analysis/gpu_compatibility_data.dart';
 import 'package:rapidefi/utils/hardware/analysis/hardware_analysis.dart';
+import 'package:rapidefi/utils/hardware/data/gpu_codename_data.dart';
 import 'package:rapidefi/utils/hardware/data/hardware_device_data.dart';
 
 /// 统一识别自动配置流程中的核显与独显拓扑。
@@ -27,6 +28,11 @@ class HardwareGpuTopology {
   }
 
   static bool isIntegrated(String name, Map<String, dynamic> gpu) {
+    if (GpuCodenameData.isKnownIntelIntegratedGpu(
+      safeStr(gpu['Device ID']),
+    )) {
+      return true;
+    }
     final type = safeStr(gpu['Device Type']).toLowerCase();
     if (type.contains('integrated') ||
         type.contains('核显') ||
@@ -52,6 +58,11 @@ class HardwareGpuTopology {
   }
 
   static bool isDiscrete(String name, Map<String, dynamic> gpu) {
+    if (GpuCodenameData.isKnownIntelIntegratedGpu(
+      safeStr(gpu['Device ID']),
+    )) {
+      return false;
+    }
     final deviceId = GpuCompatibilityData.normalizeFullDeviceId(
       safeStr(gpu['Device ID']),
     ).toUpperCase();

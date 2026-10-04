@@ -72,6 +72,7 @@ class HardwareConfigModelBuilder {
     for (final stage in _stages) {
       stage.apply(context, model);
     }
+    IntelIgpuMemoryPolicy.applyAutomaticDefault(model, hardwareInfo.monitorsInfo);
 
     return model;
   }
@@ -224,6 +225,11 @@ class HardwareConfigModelBuilder {
         selected,
         preferredPciPath: safeStr(gpu['PCI Path']),
         replaceExisting: _isComputeOnlyMode(selected),
+      );
+      IntelIgpuMemoryPolicy.applyDisplayDefaults(
+        model,
+        pciPath: safeStr(gpu['PCI Path']),
+        sourceDeviceId: safeStr(gpu['Device ID']),
       );
       _applyIntegratedGpuDisplayTweaks(context, model, entry.key, gpu);
     }
@@ -484,6 +490,7 @@ class HardwareConfigModelBuilder {
     if (macOSVersion != null && macOSVersion.trim().isNotEmpty) {
       model.macOSVersion = macOSVersion;
     }
+    DevicePropertiesAccessor.synchronizeSkylakeDisplayMode(model);
 
     final platformInfoGeneric = options.platformInfoGeneric;
     if (platformInfoGeneric != null) {
@@ -562,7 +569,9 @@ class HardwareConfigModelBuilder {
       return _firstModeWhere(modes, _isHeadlessOrDisabledMode) ?? modes.last;
     }
 
-    return _firstModeWhere(modes, _modeHasDisplayOutput) ?? modes.first;
+    return DevicePropertiesAccessor.skylakeDisplayModeForTarget(model) ??
+        _firstModeWhere(modes, _modeHasDisplayOutput) ??
+        modes.first;
   }
 
   List<IgpuPropertyModel>? _firstModeWhere(

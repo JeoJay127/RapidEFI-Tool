@@ -41,6 +41,7 @@ class ManualConfigController extends ChangeNotifier {
   int _platformSelectionRevision = 0;
 
   List<DevicePropertyItem>? _igpuAdvancedItems;
+  String? _igpuSourceDeviceId;
 
   PlatformModel? _cachedPlatformModel;
   CpuType? _cachedPlatformCpuType;
@@ -92,6 +93,7 @@ class ManualConfigController extends ChangeNotifier {
     try {
       _mode = mode;
       _igpuAdvancedItems = null;
+      _igpuSourceDeviceId = null;
       activateSession();
       if (initialModel != null) {
         _editor.setConfigModel(initialModel);
@@ -226,6 +228,7 @@ class ManualConfigController extends ChangeNotifier {
   }) {
     final previousGeneric = _configService.configModel.platformInfo.generic;
     _igpuAdvancedItems = null;
+    _igpuSourceDeviceId = null;
     _editor.setConfigModel(
       _configFor(
         cpuType,
@@ -273,7 +276,23 @@ class ManualConfigController extends ChangeNotifier {
 
   void updateIgpu(void Function(ConfigModelEditor editor) action) {
     activateSession();
+    final previousIgpu = DevicePropertiesAccessor.getModel(
+      _configService.configModel,
+      ConfigDp.pciPath,
+    );
     action(_editor);
+    final igpu = DevicePropertiesAccessor.getModel(
+      _configService.configModel,
+      ConfigDp.pciPath,
+    );
+    if (igpu != null &&
+        (igpu.sourceDeviceId.isEmpty || !identical(previousIgpu, igpu)) &&
+        igpu.sourceDeviceId != _igpuSourceDeviceId &&
+        (_igpuSourceDeviceId?.isNotEmpty ?? false)) {
+      // 从预设切到 CPU 配置时节点会重建，恢复原始身份后再判断默认项。
+      igpu.sourceDeviceId = _igpuSourceDeviceId!;
+      IntelIgpuMemoryPolicy.applyDisplayDefaults(_configService.configModel);
+    }
     _configService.normalizeRuntimeConfigModel();
     _igpuRevision++;
     notifyListeners();
@@ -282,6 +301,22 @@ class ManualConfigController extends ChangeNotifier {
   void selectIgpuMode(List<IgpuPropertyModel>? addList) {
     updateIgpu((editor) {
       final model = editor.configModel;
+      var currentIgpu =
+          DevicePropertiesAccessor.getModel(model, ConfigDp.pciPath);
+      for (final device in model.deviceProperties.addList ?? []) {
+        if (device.sourceDeviceId.isNotEmpty &&
+            device.propertyItems.any((item) =>
+                item.key?.toLowerCase() == 'aapl,ig-platform-id' ||
+                item.key?.toLowerCase() == 'aapl,snb-platform-id')) {
+          currentIgpu = device;
+        }
+      }
+      if (currentIgpu != null) {
+        DevicePropertiesAccessor.rememberIntelDeviceId(currentIgpu);
+        if (currentIgpu.sourceDeviceId.isNotEmpty) {
+          _igpuSourceDeviceId = currentIgpu.sourceDeviceId;
+        }
+      }
       if (IntelIgpuMemoryPolicy.hasManualDisplay(model)) {
         final keys =
             selectableIGPUDeviceProperties().map((item) => item.key).toSet();
@@ -297,7 +332,14 @@ class ManualConfigController extends ChangeNotifier {
       }
 
       editor.updateDeviceProperties(
-        addList?.map((item) => item.copyWith()).toList(),
+        addList
+            ?.map((item) => item.copyWith(
+                  sourceDeviceId: item.pciPath == ConfigDp.pciPath &&
+                          item.sourceDeviceId.isEmpty
+                      ? _igpuSourceDeviceId
+                      : item.sourceDeviceId,
+                ))
+            .toList(),
       );
       IntelIgpuMemoryPolicy.applyManualDefault(model);
       if (IntelIgpuMemoryPolicy.hasManualDisplay(model) &&
@@ -305,6 +347,7 @@ class ManualConfigController extends ChangeNotifier {
         DevicePropertiesAccessor.replaceIGPUProperties(model, {});
         DevicePropertiesAccessor.addIGPUProperties(model, _igpuAdvancedItems!);
       }
+      IntelIgpuMemoryPolicy.applyDisplayDefaults(model);
     });
   }
 
@@ -402,6 +445,7 @@ class ManualConfigController extends ChangeNotifier {
           platformIndex: platformIndex,
         );
     IntelIgpuMemoryPolicy.applyManualDefault(model);
+    IntelIgpuMemoryPolicy.applyDisplayDefaults(model);
     return model;
   }
 
