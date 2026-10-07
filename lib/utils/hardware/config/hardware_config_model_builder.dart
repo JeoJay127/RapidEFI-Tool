@@ -201,7 +201,7 @@ class HardwareConfigModelBuilder {
           HardwareDeviceData.isNootedRedSupportedDeviceId(
             safeStr(gpu['Device ID']),
           )) {
-        _addKexts(model, [ConfigKernel.NootedRed]);
+        AmdSettingsAccessor.setUsesRyzenGpu(model, true);
         continue;
       }
 
@@ -242,6 +242,15 @@ class HardwareConfigModelBuilder {
     for (final entry in hardwareDevices(context.rawInfoMap['GPU'])) {
       final gpu = safeMap(entry.value);
       if (!_isDiscreteGpu(entry.key, gpu)) continue;
+      if (HardwareGpuTopology.shouldDisableDiscreteGpu(
+        context.rawInfoMap,
+        entry.key,
+        gpu,
+        cpuType: model.cpuType,
+        platformType: model.platformType,
+      )) {
+        continue;
+      }
 
       final ruleText = _gpuRuleText(entry.key, gpu).toLowerCase();
       final record = GpuCompatibilityData.findSync(
@@ -276,8 +285,11 @@ class HardwareConfigModelBuilder {
     HardwareConfigBuildContext context,
     ConfigModel model,
   ) {
-    if (model.platformType != PlatformType.laptop) return;
-    if (!HardwareGpuTopology.hasOnlyIntegratedGraphics(context.rawInfoMap)) {
+    if (!HardwareGpuTopology.hasSingleGraphicsDevice(context.rawInfoMap) &&
+        (model.platformType != PlatformType.laptop ||
+            !HardwareGpuTopology.hasOnlyIntegratedGraphics(
+              context.rawInfoMap,
+            ))) {
       return;
     }
 
@@ -453,22 +465,24 @@ class HardwareConfigModelBuilder {
     final hasRmi = deviceTypes.any((type) => type.contains('rmi'));
     final hasPs2 = deviceTypes.any((type) => type.contains('ps/2'));
 
+    final KextGroup group;
     if (hasI2c) {
-      _addKexts(model, ConfigKextGroups.voodooPs2ControllerWithI2c.kexts);
-      return;
-    }
-
-    if (hasRmi) {
-      _addKexts(model, ConfigKextGroups.voodooPs2ControllerWithRmi.kexts);
-      return;
-    }
-
-    if (hasPs2) {
-      final group = model.platformRank <= 2
+      group = ConfigKextGroups.voodooPs2ControllerWithI2c;
+    } else if (hasRmi) {
+      group = ConfigKextGroups.voodooPs2ControllerWithRmi;
+    } else if (hasPs2) {
+      group = model.platformRank <= 2
           ? ConfigKextGroups.applePs2SmartTouchPad
           : ConfigKextGroups.voodooPs2Controller;
-      _addKexts(model, group.kexts);
+    } else {
+      return;
     }
+
+    KextAccessor.replaceKexts(
+      model,
+      KextGroup.expand(ConfigKextGroups.touchPadGroups),
+      group.kexts,
+    );
   }
 
   void _applySurfaceConfiguration(
@@ -654,10 +668,11 @@ class HardwareConfigModelBuilder {
       final connectedGpu = safeStr(monitor['Connected GPU']).toLowerCase();
       if (connectedGpu.isEmpty) continue;
       if (discreteGpus.any(
-        (entry) => _gpuNameMatches(
+        (entry) => HardwareGpuTopology.gpuNameMatches(
           connectedGpu,
           entry.key,
           safeMap(entry.value),
+          includeDeviceMetadata: true,
         ),
       )) {
         return true;
@@ -678,40 +693,17 @@ class HardwareConfigModelBuilder {
       final monitor = safeMap(entry.value);
       final connectedGpu = safeStr(monitor['Connected GPU']).toLowerCase();
       if (connectedGpu.isEmpty) continue;
-      if (_gpuNameMatches(
+      if (HardwareGpuTopology.gpuNameMatches(
         connectedGpu,
         gpuName,
         safeMap(context.rawInfoMap['GPU']?[gpuName]),
+        includeDeviceMetadata: true,
       )) {
         return true;
       }
     }
 
     return false;
-  }
-
-  bool _gpuNameMatches(
-    String connectedGpu,
-    String fallbackName,
-    Map<String, dynamic> gpu,
-  ) {
-    final aliases = [
-      fallbackName,
-      safeStr(gpu['Name']),
-      safeStr(gpu['Device ID']),
-      safeStr(gpu['DeviceDesc']),
-      safeStr(gpu['Device Description']),
-      safeStr(gpu['Description']),
-      safeStr(gpu['Manufacturer']),
-    ]
-        .map((value) => value.toLowerCase().trim())
-        .where((value) => value.isNotEmpty);
-
-    return aliases.any(
-      (alias) => connectedGpu == alias ||
-          connectedGpu.contains(alias) ||
-          alias.contains(connectedGpu),
-    );
   }
 
   void _mergeDeviceProperties(
@@ -797,7 +789,12 @@ class HardwareConfigModelBuilder {
 
       final connectedGpu = safeStr(monitor['Connected GPU']).toLowerCase();
       if (connectedGpu.isNotEmpty &&
-          !_gpuNameMatches(connectedGpu, gpuName, gpu)) {
+          !HardwareGpuTopology.gpuNameMatches(
+            connectedGpu,
+            gpuName,
+            gpu,
+            includeDeviceMetadata: true,
+          )) {
         continue;
       }
 

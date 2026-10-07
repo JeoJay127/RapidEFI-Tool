@@ -1,3 +1,4 @@
+import 'package:rapidefi/utils/config/models/enums/config_enums.dart';
 import 'package:rapidefi/utils/hardware/analysis/gpu_compatibility_data.dart';
 import 'package:rapidefi/utils/hardware/analysis/hardware_analysis.dart';
 import 'package:rapidefi/utils/hardware/data/gpu_codename_data.dart';
@@ -6,6 +7,27 @@ import 'package:rapidefi/utils/hardware/data/hardware_device_data.dart';
 /// 统一识别自动配置流程中的核显与独显拓扑。
 class HardwareGpuTopology {
   const HardwareGpuTopology._();
+
+  static bool hasSingleGraphicsDevice(Map<String, dynamic>? rawInfo) {
+    return hardwareDevices(rawInfo?['GPU']).length == 1;
+  }
+
+  static bool shouldDisableDiscreteGpu(
+    Map<String, dynamic>? rawInfo,
+    String name,
+    Map<String, dynamic> gpu, {
+    CpuType? cpuType,
+    PlatformType? platformType,
+  }) {
+    final data = rawInfo ?? const <String, dynamic>{};
+    if (hasSingleGraphicsDevice(data) || !isDiscrete(name, gpu)) return false;
+
+    return gpuEntryCompatibility(data, name, gpu).level ==
+            CompatibilityLevel.unsupported ||
+        (cpuType == CpuType.intel &&
+            platformType == PlatformType.laptop &&
+            _intelIgpuDrivesDisplay(data));
+  }
 
   static bool shouldDefaultEnableNpci(Map<String, dynamic>? rawInfo) {
     if (rawInfo == null) return false;
@@ -95,6 +117,64 @@ class HardwareGpuTopology {
         text.contains('firepro') ||
         text.contains('geforce') ||
         text.contains('quadro');
+  }
+
+  static bool _intelIgpuDrivesDisplay(Map<String, dynamic> data) {
+    final intelIntegratedGpus = hardwareDevices(data['GPU'])
+        .where((entry) {
+          final gpu = safeMap(entry.value);
+          return isIntegrated(entry.key, gpu) &&
+              (GpuCodenameData.isIntelGpu(safeStr(gpu['Device ID'])) ||
+                  _searchText(entry.key, gpu).contains('intel'));
+        })
+        .toList();
+    if (intelIntegratedGpus.isEmpty) return false;
+
+    final monitors = hardwareDevices(data['Monitor']).toList();
+    if (monitors.isEmpty) return false;
+
+    for (final monitorEntry in monitors) {
+      final monitor = safeMap(monitorEntry.value);
+      final connectedGpu = safeStr(monitor['Connected GPU']).toLowerCase();
+      if (connectedGpu.isEmpty) continue;
+      if (intelIntegratedGpus.any(
+        (entry) => gpuNameMatches(
+          connectedGpu,
+          entry.key,
+          safeMap(entry.value),
+        ),
+      )) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  /// 默认只匹配名称；配置构建可额外使用设备 ID 和厂商名别名。
+  static bool gpuNameMatches(
+    String connectedGpu,
+    String fallbackName,
+    Map<String, dynamic> gpu, {
+    bool includeDeviceMetadata = false,
+  }) {
+    final aliases = [
+      fallbackName,
+      safeStr(gpu['Name']),
+      if (includeDeviceMetadata) safeStr(gpu['Device ID']),
+      safeStr(gpu['DeviceDesc']),
+      safeStr(gpu['Device Description']),
+      safeStr(gpu['Description']),
+      if (includeDeviceMetadata) safeStr(gpu['Manufacturer']),
+    ]
+        .map((value) => value.toLowerCase().trim())
+        .where((value) => value.isNotEmpty);
+
+    return aliases.any(
+      (alias) => connectedGpu == alias ||
+          connectedGpu.contains(alias) ||
+          alias.contains(connectedGpu),
+    );
   }
 
   static String _searchText(String name, Map<String, dynamic> gpu) {
