@@ -1,38 +1,28 @@
 name: Build & Release
 
 # ── 触发规则 ────────────────────────────────────────────
-# push main/master  → Alpha（自动，固定 tag "alpha"）
-# workflow_dispatch → Beta（手动，固定 tag "beta"）
-#                  → Stable（手动，输入版本号，生成 tag "vX.Y.Z"）
-# push v* tag       → Stable（手动推 tag 也可触发）
+# push main/master  → Beta（自动，固定 tag "beta"，每次发布先删除旧 Release）
+# workflow_dispatch → Release（手动输入版本号，生成 tag "vX.Y.Z"）
 # ─────────────────────────────────────────────────────────
 on:
   push:
-    branches: [ main, master ]       # → alpha
-    tags:     [ 'v*' ]               # → stable
+    branches: [ main, master ]
 
   workflow_dispatch:
     inputs:
-      channel:
-        description: '发布渠道'
-        required: true
-        type: choice
-        options:
-          - beta                     # 固定 tag "beta"
-          - stable                   # tag = "v{version}"
       version:
-        description: '版本号（stable 必填，如 5.1.0；beta 留空）'
-        required: false
+        description: '版本号（如 v5.9.0 或 v5.9，v 可省略）'
+        required: true
         type: string
 
 env:
   APP_NAME: RapidEFI
   FLUTTER_VERSION: '3.41.9'
 
-# 同一 ref 的旧构建自动取消（节省 runner 资源）
+# 同一 ref 的旧构建自动取消（仅 push 的 beta 构建；手动发布不取消）
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'push' }}
 
 jobs:
   # ──────────────────────────────────────────────────────
@@ -45,51 +35,48 @@ jobs:
       channel:    ${{ steps.info.outputs.channel }}
       tag:        ${{ steps.info.outputs.tag }}
       version:    ${{ steps.info.outputs.version }}
-      fixed_tag:  ${{ steps.info.outputs.fixed_tag }}  # "true" → alpha / beta
+      overwrite:  ${{ steps.info.outputs.overwrite }}  # "true" → 覆盖固定 tag（beta）
 
     steps:
       - name: Resolve channel / tag / version
         id: info
+        env:
+          INPUT_VERSION: ${{ github.event.inputs.version }}
         run: |
           EVENT="${{ github.event_name }}"
 
-          if [ "$EVENT" = "push" ] && [[ "${{ github.ref }}" == refs/heads/* ]]; then
-            # ── Alpha：push 到分支 ──────────────────────
-            CHANNEL=alpha
-            TAG=alpha
-            VERSION="alpha.$(date -u +%Y%m%d%H%M).${GITHUB_SHA::7}"
-            FIXED_TAG=true
+          if [ "$EVENT" = "push" ]; then
+            # ── Beta：push 到主分支，固定 tag "beta" ──────
+            CHANNEL=beta
+            TAG=beta
+            VERSION="beta.$(date -u +%Y%m%d%H%M).${GITHUB_SHA::7}"
+            OVERWRITE=true
+          else
+            # ── Release：手动输入版本号（vX.Y.Z / X.Y.Z / X.Y）──
+            CHANNEL=release
+            RAW="$INPUT_VERSION"
+            RAW="${RAW#v}"
+            RAW="${RAW#V}"
 
-          elif [ "$EVENT" = "push" ] && [[ "${{ github.ref }}" == refs/tags/* ]]; then
-            # ── Stable：推送 v* tag ────────────────────
-            TAG="${GITHUB_REF#refs/tags/}"
-            VERSION="${TAG#v}"
-            CHANNEL=stable
-            FIXED_TAG=false
-
-          elif [ "$EVENT" = "workflow_dispatch" ]; then
-            CHANNEL="${{ github.event.inputs.channel }}"
-
-            if [ "$CHANNEL" = "beta" ]; then
-              # ── Beta：固定 tag "beta" ─────────────────
-              TAG=beta
-              VERSION="beta.$(date -u +%Y%m%d%H%M).${GITHUB_SHA::7}"
-              FIXED_TAG=true
-            else
-              # ── Stable：手动指定版本 ──────────────────
-              VERSION="${{ github.event.inputs.version }}"
-              if [ -z "$VERSION" ]; then
-                echo "::error::stable 渠道必须填写版本号" && exit 1
-              fi
-              TAG="v${VERSION}"
-              FIXED_TAG=false
+            if ! [[ "$RAW" =~ ^[0-9]+\.[0-9]+(\.[0-9]+)?$ ]]; then
+              echo "::error::版本号格式不正确：'${INPUT_VERSION}'（应类似 v5.9.0）"
+              exit 1
             fi
+
+            # pubspec 要求 major.minor.patch，输入 v5.9 时补成 5.9.0
+            if [[ "$RAW" =~ ^[0-9]+\.[0-9]+$ ]]; then
+              RAW="${RAW}.0"
+            fi
+
+            VERSION="$RAW"
+            TAG="v${VERSION}"
+            OVERWRITE=false
           fi
 
           echo "channel=$CHANNEL"     >> "$GITHUB_OUTPUT"
           echo "tag=$TAG"             >> "$GITHUB_OUTPUT"
           echo "version=$VERSION"     >> "$GITHUB_OUTPUT"
-          echo "fixed_tag=$FIXED_TAG" >> "$GITHUB_OUTPUT"
+          echo "overwrite=$OVERWRITE" >> "$GITHUB_OUTPUT"
 
           # Step summary
           {
@@ -99,7 +86,7 @@ jobs:
             echo "| Channel | \`$CHANNEL\` |"
             echo "| Tag | \`$TAG\` |"
             echo "| Version | \`$VERSION\` |"
-            echo "| Fixed tag | \`$FIXED_TAG\` |"
+            echo "| Overwrite tag | \`$OVERWRITE\` |"
           } >> "$GITHUB_STEP_SUMMARY"
 
   # ──────────────────────────────────────────────────────
@@ -263,12 +250,12 @@ jobs:
 
       # ── 版本号写入 pubspec.yaml ─────────────────────
       # pubspec 只接受 X.Y.Z+buildNumber 格式（纯整数）
-      # stable：用输入的版本号；alpha/beta：保留原有 X.Y.Z，只更新 build number
+      # release：用输入的版本号；beta：保留原有 X.Y.Z，只更新 build number
       - name: Patch pubspec version
         shell: bash
         run: |
           CHANNEL="${{ needs.prepare.outputs.channel }}"
-          if [ "$CHANNEL" = "stable" ]; then
+          if [ "$CHANNEL" = "release" ]; then
             SEMVER="${{ needs.prepare.outputs.version }}"
           else
             # 从 pubspec.yaml 读取当前语义版本（去掉已有的 +build 部分）
@@ -314,8 +301,8 @@ jobs:
 
   # ──────────────────────────────────────────────────────
   # 3. 发布 Release
-  #    alpha / beta：强制覆盖同名 tag & release（固定入口）
-  #    stable      ：创建全新版本 release
+  #    beta    ：强制覆盖固定 tag "beta"（每次删除旧 Release 再发布）
+  #    release ：创建正式版本 Release（tag = "vX.Y.Z"）
   # ──────────────────────────────────────────────────────
   release:
     name: Release · ${{ needs.prepare.outputs.tag }}
@@ -323,6 +310,10 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    # 同一 tag 的发布串行执行，避免 beta Release 并发删建产生竞争
+    concurrency:
+      group: release-${{ needs.prepare.outputs.tag }}
+      cancel-in-progress: false
 
     steps:
       - uses: actions/checkout@v4
@@ -335,17 +326,14 @@ jobs:
 
       - run: ls -lh dist/
 
-      # ── alpha / beta：原子操作——删旧 release+tag，建新 tag，发新 release ──
-      # 合并为单步，避免"先推 tag 又被 --cleanup-tag 删掉"的冗余操作
-      - name: Publish alpha/beta release (overwrite)
-        if: needs.prepare.outputs.fixed_tag == 'true'
+      # ── beta：删除旧 release + tag，再将 tag 指向当前 commit 并发布 ──
+      - name: Publish beta release (overwrite)
+        if: needs.prepare.outputs.overwrite == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ needs.prepare.outputs.tag }}
+          VERSION: ${{ needs.prepare.outputs.version }}
         run: |
-          TAG="${{ needs.prepare.outputs.tag }}"
-          CHANNEL="${{ needs.prepare.outputs.channel }}"
-          VERSION="${{ needs.prepare.outputs.version }}"
-
           # 1. 删除旧 release（含 tag），忽略不存在时的错误
           gh release delete "$TAG" --yes --cleanup-tag 2>/dev/null || true
 
@@ -355,30 +343,26 @@ jobs:
           git tag -f "$TAG"
           git push origin "$TAG" --force
 
-          # 3. 创建新 release（使用 printf '%s' 防止变量中特殊字符被解析）
-          if [ "$CHANNEL" = "alpha" ]; then
-            TITLE="🔬 Alpha Build"
-            NOTES=$(printf '自动构建（每次推送到主分支更新此 Release）。\n\n**版本快照：** `%s`\n**构建号：** #%s\n**Commit：** %s' \
-              "$VERSION" "${{ github.run_number }}" "${{ github.sha }}")
-          else
-            TITLE="🧪 Beta Build"
-            NOTES=$(printf 'Beta 手动构建（每次触发 Beta 发布更新此 Release）。\n\n**版本快照：** `%s`\n**构建号：** #%s\n**Commit：** %s' \
-              "$VERSION" "${{ github.run_number }}" "${{ github.sha }}")
-          fi
+          # 3. 创建新 release（printf 防止变量中的特殊字符被解析）
+          NOTES=$(printf '自动构建（每次推送到主分支更新此 Release）。\n\n**版本快照：** `%s`\n**构建号：** #%s\n**Commit：** %s' \
+            "$VERSION" "${{ github.run_number }}" "${{ github.sha }}")
 
           gh release create "$TAG" dist/* \
+            --verify-tag \
             --prerelease \
-            --title "$TITLE" \
+            --title "🧪 Beta Build" \
             --notes "$NOTES"
 
-      # ── stable：创建正式版本 release ──────────────────
-      - name: Publish stable release
-        if: needs.prepare.outputs.fixed_tag == 'false'
+      # ── release：创建正式版本 release ──────────────────
+      - name: Publish release
+        if: needs.prepare.outputs.overwrite == 'false'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ needs.prepare.outputs.tag }}
+          VERSION: ${{ needs.prepare.outputs.version }}
         run: |
-          TAG="${{ needs.prepare.outputs.tag }}"
           gh release create "$TAG" dist/* \
-            --title "${{ env.APP_NAME }} ${TAG}" \
+            --target "${{ github.sha }}" \
+            --title "${{ env.APP_NAME }} ${VERSION}" \
             --generate-notes \
             --latest
