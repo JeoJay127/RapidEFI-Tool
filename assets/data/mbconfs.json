@@ -57801,6 +57801,539 @@
               "ResizeUsePciRbIo": false
             }
           }
+        },
+        "ASRock-B650M-PG-Riptide": {
+          "ACPI": {
+            "Add": [
+              "FixShutdown-USB-SSDT.aml",
+              "SSDT-GPU-DISABLE.aml",
+              "SSDT-HPET.aml",
+              "SSDT-EC.aml",
+              "SSDT-USBX.aml",
+              "SSDT-PLUG-ALT.aml",
+              "SSDT-USB-Reset.aml"
+            ]
+          },
+          "Booter": {
+            "Quirks": {
+              "AllowRelocationBlock": false,
+              "AvoidRuntimeDefrag": true,
+              "ClearTaskSwitchBit": false,
+              "DevirtualiseMmio": true,
+              "DisableSingleUser": false,
+              "DisableVariableWrite": false,
+              "DiscardHibernateMap": false,
+              "EnableSafeModeSlide": true,
+              "EnableWriteUnprotector": false,
+              "FixupAppleEfiImages": false,
+              "ForceBooterSignature": false,
+              "ForceExitBootServices": false,
+              "ProtectMemoryRegions": false,
+              "ProtectSecureBoot": false,
+              "ProtectUefiServices": false,
+              "ProvideCustomSlide": true,
+              "ProvideMaxSlide": 0,
+              "RebuildAppleMemoryMap": true,
+              "ResizeAppleGpuBars": 0,
+              "SetupVirtualMap": false,
+              "SignalAppleOS": false,
+              "SyncRuntimePermissions": true
+            }
+          },
+          "DP": {
+            "Add": {
+              "PciRoot(0x0)/Pci(0x1,0x1)/Pci(0x0,0x0)": {
+                "#Name": "NVIDIA RTX 3060",
+                "disable-gpu": true
+              },
+              "PciRoot(0x0)/Pci(0x2,0x1)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)": {
+                "#Name": "Intel(R) Wi-Fi 6E AX210 160MHz",
+                "built-in": "01"
+              },
+              "PciRoot(0x0)/Pci(0x2,0x1)/Pci(0x0,0x0)/Pci(0x3,0x0)/Pci(0x0,0x0)": {
+                "#Name": "Realtek RTL8125BG",
+                "built-in": "01"
+              },
+              "PciRoot(0x0)/Pci(0x2,0x1)/Pci(0x0,0x0)/Pci(0x8,0x0)/Pci(0x0,0x0)": {
+                "#Name": "SAMSUNG MZVLB256HAHQ-000H1",
+                "built-in": "01"
+              },
+              "PciRoot(0x0)/Pci(0x2,0x1)/Pci(0x0,0x0)/Pci(0xD,0x0)/Pci(0x0,0x0)": {
+                "#Name": "SATA Controller",
+                "built-in": "01"
+              },
+              "PciRoot(0x0)/Pci(0x2,0x2)/Pci(0x0,0x0)": {
+                "#Name": "Samsung 970 EVO Plus",
+                "built-in": "01"
+              }
+            }
+          },
+          "Kernel": {
+            "Add": [
+              "Lilu.kext",
+              "AppleMCEReporterDisabler.kext",
+              "IntelBluetoothFirmware.kext",
+              "IntelBluetoothInjector.kext",
+              "LucyRTL8125Ethernet.kext",
+              "NVMeFix.kext",
+              "USBMap.kext",
+              "VirtualSMC.kext",
+              "WhateverGreen.kext",
+              "AppleALC.kext",
+              "BlueToolFixup.kext",
+              "IntelBTPatcher.kext",
+              "SMCRadeonSensors.kext",
+              "RestrictEvents.kext",
+              "SMCProcessorAMD.kext",
+              "FeatureUnlock.kext",
+              "itlwm.kext",
+              "IntelMKLFixup.kext",
+              "HoRNDIS.kext",
+              "AMFIPass.kext"
+            ],
+            "Patch": [
+              {
+                "Arch": "x86_64",
+                "Base": "_cpuid_set_info",
+                "Comment": "algrey | Force cpuid_cores_per_package to constant (user-specified) | 10.13-10.14",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "c1e81a000000",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "fffdff000000",
+                "MaxKernel": "18.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "b80600000000",
+                "ReplaceMask": "ffffffffff00",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "_cpuid_set_info",
+                "Comment": "algrey | Force cpuid_cores_per_package to constant (user-specified) | 10.15-11.0",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "c1e81a000000",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "fffdff000000",
+                "MaxKernel": "20.99.99",
+                "MinKernel": "19.0.0",
+                "Replace": "ba0600000000",
+                "ReplaceMask": "ffffffffff00",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "_cpuid_set_info",
+                "Comment": "algrey | Force cpuid_cores_per_package to constant (user-specified) | 12.0-13.2",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "c1e81a000000",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "fffdff000000",
+                "MaxKernel": "22.3.99",
+                "MinKernel": "21.0.0",
+                "Replace": "ba0600000090",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "_cpuid_set_info",
+                "Comment": "algrey | Force cpuid_cores_per_package to constant (user-specified) | 13.3+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "c1e81a0000",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "fffdff0000",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "22.4.0",
+                "Replace": "ba06000000",
+                "ReplaceMask": "ffffffffff",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _commpage_populate | Remove rdmsr | 10.13+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "b9a00100000f32",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "66906690669090",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _cpuid_set_cache_info | Set CPUID proper instead of 4 | 10.13+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "b8040000004489f14489",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "b81d0000804489f14489",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _cpuid_set_generic_info | Remove wrmsr(0x8B) | 10.13+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "b98b00000031c031d20f30",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "6690669066906690669090",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _cpuid_set_generic_info | Replace rdmsr(0x8B) with constant 186 | 10.13+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "b98b0000000f32",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "baba0000006690",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _cpuid_set_generic_info | Set flag=1 | 10.13+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "b9170000000f32c1ea1280e207",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "b201660f1f8400000000006690",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _cpuid_set_generic_info | Disable check to allow leaf7 | 10.13+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "003a0f82",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "23.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "00000f82",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _cpuid_set_generic_info | Disable check to allow leaf7 | 15.0+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "00050f82",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "24.0.0",
+                "Replace": "00000f82",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _cpuid_set_info | GenuineIntel to AuthenticAMD | 10.13-11.0",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "47656e75696e65496e74656c00",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "20.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "41757468656e746963414d4400",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "_cpuid_set_info",
+                "Comment": "Goldfish64, algrey | Bypass GenuineIntel check panic | 12.0+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "00000000000031d2b301",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "000000000000ffffffff",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "21.0.0",
+                "Replace": "90909090909031d2b301",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _cpuid_set_cpufamily | Force CPUFAMILY_INTEL_PENRYN | 10.13-11.2",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "31db803d00000000067500",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "ffffffff000000ffffff00",
+                "MaxKernel": "20.3.0",
+                "MinKernel": "17.0.0",
+                "Replace": "bbbc4fea78e95d00000090",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "_cpuid_set_info ",
+                "Comment": "algrey | _cpuid_set_cpufamily | Force CPUFAMILY_INTEL_PENRYN | 11.3+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "803d000000000675",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "ffff00000000ffff",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "20.4.0",
+                "Replace": "babc4fea7831dbeb",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _i386_init | Remove 3 rdmsr calls | 10.13+",
+                "Count": 0,
+                "Enabled": true,
+                "Find": "b9990100000f3248c1e22089c64809d6b9980100000f3248c1e22089c04809c2bf5802310531c94531c0",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "660f1f840000000000660f1f840000000000660f1f840000000000660f1f840000000000660f1f440000",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey, XLNC | Remove version check and panic | 10.13+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "25fc00000083f813",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "25fc0000000f1f00",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "__ZN11IOPCIBridge13probeBusGatedEP14probeBusParams",
+                "Comment": "CaseySJ | probeBusGated | Disable 10 bit tags | 12.0-15.x",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "e0117200",
+                "Identifier": "com.apple.iokit.IOPCIFamily",
+                "Limit": 0,
+                "Mask": "f0fffff0",
+                "MaxKernel": "24.99.99",
+                "MinKernel": "21.0.0",
+                "Replace": "00000300",
+                "ReplaceMask": "00000f00",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "__ZN11IOPCIBridge13probeBusGatedEP14probeBusParams",
+                "Comment": "CaseySJ | probeBusGated | Disable 10 bit tags | 26.0+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "e0117340",
+                "Identifier": "com.apple.iokit.IOPCIFamily",
+                "Limit": 0,
+                "Mask": "f0fffff0",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "25.0.0",
+                "Replace": "00000200",
+                "ReplaceMask": "00000f00",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "Visual | thread_quantum_expire, thread_unblock, thread_invoke | Remove non-monotonic time panic | 12.0+",
+                "Count": 3,
+                "Enabled": true,
+                "Find": "48000000020000480000580000000f0000000000",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "ff00000fffffffff0000ff000000ff0000000000",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "21.0.0",
+                "Replace": "0000000000000000000000000000669066906690",
+                "ReplaceMask": "0000000000000000000000000000ffffffffffff",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "Visual | thread_invoke, thread_dispatch | Remove non-monotonic time panic | 12.0+",
+                "Count": 2,
+                "Enabled": true,
+                "Find": "480000800400000f0000000000",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "480000f0ffffffff0000000000",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "21.0.0",
+                "Replace": "00000000000000669066906690",
+                "ReplaceMask": "00000000000000ffffffffffff",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "Shaneee | _mtrr_update_action | Fix PAT | 10.13+",
+                "Count": 0,
+                "Enabled": true,
+                "Find": "89c081e2ffff00ff81ca00000100b977020000",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "ffffffffffff0fffffffffffffffffffffffff",
+                "MaxKernel": "23.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "b977020000b806060606ba060606060f300f09",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "Shaneee / Zormeister | _mtrr_update_action | Fix PAT | 15.0+",
+                "Count": 0,
+                "Enabled": true,
+                "Find": "89c081e2ffff00ff81ca000000000f30",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "ffffffffffffffffffff00000000ffff",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "24.0.0",
+                "Replace": "89c0b806060606ba060606060f309090",
+                "ReplaceMask": "",
+                "Skip": 0
+              }
+            ]
+          },
+          "Misc": {
+            "Boot": {
+              "HibernateMode": "None"
+            },
+            "Security": {
+              "AllowSetDefault": true,
+              "DmgLoading": "Signed",
+              "ExposeSensitiveData": 15,
+              "HaltLevel": 2147483648,
+              "SecureBootModel": "Disabled"
+            }
+          },
+          "NVRAM": {
+            "4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14": {
+              "DefaultBackgroundColor": "00000000"
+            },
+            "4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102": {
+              "revcpu": 1,
+              "revcpuname": "AMD Ryzen 5 7600X 6-Core Processor",
+              "revpatch": "sbvmm,memtab,cpuname,pci",
+              "rtc-blacklist": ""
+            },
+            "7C436110-AB2A-4BBB-A880-FE41995C9F82": {
+              "#INFO (prev-lang:kbd)": "en:252 (ABC), set 656e3a323532",
+              "EnableTRIM": "01000000",
+              "ForceDisplayRotationInEFI": 0,
+              "SystemAudioVolume": "79",
+              "bluetoothExternalDongleFailed": "00",
+              "bluetoothInternalControllerInfo": "0000000000000000000000000000",
+              "boot-args": "debug=0x100 keepsyms=1 alcid=11 unfairgva=1 itlwm_cc=AU -lilubetaall",
+              "csr-active-config": "0fff0000",
+              "prev-lang:kbd": "en-AU:15",
+              "run-efi-updater": "No"
+            }
+          },
+          "PI": {
+            "Automatic": true,
+            "UpdateSMBIOSMode": "Custom",
+            "Generic": {
+              "AdviseFeatures": false,
+              "MaxBIOSVersion": false,
+              "ProcessorType": 1537,
+              "SpoofVendor": true,
+              "SystemMemoryStatus": "Auto",
+              "SystemProductName": "MacPro7,1"
+            },
+            "UpdateDataHub": true,
+            "UpdateNVRAM": true,
+            "UpdateSMBIOS": true,
+            "UseRawUuidEncoding": false,
+            "CustomMemory": false
+          },
+          "UEFI": {
+            "Quirks": {
+              "ActivateHpetSupport": false,
+              "DisableSecurityPolicy": false,
+              "EnableVectorAcceleration": true,
+              "EnableVmx": false,
+              "ExitBootServicesDelay": 0,
+              "ForceOcWriteFlash": false,
+              "ForgeUefiSupport": false,
+              "IgnoreInvalidFlexRatio": false,
+              "ReleaseUsbOwnership": false,
+              "ReloadOptionRoms": false,
+              "RequestBootVarRouting": true,
+              "ResizeGpuBars": -1,
+              "ResizeUsePciRbIo": false,
+              "ShimRetainProtocol": false,
+              "TscSyncTimeout": 0,
+              "UnblockFsConnect": false
+            }
+          }
         }
       }
     },
@@ -58906,6 +59439,499 @@
           },
           "Audio": {
             "LayoutID": 13
+          }
+        },
+        "Gigabyte-B650M-D3HP": {
+          "ACPI": {
+            "Add": [
+              "SSDT-CPUR.aml",
+              "SSDT-EC-USBX-DESKTOP.aml",
+              "SSDT-GPU-SPOOF.aml"
+            ]
+          },
+          "Booter": {
+            "Quirks": {
+              "AllowRelocationBlock": false,
+              "AvoidRuntimeDefrag": true,
+              "DevirtualiseMmio": true,
+              "DisableSingleUser": false,
+              "DisableVariableWrite": false,
+              "DiscardHibernateMap": false,
+              "EnableSafeModeSlide": true,
+              "EnableWriteUnprotector": false,
+              "FixupAppleEfiImages": true,
+              "ForceBooterSignature": false,
+              "ForceExitBootServices": false,
+              "ProtectMemoryRegions": false,
+              "ProtectSecureBoot": false,
+              "ProtectUefiServices": false,
+              "ProvideCustomSlide": true,
+              "ProvideMaxSlide": 0,
+              "RebuildAppleMemoryMap": true,
+              "ResizeAppleGpuBars": 0,
+              "SetupVirtualMap": true,
+              "SignalAppleOS": false,
+              "SyncRuntimePermissions": true
+            }
+          },
+          "DP": {
+            "Add": {}
+          },
+          "Kernel": {
+            "Add": [
+              "AppleMCEReporterDisabler.kext",
+              "Lilu.kext",
+              "LucyRTL8125Ethernet.kext",
+              "NVMeFix.kext",
+              "Phantom.kext",
+              "RestrictEvents.kext",
+              "USBToolBox.kext",
+              "UTBMap.kext",
+              "VirtualSMC.kext",
+              "WhateverGreen.kext",
+              "AMDRyzenCPUPowerManagement.kext",
+              "AppleALC.kext",
+              "IntelMKLFixup.kext",
+              "RadeonSensor.kext",
+              "SMCAMDProcessor.kext",
+              "SMCRadeonGPU.kext"
+            ],
+            "Patch": [
+              {
+                "Arch": "x86_64",
+                "Base": "_cpuid_set_info",
+                "Comment": "algrey | Force cpuid_cores_per_package to constant (user-specified) | 10.13-10.14",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "c1e81a000000",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "fffdff000000",
+                "MaxKernel": "18.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "b81000000000",
+                "ReplaceMask": "ffffffffff00",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "_cpuid_set_info",
+                "Comment": "algrey | Force cpuid_cores_per_package to constant (user-specified) | 10.15-11.0",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "c1e81a000000",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "fffdff000000",
+                "MaxKernel": "20.99.99",
+                "MinKernel": "19.0.0",
+                "Replace": "ba1000000000",
+                "ReplaceMask": "ffffffffff00",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "_cpuid_set_info",
+                "Comment": "algrey | Force cpuid_cores_per_package to constant (user-specified) | 12.0-13.2",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "c1e81a000000",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "fffdff000000",
+                "MaxKernel": "22.3.99",
+                "MinKernel": "21.0.0",
+                "Replace": "ba1000000090",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "_cpuid_set_info",
+                "Comment": "algrey | Force cpuid_cores_per_package to constant (user-specified) | 13.3+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "c1e81a0000",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "fffdff0000",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "22.4.0",
+                "Replace": "ba10000000",
+                "ReplaceMask": "ffffffffff",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _commpage_populate | Remove rdmsr | 10.13+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "b9a00100000f32",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "66906690669090",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _cpuid_set_cache_info | Set CPUID proper instead of 4 | 10.13+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "b8040000004489f14489",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "b81d0000804489f14489",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _cpuid_set_generic_info | Remove wrmsr(0x8B) | 10.13+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "b98b00000031c031d20f30",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "6690669066906690669090",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _cpuid_set_generic_info | Replace rdmsr(0x8B) with constant 186 | 10.13+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "b98b0000000f32",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "baba0000006690",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _cpuid_set_generic_info | Set flag=1 | 10.13+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "b9170000000f32c1ea1280e207",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "b201660f1f8400000000006690",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _cpuid_set_generic_info | Disable check to allow leaf7 | 10.13+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "003a0f82",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "23.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "00000f82",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _cpuid_set_generic_info | Disable check to allow leaf7 | 15.0+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "00050f82",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "24.0.0",
+                "Replace": "00000f82",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _cpuid_set_info | GenuineIntel to AuthenticAMD | 10.13-11.0",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "47656e75696e65496e74656c00",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "20.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "41757468656e746963414d4400",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "_cpuid_set_info",
+                "Comment": "Goldfish64, algrey | Bypass GenuineIntel check panic | 12.0+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "00000000000031d2b301",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "000000000000ffffffff",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "21.0.0",
+                "Replace": "90909090909031d2b301",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _cpuid_set_cpufamily | Force CPUFAMILY_INTEL_PENRYN | 10.13-11.2",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "31db803d00000000067500",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "ffffffff000000ffffff00",
+                "MaxKernel": "20.3.0",
+                "MinKernel": "17.0.0",
+                "Replace": "bbbc4fea78e95d00000090",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "_cpuid_set_info ",
+                "Comment": "algrey | _cpuid_set_cpufamily | Force CPUFAMILY_INTEL_PENRYN | 11.3+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "803d000000000675",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "ffff00000000ffff",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "20.4.0",
+                "Replace": "babc4fea7831dbeb",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _i386_init | Remove 3 rdmsr calls | 10.13+",
+                "Count": 0,
+                "Enabled": true,
+                "Find": "b9990100000f3248c1e22089c64809d6b9980100000f3248c1e22089c04809c2bf5802310531c94531c0",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "660f1f840000000000660f1f840000000000660f1f840000000000660f1f840000000000660f1f440000",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey, XLNC | Remove version check and panic | 10.13+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "25fc00000083f813",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "25fc0000000f1f00",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "__ZN11IOPCIBridge13probeBusGatedEP14probeBusParams",
+                "Comment": "CaseySJ | probeBusGated | Disable 10 bit tags | 12.0-15.x",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "e0117200",
+                "Identifier": "com.apple.iokit.IOPCIFamily",
+                "Limit": 0,
+                "Mask": "f0fffff0",
+                "MaxKernel": "24.99.99",
+                "MinKernel": "21.0.0",
+                "Replace": "00000300",
+                "ReplaceMask": "00000f00",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "__ZN11IOPCIBridge13probeBusGatedEP14probeBusParams",
+                "Comment": "CaseySJ | probeBusGated | Disable 10 bit tags | 26.0+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "e0117340",
+                "Identifier": "com.apple.iokit.IOPCIFamily",
+                "Limit": 0,
+                "Mask": "f0fffff0",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "25.0.0",
+                "Replace": "00000200",
+                "ReplaceMask": "00000f00",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "Visual | thread_quantum_expire, thread_unblock, thread_invoke | Remove non-monotonic time panic | 12.0+",
+                "Count": 3,
+                "Enabled": true,
+                "Find": "48000000020000480000580000000f0000000000",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "ff00000fffffffff0000ff000000ff0000000000",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "21.0.0",
+                "Replace": "0000000000000000000000000000669066906690",
+                "ReplaceMask": "0000000000000000000000000000ffffffffffff",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "Visual | thread_invoke, thread_dispatch | Remove non-monotonic time panic | 12.0+",
+                "Count": 2,
+                "Enabled": true,
+                "Find": "480000800400000f0000000000",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "480000f0ffffffff0000000000",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "21.0.0",
+                "Replace": "00000000000000669066906690",
+                "ReplaceMask": "00000000000000ffffffffffff",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "Shaneee | _mtrr_update_action | Fix PAT | 10.13+",
+                "Count": 0,
+                "Enabled": true,
+                "Find": "89c081e2ffff00ff81ca00000100b977020000",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "ffffffffffff0fffffffffffffffffffffffff",
+                "MaxKernel": "23.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "b977020000b806060606ba060606060f300f09",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "Shaneee / Zormeister | _mtrr_update_action | Fix PAT | 15.0+",
+                "Count": 0,
+                "Enabled": true,
+                "Find": "89c081e2ffff00ff81ca000000000f30",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "ffffffffffffffffffff00000000ffff",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "24.0.0",
+                "Replace": "89c0b806060606ba060606060f309090",
+                "ReplaceMask": "",
+                "Skip": 0
+              }
+            ]
+          },
+          "Misc": {
+            "Boot": {
+              "HibernateMode": "None"
+            },
+            "Security": {
+              "AllowSetDefault": true,
+              "DmgLoading": "Signed",
+              "ExposeSensitiveData": 6,
+              "HaltLevel": 2147483648,
+              "SecureBootModel": "Disabled"
+            }
+          },
+          "NVRAM": {
+            "4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14": {
+              "DefaultBackgroundColor": "00000000"
+            },
+            "4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102": {
+              "rtc-blacklist": ""
+            },
+            "7C436110-AB2A-4BBB-A880-FE41995C9F82": {
+              "#INFO (prev-lang:kbd)": "en:252 (ABC), set 656e3a323532",
+              "ForceDisplayRotationInEFI": 0,
+              "SystemAudioVolume": "46",
+              "boot-args": "keepsyms=1 debug=0x100 alcid=1 agdpmod=pikera -radcodec",
+              "csr-active-config": "00000000",
+              "prev-lang:kbd": "656e2d55533a30",
+              "run-efi-updater": "No"
+            }
+          },
+          "PI": {
+            "Automatic": true,
+            "UpdateSMBIOSMode": "Create",
+            "Generic": {
+              "AdviseFeatures": false,
+              "MaxBIOSVersion": false,
+              "ProcessorType": 3841,
+              "SpoofVendor": true,
+              "SystemMemoryStatus": "Auto",
+              "SystemProductName": "MacPro7,1"
+            },
+            "UpdateDataHub": true,
+            "UpdateNVRAM": true,
+            "UpdateSMBIOS": true,
+            "UseRawUuidEncoding": false,
+            "CustomMemory": false
+          },
+          "UEFI": {
+            "Quirks": {
+              "ActivateHpetSupport": false,
+              "DisableSecurityPolicy": false,
+              "EnableVectorAcceleration": true,
+              "EnableVmx": false,
+              "ExitBootServicesDelay": 0,
+              "ForceOcWriteFlash": false,
+              "ForgeUefiSupport": false,
+              "IgnoreInvalidFlexRatio": false,
+              "ReleaseUsbOwnership": false,
+              "ReloadOptionRoms": false,
+              "RequestBootVarRouting": true,
+              "ResizeGpuBars": -1,
+              "ResizeUsePciRbIo": false,
+              "ShimRetainProtocol": false,
+              "TscSyncTimeout": 0,
+              "UnblockFsConnect": false
+            }
           }
         }
       },
@@ -60376,6 +61402,538 @@
             "Quirks": {
               "ReleaseUsbOwnership": true,
               "ResizeUsePciRbIo": false
+            }
+          }
+        }
+      }
+    }
+  },
+  "AMD Zen5 (Ryzen 9000, AM5)": {
+    "Colorful": {
+      "B650M": {
+        "COLORFIRE-B650M": {
+          "ACPI": {
+            "Add": [
+              "SSDT-EC-USBX.aml",
+              "SSDT-CPUR.aml"
+            ]
+          },
+          "Booter": {
+            "Quirks": {
+              "AllowRelocationBlock": false,
+              "AvoidRuntimeDefrag": true,
+              "ClearTaskSwitchBit": false,
+              "DevirtualiseMmio": true,
+              "DisableSingleUser": false,
+              "DisableVariableWrite": false,
+              "DiscardHibernateMap": false,
+              "EnableSafeModeSlide": true,
+              "EnableWriteUnprotector": false,
+              "FixupAppleEfiImages": true,
+              "ForceBooterSignature": false,
+              "ForceExitBootServices": false,
+              "ProtectMemoryRegions": false,
+              "ProtectSecureBoot": false,
+              "ProtectUefiServices": false,
+              "ProvideCustomSlide": true,
+              "ProvideMaxSlide": 0,
+              "RebuildAppleMemoryMap": true,
+              "ResizeAppleGpuBars": 10,
+              "SetupVirtualMap": true,
+              "SignalAppleOS": false,
+              "SyncRuntimePermissions": true
+            }
+          },
+          "DP": {
+            "Add": {
+              "PciRoot(0x0)/Pci(0x1b,0x0)": {
+                "layout-id": "01000000"
+              }
+            }
+          },
+          "Kernel": {
+            "Add": [
+              "Lilu.kext",
+              "VirtualSMC.kext",
+              "RTL812xLucy.kext",
+              "AppleMCEReporterDisabler.kext",
+              "USBToolBox.kext",
+              "UTBMap.kext",
+              "IntelBluetoothFirmware.kext",
+              "BlueToolFixup.kext",
+              "BTLEAdvFixup.kext",
+              "ForbiddenItlwm.kext",
+              "RestrictEvents.kext",
+              "AppleALC.kext",
+              "SimpleHDA.kext",
+              "VermilionBoot.kext"
+            ],
+            "Patch": [
+              {
+                "Arch": "x86_64",
+                "Base": "_cpuid_set_info",
+                "Comment": "algrey | Force cpuid_cores_per_package to constant (user-specified) | 10.13-10.14",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "c1e81a000000",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "fffdff000000",
+                "MaxKernel": "18.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "b80c00000000",
+                "ReplaceMask": "ffffffffff00",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "_cpuid_set_info",
+                "Comment": "algrey | Force cpuid_cores_per_package to constant (user-specified) | 10.15-11.0",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "c1e81a000000",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "fffdff000000",
+                "MaxKernel": "20.99.99",
+                "MinKernel": "19.0.0",
+                "Replace": "ba0c00000000",
+                "ReplaceMask": "ffffffffff00",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "_cpuid_set_info",
+                "Comment": "algrey | Force cpuid_cores_per_package to constant (user-specified) | 12.0-13.2",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "c1e81a000000",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "fffdff000000",
+                "MaxKernel": "22.3.99",
+                "MinKernel": "21.0.0",
+                "Replace": "ba0c00000090",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "_cpuid_set_info",
+                "Comment": "algrey | Force cpuid_cores_per_package to constant (user-specified) | 13.3+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "c1e81a0000",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "fffdff0000",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "22.4.0",
+                "Replace": "ba0c000000",
+                "ReplaceMask": "ffffffffff",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _commpage_populate | Remove rdmsr | 10.13+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "b9a00100000f32",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "66906690669090",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _cpuid_set_cache_info | Set CPUID proper instead of 4 | 10.13+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "b8040000004489f14489",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "b81d0000804489f14489",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _cpuid_set_generic_info | Remove wrmsr(0x8B) | 10.13+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "b98b00000031c031d20f30",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "6690669066906690669090",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _cpuid_set_generic_info | Replace rdmsr(0x8B) with constant 186 | 10.13+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "b98b0000000f32",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "baba0000006690",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _cpuid_set_generic_info | Set flag=1 | 10.13+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "b9170000000f32c1ea1280e207",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "b201660f1f8400000000006690",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _cpuid_set_generic_info | Disable check to allow leaf7 | 10.13+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "003a0f82",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "23.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "00000f82",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _cpuid_set_generic_info | Disable check to allow leaf7 | 15.0+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "00050f82",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "24.0.0",
+                "Replace": "00000f82",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _cpuid_set_info | GenuineIntel to AuthenticAMD | 10.13-11.0",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "47656e75696e65496e74656c00",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "20.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "41757468656e746963414d4400",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "_cpuid_set_info",
+                "Comment": "Goldfish64, algrey | Bypass GenuineIntel check panic | 12.0+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "00000000000031d2b301",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "000000000000ffffffff",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "21.0.0",
+                "Replace": "90909090909031d2b301",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _cpuid_set_cpufamily | Force CPUFAMILY_INTEL_PENRYN | 10.13-11.2",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "31db803d00000000067500",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "ffffffff000000ffffff00",
+                "MaxKernel": "20.3.0",
+                "MinKernel": "17.0.0",
+                "Replace": "bbbc4fea78e95d00000090",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "_cpuid_set_info ",
+                "Comment": "algrey | _cpuid_set_cpufamily | Force CPUFAMILY_INTEL_PENRYN | 11.3+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "803d000000000675",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "ffff00000000ffff",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "20.4.0",
+                "Replace": "babc4fea7831dbeb",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _i386_init | Remove 3 rdmsr calls | 10.13+",
+                "Count": 0,
+                "Enabled": true,
+                "Find": "b9990100000f3248c1e22089c64809d6b9980100000f3248c1e22089c04809c2bf5802310531c94531c0",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "660f1f840000000000660f1f840000000000660f1f840000000000660f1f840000000000660f1f440000",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey, XLNC | Remove version check and panic | 10.13+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "25fc00000083f813",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "25fc0000000f1f00",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "__ZN11IOPCIBridge13probeBusGatedEP14probeBusParams",
+                "Comment": "CaseySJ | probeBusGated | Disable 10 bit tags | 12.0-15.x",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "e0117200",
+                "Identifier": "com.apple.iokit.IOPCIFamily",
+                "Limit": 0,
+                "Mask": "f0fffff0",
+                "MaxKernel": "24.99.99",
+                "MinKernel": "21.0.0",
+                "Replace": "00000300",
+                "ReplaceMask": "00000f00",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "__ZN11IOPCIBridge13probeBusGatedEP14probeBusParams",
+                "Comment": "CaseySJ | probeBusGated | Disable 10 bit tags | 26.0+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "e0117340",
+                "Identifier": "com.apple.iokit.IOPCIFamily",
+                "Limit": 0,
+                "Mask": "f0fffff0",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "25.0.0",
+                "Replace": "00000200",
+                "ReplaceMask": "00000f00",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "__ZN17IOPCIConfigurator18IOPCIIsHotplugPortEP16IOPCIConfigEntry",
+                "Comment": "CaseySJ | IOPCIIsHotplugPort | Fix PCI bus enumeration on AM5 | 13.0+",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "8400754b",
+                "Identifier": "com.apple.iokit.IOPCIFamily",
+                "Limit": 0,
+                "Mask": "ff00ffff",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "22.0.0",
+                "Replace": "0000eb00",
+                "ReplaceMask": "0000ff00",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "Visual | thread_quantum_expire, thread_unblock, thread_invoke | Remove non-monotonic time panic | 12.0+",
+                "Count": 3,
+                "Enabled": true,
+                "Find": "48000000020000480000580000000f0000000000",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "ff00000fffffffff0000ff000000ff0000000000",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "21.0.0",
+                "Replace": "0000000000000000000000000000669066906690",
+                "ReplaceMask": "0000000000000000000000000000ffffffffffff",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "Visual | thread_invoke, thread_dispatch | Remove non-monotonic time panic | 12.0-26.3",
+                "Count": 2,
+                "Enabled": true,
+                "Find": "480000800400000f0000000000",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "480000f0ffffffff0000000000",
+                "MaxKernel": "25.3.99",
+                "MinKernel": "21.0.0",
+                "Replace": "00000000000000669066906690",
+                "ReplaceMask": "00000000000000ffffffffffff",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "laobamac | thread_invoke, thread_dispatch | Remove non-monotonic time panic | 26.4+",
+                "Count": 2,
+                "Enabled": true,
+                "Find": "480000900400000f0000000000",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "480000f0ffffffff0000000000",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "25.4.0",
+                "Replace": "00000000000000669066906690",
+                "ReplaceMask": "00000000000000ffffffffffff",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "algrey | _mtrr_update_action | fix PAT | 10.13+",
+                "Count": 0,
+                "Enabled": true,
+                "Find": "89c081e2ffff00ff81ca00000100b977020000",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "ffffffffffff0fffffffffffffffffffffffff",
+                "MaxKernel": "23.99.99",
+                "MinKernel": "17.0.0",
+                "Replace": "b977020000b806010700ba060107000f1f4000",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "x86_64",
+                "Base": "",
+                "Comment": "Algrey / Zormeister | _mtrr_update_action | Fix PAT | 15.0+",
+                "Count": 0,
+                "Enabled": true,
+                "Find": "89c081e2ffff00ff81ca000000000f30",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "ffffffffffffffffffff00000000ffff",
+                "MaxKernel": "25.99.99",
+                "MinKernel": "24.0.0",
+                "Replace": "89c0b806010700ba060107000f309090",
+                "ReplaceMask": "",
+                "Skip": 0
+              }
+            ]
+          },
+          "Misc": {
+            "Boot": {
+              "HibernateMode": "None"
+            },
+            "Security": {
+              "AllowSetDefault": true,
+              "DmgLoading": "Signed",
+              "ExposeSensitiveData": 0,
+              "HaltLevel": 2147483648,
+              "SecureBootModel": "Disabled"
+            }
+          },
+          "NVRAM": {
+            "4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102": {
+              "OCBt0080": "0100000016015400610068006f006500000002010c00d041030a0000000001010600010201010600000001010600000c01010600000003050600010004012a000200000000f81f0000000000881a7e3b000000009beddd3f3df084409d7eb3b7ac0fd08a020204032400f7fc74be7c0bf349914701f4042e6842feb0a77ed7b0934c9f8c7ddf9c97a2a704049a005c00440036003900460039003000410031002d0042004400450038002d0034003700320046002d0039004600440041002d004200440034003500430045003800330046003200320043005c00530079007300740065006d005c004c006900620072006100720079005c0043006f0072006500530065007200760069006300650073005c0062006f006f0074002e0065006600690000007fff0400",
+              "OCBtOrder": "8000",
+              "revcpuname": "AMD Ryzen 9 9900X",
+              "revpatch": "cpuname"
+            },
+            "7C436110-AB2A-4BBB-A880-FE41995C9F82": {
+              "bluetoothExternalDongleFailed": "00",
+              "bluetoothInternalControllerInfo": "0000000000000000000000000000",
+              "boot-args": "keepsyms=1 debug=0x100 -btleadv -itlawdlcoexprobe -itlawdliface -itlawdlnativeup -itlawdlcoexrx -itlawdlcoextx -itlawdlcoexmulti -itlawdlcoexdata -itlawdlmitx -itlawdlelicit -itlawdlcaps -itlawdlsvcmerge -itlawdlawsync itlawdlintcoal=4 -itlawdlcoexbatx -itlawdlcoexpeerpause -itlawdlcoexbatrace itlawdltxqueue=4096 alcid=31 amfi_get_out_of_my_way=1 amfi=0x80 ipc_control_port_options=0 phxdebug=1",
+              "csr-active-config": "ff0f0000",
+              "prev-lang:kbd": "656e3a323532",
+              "run-efi-updater": "No"
+            }
+          },
+          "PI": {
+            "Automatic": true,
+            "UpdateSMBIOSMode": "Create",
+            "Generic": {
+              "AdviseFeatures": true,
+              "MaxBIOSVersion": false,
+              "ProcessorType": 3841,
+              "SpoofVendor": true,
+              "SystemMemoryStatus": "Auto",
+              "SystemProductName": "MacPro7,1"
+            },
+            "UpdateDataHub": true,
+            "UpdateNVRAM": true,
+            "UpdateSMBIOS": true,
+            "UseRawUuidEncoding": false,
+            "CustomMemory": false
+          },
+          "UEFI": {
+            "Quirks": {
+              "ActivateHpetSupport": false,
+              "DisableSecurityPolicy": false,
+              "EnableVectorAcceleration": true,
+              "EnableVmx": false,
+              "ExitBootServicesDelay": 0,
+              "ForceOcWriteFlash": false,
+              "ForgeUefiSupport": false,
+              "IgnoreInvalidFlexRatio": false,
+              "ReleaseUsbOwnership": true,
+              "ReloadOptionRoms": false,
+              "RequestBootVarRouting": true,
+              "ResizeGpuBars": -1,
+              "ResizeUsePciRbIo": false,
+              "ShimRetainProtocol": false,
+              "TscSyncTimeout": 0,
+              "UnblockFsConnect": false
             }
           }
         }
@@ -84836,6 +86394,140 @@
             "LayoutID": 13
           }
         }
+      },
+      "B760I": {
+        "ASUS-ROG-STRIX-B760-I-GAMING-WIFI": {
+          "ACPI": {
+            "Add": [
+              "SSDT-SBUS.aml",
+              "SSDT-EC.aml",
+              "SSDT-PLUG-ALT.aml",
+              "SSDT-RTCAWAC.aml",
+              "SSDT-USB-Reset.aml",
+              "SSDT-USBX.aml"
+            ]
+          },
+          "Booter": {
+            "Quirks": {
+              "AllowRelocationBlock": true,
+              "AvoidRuntimeDefrag": true,
+              "ClearTaskSwitchBit": false,
+              "DevirtualiseMmio": false,
+              "DisableSingleUser": false,
+              "DisableVariableWrite": false,
+              "DiscardHibernateMap": false,
+              "EnableSafeModeSlide": true,
+              "EnableWriteUnprotector": false,
+              "FixupAppleEfiImages": true,
+              "ForceBooterSignature": false,
+              "ForceExitBootServices": false,
+              "ProtectMemoryRegions": false,
+              "ProtectSecureBoot": false,
+              "ProtectUefiServices": true,
+              "ProvideCustomSlide": true,
+              "ProvideMaxSlide": 0,
+              "RebuildAppleMemoryMap": true,
+              "ResizeAppleGpuBars": 0,
+              "SetupVirtualMap": true,
+              "SignalAppleOS": false,
+              "SyncRuntimePermissions": true
+            }
+          },
+          "DP": {
+            "Add": {}
+          },
+          "Kernel": {
+            "Add": [
+              "AppleIGC.kext",
+              "Lilu.kext",
+              "AppleALC.kext",
+              "SimpleHDA.kext",
+              "BlueToolFixup.kext",
+              "IntelBTPatcher.kext",
+              "IntelBluetoothFirmware.kext",
+              "NVMeFix.kext",
+              "RestrictEvents.kext",
+              "VirtualSMC.kext",
+              "SMCProcessor.kext",
+              "SMCSuperIO.kext",
+              "VermilionBoot.kext",
+              "USBToolBox.kext",
+              "UTBMap.kext",
+              "XHCI-unsupported.kext",
+              "AirportItlwm.kext",
+              "AMFIPass.kext"
+            ],
+            "Patch": []
+          },
+          "Misc": {
+            "Boot": {
+              "HibernateMode": "None"
+            },
+            "Security": {
+              "AllowSetDefault": true,
+              "DmgLoading": "Signed",
+              "ExposeSensitiveData": 7,
+              "HaltLevel": 2147483648,
+              "SecureBootModel": "Disabled"
+            }
+          },
+          "NVRAM": {
+            "4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102": {
+              "background-color": "00000000",
+              "revcpu": "01",
+              "revcpuname": "Intel Core i7-13700K",
+              "revpatch": "sbvmm,cpuname",
+              "rtc-blacklist": ""
+            },
+            "7C436110-AB2A-4BBB-A880-FE41995C9F82": {
+              "ForceDisplayRotationInEFI": 0,
+              "SystemAudioVolume": "46",
+              "bluetoothExternalDongleFailed": "00",
+              "bluetoothInternalControllerInfo": "0000000000000000000000000000",
+              "boot-args": "keepsyms=1 -ibtcompatbeta revpatch=sbvmm,cpuname phxdebug=1 nvaccel=1 amfi=0x80 ipc_control_port_options=0 -xcpm_ignore_fv alcid=7 shda-lang=en -btlfxa2dpcheck phxfaultdef=1 phxrecover=1",
+              "csr-active-config": "030a0000",
+              "prev-lang:kbd": "",
+              "run-efi-updater": "No"
+            }
+          },
+          "PI": {
+            "Automatic": true,
+            "UpdateSMBIOSMode": "Custom",
+            "Generic": {
+              "AdviseFeatures": false,
+              "MaxBIOSVersion": false,
+              "ProcessorType": 3841,
+              "SpoofVendor": true,
+              "SystemMemoryStatus": "Auto",
+              "SystemProductName": "MacPro7,1"
+            },
+            "UpdateDataHub": true,
+            "UpdateNVRAM": true,
+            "UpdateSMBIOS": true,
+            "UseRawUuidEncoding": false,
+            "CustomMemory": false
+          },
+          "UEFI": {
+            "Quirks": {
+              "ActivateHpetSupport": false,
+              "DisableSecurityPolicy": false,
+              "EnableVectorAcceleration": false,
+              "EnableVmx": false,
+              "ExitBootServicesDelay": 0,
+              "ForceOcWriteFlash": false,
+              "ForgeUefiSupport": false,
+              "IgnoreInvalidFlexRatio": false,
+              "ReleaseUsbOwnership": true,
+              "ReloadOptionRoms": false,
+              "RequestBootVarRouting": true,
+              "ResizeGpuBars": -1,
+              "ResizeUsePciRbIo": false,
+              "ShimRetainProtocol": false,
+              "TscSyncTimeout": 0,
+              "UnblockFsConnect": false
+            }
+          }
+        }
       }
     },
     "Gigabyte": {
@@ -84948,6 +86640,204 @@
           },
           "Audio": {
             "LayoutID": 66
+          }
+        },
+        "Gigabyte-Z790-AERO-G": {
+          "ACPI": {
+            "Add": [
+              "SSDT-AWAC.aml",
+              "SSDT-EC-USBX.aml",
+              "SSDT-PLUG-ALT.aml",
+              "SSDT-SBUS-MCHC.aml",
+              "SSDT-RHUB.aml",
+              "SSDT-USBW.aml",
+              "SSDT-GPU-SPOOF.aml"
+            ]
+          },
+          "Booter": {
+            "Quirks": {
+              "AllowRelocationBlock": false,
+              "AvoidRuntimeDefrag": true,
+              "ClearTaskSwitchBit": false,
+              "DevirtualiseMmio": true,
+              "DisableSingleUser": false,
+              "DisableVariableWrite": false,
+              "DiscardHibernateMap": false,
+              "EnableSafeModeSlide": true,
+              "EnableWriteUnprotector": false,
+              "FixupAppleEfiImages": false,
+              "ForceBooterSignature": false,
+              "ForceExitBootServices": false,
+              "ProtectMemoryRegions": false,
+              "ProtectSecureBoot": false,
+              "ProtectUefiServices": true,
+              "ProvideCustomSlide": true,
+              "ProvideMaxSlide": 0,
+              "RebuildAppleMemoryMap": true,
+              "ResizeAppleGpuBars": 0,
+              "SetupVirtualMap": true,
+              "SignalAppleOS": false,
+              "SyncRuntimePermissions": true
+            }
+          },
+          "DP": {
+            "Add": {
+              "PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x0)": {
+                "disable-gpu": true
+              },
+              "PciRoot(0x0)/Pci(0x1C,0x4)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)": {
+                "@0,name": "ATY,Henbury",
+                "@1,name": "ATY,Henbury",
+                "@2,name": "ATY,Henbury",
+                "@3,name": "ATY,Henbury",
+                "CFG,CFG_USE_AGDC": "00"
+              },
+              "PciRoot(0x0)/Pci(0x1F,0x3)": {
+                "#AAPL,slot-name": "Internal@0,31,3",
+                "#device-id": "d07a0000",
+                "layout-id": "01000000"
+              }
+            }
+          },
+          "Kernel": {
+            "Add": [
+              "Lilu.kext",
+              "VirtualSMC.kext",
+              "WhateverGreen.kext",
+              "AppleALC.kext",
+              "SMCProcessor.kext",
+              "SMCSuperIO.kext",
+              "RestrictEvents.kext",
+              "CpuTopologyRebuild.kext",
+              "CPUFriend.kext",
+              "CPUFriendDataProvider.kext",
+              "USBPower.kext",
+              "Z790-XHCI-unsupported.kext",
+              "USBWakeFixup.kext",
+              "USBMap.kext",
+              "USBToolBox.kext",
+              "IOSkywalkFamily.kext",
+              "IO80211FamilyLegacy.kext",
+              "IO80211FamilyLegacy.kext/Contents/PlugIns/AirPortBrcmNIC.kext",
+              "AppleIGC.kext",
+              "CpuTscSync.kext"
+            ],
+            "Patch": [
+              {
+                "Arch": "Any",
+                "Base": "_cpu_thread_alloc",
+                "Comment": "force HT enabled for Mojave or later",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "8b8894010000",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "",
+                "MinKernel": "18.0.0",
+                "Replace": "b9ff00000090",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "Any",
+                "Base": "_cpu_thread_alloc",
+                "Comment": "force HT enabled for High Sierra or earlier (untested)",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "8b8890010000",
+                "Identifier": "kernel",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "17.99.99",
+                "MinKernel": "15.0.0",
+                "Replace": "b90000000090",
+                "ReplaceMask": "",
+                "Skip": 0
+              },
+              {
+                "Arch": "Any",
+                "Base": "__ZN8AppleRTC18setupDateTimeAlarmEPK11RTCDateTime",
+                "Comment": "Disable RTC wake scheduling",
+                "Count": 1,
+                "Enabled": true,
+                "Find": "",
+                "Identifier": "com.apple.driver.AppleRTC",
+                "Limit": 0,
+                "Mask": "",
+                "MaxKernel": "",
+                "MinKernel": "19.0.0",
+                "Replace": "c3",
+                "ReplaceMask": "",
+                "Skip": 0
+              }
+            ]
+          },
+          "Misc": {
+            "Boot": {
+              "HibernateMode": "None"
+            },
+            "Security": {
+              "AllowSetDefault": true,
+              "DmgLoading": "Signed",
+              "ExposeSensitiveData": 6,
+              "HaltLevel": 2147483648,
+              "SecureBootModel": "Disabled"
+            }
+          },
+          "NVRAM": {
+            "4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14": {
+              "DefaultBackgroundColor": "00000000"
+            },
+            "4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102": {
+              "revcpu": 1,
+              "revcpuname": "3.0 GHz 24-Core Intel i9-13900K",
+              "rtc-blacklist": ""
+            },
+            "7C436110-AB2A-4BBB-A880-FE41995C9F82": {
+              "SystemAudioVolume": "46",
+              "boot-args": "keepsyms=1 debug=0x100 e1000=0 agdpmod=pikera -wegnoigpu alcid=7 -ctrsmt amfi=0x80",
+              "csr-active-config": "03080000",
+              "prev-lang:kbd": "en-US:0",
+              "run-efi-updater": "No"
+            }
+          },
+          "PI": {
+            "Automatic": true,
+            "UpdateSMBIOSMode": "Custom",
+            "Generic": {
+              "AdviseFeatures": false,
+              "MaxBIOSVersion": false,
+              "ProcessorType": 3842,
+              "SpoofVendor": true,
+              "SystemMemoryStatus": "Auto",
+              "SystemProductName": "MacPro7,1"
+            },
+            "UpdateDataHub": true,
+            "UpdateNVRAM": true,
+            "UpdateSMBIOS": true,
+            "UseRawUuidEncoding": false,
+            "CustomMemory": false
+          },
+          "UEFI": {
+            "Quirks": {
+              "ActivateHpetSupport": false,
+              "DisableSecurityPolicy": false,
+              "EnableVectorAcceleration": false,
+              "EnableVmx": false,
+              "ExitBootServicesDelay": 0,
+              "ForceOcWriteFlash": false,
+              "ForgeUefiSupport": false,
+              "IgnoreInvalidFlexRatio": false,
+              "ReleaseUsbOwnership": false,
+              "ReloadOptionRoms": false,
+              "RequestBootVarRouting": true,
+              "ResizeGpuBars": -1,
+              "ResizeUsePciRbIo": false,
+              "ShimRetainProtocol": false,
+              "TscSyncTimeout": 0,
+              "UnblockFsConnect": false
+            }
           }
         }
       },
@@ -87054,6 +88944,134 @@
           },
           "Audio": {
             "LayoutID": 66
+          }
+        },
+        "MSI-B760M-BOMBER-DDR4": {
+          "ACPI": {
+            "Add": [
+              "SSDT-EC.aml",
+              "SSDT-PLUG-ALT.aml",
+              "SSDT-RTCAWAC.aml",
+              "SSDT-SBUS-MCHC.aml",
+              "SSDT-USBX.aml"
+            ]
+          },
+          "Booter": {
+            "Quirks": {
+              "AllowRelocationBlock": false,
+              "AvoidRuntimeDefrag": true,
+              "ClearTaskSwitchBit": false,
+              "DevirtualiseMmio": true,
+              "DisableSingleUser": false,
+              "DisableVariableWrite": false,
+              "DiscardHibernateMap": false,
+              "EnableSafeModeSlide": true,
+              "EnableWriteUnprotector": false,
+              "FixupAppleEfiImages": true,
+              "ForceBooterSignature": false,
+              "ForceExitBootServices": false,
+              "ProtectMemoryRegions": false,
+              "ProtectSecureBoot": false,
+              "ProtectUefiServices": false,
+              "ProvideCustomSlide": true,
+              "ProvideMaxSlide": 0,
+              "RebuildAppleMemoryMap": true,
+              "ResizeAppleGpuBars": -1,
+              "SetupVirtualMap": true,
+              "SignalAppleOS": false,
+              "SyncRuntimePermissions": true
+            }
+          },
+          "DP": {
+            "Add": {
+              "PciRoot(0x0)/Pci(0x1f,0x3)": {
+                "layout-id": "0b000000"
+              }
+            }
+          },
+          "Kernel": {
+            "Add": [
+              "Lilu.kext",
+              "VirtualSMC.kext",
+              "SMCProcessor.kext",
+              "SMCSuperIO.kext",
+              "NootRX.kext",
+              "RTL812xLucy.kext",
+              "AppleALC.kext",
+              "SimpleHDA.kext",
+              "USBToolBox.kext",
+              "UTBMap.kext",
+              "CpuTopologyRebuild.kext",
+              "RestrictEvents.kext",
+              "NVMeFix.kext"
+            ],
+            "Patch": []
+          },
+          "Misc": {
+            "Boot": {
+              "HibernateMode": "None"
+            },
+            "Security": {
+              "AllowSetDefault": false,
+              "DmgLoading": "Any",
+              "ExposeSensitiveData": 6,
+              "HaltLevel": 2147483648,
+              "SecureBootModel": "Disabled"
+            }
+          },
+          "NVRAM": {
+            "4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14": {
+              "DefaultBackgroundColor": "00000000"
+            },
+            "4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102": {
+              "rtc-blacklist": ""
+            },
+            "7C436110-AB2A-4BBB-A880-FE41995C9F82": {
+              "#INFO (prev-lang:kbd)": "en:252 (ABC), set 656e3a323532",
+              "ForceDisplayRotationInEFI": 0,
+              "SystemAudioVolume": "46",
+              "boot-args": "revcpu=1 revpatch=cpuname,pci revblock=pci",
+              "csr-active-config": "00000000",
+              "prev-lang:kbd": "zh-Hans:252",
+              "run-efi-updater": "No"
+            }
+          },
+          "PI": {
+            "Automatic": true,
+            "UpdateSMBIOSMode": "Create",
+            "Generic": {
+              "AdviseFeatures": false,
+              "MaxBIOSVersion": false,
+              "ProcessorType": 3841,
+              "SpoofVendor": true,
+              "SystemMemoryStatus": "Auto",
+              "SystemProductName": "MacPro7,1"
+            },
+            "UpdateDataHub": true,
+            "UpdateNVRAM": true,
+            "UpdateSMBIOS": true,
+            "UseRawUuidEncoding": false,
+            "CustomMemory": false
+          },
+          "UEFI": {
+            "Quirks": {
+              "ActivateHpetSupport": false,
+              "DisableSecurityPolicy": false,
+              "EnableVectorAcceleration": true,
+              "EnableVmx": false,
+              "ExitBootServicesDelay": 0,
+              "ForceOcWriteFlash": false,
+              "ForgeUefiSupport": false,
+              "IgnoreInvalidFlexRatio": false,
+              "ReleaseUsbOwnership": true,
+              "ReloadOptionRoms": false,
+              "RequestBootVarRouting": true,
+              "ResizeGpuBars": -1,
+              "ResizeUsePciRbIo": false,
+              "ShimRetainProtocol": false,
+              "TscSyncTimeout": 0,
+              "UnblockFsConnect": false
+            }
           }
         }
       },

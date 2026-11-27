@@ -134,6 +134,34 @@ class ConfigKextGroups {
     ],
   );
 
+  static final whateverXe = KextGroup(
+    id: 'whatever_xe',
+    title: 'WhateverXe (Intel Xe-LP 核显)',
+    description:
+        '适用于 Tiger Lake/Alder Lake/Raptor Lake/Twin Lake 等 Xe-LP 核显,通过 Apple 原生 TGL 驱动实现显示输出与加速.必须与 WhateverGreen 二选一,并同时加载 AMFIAnchor 与 AMFIAnchorInjector,保持 AMFI 开启',
+    kexts: [
+      ConfigKernel.WhateverXe,
+      ConfigKernel.AMFIAnchor,
+      ConfigKernel.AMFIAnchorInjector,
+    ],
+  );
+
+  static final wtlIntelGfx = KextGroup(
+    id: 'wtl_intel_gfx',
+    title: 'WTLIntelGfx (XeGfx, Meteor Lake/Arrow Lake)',
+    description:
+        '基于 Linux i915 移植的 Intel Xe 加速驱动(实验性).工具仅内置 XeGfx.kext 与 XeGfxIntelFB.kext,完整加速组件需按上游说明自行构建并安装到辅助内核集合;Tiger Lake/Alder Lake/Raptor Lake 请改用 WhateverXe',
+    kexts: [
+      ConfigKernel.XeGfx,
+      ConfigKernel.XeGfxIntelFB,
+    ],
+  );
+
+  static final graphicsGroups = [
+    whateverXe,
+    wtlIntelGfx,
+  ];
+
   static final brcm94360 = KextGroup(
     id: 'brcm94360',
     title: '博通BCM94360免驱系列',
@@ -247,6 +275,7 @@ class ConfigKextGroups {
 
   static final requiredTogetherGroups = [
     ...optionalGroups,
+    ...graphicsGroups,
     ...touchPadGroups,
     ...brcmWifiGroups,
     atherosWifiLegacySupport,

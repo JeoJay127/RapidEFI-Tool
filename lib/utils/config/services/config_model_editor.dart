@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:rapidefi/utils/config/config_model.dart';
+import 'package:rapidefi/utils/constant.dart';
 import 'package:rapidefi/utils/config/accessors/amd_settings_accessor.dart';
 import 'package:rapidefi/utils/config/accessors/efi_driver_accessor.dart';
 import 'package:rapidefi/utils/config/accessors/nvram/bluetooth_nvram_accessor.dart';
@@ -31,6 +32,7 @@ import 'package:rapidefi/utils/config/support/intel_igpu_memory_policy.dart';
 import 'package:rapidefi/utils/config/support/platform_properties.dart';
 import 'package:rapidefi/utils/config/support/surface_support.dart';
 import 'package:rapidefi/utils/config/support/wifi_oclp_support.dart';
+import 'package:sp_util/sp_util.dart';
 
 class ConfigModelEditor {
   ConfigModelEditor(this._configService);
@@ -106,6 +108,7 @@ class ConfigModelEditor {
 
   void setOutputDirectory(String value) {
     _configService.outputDirectory = value;
+    SpUtil.putString(Constant.outputDirectoryKey, value);
   }
 
   set outputDirectory(String value) => setOutputDirectory(value);
@@ -115,7 +118,8 @@ class ConfigModelEditor {
   }
 
   void setEdidOverride(int connectorIndex, String value) {
-    DevicePropertiesAccessor.setEdidOverride(configModel, connectorIndex, value);
+    DevicePropertiesAccessor.setEdidOverride(
+        configModel, connectorIndex, value);
   }
 
   void replaceKexts(
@@ -233,8 +237,7 @@ class ConfigModelEditor {
       _preSurfaceTouchPadKexts =
           SurfaceSupport.selectedTouchPadKexts(configModel)
               .where(
-                (kext) =>
-                    !ConfigKextGroups.bigSurface.kexts.contains(kext),
+                (kext) => !ConfigKextGroups.bigSurface.kexts.contains(kext),
               )
               .toList();
       SurfaceSupport.apply(configModel);
@@ -244,7 +247,8 @@ class ConfigModelEditor {
           (_preSurfaceTouchPadKexts?.isNotEmpty ?? false)
               ? _preSurfaceTouchPadKexts!
               : SurfaceSupport.selectedTouchPadKexts(originConfigModel);
-      SurfaceSupport.restoreTouchPadSelection(configModel, fallbackTouchPadKexts);
+      SurfaceSupport.restoreTouchPadSelection(
+          configModel, fallbackTouchPadKexts);
       _preSurfaceTouchPadKexts = null;
     } else if (configModel.brand != Brand.microsoft) {
       SurfaceSupport.removeManagedSurfaceKexts(configModel);
@@ -460,8 +464,14 @@ class ConfigModelEditor {
     final alcid = _alcidFromSelection(alcidPickerSelection) ??
         BootArgsAccessor.getAlcid(configModel) ??
         1;
+    final useAppleALC =
+        soundDriverType?.bundlePath == ConfigKernel.AppleALC.bundlePath;
     replaceKexts(
-      [ConfigKernel.AppleALC, ConfigKernel.VoodooHDA],
+      [
+        ConfigKernel.AppleALC,
+        ConfigKernel.VoodooHDA,
+        ConfigKernel.SimpleHDA,
+      ],
       soundDriverType == null || soundDriverType.bundlePath.isEmpty
           ? []
           : [soundDriverType],
@@ -471,13 +481,17 @@ class ConfigModelEditor {
       (arg) => arg.startsWith('alcid='),
     );
 
-    if (soundDriverType?.bundlePath == ConfigKernel.AppleALC.bundlePath) {
-      configModel.alcidPickerSelection = alcidPickerSelection ?? ['', '', alcid];
+    if (useAppleALC) {
+      configModel.alcidPickerSelection =
+          alcidPickerSelection ?? ['', '', alcid];
       BootArgsAccessor.setAlcid(configModel, alcid);
       if (hpetPath.trim().isNotEmpty) {
         AcpiPatchAccessor.setHpetPatch(configModel, path: hpetPath.trim());
       } else {
         AcpiPatchAccessor.removeHpetPatch(configModel);
+      }
+      if (configModel.darwinMajorVersion >= 25) {
+        KextAccessor.addKext(configModel, ConfigKernel.SimpleHDA);
       }
     } else {
       configModel.alcidPickerSelection = null;
@@ -566,6 +580,7 @@ class ConfigModelEditor {
   }
 
   List<KernelKext> get _wifiSelectionKexts => [
+        ConfigKernel.AirportItlwm_Tahoe,
         ConfigKernel.AirportItlwm_Sequoia,
         ConfigKernel.AirportItlwm_Sonoma_14_4,
         ConfigKernel.AirportItlwm_Sonoma,

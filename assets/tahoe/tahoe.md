@@ -38,9 +38,14 @@
 
 1. Intel 核显 : 6代Skylake(核显仿冒HD630即可) - 10代
 
-2. AMD 独显: RX 460,RX 550 及以上
+2. Intel Xe 核显 (11代 Tiger Lake ~ 14代 Raptor Lake,以及 Twin Lake):
+   
+   - 使用 WhateverXe + AMFIAnchor + AMFIAnchorInjector 组合(工具【可选Kexts驱动】→【显卡】)。该方案通过适配 Apple 原生 TGL 驱动实现显示输出,必须与 WhateverGreen 二选一,保持 AMFI 开启,并设置 csr-active-config=03080000、启动参数 -allow3d -disablegfxfirmware。安装系统后还需要手动安装 WhateverXe Graphics 显卡包才能获得完整加速。
+   - Core Ultra (Meteor Lake / Arrow Lake) 属于 Xe-LPG,需要 WTLIntelGfx (XeGfx.kext),目前仍是测试驱动。工具内置的 XeGfx/XeGfxIntelFB 仅用于方便分发,完整加速组件仍需按上游说明自行构建,并安装到辅助内核集合后手动加载。
 
-3. AMD Ryzen 核显: Ryzen 1xxx 系列（Athlon Silver/Gold）到 Ryzen 5xxx，以及 7x30系列 (NootedRed.kext支持macOS Tahoe 26)
+3. AMD 独显: RX 460,RX 550 及以上
+
+4. AMD Ryzen 核显: Ryzen 1xxx 系列（Athlon Silver/Gold）到 Ryzen 5xxx，以及 7x30系列 (NootedRed.kext支持macOS Tahoe 26)
 
 注意:
    
@@ -50,11 +55,22 @@
 
 ## 4.macOS Tahoe 26 支持哪些WiFi?
 
-1. Intel WiFi (注意方案一，二不要同时使用,只能二选一!)
+1. Intel WiFi (注意方案一、二、三不要同时使用,只能选一种!)
    
    #### 方案一. 使用Z大驱动 itlwm.kext + Heliport客户端(非必须，对于小白，相对方便,主要配置WiFi密码信息)
 
    #### 方案二. 使用OCLP修改版（例如:[OCLP-X 2.7.0版本](https://github.com/JeoJay127/OCLP-X/releases/tag/2.7.0) ）打WiFi补丁
+
+   #### 方案三(Tahoe 26 推荐). 使用 AirportItlwm Tahoe 构建,直接接入原生 Wi-Fi 界面,无需 OCLP 补丁
+
+   工具【WiFi蓝牙驱动】→【英特尔(Intel)】中勾选 AirportItlwm_Tahoe.kext(laobamac 分支构建)即可,系统会把它识别为原生无线网卡。
+
+   注意:
+   - 该构建仅适用于 macOS Tahoe 26.x(Darwin 25),与 Sequoia 构建使用不同的 ABI,不要混用;
+   - 不需要、也不能阻止 IOSkywalkFamily(该阻止项只用于老款博通网卡,会导致 Tahoe 原生无线框架被移除);
+   - Wi-Fi 6 (802.11ax/HE) 默认关闭,可添加启动参数 itlwm_he=1 尝试启用;
+   - 不支持 WPA3-only、强制 PMF、AWDL/AirDrop 与 MLO;
+   - 首次进入系统后如果网络设置里没有 Wi-Fi 服务,可在 系统设置 → 网络 中手动添加 Wi-Fi 接口。
 
 2. Brcm博通 WiFi
 
@@ -66,21 +82,28 @@
  
  ## 5.macOS Tahoe 26 声卡问题
 
- 1. AppleALC.kext
+1. AppleALC.kext + SimpleHDA.kext(推荐,无需根补丁)
 
- 从macOS Tahoe 26 Beta2开始,由于苹果移除了AppleHDA.kext,导致所有使用AppleALC.kext驱动声卡失效。可以采取如下措施：
+从macOS Tahoe 26 Beta2开始,由于苹果移除了AppleHDA.kext,导致所有使用AppleALC.kext驱动声卡失效。工具在 Tahoe 26 且勾选 AppleALC 时会自动附加 SimpleHDA.kext,通过 OpenCore 恢复原版 AppleHDA 音频栈:
 
- 使用OCLP修改版（例如:[OCLP-X 2.7.0版本](https://github.com/JeoJay127/OCLP-X/releases/tag/2.7.0) ）打补丁,找回AppleHDA.kext,即可支持(原来macOS Sequoia以下本身能正常驱动的)
+   - 保持 Kernel → Quirks → DisableLinkeditJettison 为开启;
+   - 保留原有可用的 alcid/layout-id 配置,加载顺序为 Lilu → AppleALC → SimpleHDA;
+   - 使用前请移除 OCLP 音频根补丁或其他 AppleHDA 恢复方案,避免重复加载;
+   - 可选安装 SimpleHDA-HAL 包获得原版 HAL 控制面板,无需重建系统内核集合。
 
- 2. VoodooHDA.kext
+2. AppleALC.kext + OCLP 补丁
 
-    该驱动称为万能声卡,可以使用Hackintool工具将此驱动打入系统内核扩展,重启即可驱动.
+使用OCLP修改版（例如:[OCLP-X 2.7.0版本](https://github.com/JeoJay127/OCLP-X/releases/tag/2.7.0) ）打补丁,找回AppleHDA.kext,即可支持(原来macOS Sequoia以下本身能正常驱动的)
 
-    由于万能声卡可能存在电流杂音，开机爆音问题，一般不建议使用万能声卡！只有当AppleALC不支持或者很难驱动时，可以考虑万能声卡。
+3. VoodooHDA.kext
 
- 3. USB 声卡
-    
-    USB声卡一般免驱，当驱动声卡比较繁琐或者不能驱动时，可以考虑USB声卡
+   该驱动称为万能声卡,可以使用Hackintool工具将此驱动打入系统内核扩展,重启即可驱动.
+
+   由于万能声卡可能存在电流杂音，开机爆音问题，一般不建议使用万能声卡！只有当AppleALC不支持或者很难驱动时，可以考虑万能声卡。
+
+4. USB 声卡
+   
+   USB声卡一般免驱，当驱动声卡比较繁琐或者不能驱动时，可以考虑USB声卡
 
  ----------
 

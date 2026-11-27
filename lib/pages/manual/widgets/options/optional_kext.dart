@@ -30,6 +30,8 @@ class _OptionalKextWidgetState extends State<OptionalKextWidget>
         name: '显卡',
         options: [
           KextGroup.single(ConfigKernel.WhateverGreen),
+          ConfigKextGroups.whateverXe,
+          ConfigKextGroups.wtlIntelGfx,
           KextGroup.single(ConfigKernel.FakePCIID),
           KextGroup.single(ConfigKernel.NootRX),
           KextGroup.single(ConfigKernel.RadeonBoost),

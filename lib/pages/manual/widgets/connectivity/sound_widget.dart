@@ -16,6 +16,7 @@ class SoundWidget extends StatefulWidget {
   final List<Object>? alcidPickerSelection;
   final KernelKext? soundDriverType;
   final String? hpet;
+  final bool isTahoeOrNewer;
 
   const SoundWidget({
     super.key,
@@ -23,6 +24,7 @@ class SoundWidget extends StatefulWidget {
     this.alcidPickerSelection,
     this.hpet,
     this.soundDriverType,
+    this.isTahoeOrNewer = false,
   });
 
   @override
@@ -265,6 +267,8 @@ class _SoundWidgetState extends State<SoundWidget> {
   @override
   Widget build(BuildContext context) {
     final soundChoices = [ConfigKernel.AppleALC, ConfigKernel.VoodooHDA];
+    final isAppleALC =
+        soundDriverType?.bundlePath == ConfigKernel.AppleALC.bundlePath;
     return KextChoiceListCard(
       title: "声卡驱动:",
       cardSubTitle: '(默认使用AppleALC驱动)',
@@ -276,8 +280,15 @@ class _SoundWidgetState extends State<SoundWidget> {
       isMultipleSelection: false,
       allowToggle: true,
       labelBuilder: kextDescriptionLabel,
-      header: soundDriverType?.bundlePath == ConfigKernel.AppleALC.bundlePath
-          ? configalcid()
+      header: isAppleALC ? configalcid() : const SizedBox.shrink(),
+      footer: isAppleALC && widget.isTahoeOrNewer
+          ? Padding(
+              padding: const EdgeInsets.fromLTRB(10, 6, 10, 10),
+              child: Text(
+                'macOS Tahoe 26 已移除 AppleHDA：使用 AppleALC 时将自动附加 SimpleHDA.kext 恢复原版音频栈（需开启 Kernel → Quirks → DisableLinkeditJettison，并先移除 OCLP 音频根补丁）',
+                style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+              ),
+            )
           : const SizedBox.shrink(),
       onChanged: (List<KernelKext> value) {
         soundDriverType = value.firstOrNull;

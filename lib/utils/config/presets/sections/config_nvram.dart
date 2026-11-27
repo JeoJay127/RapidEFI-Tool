@@ -177,6 +177,20 @@ class ConfigNvram {
       comment:
           '禁用Apple Graphics Firmware固件加载,避免启动过程中因固件加载失败或重试循环而卡住(仅适用于Intel核显)');
 
+  static BootArgModel allow3d = BootArgModel(
+      arg: '-allow3d',
+      comment:
+          '允许 Intel Xe-LP 核显通过 WhateverXe 使用 3D/Metal 加速(使用 WhateverXe.kext 时必须添加)');
+
+  static BootArgModel wexTglEdpKeep = BootArgModel(
+      arg: '-wex-tgl-edp-keep',
+      comment: 'Tiger Lake 笔记本内屏在 macOS 接管后黑屏时,尝试保留固件显示模式(可能降低色深,不使用时请移除)');
+
+  static BootArgModel itlwmHe = BootArgModel(
+      arg: 'itlwm_he=1',
+      comment:
+          '为支持 802.11ax 的 Intel 网卡启用 Wi-Fi 6(HE),AirportItlwm 的 Tahoe/Sequoia 构建默认关闭该功能');
+
   static BootArgModel wegnoigpu = BootArgModel(
       arg: '-wegnoigpu', comment: '禁用Intel核显(核显无法驱动，也不支持加速硬解时，建议勾选)');
 
@@ -300,7 +314,8 @@ class ConfigNvram {
       comment:
           '修复Intel 3代及以下平台AMD RX5XX(例如:RX560,RX570,RX580)系列,AMD RX5XXX,RX6XXX(例如:RX5500,RX6600)系列免驱显卡在Ventura及以上系统黑屏问题(注意:进入系统后需要使用OCLP打显卡补丁!打完显卡补丁后,去掉该引导参数或者使用EFI目录下备用config-after-post改名替换config,重启即可驱动显卡!)');
   static BootArgModel radcodec = BootArgModel(
-      arg: '-radcodec', comment: '修复官方不支持的AMD显卡(例如: RX550 Lexa核心)使其支持VDA硬件视频编码');
+      arg: '-radcodec',
+      comment: '修复官方不支持的AMD显卡(例如: RX550 Lexa核心)使其支持VDA硬件视频编码');
 
   static BootArgModel ngfxcompat_ngfxgl_nvda_drv_vrl = BootArgModel(
       arg: 'ngfxcompat=1 ngfxgl=1 nvda_drv_vrl=1',
@@ -324,7 +339,8 @@ class ConfigNvram {
 
   static BootArgModel ctrsmt = BootArgModel(
       arg: 'ctrsmt=full',
-      comment: '改善Intel 12代及之后大小核 CPU 的拓扑识别与调度，性能提升不保证，建议实测后启用(注意需要搭配CpuTopologyRebuild.kext使用才生效)');
+      comment:
+          '改善Intel 12代及之后大小核 CPU 的拓扑识别与调度，性能提升不保证，建议实测后启用(注意需要搭配CpuTopologyRebuild.kext使用才生效)');
 
   static BootArgModel darkwake = BootArgModel(
       arg: 'darkwake=0',
@@ -356,6 +372,9 @@ class ConfigNvram {
     cpus,
     dart,
     disablegfxfirmware,
+    allow3d,
+    wexTglEdpKeep,
+    itlwmHe,
     nv_disable,
     amfi,
     amfi_get_out_of_my_way,

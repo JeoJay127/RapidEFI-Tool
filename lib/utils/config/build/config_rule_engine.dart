@@ -176,9 +176,26 @@ class ConfigRuleEngine {
       );
     }
 
+    if (configService.hasKext(ConfigKernel.SimpleHDA) ||
+        (configService.checkMacOSVersion() >= 26 &&
+            configService.hasKext(ConfigKernel.AppleALC))) {
+      model.kernel.kernelQuirks.disableLinkeditJettison = true;
+    }
+
     if (configService.useNootRXKext) {
       model.kernel.kernelKexts.removeWhere(
           (e) => e.bundlePath == ConfigKernel.WhateverGreen.bundlePath);
+    }
+
+    if (configService.hasKext(ConfigKernel.WhateverXe)) {
+      model.kernel.kernelKexts.removeWhere(
+          (e) => e.bundlePath == ConfigKernel.WhateverGreen.bundlePath);
+      BootArgsAccessor.add(model, ConfigNvram.allow3d.arg);
+      BootArgsAccessor.add(model, ConfigNvram.disablegfxfirmware.arg);
+      NvramSettingsAccessor.setCsrSetting(
+        model,
+        CsrSetting.partialDisabled,
+      );
     }
 
     model.booter.booterQuirks.resizeAppleGpuBars =
@@ -311,8 +328,20 @@ class ConfigRuleEngine {
     bool hasSelected(KernelKext kext) =>
         selectedKexts.any((e) => e.bundlePath == kext.bundlePath);
 
+    if (macOSVersion >= 26 && hasSelected(ConfigKernel.AppleALC)) {
+      otherKexts.add(ConfigKernel.SimpleHDA);
+    }
+
+    if (hasSelected(ConfigKernel.WhateverXe)) {
+      otherKexts.addAll([
+        ConfigKernel.AMFIAnchor,
+        ConfigKernel.AMFIAnchorInjector,
+      ]);
+    }
+
     final intelWifiKexts = [
       ConfigKernel.itlwm,
+      ConfigKernel.AirportItlwm_Tahoe,
       ConfigKernel.AirportItlwm_Sequoia,
       ConfigKernel.AirportItlwm_Sonoma_14_4,
       ConfigKernel.AirportItlwm_Sonoma,

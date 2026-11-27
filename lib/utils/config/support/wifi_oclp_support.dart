@@ -61,7 +61,11 @@ class WifiOclpSupport {
     if (darwinMajorVersion >= 24 &&
         (_hasSequoiaIntelWifi(selectedBundlePaths) ||
             _hasBrcmWifi(selectedBundlePaths))) {
-      blocks.add(KernelPatch.fixIntelWiFiForSequoia);
+      final hasTahoeIntelWifi = selectedBundlePaths
+          .contains(ConfigKernel.AirportItlwm_Tahoe.bundlePath);
+      blocks.add(hasTahoeIntelWifi
+          ? KernelPatch.fixIntelWiFiForSequoia.copyWith(maxKernel: '24.99.99')
+          : KernelPatch.fixIntelWiFiForSequoia);
       return blocks;
     }
 

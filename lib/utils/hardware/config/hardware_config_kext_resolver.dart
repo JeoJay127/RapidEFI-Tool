@@ -70,6 +70,7 @@ class HardwareConfigKextResolver {
 
   KernelKext _airportItlwmForDarwinMajor(int darwinMajorVersion) {
     return switch (darwinMajorVersion) {
+      >= 25 => ConfigKernel.AirportItlwm_Tahoe,
       >= 24 => ConfigKernel.AirportItlwm_Sequoia,
       23 => ConfigKernel.AirportItlwm_Sonoma_14_4,
       22 => ConfigKernel.AirportItlwm_Ventura,

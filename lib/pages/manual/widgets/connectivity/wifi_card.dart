@@ -39,6 +39,7 @@ class WifiCard extends StatefulWidget {
   });
 
   static final removableKexts = [
+    ConfigKernel.AirportItlwm_Tahoe,
     ConfigKernel.AirportItlwm_Sequoia,
     ConfigKernel.AirportItlwm_Sonoma_14_4,
     ConfigKernel.AirportItlwm_Sonoma,
@@ -68,6 +69,7 @@ class _WifiCardState extends State<WifiCard> {
   late List<KernelKext> choices = widget.choices ?? [];
 
   late final List<KernelKext> intelAirportOptions = [
+    ConfigKernel.AirportItlwm_Tahoe,
     ConfigKernel.AirportItlwm_Sequoia,
     ConfigKernel.AirportItlwm_Sonoma_14_4,
     ConfigKernel.AirportItlwm_Sonoma,

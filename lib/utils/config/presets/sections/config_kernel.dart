@@ -22,6 +22,33 @@ class ConfigKernel {
         "必备基础驱动"
       ]);
 
+  static KernelKext AMFIAnchor = KernelKext(
+      bundlePath: 'AMFIAnchor.kext',
+      executablePath: 'Contents/MacOS/AMFIAnchor',
+      plistPath: 'Contents/Info.plist',
+      minKernel: '20.0.0',
+      maxKernel: '25.99.99',
+      name: 'AMFIAnchor',
+      url: 'https://github.com/b00t0x/AMFIAnchor',
+      function:
+          '在保持 AMFI 开启的前提下,允许加载由受信任 CA(例如 b00t0x)签名的新式驱动(例如 WhateverXe Graphics),需要搭配 AMFIAnchorInjector.kext 使用',
+      note: [
+        '加载顺序: Lilu → AMFIAnchor → AMFIAnchorInjector(或自定义 anchor kext) → AMFIPass(可选)',
+        '同时使用 OCLP 根补丁时,请将 OCLP 的 AMFIPass 放在 AMFIAnchor 及其 Injector 之后加载',
+        '使用 WhateverXe 时必须同时加载本驱动和 AMFIAnchorInjector.kext'
+      ]);
+
+  static KernelKext AMFIAnchorInjector = KernelKext(
+      bundlePath: 'AMFIAnchorInjector.kext',
+      executablePath: '',
+      plistPath: 'Contents/Info.plist',
+      minKernel: '20.0.0',
+      maxKernel: '25.99.99',
+      name: 'AMFIAnchorInjector',
+      url: 'https://github.com/b00t0x/AMFIAnchor',
+      function: '无代码的签名锚点 kext,为 WhateverXe Graphics 使用的 b00t0x 签名 CA 授予平台信任',
+      note: ['与 AMFIAnchor.kext 配套使用,只在需要加载同 CA 签名组件时启用']);
+
   static KernelKext VirtualSMC = KernelKext(
       bundlePath: 'VirtualSMC.kext',
       executablePath: 'Contents/MacOS/VirtualSMC',
@@ -51,6 +78,25 @@ class ConfigKernel {
         "提供了对 HDMI 和 DisplayPort(DP)连接的支持,以确保音频和视频输出正常工作",
       ]);
 
+  static KernelKext WhateverXe = KernelKext(
+      bundlePath: 'WhateverXe.kext',
+      executablePath: 'Contents/MacOS/WhateverXe',
+      plistPath: 'Contents/Info.plist',
+      minKernel: '20.6.0',
+      maxKernel: '',
+      name: "WhateverXe",
+      url: "https://github.com/b00t0x/WhateverXe",
+      function:
+          'WhateverGreen 分支,通过适配 Apple 原生 TGL 驱动,为 Intel Xe-LP 核显(Tiger Lake/Alder Lake/Raptor Lake/Twin Lake 等)提供显示与加速支持',
+      note: [
+        "必须与 WhateverGreen 二选一,不能同时启用;需要 Lilu 1.7.2 及以上版本",
+        "必须同时加载 AMFIAnchor.kext 与 AMFIAnchorInjector.kext,并保持 AMFI 开启",
+        "需要 csr-active-config=03080000(禁用SIP方案一)以及启动参数 -allow3d -disablegfxfirmware",
+        "安装系统后还需手动安装 WhateverXe Graphics 显卡包,才能获得完整的 Metal 加速与显示输出",
+        "BIOS 中 DVMT 建议设为 96MB;若固定为 60MB,还需添加 -igfxdvmt 并设置 framebuffer-stolenmem=0000C003",
+        "Tiger Lake 笔记本内屏在 macOS 接管后黑屏时,可尝试添加 -wex-tgl-edp-keep"
+      ]);
+
   static KernelKext AppleALC = KernelKext(
       bundlePath: 'AppleALC.kext',
       executablePath: 'Contents/MacOS/AppleALC',
@@ -60,6 +106,23 @@ class ConfigKernel {
       minKernel: '',
       maxKernel: '',
       function: '使用AppleALC仿冒内建声卡(相对较完美,优先选择)');
+
+  static KernelKext SimpleHDA = KernelKext(
+      bundlePath: 'SimpleHDA.kext',
+      executablePath: 'Contents/MacOS/SimpleHDA',
+      plistPath: 'Contents/Info.plist',
+      minKernel: '25.0.0',
+      maxKernel: '',
+      name: "SimpleHDA",
+      url: "https://github.com/laobamac/SimpleHDA",
+      function:
+          '在 macOS Tahoe 26 及以上系统中通过 OpenCore 恢复原版 AppleHDA 音频栈,让 AppleALC 能够继续使用原有的声卡配置',
+      note: [
+        "仅适用于 macOS Tahoe 26 及以上;必须与 AppleALC.kext 搭配使用,加载顺序为 Lilu → AppleALC → SimpleHDA",
+        "必须开启 Kernel → Quirks → DisableLinkeditJettison,并保留原有可用的 alcid/layout-id 配置",
+        "使用前请移除 OCLP 音频根补丁或其他 AppleHDA 恢复方案,避免重复加载",
+        "可选安装 SimpleHDA-HAL 包获得原版 HAL 控制面板,无需重建系统内核集合"
+      ]);
 
   static KernelKext VoodooHDA = KernelKext(
       bundlePath: 'VoodooHDA.kext',
@@ -214,6 +277,38 @@ class ConfigKernel {
       maxKernel: '',
       name: 'NootedRed',
       function: '');
+
+  static KernelKext XeGfx = KernelKext(
+      bundlePath: 'XeGfx.kext',
+      executablePath: 'Contents/MacOS/XeGfx',
+      plistPath: 'Contents/Info.plist',
+      minKernel: '24.0.0',
+      maxKernel: '',
+      name: "XeGfx",
+      url: "https://github.com/watchthelight-labs/WTLIntelGfx",
+      function:
+          '基于 FreeBSD drm-kmod/Linux i915 移植的 Intel Xe 核显驱动,面向 Meteor Lake/Arrow Lake 等 Apple 原生驱动不支持的核显(实验性)',
+      note: [
+        "测试驱动,可能导致内核崩溃,请只在可以随时重启的机器上尝试",
+        "上游推荐通过 tools/install.sh 安装到辅助内核集合(AuxKC),再以 kmutil load -b org.watchthelight.XeGfx 手动加载;随 OpenCore 注入仅适合分发或排查使用",
+        "Tiger Lake/Alder Lake/Raptor Lake 核显优先使用 WhateverXe;本驱动主要面向 Meteor Lake/Arrow Lake",
+        "完整加速还需要 XeGfxAccel.kext、XeGfxAGDC.kext、NMIntelFB.kext、Metal 插件及 Mesa/ANV 用户态组件,需按上游 BUILD.md 自行构建安装",
+        "驱动默认不在开机时加载,需通过 debug.xegfx_stage 分阶段启用"
+      ]);
+
+  static KernelKext XeGfxIntelFB = KernelKext(
+      bundlePath: 'XeGfxIntelFB.kext',
+      executablePath: 'Contents/MacOS/XeGfxIntelFB',
+      plistPath: 'Contents/Info.plist',
+      minKernel: '24.0.0',
+      maxKernel: '',
+      name: "XeGfxIntelFB",
+      url: "https://github.com/watchthelight-labs/WTLIntelGfx",
+      function: 'XeGfx 配套的内屏帧缓冲驱动,使系统以 "Intel Xe Graphics" 识别核显',
+      note: [
+        "与 XeGfx.kext 配套使用;当前版本仅匹配 Arrow Lake-S(8086:7D67)等少数设备",
+        "上游同样通过辅助内核集合安装,需要时再手动启用"
+      ]);
 
   static KernelKext BFixup = KernelKext(
       bundlePath: 'BFixup.kext',
@@ -1102,6 +1197,18 @@ class ConfigKernel {
     note: ["支持macOS High Sierra 10.13 ~ macOS Tathoe 26.x(通常搭配HeliPort客户端使用)"],
   );
 
+  static KernelKext AirportItlwm_Tahoe = KernelKext(
+    bundlePath: 'AirportItlwm_Tahoe.kext',
+    executablePath: 'Contents/MacOS/AirportItlwm',
+    plistPath: 'Contents/Info.plist',
+    minKernel: '25.0.0',
+    maxKernel: '25.99.99',
+    note: [
+      "macOS Tahoe 26.x 专用原生 Wi-Fi 驱动(laobamac 分支构建),直接接入 IO80211/WCL,无需 OCLP 补丁;不支持 WPA3-only、强制 PMF 与 AWDL/AirDrop",
+      "不要阻止 IOSkywalkFamily;Wi-Fi 6 (802.11ax) 默认关闭,可添加启动参数 itlwm_he=1 启用"
+    ],
+  );
+
   static KernelKext AirportItlwm_Sequoia = KernelKext(
     bundlePath: 'AirportItlwm_Sequoia.kext',
     executablePath: 'Contents/MacOS/AirportItlwm',
@@ -1392,13 +1499,18 @@ class ConfigKernel {
 
   static List<KernelKext> sortKernelKexts = [
     Lilu,
+    AMFIAnchor,
+    AMFIAnchorInjector,
     VirtualSMC,
     AAAMouSSE,
     AsusSMC,
     YogaSMC,
     WhateverGreen,
+    WhateverXe,
     BFixup,
     NootedRed,
+    XeGfx,
+    XeGfxIntelFB,
     ECEnabler,
     ACPIBatteryManager,
     SMCBatteryManager,
@@ -1408,6 +1520,7 @@ class ConfigKernel {
     SMCSuperIO,
     NootRX,
     AppleALC,
+    SimpleHDA,
     VoodooHDA,
     AppleMCEReporterDisabler,
     RestrictEvents,
@@ -1483,6 +1596,7 @@ class ConfigKernel {
     AirportBrcmFixupAirPortBrcm4360_Injector,
     AirportBrcmFixupAirPortBrcmNIC_Injector,
     itlwm,
+    AirportItlwm_Tahoe,
     AirportItlwm_Sequoia,
     AirportItlwm_Sonoma_14_4,
     AirportItlwm_Sonoma,
